@@ -3,6 +3,7 @@ import { Space_Grotesk, Plus_Jakarta_Sans } from 'next/font/google'
 import PWARegister from '@/components/PWARegister'
 import AuthListener from '@/components/AuthListener'
 import FeedbackButton from '@/components/FeedbackButton'
+import CookieConsent from '@/components/CookieConsent'
 import { MarketProvider } from '@/components/MarketProvider'
 import './globals.css'
 
@@ -74,9 +75,38 @@ export default function RootLayout({
             {children}
           </MarketProvider>
           <FeedbackButton />
+          <CookieConsent />
           <footer className="py-8 px-4 text-center">
             <div className="gradient-divider max-w-xs mx-auto mb-6" />
-            <p className="text-xs tracking-wide" style={{ color: 'rgba(240,240,244,0.2)' }}>
+            <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mb-4">
+              {[
+                { label: 'Home', href: '/' },
+                { label: 'Scan', href: '/scan' },
+                { label: 'History', href: '/history' },
+                { label: 'Pro', href: '/pro' },
+                { label: 'Blog', href: '/blog' },
+              ].map((link) => (
+                <a key={link.href} href={link.href} className="footer-link text-xs font-medium transition-colors">
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+            <nav className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 mb-4">
+              {[
+                { label: 'Privacy Policy', href: '/privacy' },
+                { label: 'Cookie Policy', href: '/cookies' },
+                { label: 'Terms', href: '/terms' },
+                { label: 'Disclaimer', href: '/disclaimer' },
+              ].map((link) => (
+                <a key={link.href} href={link.href} className="footer-link-muted text-[11px] transition-colors">
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+            <p className="text-xs mb-3" style={{ color: 'rgba(240,240,244,0.25)' }}>
+              &copy; 2026 IngredScan &middot; Made in London 🇬🇧
+            </p>
+            <p className="text-xs tracking-wide" style={{ color: 'rgba(240,240,244,0.15)' }}>
               IngredScan provides informational content only and is not a substitute for professional dietary or medical advice.
             </p>
           </footer>

@@ -68,6 +68,44 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'SoftwareApplication',
+            name: 'IngredScan',
+            applicationCategory: 'HealthApplication',
+            operatingSystem: 'Web, iOS, Android',
+            description: 'Scan any supermarket product. Get an instant honest verdict — dual scoring, transparent data, and supermarket-specific swaps.',
+            url: 'https://www.ingredscan.com',
+            offers: [
+              {
+                '@type': 'Offer',
+                price: '0',
+                priceCurrency: 'GBP',
+                name: 'Free',
+                description: 'Up to 10 scans per day',
+              },
+              {
+                '@type': 'Offer',
+                price: '3.99',
+                priceCurrency: 'GBP',
+                name: 'Pro Monthly',
+                description: 'Unlimited scans and all features',
+              },
+              {
+                '@type': 'Offer',
+                price: '29.99',
+                priceCurrency: 'GBP',
+                name: 'Pro Yearly',
+                description: 'Unlimited scans and all features',
+              },
+            ],
+            featureList: 'Barcode scanning, NOVA score, Quality score, Additive analysis, Supermarket swaps, Nutritional breakdown',
+          }),
+        }}
+      />
       {/* Hero radial glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[600px] pointer-events-none"
