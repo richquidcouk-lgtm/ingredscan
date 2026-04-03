@@ -6,6 +6,8 @@ import { supabase } from '@/lib/supabase'
 import { getScoreColor, getNovaColor, getNovaEmoji } from '@/lib/scoring'
 import { getCategoryEmoji } from '@/lib/utils'
 import AuthModal from '@/components/AuthModal'
+import { useMarket } from '@/components/MarketProvider'
+import MarketSelector, { MarketSelectorTrigger } from '@/components/MarketSelector'
 
 type RecentScan = {
   barcode: string
@@ -19,6 +21,8 @@ export default function HomePage() {
   const [user, setUser] = useState<any>(null)
   const [recentScans, setRecentScans] = useState<RecentScan[]>([])
   const [showAuth, setShowAuth] = useState(false)
+  const [showMarketSelector, setShowMarketSelector] = useState(false)
+  const { market, config } = useMarket()
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -79,6 +83,7 @@ export default function HomePage() {
           <span style={{ color: '#00e5a0' }}>Scan</span>
         </h1>
         <div className="flex items-center gap-2.5">
+          <MarketSelectorTrigger onClick={() => setShowMarketSelector(true)} />
           <Link href="/history" className="p-2.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10" />
@@ -129,7 +134,14 @@ export default function HomePage() {
           in your food
         </h2>
         <p className="text-base mb-10 max-w-sm mx-auto leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)', letterSpacing: '-0.01em' }}>
-          Scan any UK supermarket product. Get an instant honest verdict — dual scoring, transparent data, and supermarket-specific swaps.
+          {market === 'uk'
+            ? 'Scan any UK supermarket product. Get an instant honest verdict \u2014 dual scoring, transparent data, and supermarket-specific swaps.'
+            : market === 'us'
+            ? 'Scan any product from Walmart, Kroger, Whole Foods and more. Get an instant honest verdict \u2014 dual scoring, transparent data, and swaps.'
+            : market === 'other'
+            ? 'Scan any food product anywhere in the world. Get an instant honest verdict \u2014 dual scoring, transparent data, and more.'
+            : `Scan any ${config.name} supermarket product. Get an instant honest verdict \u2014 dual scoring, transparent data, and supermarket-specific swaps.`
+          }
         </p>
 
         <Link
@@ -149,7 +161,12 @@ export default function HomePage() {
 
         {/* Stat pills */}
         <div className="flex flex-wrap items-center justify-center gap-2.5 mt-10">
-          {['3.2M+ Products', '650+ Additives Explained', 'UK Supermarkets Covered'].map((stat) => (
+          {(market === 'uk'
+            ? ['180K+ UK Products', '650+ Additives Explained', 'UK Supermarkets Covered']
+            : config.comingSoon
+            ? ['3.2M+ Products Worldwide', '650+ Additives Explained', `${config.name} Swaps Coming Soon`]
+            : ['3.2M+ Products Worldwide', '650+ Additives Explained', 'Scan Any Product']
+          ).map((stat) => (
             <span
               key={stat}
               className="px-3.5 py-1.5 rounded-full text-xs font-medium glass-subtle"
@@ -224,6 +241,7 @@ export default function HomePage() {
       </section>
 
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
+      {showMarketSelector && <MarketSelector onClose={() => setShowMarketSelector(false)} />}
     </div>
   )
 }

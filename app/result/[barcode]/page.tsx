@@ -14,6 +14,8 @@ import SkeletonResult from '@/components/SkeletonResult'
 import UpgradeModal from '@/components/UpgradeModal'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
 import { getCategoryEmoji, incrementAnonScanCount, getAnonScanCount } from '@/lib/utils'
+import { useMarket } from '@/components/MarketProvider'
+import ComingSoonSwaps from '@/components/ComingSoonSwaps'
 import swapsData from '@/data/swaps.json'
 
 type Tab = 'overview' | 'additives' | 'swaps'
@@ -29,6 +31,7 @@ export default function ResultPage() {
   const [matchedSwaps, setMatchedSwaps] = useState<any[]>([])
   const [showUpgrade, setShowUpgrade] = useState(false)
   const [limitReached, setLimitReached] = useState(false)
+  const { config } = useMarket()
 
   useEffect(() => {
     if (!barcode) return
@@ -394,7 +397,7 @@ export default function ResultPage() {
                     <AdditiveCard key={additive.code} additive={additive} index={i} />
                   ))}
                   <p className="text-xs text-center pt-3" style={{ color: 'rgba(240,240,244,0.25)' }}>
-                    Risk levels based on EU Reg 1333/2008 and UK FSA guidelines
+                    Risk levels based on {config.regulatoryRef}
                   </p>
                 </>
               )}
@@ -403,7 +406,9 @@ export default function ResultPage() {
 
           {activeTab === 'swaps' && (
             <div className="space-y-2">
-              {matchedSwaps.length === 0 ? (
+              {!config.supported ? (
+                <ComingSoonSwaps />
+              ) : matchedSwaps.length === 0 ? (
                 <div className="rounded-2xl p-6 text-center glass-card">
                   <p className="text-sm" style={{ color: 'rgba(240,240,244,0.4)' }}>
                     No swaps available for this product category yet.
@@ -412,7 +417,7 @@ export default function ResultPage() {
               ) : (
                 <>
                   <p className="text-xs font-medium mb-3" style={{ color: 'rgba(240,240,244,0.4)' }}>
-                    Better alternatives at UK supermarkets
+                    Better alternatives at {config.name} supermarkets
                   </p>
                   {matchedSwaps.map((swap, i) => (
                     <SwapCard key={i} swap={swap} currentScore={product.quality_score} index={i} />

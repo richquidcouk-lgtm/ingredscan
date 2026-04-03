@@ -3,6 +3,7 @@ import { Space_Grotesk, Plus_Jakarta_Sans } from 'next/font/google'
 import PWARegister from '@/components/PWARegister'
 import AuthListener from '@/components/AuthListener'
 import FeedbackButton from '@/components/FeedbackButton'
+import { MarketProvider } from '@/components/MarketProvider'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -51,6 +52,14 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <link rel="alternate" hrefLang="en-gb" href="https://ingredscan.app" />
+        <link rel="alternate" hrefLang="en-us" href="https://ingredscan.app" />
+        <link rel="alternate" hrefLang="de" href="https://ingredscan.app" />
+        <link rel="alternate" hrefLang="fr" href="https://ingredscan.app" />
+        <link rel="alternate" hrefLang="nl" href="https://ingredscan.app" />
+        <link rel="alternate" hrefLang="it" href="https://ingredscan.app" />
+        <link rel="alternate" hrefLang="es" href="https://ingredscan.app" />
+        <link rel="alternate" hrefLang="x-default" href="https://ingredscan.app" />
       </head>
       <body className="antialiased min-h-screen" style={{ backgroundColor: '#0b0b0f' }}>
         {/* Background layers */}
@@ -61,7 +70,9 @@ export default function RootLayout({
         <div className="relative z-10">
           <PWARegister />
           <AuthListener />
-          {children}
+          <MarketProvider>
+            {children}
+          </MarketProvider>
           <FeedbackButton />
           <footer className="py-8 px-4 text-center">
             <div className="gradient-divider max-w-xs mx-auto mb-6" />

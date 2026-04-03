@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { supabase, type Profile } from '@/lib/supabase'
 import AuthModal from '@/components/AuthModal'
+import { useMarket } from '@/components/MarketProvider'
+import MarketSelector from '@/components/MarketSelector'
 
 export default function AccountPage() {
   const router = useRouter()
@@ -13,6 +15,8 @@ export default function AccountPage() {
   const [loading, setLoading] = useState(true)
   const [showAuth, setShowAuth] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [showMarketSelector, setShowMarketSelector] = useState(false)
+  const { config } = useMarket()
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -130,6 +134,27 @@ export default function AccountPage() {
               </p>
             </div>
 
+            {/* Your market */}
+            <div className="rounded-2xl p-5 glass-card">
+              <p className="text-xs font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>Your market</p>
+              <div className="flex items-center justify-between mt-1.5">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-lg">{config.flag}</span>
+                  <span className="text-sm font-medium" style={{ color: '#f0f0f4' }}>{config.name}</span>
+                </div>
+                <button
+                  onClick={() => setShowMarketSelector(true)}
+                  className="text-xs font-medium transition-colors hover:brightness-125"
+                  style={{ color: '#7c6fff' }}
+                >
+                  Change
+                </button>
+              </div>
+              <p className="text-xs mt-2.5" style={{ color: 'rgba(240,240,244,0.3)' }}>
+                Your market affects swap suggestions and regulatory references.
+              </p>
+            </div>
+
             {/* Scan History */}
             <Link
               href="/history"
@@ -170,6 +195,9 @@ export default function AccountPage() {
                 Delete Account
               </button>
             </div>
+
+            {/* Market selector modal */}
+            {showMarketSelector && <MarketSelector onClose={() => setShowMarketSelector(false)} />}
 
             {/* Delete confirmation modal */}
             {showDeleteConfirm && (
