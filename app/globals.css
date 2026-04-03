@@ -20,6 +20,11 @@
   box-sizing: border-box;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 html {
   color-scheme: dark;
 }
@@ -39,10 +44,15 @@ body {
 
 .bg-mesh {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 .bg-mesh::before {

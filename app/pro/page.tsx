@@ -46,11 +46,13 @@ export default function ProPage() {
 
       if (data.url) {
         window.location.href = data.url
+      } else if (data.error?.includes('not configured') || data.error?.includes('Stripe')) {
+        alert('Payments are being set up. Please try again soon!')
       } else {
         alert(data.error || 'Something went wrong')
       }
     } catch {
-      alert('Could not connect to payment service')
+      alert('Payments are being set up. Please try again soon!')
     }
 
     setLoading(null)
@@ -60,7 +62,7 @@ export default function ProPage() {
     <div className="min-h-screen relative">
       {/* Accent glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[600px] h-[400px] pointer-events-none"
         style={{
           background: 'radial-gradient(ellipse at center, rgba(0,229,160,0.06) 0%, rgba(124,111,255,0.04) 50%, transparent 70%)',
         }}

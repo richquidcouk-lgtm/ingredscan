@@ -66,7 +66,7 @@ export default function HomePage() {
     <div className="min-h-screen relative">
       {/* Hero radial glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[600px] pointer-events-none"
         style={{
           background: 'radial-gradient(ellipse at center, rgba(0,229,160,0.07) 0%, rgba(124,111,255,0.04) 40%, transparent 70%)',
         }}

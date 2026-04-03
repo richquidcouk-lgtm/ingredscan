@@ -4,15 +4,16 @@ import Link from 'next/link'
 
 export default function UpgradeModal({ onClose }: { onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
       <div
-        className="relative w-full sm:max-w-md rounded-t-3xl sm:rounded-2xl p-6 pb-8 animate-slideUp"
+        className="relative rounded-2xl p-6 pb-8 animate-slideUp mx-4"
         style={{
-          background: 'rgba(19,19,26,0.95)',
+          width: 'calc(100% - 32px)',
+          maxWidth: '400px',
+          background: 'rgba(19,19,26,0.98)',
           backdropFilter: 'blur(20px) saturate(180%)',
           WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-          borderTop: '1px solid rgba(255,255,255,0.08)',
           border: '1px solid rgba(255,255,255,0.06)',
           boxShadow: '0 -8px 40px rgba(0,0,0,0.5)',
         }}

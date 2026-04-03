@@ -60,16 +60,17 @@ export default function FeedbackButton() {
       {/* Modal overlay */}
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-end justify-center"
+          className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto"
           onClick={() => setOpen(false)}
         >
           <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }} />
           <div
-            className="relative w-full max-w-lg rounded-t-2xl p-6 animate-fadeUp glass-card"
+            className="relative rounded-2xl p-6 animate-fadeUp glass-card mx-4"
             style={{
+              width: 'calc(100% - 32px)',
+              maxWidth: '400px',
               backgroundColor: '#13131a',
               borderColor: 'rgba(255,255,255,0.08)',
-              borderBottom: 'none',
             }}
             onClick={(e) => e.stopPropagation()}
           >
