@@ -16,7 +16,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'IngredScan — Know what\'s really in your food',
+  title: 'IngredScan — Know What\'s Really In Your Food',
   description: 'Scan any UK supermarket product. Get an instant honest verdict — dual scoring, transparent data, and supermarket-specific swaps.',
   manifest: '/manifest.json',
   appleWebApp: {
