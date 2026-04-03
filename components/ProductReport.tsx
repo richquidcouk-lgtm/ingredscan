@@ -50,10 +50,19 @@ export default function ProductReport({ barcode }: { barcode: string }) {
       <div className="text-center animate-fadeUp" style={{ animationDelay: '110ms' }}>
         <button
           onClick={() => setOpen(true)}
-          className="text-xs font-medium transition-colors hover:underline"
-          style={{ color: 'rgba(240,240,244,0.35)' }}
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-medium transition-all hover:scale-105"
+          style={{
+            backgroundColor: 'rgba(255,90,90,0.08)',
+            color: '#ff5a5a',
+            border: '1px solid rgba(255,90,90,0.15)',
+          }}
         >
-          Report an issue with this product
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          Report an issue
         </button>
       </div>
 

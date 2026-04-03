@@ -42,11 +42,13 @@ export default function FeedbackButton() {
       {/* Floating pill button */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-5 z-40 flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium glass transition-all hover:scale-105"
+        className="fixed bottom-20 right-5 z-40 flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium transition-all hover:scale-105"
         style={{
-          color: '#f0f0f4',
-          border: '1px solid rgba(255,255,255,0.08)',
+          backgroundColor: 'rgba(124,111,255,0.15)',
+          color: '#7c6fff',
+          border: '1px solid rgba(124,111,255,0.25)',
           boxShadow: '0 4px 24px rgba(0,0,0,0.4)',
+          backdropFilter: 'blur(12px)',
         }}
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
