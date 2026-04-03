@@ -5,6 +5,7 @@ import { getScoreColor, getScoreLabel, getNovaColor, getNovaEmoji, getNovaLabel 
 
 export function QualityScoreCard({ score }: { score: number }) {
   const [displayScore, setDisplayScore] = useState(0)
+  const [showInfo, setShowInfo] = useState(false)
   const color = getScoreColor(score)
   const label = getScoreLabel(score)
 
@@ -40,9 +41,22 @@ export function QualityScoreCard({ score }: { score: number }) {
         e.currentTarget.style.boxShadow = `0 0 24px ${color}10, inset 0 1px 0 rgba(255,255,255,0.03)`
       }}
     >
-      <p className="text-[11px] uppercase tracking-wider mb-3 font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
-        Quality Score
-      </p>
+      <div className="flex items-center gap-1.5 mb-3">
+        <p className="text-[11px] uppercase tracking-wider font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
+          Quality Score
+        </p>
+        <button
+          onClick={() => setShowInfo(!showInfo)}
+          className="w-4 h-4 flex items-center justify-center rounded-full text-[10px] leading-none transition-colors"
+          style={{
+            color: showInfo ? '#7c6fff' : 'rgba(240,240,244,0.35)',
+            border: `1px solid ${showInfo ? 'rgba(124,111,255,0.4)' : 'rgba(255,255,255,0.1)'}`,
+          }}
+          aria-label="What is Quality Score?"
+        >
+          i
+        </button>
+      </div>
       <div className="flex items-baseline gap-1">
         <span className="text-4xl font-extrabold heading-display" style={{ color }}>
           {displayScore.toFixed(1)}
@@ -55,6 +69,16 @@ export function QualityScoreCard({ score }: { score: number }) {
       >
         {label}
       </span>
+      {showInfo && (
+        <div
+          className="mt-3 rounded-xl p-3 animate-fadeUp glass-card"
+          style={{ borderColor: 'rgba(124,111,255,0.15)' }}
+        >
+          <p className="text-[11px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.55)' }}>
+            Rates overall ingredient quality from 0-10. Factors include additives, nutri-score grade, saturated fat, sugar, and salt levels. Higher is better.
+          </p>
+        </div>
+      )}
     </div>
   )
 }
@@ -64,6 +88,7 @@ export function NovaScoreCard({ score }: { score: number }) {
   const emoji = getNovaEmoji(score)
   const label = getNovaLabel(score)
   const [scale, setScale] = useState(0.8)
+  const [showInfo, setShowInfo] = useState(false)
 
   useEffect(() => {
     const t1 = setTimeout(() => setScale(1.1), 100)
@@ -86,9 +111,22 @@ export function NovaScoreCard({ score }: { score: number }) {
         e.currentTarget.style.boxShadow = `0 0 24px ${color}10, inset 0 1px 0 rgba(255,255,255,0.03)`
       }}
     >
-      <p className="text-[11px] uppercase tracking-wider mb-3 font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
-        Processing Level
-      </p>
+      <div className="flex items-center gap-1.5 mb-3">
+        <p className="text-[11px] uppercase tracking-wider font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
+          Processing Level
+        </p>
+        <button
+          onClick={() => setShowInfo(!showInfo)}
+          className="w-4 h-4 flex items-center justify-center rounded-full text-[10px] leading-none transition-colors"
+          style={{
+            color: showInfo ? '#7c6fff' : 'rgba(240,240,244,0.35)',
+            border: `1px solid ${showInfo ? 'rgba(124,111,255,0.4)' : 'rgba(255,255,255,0.1)'}`,
+          }}
+          aria-label="What is Processing Level?"
+        >
+          i
+        </button>
+      </div>
       <div className="flex items-center gap-3">
         <span
           className="text-4xl transition-transform duration-400"
@@ -106,6 +144,16 @@ export function NovaScoreCard({ score }: { score: number }) {
       >
         {label}
       </span>
+      {showInfo && (
+        <div
+          className="mt-3 rounded-xl p-3 animate-fadeUp glass-card"
+          style={{ borderColor: 'rgba(124,111,255,0.15)' }}
+        >
+          <p className="text-[11px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.55)' }}>
+            NOVA classifies foods by processing level. NOVA 1 = unprocessed (fruits, veg). NOVA 2 = processed ingredients (oils, flour). NOVA 3 = processed foods (canned, cured). NOVA 4 = ultra-processed (contains additives like emulsifiers, flavourings).
+          </p>
+        </div>
+      )}
     </div>
   )
 }

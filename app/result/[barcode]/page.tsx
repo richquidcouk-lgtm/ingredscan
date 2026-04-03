@@ -9,6 +9,7 @@ import NutriScoreBar from '@/components/NutriScoreBar'
 import AdditiveCard from '@/components/AdditiveCard'
 import SwapCard from '@/components/SwapCard'
 import ShareButton from '@/components/ShareCard'
+import ProductReport from '@/components/ProductReport'
 import SkeletonResult from '@/components/SkeletonResult'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
 import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
@@ -150,7 +151,7 @@ export default function ResultPage() {
   const additives = product.additives || []
 
   return (
-    <div className="min-h-screen pb-8 relative">
+    <div className="min-h-screen pb-24 relative">
       {/* Top bar */}
       <header className="flex items-center justify-between px-5 py-4 max-w-lg mx-auto relative z-10">
         <button onClick={() => router.back()} className="p-2.5 rounded-xl glass-card">
@@ -205,6 +206,9 @@ export default function ResultPage() {
             🔍 {product.data_source} · {product.confidence}% verified
           </p>
         </div>
+
+        {/* Report issue */}
+        <ProductReport barcode={barcode} />
 
         {/* Nutri-Score */}
         <div className="animate-fadeUp" style={{ animationDelay: '150ms' }}>
@@ -322,6 +326,22 @@ export default function ResultPage() {
               )}
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Sticky bottom bar */}
+      <div
+        className="fixed bottom-0 left-0 right-0 z-50 glass"
+        style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+      >
+        <div className="max-w-lg mx-auto px-5 py-4">
+          <Link
+            href="/scan"
+            className="block w-full text-center py-3.5 rounded-xl text-sm font-semibold btn-glow transition-all"
+            style={{ color: '#0b0b0f' }}
+          >
+            Scan Another Product
+          </Link>
         </div>
       </div>
     </div>

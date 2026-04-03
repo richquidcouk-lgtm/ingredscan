@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import PWARegister from '@/components/PWARegister'
+import FeedbackButton from '@/components/FeedbackButton'
 import './globals.css'
 
 const inter = Inter({
@@ -53,6 +54,7 @@ export default function RootLayout({
         <div className="relative z-10">
           <PWARegister />
           {children}
+          <FeedbackButton />
           <footer className="py-8 px-4 text-center">
             <div className="gradient-divider max-w-xs mx-auto mb-6" />
             <p className="text-xs tracking-wide" style={{ color: 'rgba(240,240,244,0.2)' }}>
