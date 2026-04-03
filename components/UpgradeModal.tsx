@@ -39,8 +39,8 @@ export default function UpgradeModal({ onClose }: { onClose: () => void }) {
             'Shareable scan cards',
           ].map((feature) => (
             <div key={feature} className="flex items-center gap-3">
-              <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(34,199,126,0.1)' }}>
-                <span className="text-xs" style={{ color: '#22c77e' }}>✓</span>
+              <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(0,229,160,0.1)' }}>
+                <span className="text-xs" style={{ color: '#00e5a0' }}>✓</span>
               </div>
               <span className="text-sm" style={{ color: 'rgba(240,240,244,0.65)' }}>{feature}</span>
             </div>

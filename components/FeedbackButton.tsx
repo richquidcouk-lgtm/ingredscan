@@ -76,7 +76,7 @@ export default function FeedbackButton() {
             {submitted ? (
               <div className="text-center py-8">
                 <div className="text-3xl mb-3">&#10003;</div>
-                <p className="text-sm font-medium" style={{ color: '#22c77e' }}>
+                <p className="text-sm font-medium" style={{ color: '#00e5a0' }}>
                   Thanks for your feedback!
                 </p>
               </div>

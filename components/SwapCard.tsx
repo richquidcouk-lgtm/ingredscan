@@ -60,16 +60,16 @@ export default function SwapCard({
             <span
               className="px-2 py-0.5 rounded-full text-xs font-medium"
               style={{
-                backgroundColor: isSaving ? '#22c77e12' : '#f5a62312',
-                color: isSaving ? '#22c77e' : '#f5a623',
-                border: `1px solid ${isSaving ? '#22c77e20' : '#f5a62320'}`,
+                backgroundColor: isSaving ? '#00e5a012' : '#f5a62312',
+                color: isSaving ? '#00e5a0' : '#f5a623',
+                border: `1px solid ${isSaving ? '#00e5a020' : '#f5a62320'}`,
               }}
             >
               {swap.price_difference}
             </span>
           </div>
           {improvement > 0 && (
-            <p className="text-xs mt-2.5 font-medium" style={{ color: '#22c77e' }}>
+            <p className="text-xs mt-2.5 font-medium" style={{ color: '#00e5a0' }}>
               ↑ Score improves by {improvement.toFixed(1)} points
             </p>
           )}

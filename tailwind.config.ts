@@ -13,14 +13,14 @@ const config: Config = {
         surface: '#13131a',
         surface2: '#1c1c26',
         text: '#f0f0f4',
-        green: '#22c77e',
+        green: '#00e5a0',
         amber: '#f5a623',
         red: '#ff5a5a',
         accent: '#7c6fff',
       },
       fontFamily: {
-        clash: ['var(--font-clash)', 'system-ui', 'sans-serif'],
-        satoshi: ['var(--font-satoshi)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-body)', 'system-ui', 'sans-serif'],
       },
       animation: {
         fadeUp: 'fadeUp 400ms ease both',

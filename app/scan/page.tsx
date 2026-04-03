@@ -69,7 +69,7 @@ export default function ScanPage() {
         {/* Search Results */}
         {searching && (
           <div className="mt-4 text-center">
-            <div className="w-5 h-5 border-2 border-t-transparent rounded-full animate-spin mx-auto" style={{ borderColor: '#22c77e', borderTopColor: 'transparent' }} />
+            <div className="w-5 h-5 border-2 border-t-transparent rounded-full animate-spin mx-auto" style={{ borderColor: '#00e5a0', borderTopColor: 'transparent' }} />
           </div>
         )}
 

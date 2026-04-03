@@ -366,8 +366,8 @@ export default function ResultPage() {
           {activeTab === 'additives' && (
             <div className="space-y-2">
               {additives.length === 0 ? (
-                <div className="rounded-2xl p-6 text-center glass-card" style={{ borderColor: 'rgba(34,199,126,0.15)' }}>
-                  <p className="text-sm font-medium" style={{ color: '#22c77e' }}>
+                <div className="rounded-2xl p-6 text-center glass-card" style={{ borderColor: 'rgba(0,229,160,0.15)' }}>
+                  <p className="text-sm font-medium" style={{ color: '#00e5a0' }}>
                     No concerning additives found ✓
                   </p>
                 </div>

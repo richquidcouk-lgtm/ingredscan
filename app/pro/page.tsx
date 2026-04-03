@@ -62,7 +62,7 @@ export default function ProPage() {
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(34,199,126,0.06) 0%, rgba(124,111,255,0.04) 50%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(0,229,160,0.06) 0%, rgba(124,111,255,0.04) 50%, transparent 70%)',
         }}
       />
 
@@ -105,13 +105,13 @@ export default function ProPage() {
 
           {/* Annual */}
           <div className="rounded-2xl p-5 relative gradient-border glass-card" style={{ borderColor: 'transparent' }}>
-            <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-semibold" style={{ backgroundColor: '#22c77e', color: '#0b0b0f' }}>
+            <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-semibold" style={{ backgroundColor: '#00e5a0', color: '#0b0b0f' }}>
               Most popular
             </span>
             <p className="text-xs font-medium mb-1.5" style={{ color: 'rgba(240,240,244,0.4)' }}>Annual</p>
             <p className="text-2xl font-bold heading-display mb-1" style={{ color: '#f0f0f4', letterSpacing: '-0.03em' }}>£29.99</p>
             <p className="text-xs mb-1" style={{ color: 'rgba(240,240,244,0.3)' }}>per year</p>
-            <p className="text-xs mb-5 font-medium" style={{ color: '#22c77e' }}>Save 37%</p>
+            <p className="text-xs mb-5 font-medium" style={{ color: '#00e5a0' }}>Save 37%</p>
             <button
               onClick={() => handleSubscribe('annual')}
               disabled={loading === 'annual'}
@@ -129,8 +129,8 @@ export default function ProPage() {
           <div className="space-y-3.5">
             {features.map((feature) => (
               <div key={feature} className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(34,199,126,0.1)' }}>
-                  <span className="text-xs" style={{ color: '#22c77e' }}>✓</span>
+                <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(0,229,160,0.1)' }}>
+                  <span className="text-xs" style={{ color: '#00e5a0' }}>✓</span>
                 </div>
                 <span className="text-sm" style={{ color: 'rgba(240,240,244,0.65)' }}>{feature}</span>
               </div>

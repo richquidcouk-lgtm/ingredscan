@@ -9,7 +9,7 @@ type Additive = {
 }
 
 const riskColors = {
-  low: '#22c77e',
+  low: '#00e5a0',
   medium: '#f5a623',
   high: '#ff5a5a',
 }

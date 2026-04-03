@@ -102,7 +102,7 @@ export default function Scanner() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center">
         <div className="text-5xl mb-4">📷</div>
-        <h2 className="text-lg font-bold mb-2" style={{ color: '#f0f0f4', fontFamily: 'var(--font-clash)' }}>
+        <h2 className="text-lg font-bold mb-2" style={{ color: '#f0f0f4', fontFamily: 'var(--font-display)' }}>
           Camera Access Needed
         </h2>
         <p className="text-sm mb-6" style={{ color: 'rgba(240,240,244,0.45)' }}>
@@ -111,7 +111,7 @@ export default function Scanner() {
         <button
           onClick={() => { setError(null); window.location.reload() }}
           className="px-6 py-3 rounded-xl text-sm font-medium"
-          style={{ backgroundColor: '#22c77e', color: '#0b0b0f' }}
+          style={{ backgroundColor: '#00e5a0', color: '#0b0b0f' }}
         >
           Try Again
         </button>
@@ -128,7 +128,7 @@ export default function Scanner() {
 
         {/* Success flash */}
         {scanSuccess && (
-          <div className="absolute inset-0 z-20 flex items-center justify-center" style={{ backgroundColor: 'rgba(34,199,126,0.15)' }}>
+          <div className="absolute inset-0 z-20 flex items-center justify-center" style={{ backgroundColor: 'rgba(0,229,160,0.15)' }}>
             <div className="text-6xl animate-bounce">✓</div>
           </div>
         )}
@@ -136,16 +136,16 @@ export default function Scanner() {
         {/* Animated corners */}
         {isStarted && !scanSuccess && (
           <>
-            <div className="absolute top-[15%] left-[10%] w-8 h-8 border-t-2 border-l-2 rounded-tl-lg animate-pulse" style={{ borderColor: '#22c77e' }} />
-            <div className="absolute top-[15%] right-[10%] w-8 h-8 border-t-2 border-r-2 rounded-tr-lg animate-pulse" style={{ borderColor: '#22c77e' }} />
-            <div className="absolute bottom-[15%] left-[10%] w-8 h-8 border-b-2 border-l-2 rounded-bl-lg animate-pulse" style={{ borderColor: '#22c77e' }} />
-            <div className="absolute bottom-[15%] right-[10%] w-8 h-8 border-b-2 border-r-2 rounded-br-lg animate-pulse" style={{ borderColor: '#22c77e' }} />
+            <div className="absolute top-[15%] left-[10%] w-8 h-8 border-t-2 border-l-2 rounded-tl-lg animate-pulse" style={{ borderColor: '#00e5a0' }} />
+            <div className="absolute top-[15%] right-[10%] w-8 h-8 border-t-2 border-r-2 rounded-tr-lg animate-pulse" style={{ borderColor: '#00e5a0' }} />
+            <div className="absolute bottom-[15%] left-[10%] w-8 h-8 border-b-2 border-l-2 rounded-bl-lg animate-pulse" style={{ borderColor: '#00e5a0' }} />
+            <div className="absolute bottom-[15%] right-[10%] w-8 h-8 border-b-2 border-r-2 rounded-br-lg animate-pulse" style={{ borderColor: '#00e5a0' }} />
             {/* Scan line */}
             <div
               className="absolute left-[10%] right-[10%] h-0.5"
               style={{
-                backgroundColor: '#22c77e',
-                boxShadow: '0 0 8px #22c77e',
+                backgroundColor: '#00e5a0',
+                boxShadow: '0 0 8px #00e5a0',
                 animation: 'scanLine 2s ease-in-out infinite alternate',
                 top: '20%',
               }}
@@ -157,7 +157,7 @@ export default function Scanner() {
         {!isStarted && (
           <div className="flex items-center justify-center" style={{ minHeight: 300, backgroundColor: '#0b0b0f' }}>
             <div className="text-center">
-              <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin mx-auto mb-3" style={{ borderColor: '#22c77e', borderTopColor: 'transparent' }} />
+              <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin mx-auto mb-3" style={{ borderColor: '#00e5a0', borderTopColor: 'transparent' }} />
               <p className="text-sm" style={{ color: 'rgba(240,240,244,0.45)' }}>Starting camera...</p>
             </div>
           </div>
@@ -168,9 +168,9 @@ export default function Scanner() {
           <button
             onClick={toggleTorch}
             className="absolute top-4 right-4 z-10 p-2.5 rounded-xl backdrop-blur-md"
-            style={{ backgroundColor: torchOn ? '#22c77e30' : 'rgba(0,0,0,0.5)' }}
+            style={{ backgroundColor: torchOn ? '#00e5a030' : 'rgba(0,0,0,0.5)' }}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={torchOn ? '#22c77e' : '#fff'} strokeWidth="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={torchOn ? '#00e5a0' : '#fff'} strokeWidth="2">
               <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
             </svg>
             💡

@@ -35,9 +35,9 @@ export default function AuthListener() {
       <div
         className="flex items-center gap-2.5 px-5 py-3 rounded-xl text-sm font-medium"
         style={{
-          backgroundColor: toast.type === 'success' ? 'rgba(34,199,126,0.15)' : 'rgba(255,90,90,0.15)',
-          color: toast.type === 'success' ? '#22c77e' : '#ff5a5a',
-          border: `1px solid ${toast.type === 'success' ? 'rgba(34,199,126,0.25)' : 'rgba(255,90,90,0.25)'}`,
+          backgroundColor: toast.type === 'success' ? 'rgba(0,229,160,0.15)' : 'rgba(255,90,90,0.15)',
+          color: toast.type === 'success' ? '#00e5a0' : '#ff5a5a',
+          border: `1px solid ${toast.type === 'success' ? 'rgba(0,229,160,0.25)' : 'rgba(255,90,90,0.25)'}`,
           backdropFilter: 'blur(12px)',
           boxShadow: '0 4px 24px rgba(0,0,0,0.4)',
         }}

@@ -68,7 +68,7 @@ export default function HomePage() {
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(34,199,126,0.07) 0%, rgba(124,111,255,0.04) 40%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(0,229,160,0.07) 0%, rgba(124,111,255,0.04) 40%, transparent 70%)',
         }}
       />
 
@@ -76,7 +76,7 @@ export default function HomePage() {
       <header className="flex items-center justify-between px-5 py-5 max-w-lg mx-auto relative z-10">
         <h1 className="text-xl font-extrabold heading-display" style={{ letterSpacing: '-0.04em' }}>
           <span style={{ color: '#f0f0f4' }}>Ingred</span>
-          <span style={{ color: '#22c77e' }}>Scan</span>
+          <span style={{ color: '#00e5a0' }}>Scan</span>
         </h1>
         <div className="flex items-center gap-2.5">
           <Link href="/history" className="p-2.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
@@ -118,7 +118,11 @@ export default function HomePage() {
       <section className="px-5 pt-16 pb-10 max-w-lg mx-auto text-center relative z-10 animate-fadeUp">
         <h2
           className="text-4xl sm:text-5xl heading-display mb-5"
-          style={{ color: '#f0f0f4' }}
+          style={{
+            background: 'linear-gradient(135deg, #f0f0f4 0%, #00e5a0 50%, #7c6fff 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
         >
           Know what&apos;s really
           <br />

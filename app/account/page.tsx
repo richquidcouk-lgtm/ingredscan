@@ -101,7 +101,7 @@ export default function AccountPage() {
               <div className="flex items-center gap-2.5 mt-1.5">
                 {profile?.pro ? (
                   <>
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: '#22c77e15', color: '#22c77e', border: '1px solid rgba(34,199,126,0.15)' }}>
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: '#00e5a015', color: '#00e5a0', border: '1px solid rgba(0,229,160,0.15)' }}>
                       Pro
                     </span>
                     <span className="text-xs" style={{ color: 'rgba(240,240,244,0.4)' }}>

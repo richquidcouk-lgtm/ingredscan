@@ -93,7 +93,7 @@ export function calculateQualityScore(product: OpenFoodFactsProduct): number {
 export function getScoreColor(score: number): string {
   if (score < 4.5) return '#ff5a5a'
   if (score <= 7) return '#f5a623'
-  return '#22c77e'
+  return '#00e5a0'
 }
 
 export function getScoreLabel(score: number): string {
@@ -103,7 +103,7 @@ export function getScoreLabel(score: number): string {
 }
 
 export function getNovaColor(nova: number): string {
-  if (nova <= 2) return '#22c77e'
+  if (nova <= 2) return '#00e5a0'
   if (nova === 3) return '#f5a623'
   return '#ff5a5a'
 }
