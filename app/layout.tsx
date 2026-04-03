@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import PWARegister from '@/components/PWARegister'
+import AuthListener from '@/components/AuthListener'
 import FeedbackButton from '@/components/FeedbackButton'
 import './globals.css'
 
@@ -53,6 +54,7 @@ export default function RootLayout({
 
         <div className="relative z-10">
           <PWARegister />
+          <AuthListener />
           {children}
           <FeedbackButton />
           <footer className="py-8 px-4 text-center">

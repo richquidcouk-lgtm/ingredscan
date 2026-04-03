@@ -27,6 +27,18 @@ export default function HomePage() {
         loadRecentScans(data.user.id)
       }
     })
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        setUser(session.user)
+        loadRecentScans(session.user.id)
+      } else {
+        setUser(null)
+        setRecentScans([])
+      }
+    })
+
+    return () => subscription.unsubscribe()
   }, [])
 
   async function loadRecentScans(userId: string) {
@@ -74,18 +86,29 @@ export default function HomePage() {
             </svg>
           </Link>
           {user ? (
-            <Link href="/account" className="p-2.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
+            <Link href="/account" className="flex items-center gap-2 px-3 py-1.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
+              {user.user_metadata?.avatar_url ? (
+                <img
+                  src={user.user_metadata.avatar_url}
+                  alt=""
+                  className="w-6 h-6 rounded-full"
+                />
+              ) : (
+                <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold" style={{ backgroundColor: '#7c6fff', color: '#fff' }}>
+                  {(user.email || '?')[0].toUpperCase()}
+                </div>
+              )}
+              <span className="text-xs font-medium hidden sm:inline" style={{ color: 'rgba(240,240,244,0.7)' }}>
+                {user.user_metadata?.full_name?.split(' ')[0] || 'Account'}
+              </span>
             </Link>
           ) : (
-            <button onClick={() => setShowAuth(true)} className="p-2.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <button onClick={() => setShowAuth(true)} className="flex items-center gap-2 px-3 py-2 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
+              <span className="text-xs font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>Sign in</span>
             </button>
           )}
         </div>
