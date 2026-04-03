@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0b0b0f;
+  --surface: #13131a;
+  --surface2: #1c1c26;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #f0f0f4;
+  --muted: rgba(240, 240, 244, 0.45);
+  --green: #22c77e;
+  --amber: #f5a623;
+  --red: #ff5a5a;
+  --accent: #7c6fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-satoshi), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide html5-qrcode default UI */
+#scanner-region video {
+  border-radius: 16px !important;
+  object-fit: cover !important;
+}
+
+#scanner-region > div:last-child {
+  display: none !important;
+}
+
+#scanner-region img[alt="Info icon"] {
+  display: none !important;
+}
+
+#scanner-region span {
+  display: none !important;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scanLine {
+  from {
+    top: 20%;
+  }
+  to {
+    top: 75%;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeUp {
+  animation: fadeUp 400ms ease both;
+}
+
+.animate-slideUp {
+  animation: slideUp 300ms ease both;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+}
+
+/* PWA standalone */
+@media all and (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

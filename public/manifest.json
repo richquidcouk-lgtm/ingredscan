@@ -1,0 +1,25 @@
+{
+  "name": "IngredScan — Know what's really in your food",
+  "short_name": "IngredScan",
+  "description": "Scan any UK supermarket product. Get an instant honest verdict — dual scoring, transparent data, and supermarket-specific swaps.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0b0b0f",
+  "background_color": "#0b0b0f",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["food", "health", "lifestyle"]
+}

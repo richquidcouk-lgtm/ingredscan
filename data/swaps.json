@@ -1,0 +1,92 @@
+[
+  {
+    "category": "ketchups",
+    "keywords": ["ketchup", "tomato sauce", "tomato ketchup"],
+    "swaps": [
+      {"product_name": "Tesco Organic Tomato Ketchup", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.5, "price_difference": "+40p"},
+      {"product_name": "Waitrose Duchy Organic Ketchup", "retailer": "Waitrose", "nova_score": 3, "quality_score": 8.0, "price_difference": "+85p"},
+      {"product_name": "Sainsbury's SO Organic Ketchup", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.2, "price_difference": "+30p"}
+    ]
+  },
+  {
+    "category": "breads",
+    "keywords": ["white bread", "sliced bread", "bread", "loaf"],
+    "swaps": [
+      {"product_name": "Waitrose Sourdough Loaf", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.5, "price_difference": "+£1.20"},
+      {"product_name": "Sainsbury's Taste the Difference Sourdough", "retailer": "Sainsbury's", "nova_score": 2, "quality_score": 8.0, "price_difference": "+90p"},
+      {"product_name": "Tesco Finest Rye Bread", "retailer": "Tesco", "nova_score": 2, "quality_score": 7.8, "price_difference": "+70p"}
+    ]
+  },
+  {
+    "category": "chocolate",
+    "keywords": ["chocolate", "chocolate bar", "milk chocolate", "candy bar"],
+    "swaps": [
+      {"product_name": "Sainsbury's Taste the Difference 70% Dark", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+60p"},
+      {"product_name": "Waitrose No.1 85% Dark Chocolate", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.5, "price_difference": "+£1.10"},
+      {"product_name": "Tesco Finest 72% Dark Chocolate", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.2, "price_difference": "+50p"}
+    ]
+  },
+  {
+    "category": "crisps",
+    "keywords": ["crisps", "chips", "potato chips", "snacks", "tortilla chips"],
+    "swaps": [
+      {"product_name": "Tesco Lentil Curls Lightly Salted", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.0, "price_difference": "-20p"},
+      {"product_name": "Asda Baked Crisps Ready Salted", "retailer": "Asda", "nova_score": 3, "quality_score": 6.8, "price_difference": "-30p"},
+      {"product_name": "Waitrose Love Life Popped Chips", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.5, "price_difference": "+40p"}
+    ]
+  },
+  {
+    "category": "cereals",
+    "keywords": ["cereal", "breakfast cereal", "cornflakes", "muesli", "granola", "porridge"],
+    "swaps": [
+      {"product_name": "Tesco Wholegrain Porridge Oats", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-£1.20"},
+      {"product_name": "Sainsbury's SO Organic Granola", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+30p"},
+      {"product_name": "Asda Rolled Porridge Oats", "retailer": "Asda", "nova_score": 1, "quality_score": 9.5, "price_difference": "-£1.40"}
+    ]
+  },
+  {
+    "category": "soft_drinks",
+    "keywords": ["cola", "fizzy drink", "soda", "soft drink", "lemonade", "energy drink", "carbonated"],
+    "swaps": [
+      {"product_name": "Tesco Sparkling Water with Lemon", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-80p"},
+      {"product_name": "Sainsbury's Flavoured Sparkling Water", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 9.5, "price_difference": "-70p"},
+      {"product_name": "Waitrose Sparkling Elderflower", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.0, "price_difference": "+20p"}
+    ]
+  },
+  {
+    "category": "ready_meals",
+    "keywords": ["ready meal", "microwave meal", "frozen meal", "tv dinner", "meal for one"],
+    "swaps": [
+      {"product_name": "Waitrose Fresh Meal for Tonight Range", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.0, "price_difference": "+£1.50"},
+      {"product_name": "Sainsbury's Just Cook Range", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.8, "price_difference": "+80p"},
+      {"product_name": "Tesco Finest Fresh Meals", "retailer": "Tesco", "nova_score": 3, "quality_score": 6.5, "price_difference": "+60p"}
+    ]
+  },
+  {
+    "category": "yoghurt",
+    "keywords": ["yoghurt", "yogurt", "fromage frais", "dairy dessert"],
+    "swaps": [
+      {"product_name": "Tesco Greek Style Natural Yoghurt", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.0, "price_difference": "-60p"},
+      {"product_name": "Sainsbury's Greek Yoghurt Natural", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 9.0, "price_difference": "-50p"},
+      {"product_name": "Waitrose Natural Greek Yoghurt", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.2, "price_difference": "-30p"}
+    ]
+  },
+  {
+    "category": "biscuits",
+    "keywords": ["biscuit", "cookie", "digestive", "shortbread"],
+    "swaps": [
+      {"product_name": "Waitrose Duchy Organic Oat Biscuits", "retailer": "Waitrose", "nova_score": 3, "quality_score": 6.8, "price_difference": "+70p"},
+      {"product_name": "Tesco Oat Crunch Biscuits", "retailer": "Tesco", "nova_score": 3, "quality_score": 6.5, "price_difference": "-20p"},
+      {"product_name": "Sainsbury's Free From Oat Cookies", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.5, "price_difference": "+30p"}
+    ]
+  },
+  {
+    "category": "processed_meat",
+    "keywords": ["sausage", "bacon", "ham", "salami", "hot dog", "processed meat", "deli meat"],
+    "swaps": [
+      {"product_name": "Waitrose Free Range Pork Sausages", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.0, "price_difference": "+£1.00"},
+      {"product_name": "Sainsbury's Taste the Difference Sausages", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.8, "price_difference": "+80p"},
+      {"product_name": "Tesco Finest Outdoor Bred Sausages", "retailer": "Tesco", "nova_score": 3, "quality_score": 6.5, "price_difference": "+60p"}
+    ]
+  }
+]
