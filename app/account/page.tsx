@@ -51,15 +51,15 @@ export default function AccountPage() {
 
   if (!user && !loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-6" style={{ backgroundColor: '#0b0b0f' }}>
-        <div className="text-5xl mb-4">👤</div>
-        <h2 className="text-xl font-bold mb-2" style={{ fontFamily: 'var(--font-clash), system-ui', color: '#f0f0f4' }}>
+      <div className="min-h-screen flex flex-col items-center justify-center px-6 relative">
+        <div className="text-5xl mb-5">👤</div>
+        <h2 className="text-xl font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>
           Sign in to your account
         </h2>
         <button
           onClick={() => setShowAuth(true)}
-          className="mt-4 px-6 py-3 rounded-xl text-sm font-medium"
-          style={{ backgroundColor: '#7c6fff', color: '#fff' }}
+          className="mt-4 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:brightness-110"
+          style={{ backgroundColor: '#7c6fff', color: '#fff', boxShadow: '0 0 20px rgba(124,111,255,0.2)' }}
         >
           Sign In
         </button>
@@ -69,51 +69,51 @@ export default function AccountPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#0b0b0f' }}>
-      <header className="flex items-center justify-between px-4 py-4 max-w-lg mx-auto">
-        <button onClick={() => router.back()} className="p-2 rounded-xl" style={{ backgroundColor: '#13131a' }}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f0f0f4" strokeWidth="2" strokeLinecap="round">
+    <div className="min-h-screen relative">
+      <header className="flex items-center justify-between px-5 py-4 max-w-lg mx-auto relative z-10">
+        <button onClick={() => router.back()} className="p-2.5 rounded-xl glass-card">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0f0f4" strokeWidth="2" strokeLinecap="round">
             <path d="M19 12H5" /><polyline points="12,19 5,12 12,5" />
           </svg>
         </button>
-        <h1 className="text-base font-semibold" style={{ color: '#f0f0f4' }}>Account</h1>
-        <div className="w-9" />
+        <h1 className="text-base font-semibold" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>Account</h1>
+        <div className="w-10" />
       </header>
 
-      <div className="px-4 max-w-lg mx-auto space-y-4">
+      <div className="px-5 max-w-lg mx-auto space-y-3 relative z-10">
         {loading ? (
           <div className="space-y-3">
             {[1,2,3].map(i => (
-              <div key={i} className="h-14 rounded-xl animate-pulse" style={{ backgroundColor: '#13131a' }} />
+              <div key={i} className="h-14 rounded-xl animate-pulse" style={{ backgroundColor: 'rgba(19,19,26,0.6)' }} />
             ))}
           </div>
         ) : (
           <>
             {/* Email */}
-            <div className="rounded-xl p-4" style={{ backgroundColor: '#13131a', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>Email</p>
-              <p className="text-sm font-medium mt-1" style={{ color: '#f0f0f4' }}>{user?.email}</p>
+            <div className="rounded-2xl p-5 glass-card">
+              <p className="text-xs font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>Email</p>
+              <p className="text-sm font-medium mt-1.5" style={{ color: '#f0f0f4' }}>{user?.email}</p>
             </div>
 
             {/* Plan */}
-            <div className="rounded-xl p-4" style={{ backgroundColor: '#13131a', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>Plan</p>
-              <div className="flex items-center gap-2 mt-1">
+            <div className="rounded-2xl p-5 glass-card">
+              <p className="text-xs font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>Plan</p>
+              <div className="flex items-center gap-2.5 mt-1.5">
                 {profile?.pro ? (
                   <>
-                    <span className="px-2 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: '#22c77e20', color: '#22c77e' }}>
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: '#22c77e15', color: '#22c77e', border: '1px solid rgba(34,199,126,0.15)' }}>
                       Pro
                     </span>
-                    <span className="text-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>
+                    <span className="text-xs" style={{ color: 'rgba(240,240,244,0.4)' }}>
                       expires {profile.pro_expires_at ? new Date(profile.pro_expires_at).toLocaleDateString('en-GB') : '—'}
                     </span>
                   </>
                 ) : (
                   <>
-                    <span className="px-2 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: '#1c1c26', color: 'rgba(240,240,244,0.6)' }}>
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'rgba(28,28,38,0.8)', color: 'rgba(240,240,244,0.5)' }}>
                       Free
                     </span>
-                    <Link href="/pro" className="text-xs font-medium" style={{ color: '#7c6fff' }}>
+                    <Link href="/pro" className="text-xs font-medium transition-colors hover:brightness-125" style={{ color: '#7c6fff' }}>
                       Upgrade →
                     </Link>
                   </>
@@ -122,52 +122,54 @@ export default function AccountPage() {
             </div>
 
             {/* Scan count */}
-            <div className="rounded-xl p-4" style={{ backgroundColor: '#13131a', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>Scans today</p>
-              <p className="text-sm font-medium mt-1" style={{ color: '#f0f0f4' }}>
+            <div className="rounded-2xl p-5 glass-card">
+              <p className="text-xs font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>Scans today</p>
+              <p className="text-sm font-medium mt-1.5" style={{ color: '#f0f0f4' }}>
                 {profile?.scan_count_today || 0}
-                {!profile?.pro && <span style={{ color: 'rgba(240,240,244,0.35)' }}> / 10</span>}
+                {!profile?.pro && <span style={{ color: 'rgba(240,240,244,0.3)' }}> / 10</span>}
               </p>
             </div>
 
             {/* Actions */}
-            <button
-              onClick={handleSignOut}
-              className="w-full py-3 rounded-xl text-sm font-medium"
-              style={{ backgroundColor: '#1c1c26', color: '#f0f0f4', border: '1px solid rgba(255,255,255,0.08)' }}
-            >
-              Sign Out
-            </button>
+            <div className="pt-2 space-y-2">
+              <button
+                onClick={handleSignOut}
+                className="w-full py-3.5 rounded-xl text-sm font-medium transition-all duration-200 glass-input hover:bg-white/5"
+                style={{ color: '#f0f0f4' }}
+              >
+                Sign Out
+              </button>
 
-            <button
-              onClick={() => setShowDeleteConfirm(true)}
-              className="w-full py-3 rounded-xl text-sm font-medium"
-              style={{ color: '#ff5a5a' }}
-            >
-              Delete Account
-            </button>
+              <button
+                onClick={() => setShowDeleteConfirm(true)}
+                className="w-full py-3.5 rounded-xl text-sm font-medium transition-colors hover:bg-red-500/5"
+                style={{ color: '#ff5a5a' }}
+              >
+                Delete Account
+              </button>
+            </div>
 
             {/* Delete confirmation modal */}
             {showDeleteConfirm && (
               <div className="fixed inset-0 z-50 flex items-center justify-center">
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowDeleteConfirm(false)} />
-                <div className="relative rounded-2xl p-6 mx-4 max-w-sm" style={{ backgroundColor: '#13131a' }}>
-                  <h3 className="text-lg font-bold mb-2" style={{ color: '#f0f0f4' }}>Delete account?</h3>
-                  <p className="text-sm mb-6" style={{ color: 'rgba(240,240,244,0.45)' }}>
+                <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={() => setShowDeleteConfirm(false)} />
+                <div className="relative rounded-2xl p-6 mx-4 max-w-sm glass-card" style={{ background: 'rgba(19,19,26,0.95)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  <h3 className="text-lg font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>Delete account?</h3>
+                  <p className="text-sm mb-6" style={{ color: 'rgba(240,240,244,0.4)' }}>
                     This action is permanent. All your scan history and data will be deleted.
                   </p>
                   <div className="flex gap-3">
                     <button
                       onClick={() => setShowDeleteConfirm(false)}
-                      className="flex-1 py-2.5 rounded-xl text-sm"
-                      style={{ backgroundColor: '#1c1c26', color: '#f0f0f4' }}
+                      className="flex-1 py-2.5 rounded-xl text-sm glass-input"
+                      style={{ color: '#f0f0f4' }}
                     >
                       Cancel
                     </button>
                     <button
                       onClick={handleDelete}
-                      className="flex-1 py-2.5 rounded-xl text-sm font-medium"
-                      style={{ backgroundColor: '#ff5a5a20', color: '#ff5a5a' }}
+                      className="flex-1 py-2.5 rounded-xl text-sm font-medium transition-colors"
+                      style={{ backgroundColor: 'rgba(255,90,90,0.1)', color: '#ff5a5a', border: '1px solid rgba(255,90,90,0.15)' }}
                     >
                       Delete
                     </button>

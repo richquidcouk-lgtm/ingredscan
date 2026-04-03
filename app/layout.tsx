@@ -5,7 +5,8 @@ import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-satoshi',
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-body',
 })
 
 export const viewport: Viewport = {
@@ -44,13 +45,21 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body className="antialiased min-h-screen" style={{ backgroundColor: '#0b0b0f' }}>
-        <PWARegister />
-        {children}
-        <footer className="py-6 px-4 text-center">
-          <p className="text-xs" style={{ color: 'rgba(240,240,244,0.25)' }}>
-            IngredScan provides informational content only and is not a substitute for professional dietary or medical advice.
-          </p>
-        </footer>
+        {/* Background layers */}
+        <div className="bg-mesh" />
+        <div className="bg-dots" />
+        <div className="bg-noise" />
+
+        <div className="relative z-10">
+          <PWARegister />
+          {children}
+          <footer className="py-8 px-4 text-center">
+            <div className="gradient-divider max-w-xs mx-auto mb-6" />
+            <p className="text-xs tracking-wide" style={{ color: 'rgba(240,240,244,0.2)' }}>
+              IngredScan provides informational content only and is not a substitute for professional dietary or medical advice.
+            </p>
+          </footer>
+        </div>
       </body>
     </html>
   )

@@ -66,18 +66,18 @@ export default function HistoryPage() {
 
   if (!user && !loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-6" style={{ backgroundColor: '#0b0b0f' }}>
-        <div className="text-5xl mb-4">🔐</div>
-        <h2 className="text-xl font-bold mb-2" style={{ fontFamily: 'var(--font-clash), system-ui', color: '#f0f0f4' }}>
+      <div className="min-h-screen flex flex-col items-center justify-center px-6 relative">
+        <div className="text-5xl mb-5">🔐</div>
+        <h2 className="text-xl font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>
           Sign in to view history
         </h2>
-        <p className="text-sm mb-6 text-center" style={{ color: 'rgba(240,240,244,0.45)' }}>
+        <p className="text-sm mb-6 text-center" style={{ color: 'rgba(240,240,244,0.4)' }}>
           Create an account to save and view your past scans.
         </p>
         <button
           onClick={() => setShowAuth(true)}
-          className="px-6 py-3 rounded-xl text-sm font-medium"
-          style={{ backgroundColor: '#7c6fff', color: '#fff' }}
+          className="px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:brightness-110"
+          style={{ backgroundColor: '#7c6fff', color: '#fff', boxShadow: '0 0 20px rgba(124,111,255,0.2)' }}
         >
           Sign In
         </button>
@@ -87,21 +87,21 @@ export default function HistoryPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#0b0b0f' }}>
-      <header className="flex items-center justify-between px-4 py-4 max-w-lg mx-auto">
-        <button onClick={() => router.back()} className="p-2 rounded-xl" style={{ backgroundColor: '#13131a' }}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f0f0f4" strokeWidth="2" strokeLinecap="round">
+    <div className="min-h-screen relative">
+      <header className="flex items-center justify-between px-5 py-4 max-w-lg mx-auto relative z-10">
+        <button onClick={() => router.back()} className="p-2.5 rounded-xl glass-card">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0f0f4" strokeWidth="2" strokeLinecap="round">
             <path d="M19 12H5" /><polyline points="12,19 5,12 12,5" />
           </svg>
         </button>
-        <h1 className="text-base font-semibold" style={{ color: '#f0f0f4' }}>History</h1>
-        <div className="w-9" />
+        <h1 className="text-base font-semibold" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>History</h1>
+        <div className="w-10" />
       </header>
 
-      <div className="px-4 max-w-lg mx-auto">
+      <div className="px-5 max-w-lg mx-auto relative z-10">
         {/* Search */}
-        <div className="relative mb-4">
-          <svg className="absolute left-3.5 top-1/2 -translate-y-1/2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.35)" strokeWidth="2">
+        <div className="relative mb-5">
+          <svg className="absolute left-4 top-1/2 -translate-y-1/2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.3)" strokeWidth="2">
             <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
           <input
@@ -109,28 +109,28 @@ export default function HistoryPage() {
             placeholder="Search past scans..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 rounded-xl text-sm outline-none"
-            style={{ backgroundColor: '#1c1c26', border: '1px solid rgba(255,255,255,0.08)', color: '#f0f0f4' }}
+            className="w-full pl-11 pr-4 py-3.5 rounded-xl text-sm outline-none glass-input"
+            style={{ color: '#f0f0f4' }}
           />
         </div>
 
         {loading ? (
           <div className="space-y-2">
             {[1,2,3].map(i => (
-              <div key={i} className="h-16 rounded-xl animate-pulse" style={{ backgroundColor: '#13131a' }} />
+              <div key={i} className="h-16 rounded-xl animate-pulse" style={{ backgroundColor: 'rgba(19,19,26,0.6)' }} />
             ))}
           </div>
         ) : filteredScans.length === 0 ? (
           <div className="text-center py-16">
-            <div className="text-5xl mb-4">📋</div>
-            <h3 className="text-lg font-bold mb-2" style={{ color: '#f0f0f4' }}>
+            <div className="text-5xl mb-5">📋</div>
+            <h3 className="text-lg font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>
               {search ? 'No matching scans' : 'No scans yet'}
             </h3>
-            <p className="text-sm mb-6" style={{ color: 'rgba(240,240,244,0.45)' }}>
+            <p className="text-sm mb-6" style={{ color: 'rgba(240,240,244,0.4)' }}>
               {search ? 'Try a different search term' : 'Scan your first product to get started'}
             </p>
             {!search && (
-              <Link href="/scan" className="inline-block px-6 py-3 rounded-xl text-sm font-medium" style={{ backgroundColor: '#22c77e', color: '#0b0b0f' }}>
+              <Link href="/scan" className="btn-glow inline-block px-6 py-3 rounded-xl text-sm font-medium" style={{ color: '#0b0b0f' }}>
                 Scan a Product
               </Link>
             )}
@@ -141,13 +141,12 @@ export default function HistoryPage() {
               <Link
                 key={`${scan.barcode}-${scan.scanned_at}`}
                 href={`/result/${scan.barcode}`}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-white/5"
-                style={{ backgroundColor: '#13131a' }}
+                className="flex items-center gap-3 px-4 py-3.5 rounded-xl glass-card transition-all duration-200"
               >
                 <span className="text-xl">{getCategoryEmoji(scan.category)}</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium truncate" style={{ color: '#f0f0f4' }}>{scan.name}</p>
-                  <p className="text-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>{scan.brand}</p>
+                  <p className="text-xs" style={{ color: 'rgba(240,240,244,0.4)' }}>{scan.brand}</p>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <span className="text-sm font-bold" style={{ color: getScoreColor(scan.quality_score) }}>
@@ -157,7 +156,7 @@ export default function HistoryPage() {
                     {getNovaEmoji(scan.nova_score)}
                   </span>
                 </div>
-                <span className="text-xs shrink-0" style={{ color: 'rgba(240,240,244,0.3)' }}>
+                <span className="text-xs shrink-0" style={{ color: 'rgba(240,240,244,0.25)' }}>
                   {formatDate(scan.scanned_at)}
                 </span>
               </Link>

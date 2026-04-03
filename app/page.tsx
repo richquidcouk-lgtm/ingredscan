@@ -51,30 +51,38 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#0b0b0f' }}>
+    <div className="min-h-screen relative">
+      {/* Hero radial glow */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(34,199,126,0.07) 0%, rgba(124,111,255,0.04) 40%, transparent 70%)',
+        }}
+      />
+
       {/* Header */}
-      <header className="flex items-center justify-between px-4 py-4 max-w-lg mx-auto">
-        <h1 className="text-xl font-bold tracking-tight" style={{ fontFamily: 'var(--font-clash), system-ui' }}>
+      <header className="flex items-center justify-between px-5 py-5 max-w-lg mx-auto relative z-10">
+        <h1 className="text-xl font-extrabold heading-display" style={{ letterSpacing: '-0.04em' }}>
           <span style={{ color: '#f0f0f4' }}>Ingred</span>
           <span style={{ color: '#22c77e' }}>Scan</span>
         </h1>
-        <div className="flex items-center gap-3">
-          <Link href="/history" className="p-2 rounded-xl" style={{ backgroundColor: '#13131a' }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <div className="flex items-center gap-2.5">
+          <Link href="/history" className="p-2.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10" />
               <polyline points="12,6 12,12 16,14" />
             </svg>
           </Link>
           {user ? (
-            <Link href="/account" className="p-2 rounded-xl" style={{ backgroundColor: '#13131a' }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <Link href="/account" className="p-2.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
             </Link>
           ) : (
-            <button onClick={() => setShowAuth(true)} className="p-2 rounded-xl" style={{ backgroundColor: '#13131a' }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <button onClick={() => setShowAuth(true)} className="p-2.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
@@ -84,29 +92,23 @@ export default function HomePage() {
       </header>
 
       {/* Hero */}
-      <section className="px-4 pt-12 pb-8 max-w-lg mx-auto text-center animate-fadeUp">
+      <section className="px-5 pt-16 pb-10 max-w-lg mx-auto text-center relative z-10 animate-fadeUp">
         <h2
-          className="text-4xl sm:text-5xl font-bold leading-[1.1] mb-4"
-          style={{
-            fontFamily: 'var(--font-clash), system-ui',
-            color: '#f0f0f4',
-            letterSpacing: '-2px',
-          }}
+          className="text-4xl sm:text-5xl heading-display mb-5"
+          style={{ color: '#f0f0f4' }}
         >
-          Know what&apos;s really in your food
+          Know what&apos;s really
+          <br />
+          in your food
         </h2>
-        <p className="text-base mb-8 max-w-sm mx-auto" style={{ color: 'rgba(240,240,244,0.45)' }}>
+        <p className="text-base mb-10 max-w-sm mx-auto leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)', letterSpacing: '-0.01em' }}>
           Scan any UK supermarket product. Get an instant honest verdict — dual scoring, transparent data, and supermarket-specific swaps.
         </p>
 
         <Link
           href="/scan"
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-base font-semibold transition-all duration-200 hover:scale-105 active:scale-95"
-          style={{
-            backgroundColor: '#22c77e',
-            color: '#0b0b0f',
-            boxShadow: '0 0 40px rgba(34,199,126,0.25)',
-          }}
+          className="btn-glow inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-base font-semibold"
+          style={{ color: '#0b0b0f' }}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
             <path d="M3 7V5a2 2 0 0 1 2-2h2" />
@@ -119,12 +121,12 @@ export default function HomePage() {
         </Link>
 
         {/* Stat pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 mt-10">
           {['3.2M+ Products', '650+ Additives Explained', 'UK Supermarkets Covered'].map((stat) => (
             <span
               key={stat}
-              className="px-3 py-1.5 rounded-full text-xs font-medium"
-              style={{ backgroundColor: '#13131a', color: 'rgba(240,240,244,0.6)', border: '1px solid rgba(255,255,255,0.08)' }}
+              className="px-3.5 py-1.5 rounded-full text-xs font-medium glass-subtle"
+              style={{ color: 'rgba(240,240,244,0.5)' }}
             >
               {stat}
             </span>
@@ -132,23 +134,25 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Gradient divider */}
+      <div className="gradient-divider max-w-xs mx-auto my-2" />
+
       {/* Recent Scans */}
       {recentScans.length > 0 && (
-        <section className="px-4 py-6 max-w-lg mx-auto animate-fadeUp" style={{ animationDelay: '100ms' }}>
-          <h3 className="text-sm font-medium mb-3" style={{ color: 'rgba(240,240,244,0.45)' }}>
+        <section className="px-5 py-8 max-w-lg mx-auto relative z-10 animate-fadeUp" style={{ animationDelay: '100ms' }}>
+          <h3 className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'rgba(240,240,244,0.35)' }}>
             Recent Scans
           </h3>
-          <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
+          <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-hide">
             {recentScans.map((scan) => (
               <Link
                 key={scan.barcode}
                 href={`/result/${scan.barcode}`}
-                className="shrink-0 w-36 rounded-xl p-3 transition-colors hover:brightness-110"
-                style={{ backgroundColor: '#13131a', border: '1px solid rgba(255,255,255,0.08)' }}
+                className="shrink-0 w-36 rounded-2xl p-3.5 glass-card card-hover-glow"
               >
                 <div className="text-2xl mb-2">{getCategoryEmoji(scan.category)}</div>
                 <p className="text-xs font-medium truncate" style={{ color: '#f0f0f4' }}>{scan.name}</p>
-                <div className="flex items-center gap-2 mt-2">
+                <div className="flex items-center gap-2 mt-2.5">
                   <span className="text-xs font-bold" style={{ color: getScoreColor(scan.quality_score) }}>
                     {scan.quality_score.toFixed(1)}
                   </span>
@@ -166,8 +170,8 @@ export default function HomePage() {
       )}
 
       {/* Why IngredScan */}
-      <section className="px-4 py-8 max-w-lg mx-auto">
-        <h3 className="text-lg font-bold mb-4" style={{ fontFamily: 'var(--font-clash), system-ui', color: '#f0f0f4' }}>
+      <section className="px-5 py-10 max-w-lg mx-auto relative z-10">
+        <h3 className="text-lg font-bold heading-display mb-5" style={{ color: '#f0f0f4', letterSpacing: '-0.03em' }}>
           Why IngredScan
         </h3>
         <div className="grid grid-cols-2 gap-3">
@@ -179,16 +183,14 @@ export default function HomePage() {
           ].map((feature, i) => (
             <div
               key={feature.title}
-              className="rounded-2xl p-4 animate-fadeUp"
+              className="rounded-2xl p-4 glass-card card-hover-glow animate-fadeUp"
               style={{
-                backgroundColor: '#13131a',
-                border: '1px solid rgba(255,255,255,0.08)',
-                animationDelay: `${200 + i * 50}ms`,
+                animationDelay: `${200 + i * 80}ms`,
               }}
             >
-              <div className="text-2xl mb-2">{feature.icon}</div>
-              <h4 className="text-sm font-semibold mb-1" style={{ color: '#f0f0f4' }}>{feature.title}</h4>
-              <p className="text-xs leading-relaxed" style={{ color: 'rgba(240,240,244,0.45)' }}>{feature.desc}</p>
+              <div className="text-2xl mb-3">{feature.icon}</div>
+              <h4 className="text-sm font-semibold mb-1.5" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>{feature.title}</h4>
+              <p className="text-xs leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>{feature.desc}</p>
             </div>
           ))}
         </div>

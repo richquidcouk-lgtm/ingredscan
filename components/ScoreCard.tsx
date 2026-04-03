@@ -27,31 +27,31 @@ export function QualityScoreCard({ score }: { score: number }) {
 
   return (
     <div
-      className="flex-1 rounded-2xl p-5 border transition-all duration-300 hover:shadow-lg"
+      className="flex-1 rounded-2xl p-5 transition-all duration-300 glass-card card-hover-glow"
       style={{
-        backgroundColor: '#13131a',
+        background: `linear-gradient(135deg, rgba(19,19,26,0.8) 0%, ${color}08 100%)`,
         borderColor: `${color}20`,
-        boxShadow: `0 0 20px ${color}10`,
+        boxShadow: `0 0 24px ${color}10, inset 0 1px 0 rgba(255,255,255,0.03)`,
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 30px ${color}25`
+        e.currentTarget.style.boxShadow = `0 0 40px ${color}20, inset 0 1px 0 rgba(255,255,255,0.05)`
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 20px ${color}10`
+        e.currentTarget.style.boxShadow = `0 0 24px ${color}10, inset 0 1px 0 rgba(255,255,255,0.03)`
       }}
     >
-      <p className="text-[11px] uppercase tracking-wider mb-3" style={{ color: 'rgba(240,240,244,0.45)' }}>
+      <p className="text-[11px] uppercase tracking-wider mb-3 font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
         Quality Score
       </p>
       <div className="flex items-baseline gap-1">
-        <span className="text-4xl font-bold" style={{ color, fontFamily: 'var(--font-clash)' }}>
+        <span className="text-4xl font-extrabold heading-display" style={{ color }}>
           {displayScore.toFixed(1)}
         </span>
-        <span className="text-lg" style={{ color: 'rgba(240,240,244,0.45)' }}>/10</span>
+        <span className="text-lg font-medium" style={{ color: 'rgba(240,240,244,0.35)' }}>/10</span>
       </div>
       <span
-        className="inline-block mt-2 px-3 py-1 rounded-full text-xs font-medium"
-        style={{ backgroundColor: `${color}20`, color }}
+        className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-medium"
+        style={{ backgroundColor: `${color}15`, color, border: `1px solid ${color}20` }}
       >
         {label}
       </span>
@@ -73,20 +73,20 @@ export function NovaScoreCard({ score }: { score: number }) {
 
   return (
     <div
-      className="flex-1 rounded-2xl p-5 border transition-all duration-300 hover:shadow-lg"
+      className="flex-1 rounded-2xl p-5 transition-all duration-300 glass-card card-hover-glow"
       style={{
-        backgroundColor: '#13131a',
+        background: `linear-gradient(135deg, rgba(19,19,26,0.8) 0%, ${color}08 100%)`,
         borderColor: `${color}20`,
-        boxShadow: `0 0 20px ${color}10`,
+        boxShadow: `0 0 24px ${color}10, inset 0 1px 0 rgba(255,255,255,0.03)`,
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 30px ${color}25`
+        e.currentTarget.style.boxShadow = `0 0 40px ${color}20, inset 0 1px 0 rgba(255,255,255,0.05)`
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 20px ${color}10`
+        e.currentTarget.style.boxShadow = `0 0 24px ${color}10, inset 0 1px 0 rgba(255,255,255,0.03)`
       }}
     >
-      <p className="text-[11px] uppercase tracking-wider mb-3" style={{ color: 'rgba(240,240,244,0.45)' }}>
+      <p className="text-[11px] uppercase tracking-wider mb-3 font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
         Processing Level
       </p>
       <div className="flex items-center gap-3">
@@ -96,13 +96,13 @@ export function NovaScoreCard({ score }: { score: number }) {
         >
           {emoji}
         </span>
-        <span className="text-2xl font-bold" style={{ color, fontFamily: 'var(--font-clash)' }}>
+        <span className="text-2xl font-extrabold heading-display" style={{ color }}>
           NOVA {score}
         </span>
       </div>
       <span
-        className="inline-block mt-2 px-3 py-1 rounded-full text-xs font-medium"
-        style={{ backgroundColor: `${color}20`, color }}
+        className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-medium"
+        style={{ backgroundColor: `${color}15`, color, border: `1px solid ${color}20` }}
       >
         {label}
       </span>

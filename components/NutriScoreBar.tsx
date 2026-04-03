@@ -20,10 +20,12 @@ export default function NutriScoreBar({ grade }: { grade: string }) {
             key={letter}
             className="flex-1 flex items-center justify-center rounded-lg font-bold text-sm transition-all duration-300"
             style={{
-              backgroundColor: isActive ? color : `${color}20`,
-              color: isActive ? '#fff' : `${color}80`,
+              backgroundColor: isActive ? color : `${color}15`,
+              color: isActive ? '#fff' : `${color}60`,
               height: isActive ? 44 : 36,
               fontSize: isActive ? 16 : 13,
+              boxShadow: isActive ? `0 0 16px ${color}30` : 'none',
+              border: isActive ? `1px solid ${color}` : '1px solid transparent',
             }}
           >
             {letter}
