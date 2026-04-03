@@ -130,6 +130,28 @@ export default function AccountPage() {
               </p>
             </div>
 
+            {/* Scan History */}
+            <Link
+              href="/history"
+              className="flex items-center justify-between rounded-2xl p-5 glass-card card-hover-glow transition-all"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(124,111,255,0.1)' }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12,6 12,12 16,14" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-sm font-medium" style={{ color: '#f0f0f4' }}>Scan History</p>
+                  <p className="text-xs" style={{ color: 'rgba(240,240,244,0.4)' }}>View all your past scans</p>
+                </div>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.3)" strokeWidth="2" strokeLinecap="round">
+                <polyline points="9,18 15,12 9,6" />
+              </svg>
+            </Link>
+
             {/* Actions */}
             <div className="pt-2 space-y-2">
               <button
