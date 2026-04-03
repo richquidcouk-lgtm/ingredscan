@@ -35,11 +35,13 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
       <div
-        className="relative w-full max-w-md rounded-2xl p-6 pb-8 animate-slideUp my-auto"
+        className="relative rounded-2xl p-6 pb-8 animate-slideUp mx-4"
         style={{
+          width: 'calc(100% - 32px)',
+          maxWidth: '400px',
           background: 'rgba(19,19,26,0.98)',
           backdropFilter: 'blur(20px) saturate(180%)',
           WebkitBackdropFilter: 'blur(20px) saturate(180%)',
