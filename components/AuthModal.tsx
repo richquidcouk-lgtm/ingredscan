@@ -35,20 +35,28 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
       <div
-        className="relative w-full sm:max-w-md rounded-t-3xl sm:rounded-2xl p-6 pb-8 animate-slideUp"
+        className="relative w-full max-w-md rounded-2xl p-6 pb-8 animate-slideUp my-auto"
         style={{
-          background: 'rgba(19,19,26,0.95)',
+          background: 'rgba(19,19,26,0.98)',
           backdropFilter: 'blur(20px) saturate(180%)',
           WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-          borderTop: '1px solid rgba(255,255,255,0.08)',
-          border: '1px solid rgba(255,255,255,0.06)',
-          boxShadow: '0 -8px 40px rgba(0,0,0,0.5)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 8px 40px rgba(0,0,0,0.5)',
         }}
       >
-        <div className="w-10 h-1 rounded-full mx-auto mb-6 sm:hidden" style={{ backgroundColor: 'rgba(255,255,255,0.12)' }} />
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-1.5 rounded-lg"
+          style={{ color: 'rgba(240,240,244,0.4)' }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
 
         <h2 className="text-xl font-bold heading-display mb-1" style={{ color: '#f0f0f4' }}>
           Sign in to IngredScan
