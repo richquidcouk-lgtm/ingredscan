@@ -11,8 +11,9 @@ import SwapCard from '@/components/SwapCard'
 import ShareButton from '@/components/ShareCard'
 import ProductReport from '@/components/ProductReport'
 import SkeletonResult from '@/components/SkeletonResult'
+import UpgradeModal from '@/components/UpgradeModal'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
-import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
+import { getCategoryEmoji, incrementAnonScanCount, getAnonScanCount } from '@/lib/utils'
 import swapsData from '@/data/swaps.json'
 
 type Tab = 'overview' | 'additives' | 'swaps'
@@ -26,15 +27,63 @@ export default function ResultPage() {
   const [error, setError] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<Tab>('overview')
   const [matchedSwaps, setMatchedSwaps] = useState<any[]>([])
+  const [showUpgrade, setShowUpgrade] = useState(false)
+  const [limitReached, setLimitReached] = useState(false)
 
   useEffect(() => {
     if (!barcode) return
     fetchProduct()
   }, [barcode])
 
+  async function checkScanLimit(): Promise<boolean> {
+    // Check if user is logged in
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (user) {
+      // Check if Pro user
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('pro, scan_count_today, scan_date')
+        .eq('id', user.id)
+        .single()
+
+      if (profile?.pro) return true // Pro = unlimited
+
+      // Free logged-in user: 10 scans per day
+      const today = new Date().toISOString().split('T')[0]
+      const scanCount = profile?.scan_date === today ? (profile?.scan_count_today || 0) : 0
+
+      if (scanCount >= 10) return false
+
+      // Increment count
+      await supabase
+        .from('profiles')
+        .update({
+          scan_count_today: scanCount + 1,
+          scan_date: today,
+        })
+        .eq('id', user.id)
+
+      return true
+    }
+
+    // Anonymous: 3 scans per session
+    if (getAnonScanCount() >= 3) return false
+    return true
+  }
+
   async function fetchProduct() {
     setLoading(true)
     setError(null)
+
+    // Check scan limit first
+    const canScan = await checkScanLimit()
+    if (!canScan) {
+      setLimitReached(true)
+      setShowUpgrade(true)
+      setLoading(false)
+      return
+    }
 
     try {
       // Check Supabase cache first
@@ -99,6 +148,35 @@ export default function ResultPage() {
       }
     }
     setMatchedSwaps([])
+  }
+
+  if (limitReached) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative">
+        <div className="text-5xl mb-4">🔒</div>
+        <h2 className="text-xl font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>
+          Daily scan limit reached
+        </h2>
+        <p className="text-sm mb-6 max-w-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>
+          Upgrade to Pro for unlimited scans, full additive detail, and UK supermarket swaps.
+        </p>
+        <Link
+          href="/pro"
+          className="px-6 py-3 rounded-xl text-sm font-medium btn-glow"
+          style={{ color: '#0b0b0f' }}
+        >
+          View Pro Plans — from £3.99/mo
+        </Link>
+        <button
+          onClick={() => router.back()}
+          className="mt-3 text-sm"
+          style={{ color: 'rgba(240,240,244,0.4)' }}
+        >
+          Go back
+        </button>
+        {showUpgrade && <UpgradeModal onClose={() => setShowUpgrade(false)} />}
+      </div>
+    )
   }
 
   if (loading) {
