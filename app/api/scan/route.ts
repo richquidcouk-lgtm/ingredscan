@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { fetchProduct, isUKProduct } from '@/lib/openFoodFacts'
-import { inferNovaScore, calculateQualityScore, resolveAdditives } from '@/lib/scoring'
+import { fetchProduct, isUKProduct, validateProduct } from '@/lib/openFoodFacts'
+import { resolveAdditives } from '@/lib/scoring'
 import { getServiceSupabase } from '@/lib/supabase'
 
 export async function GET(request: NextRequest) {
@@ -35,8 +35,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Product not found' }, { status: 404 })
   }
 
-  const novaScore = inferNovaScore(offProduct)
-  const qualityScore = calculateQualityScore(offProduct)
+  // Validate and score with overrides
+  const validated = validateProduct(offProduct)
   const additives = resolveAdditives(offProduct.additives_tags || [])
   const isUK = isUKProduct(offProduct)
 
@@ -44,8 +44,8 @@ export async function GET(request: NextRequest) {
     barcode,
     name: offProduct.product_name || 'Unknown Product',
     brand: offProduct.brands || 'Unknown Brand',
-    nova_score: novaScore,
-    quality_score: qualityScore,
+    nova_score: validated.nova_score,
+    quality_score: validated.quality_score,
     nutriscore_grade: offProduct.nutriscore_grade || '',
     ingredients: offProduct.ingredients_text || '',
     additives,
@@ -61,8 +61,9 @@ export async function GET(request: NextRequest) {
     },
     image_url: offProduct.image_front_url || '',
     data_source: isUK ? 'Open Food Facts + UK FSA' : 'Open Food Facts + USDA',
-    confidence: offProduct.product_name ? 97 : 78,
+    confidence: validated.confidence,
     category: (offProduct.categories_tags || []).join(', '),
+    warning: validated.warning,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   }

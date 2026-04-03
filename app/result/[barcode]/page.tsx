@@ -285,6 +285,23 @@ export default function ResultPage() {
           </p>
         </div>
 
+        {/* Low confidence warning */}
+        {(product as any).warning && (
+          <div
+            className="rounded-xl px-4 py-3 animate-fadeUp flex items-center gap-2.5"
+            style={{
+              backgroundColor: 'rgba(245,166,35,0.08)',
+              border: '1px solid rgba(245,166,35,0.15)',
+              animationDelay: '110ms',
+            }}
+          >
+            <span className="text-base">⚠️</span>
+            <p className="text-xs" style={{ color: '#f5a623' }}>
+              {(product as any).warning}
+            </p>
+          </div>
+        )}
+
         {/* Report issue */}
         <ProductReport barcode={barcode} />
 
