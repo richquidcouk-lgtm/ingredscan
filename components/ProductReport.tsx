@@ -40,7 +40,7 @@ export default function ProductReport({ barcode }: { barcode: string }) {
         setDescription('')
       }, 1800)
     } catch {
-      // silently fail
+      alert('Failed to submit report. Please try again.')
     }
     setSubmitting(false)
   }

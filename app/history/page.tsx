@@ -24,6 +24,7 @@ export default function HistoryPage() {
   const [scans, setScans] = useState<ScanHistory[]>([])
   const [loading, setLoading] = useState(true)
   const [showAuth, setShowAuth] = useState(false)
+  const [clearing, setClearing] = useState(false)
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -81,8 +82,10 @@ export default function HistoryPage() {
   async function handleClearAll() {
     if (!user) return
     if (!confirm('Clear all scan history? This cannot be undone.')) return
+    setClearing(true)
     await supabase.from('scans').delete().eq('user_id', user.id)
     setScans([])
+    setClearing(false)
   }
 
   function getScoreBg(score: number): string {
@@ -124,10 +127,11 @@ export default function HistoryPage() {
         {scans.length > 0 && (
           <button
             onClick={handleClearAll}
+            disabled={clearing}
             className="text-xs font-medium"
             style={{ color: 'rgba(240,240,244,0.4)' }}
           >
-            Clear all
+            {clearing ? 'Clearing...' : 'Clear all'}
           </button>
         )}
       </header>

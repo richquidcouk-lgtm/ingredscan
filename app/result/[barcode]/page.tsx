@@ -162,7 +162,7 @@ export default function ResultPage() {
           Daily scan limit reached
         </h2>
         <p className="text-sm mb-6 max-w-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>
-          Upgrade to Pro for unlimited scans, full additive detail, and UK supermarket swaps.
+          Upgrade to Pro for unlimited scans, full additive detail, and supermarket swaps.
         </p>
         <Link
           href="/pro"
@@ -434,7 +434,7 @@ export default function ResultPage() {
         </div>
 
         {/* Low confidence warning */}
-        {(product as any).warning && (
+        {(product as any)?.warning && (
           <div
             className="rounded-xl px-4 py-3 animate-fadeUp flex items-center gap-2.5"
             style={{
@@ -445,7 +445,7 @@ export default function ResultPage() {
           >
             <span className="text-base">⚠</span>
             <p className="text-xs" style={{ color: '#f5a623' }}>
-              {(product as any).warning}
+              {(product as any)?.warning}
             </p>
           </div>
         )}

@@ -32,7 +32,7 @@ export default function FeedbackButton() {
         setEmail('')
       }, 1800)
     } catch {
-      // silently fail
+      alert('Failed to send feedback. Please try again.')
     }
     setSubmitting(false)
   }

@@ -276,7 +276,11 @@ export default function AccountPage() {
                   </svg>
                 }
                 label="Rate IngredScan"
-                onClick={() => {}}
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({ title: 'IngredScan', text: 'Check what\'s really in your food!', url: 'https://www.ingredscan.com' })
+                  }
+                }}
               />
               <SettingsRow
                 icon={

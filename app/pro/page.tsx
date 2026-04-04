@@ -9,7 +9,7 @@ import Logo from '@/components/Logo'
 const features = [
   'Unlimited daily scans',
   'Full additive detail with risk ratings',
-  'UK supermarket swaps',
+  'Supermarket swaps',
   'Scan history (unlimited)',
   'AI label photo parser',
   'Shareable scan cards',

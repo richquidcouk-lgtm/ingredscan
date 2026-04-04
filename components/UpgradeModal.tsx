@@ -7,6 +7,8 @@ export default function UpgradeModal({ onClose }: { onClose: () => void }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
       <div
+        role="dialog"
+        aria-label="Upgrade to Pro"
         className="relative rounded-2xl p-6 pb-8 animate-slideUp mx-4"
         style={{
           width: 'calc(100% - 32px)',
@@ -26,7 +28,7 @@ export default function UpgradeModal({ onClose }: { onClose: () => void }) {
             Scan limit reached
           </h2>
           <p className="text-sm mt-2" style={{ color: 'rgba(240,240,244,0.4)' }}>
-            Upgrade to Pro for unlimited scans, full additive detail, and UK supermarket swaps.
+            Upgrade to Pro for unlimited scans, full additive detail, and supermarket swaps.
           </p>
         </div>
 
@@ -34,7 +36,7 @@ export default function UpgradeModal({ onClose }: { onClose: () => void }) {
           {[
             'Unlimited daily scans',
             'Full additive risk ratings',
-            'UK supermarket swaps',
+            'Supermarket swaps',
             'Scan history',
             'AI label photo parser',
             'Shareable scan cards',

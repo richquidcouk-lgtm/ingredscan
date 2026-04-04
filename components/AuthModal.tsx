@@ -38,6 +38,8 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
       <div
+        role="dialog"
+        aria-label="Sign in to IngredScan"
         className="relative rounded-2xl p-6 pb-8 animate-slideUp mx-4"
         style={{
           width: 'calc(100% - 32px)',

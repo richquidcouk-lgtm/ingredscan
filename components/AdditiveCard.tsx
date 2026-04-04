@@ -28,6 +28,7 @@ export default function AdditiveCard({ additive, index }: { additive: Additive; 
     >
       <button
         onClick={() => setExpanded(!expanded)}
+        aria-expanded={expanded}
         className="w-full flex items-center gap-3 py-3.5 text-left transition-colors"
       >
         {/* Risk dot */}

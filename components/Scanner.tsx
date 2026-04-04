@@ -179,6 +179,7 @@ export default function Scanner() {
         {isStarted && (
           <button
             onClick={toggleTorch}
+            aria-label="Toggle flashlight"
             className="absolute top-4 right-4 z-10 p-2.5 rounded-xl backdrop-blur-md"
             style={{ backgroundColor: torchOn ? '#00e5a030' : 'rgba(0,0,0,0.5)' }}
           >
