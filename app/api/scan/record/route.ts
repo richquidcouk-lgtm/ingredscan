@@ -22,7 +22,27 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 })
     }
 
-    // Insert scan record
+    // Check if this user already scanned this barcode today
+    const today = new Date().toISOString().split('T')[0]
+    const { data: existingScan } = await supabase
+      .from('scans')
+      .select('id')
+      .eq('user_id', userId)
+      .eq('barcode', barcode)
+      .gte('scanned_at', `${today}T00:00:00Z`)
+      .limit(1)
+      .single()
+
+    if (existingScan) {
+      // Already scanned today — just update timestamp
+      await supabase
+        .from('scans')
+        .update({ scanned_at: new Date().toISOString() })
+        .eq('id', existingScan.id)
+      return NextResponse.json({ success: true, duplicate: true })
+    }
+
+    // New scan — insert record
     const { error } = await supabase.from('scans').insert({
       user_id: userId,
       barcode,
@@ -35,7 +55,6 @@ export async function POST(request: NextRequest) {
     }
 
     // Update daily scan count
-    const today = new Date().toISOString().split('T')[0]
     const { data: profile } = await supabase
       .from('profiles')
       .select('scan_count_today, scan_date')

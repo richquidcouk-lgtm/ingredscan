@@ -26,7 +26,7 @@ export default function Scanner() {
     }
 
     setTimeout(() => {
-      router.push(`/result/${decodedText}`)
+      router.push(`/result/${decodedText}?source=scan`)
     }, 600)
   }, [router, scanSuccess])
 

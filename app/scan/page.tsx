@@ -112,7 +112,7 @@ export default function ScanPage() {
             {searchResults.map((product) => (
               <Link
                 key={product.code}
-                href={`/result/${product.code}`}
+                href={`/result/${product.code}?source=scan`}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-white/5"
               >
                 {product.image_front_small_url ? (

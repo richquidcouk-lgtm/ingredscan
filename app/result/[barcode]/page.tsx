@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useEffect, useState, useRef } from 'react'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { QualityScoreCard, NovaScoreCard } from '@/components/ScoreCard'
@@ -23,7 +23,10 @@ import swapsData from '@/data/swaps.json'
 export default function ResultPage() {
   const params = useParams()
   const router = useRouter()
+  const searchParams = useSearchParams()
   const barcode = params.barcode as string
+  const isNewScan = searchParams.get('source') === 'scan'
+  const hasRecorded = useRef(false)
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -123,11 +126,14 @@ export default function ResultPage() {
   }
 
   async function recordScan() {
+    // Only record if this is a fresh scan (not from history/recents) and hasn't been recorded yet
+    if (!isNewScan || hasRecorded.current) return
+    hasRecorded.current = true
+
     incrementAnonScanCount()
     try {
       const { data: { user } } = await supabase.auth.getUser()
       if (user) {
-        // Use API route to record scan with service role (avoids RLS issues)
         await fetch('/api/scan/record', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
