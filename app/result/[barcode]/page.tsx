@@ -325,23 +325,26 @@ export default function ResultPage() {
         )}
 
         {/* 4. Safer Alternatives (Swaps) */}
-        {config.supported && matchedSwaps.length > 0 && (
-          <div className="animate-fadeUp" style={{ animationDelay: '100ms' }}>
-            <h3 className="text-sm font-semibold mb-3" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
-              Safer Alternatives
-            </h3>
+        <div className="animate-fadeUp" style={{ animationDelay: '100ms' }}>
+          <h3 className="text-sm font-semibold mb-3" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
+            Safer Alternatives
+          </h3>
+          {!config.supported ? (
+            <ComingSoonSwaps />
+          ) : matchedSwaps.length > 0 ? (
             <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-hide">
               {matchedSwaps.map((swap, i) => (
                 <SwapCard key={i} swap={swap} currentScore={product.quality_score} index={i} />
               ))}
             </div>
-          </div>
-        )}
-        {!config.supported && (
-          <div className="animate-fadeUp" style={{ animationDelay: '100ms' }}>
-            <ComingSoonSwaps />
-          </div>
-        )}
+          ) : (
+            <div className="rounded-2xl p-5 glass-card">
+              <p className="text-sm" style={{ color: 'rgba(240,240,244,0.4)' }}>
+                No swaps available for this product category yet. We&apos;re adding more every week.
+              </p>
+            </div>
+          )}
+        </div>
 
         {/* 5. Additives section */}
         <div id="section-additives" className="animate-fadeUp" style={{ animationDelay: '150ms' }}>
