@@ -204,9 +204,11 @@ export default function AccountPage() {
                 label="Plan"
                 value={
                   profile?.pro ? (
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ backgroundColor: '#00e5a015', color: '#00e5a0', border: '1px solid rgba(0,229,160,0.15)' }}>
-                      Pro
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ backgroundColor: '#00e5a015', color: '#00e5a0', border: '1px solid rgba(0,229,160,0.15)' }}>
+                        Pro
+                      </span>
+                    </div>
                   ) : (
                     <span className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ backgroundColor: 'rgba(28,28,38,0.8)', color: 'rgba(240,240,244,0.5)' }}>
                       Free
@@ -215,6 +217,23 @@ export default function AccountPage() {
                 }
                 chevron={false}
               />
+              {profile?.pro && profile?.pro_expires_at && (
+                <SettingsRow
+                  icon={
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00e5a0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12,6 12,12 16,14" />
+                    </svg>
+                  }
+                  label="Renews"
+                  value={
+                    <span className="text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>
+                      {new Date(profile.pro_expires_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    </span>
+                  }
+                  chevron={false}
+                />
+              )}
               {!profile?.pro && (
                 <SettingsRow
                   icon={
