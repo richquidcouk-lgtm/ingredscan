@@ -63,15 +63,19 @@ export async function GET(request: NextRequest) {
     data_source: isUK ? 'Open Food Facts + UK FSA' : 'Open Food Facts + USDA',
     confidence: validated.confidence,
     category: (offProduct.categories_tags || []).join(', '),
-    warning: validated.warning,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   }
 
-  // Save to cache
-  await supabase
+  // Save to cache (exclude warning field — not in DB schema)
+  const { error: upsertError } = await supabase
     .from('products')
     .upsert(product, { onConflict: 'barcode' })
 
-  return NextResponse.json(product)
+  if (upsertError) {
+    console.error('[IngredScan] Product upsert failed:', upsertError.message)
+  }
+
+  // Return product with warning for display
+  return NextResponse.json({ ...product, warning: validated.warning })
 }

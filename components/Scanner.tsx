@@ -3,6 +3,11 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 
+// Preload the library as soon as this module is imported
+const html5QrcodePromise = typeof window !== 'undefined'
+  ? import('html5-qrcode')
+  : null
+
 export default function Scanner() {
   const router = useRouter()
   const scannerRef = useRef<HTMLDivElement>(null)
@@ -30,20 +35,27 @@ export default function Scanner() {
 
     async function startScanner() {
       try {
-        const { Html5Qrcode } = await import('html5-qrcode')
+        const { Html5Qrcode } = html5QrcodePromise ? await html5QrcodePromise : await import('html5-qrcode')
 
         if (!mounted || !scannerRef.current) return
 
         const scanner = new Html5Qrcode('scanner-region')
         html5QrCodeRef.current = scanner
 
+        // Request camera with lower resolution for faster start
         await scanner.start(
           { facingMode: 'environment' },
           {
-            fps: 10,
-            qrbox: { width: 280, height: 160 },
+            fps: 15,
+            qrbox: { width: 250, height: 150 },
             aspectRatio: 1.0,
-          },
+            disableFlip: false,
+            videoConstraints: {
+              width: { ideal: 640 },
+              height: { ideal: 480 },
+              facingMode: 'environment',
+            },
+          } as any,
           onScanSuccess,
           () => {}
         )

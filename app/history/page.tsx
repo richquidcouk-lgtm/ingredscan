@@ -37,26 +37,44 @@ export default function HistoryPage() {
   }, [])
 
   async function loadHistory(userId: string) {
-    const { data } = await supabase
+    // Fetch scans first
+    const { data: scansData } = await supabase
       .from('scans')
-      .select('barcode, scanned_at, products(name, brand, quality_score, nova_score, category, image_url)')
+      .select('barcode, scanned_at')
       .eq('user_id', userId)
       .order('scanned_at', { ascending: false })
 
-    if (data) {
-      setScans(
-        data.map((s: any) => ({
+    if (!scansData || scansData.length === 0) {
+      setLoading(false)
+      return
+    }
+
+    // Fetch product details separately (avoids RLS join issues)
+    const barcodes = Array.from(new Set(scansData.map((s: any) => s.barcode)))
+    const { data: productsData } = await supabase
+      .from('products')
+      .select('barcode, name, brand, quality_score, nova_score, category, image_url')
+      .in('barcode', barcodes)
+
+    const productMap = new Map(
+      (productsData || []).map((p: any) => [p.barcode, p])
+    )
+
+    setScans(
+      scansData.map((s: any) => {
+        const p = productMap.get(s.barcode)
+        return {
           barcode: s.barcode,
           scanned_at: s.scanned_at,
-          name: s.products?.name || 'Unknown',
-          brand: s.products?.brand || '',
-          quality_score: s.products?.quality_score || 0,
-          nova_score: s.products?.nova_score || 0,
-          category: s.products?.category || '',
-          image_url: s.products?.image_url || '',
-        }))
-      )
-    }
+          name: p?.name || 'Unknown',
+          brand: p?.brand || '',
+          quality_score: p?.quality_score || 0,
+          nova_score: p?.nova_score || 0,
+          category: p?.category || '',
+          image_url: p?.image_url || '',
+        }
+      })
+    )
     setLoading(false)
   }
 

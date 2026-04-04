@@ -123,13 +123,18 @@ export default function ResultPage() {
 
   async function recordScan() {
     incrementAnonScanCount()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (user) {
-      await supabase.from('scans').insert({
-        user_id: user.id,
-        barcode,
-        scanned_at: new Date().toISOString(),
-      })
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        // Use API route to record scan with service role (avoids RLS issues)
+        await fetch('/api/scan/record', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: user.id, barcode }),
+        })
+      }
+    } catch {
+      // Don't block the result page if recording fails
     }
   }
 
