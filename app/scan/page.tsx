@@ -31,15 +31,13 @@ export default function ScanPage() {
   }, [searchQuery, doSearch])
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen pb-24 relative">
       {/* Header */}
       <header className="flex items-center justify-between px-5 py-4 max-w-lg mx-auto relative z-10">
-        <button onClick={() => router.back()} className="p-2.5 rounded-xl glass-card">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0f0f4" strokeWidth="2" strokeLinecap="round">
-            <path d="M19 12H5" /><polyline points="12,19 5,12 12,5" />
-          </svg>
-        </button>
-        <h1 className="text-base font-semibold" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>Scan</h1>
+        <h1 className="text-xl font-extrabold heading-display" style={{ letterSpacing: '-0.04em' }}>
+          <span style={{ color: '#f0f0f4' }}>Ingred</span>
+          <span style={{ color: '#00e5a0' }}>Scan</span>
+        </h1>
         <div className="w-10" />
       </header>
 

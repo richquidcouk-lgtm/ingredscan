@@ -20,9 +20,18 @@ export default function Scanner() {
       try { html5QrCodeRef.current.stop() } catch {}
     }
 
+    // Haptic feedback
+    if (navigator.vibrate) {
+      navigator.vibrate(50)
+    }
+
+    // Scan success animation sequence:
+    // 1. Green flash (instant) - shown via CSS
+    // 2. Checkmark scales in (200ms) - shown via CSS
+    // 3. Navigate after 500ms total
     setTimeout(() => {
       router.push(`/result/${decodedText}`)
-    }, 600)
+    }, 500)
   }, [router, scanSuccess])
 
   useEffect(() => {
@@ -101,7 +110,7 @@ export default function Scanner() {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center">
-        <div className="text-5xl mb-4">📷</div>
+        <div className="text-5xl mb-4">{'\uD83D\uDCF7'}</div>
         <h2 className="text-lg font-bold mb-2" style={{ color: '#f0f0f4', fontFamily: 'var(--font-display)' }}>
           Camera Access Needed
         </h2>
@@ -126,10 +135,24 @@ export default function Scanner() {
         <div id="scanner-region" ref={scannerRef} className="w-full" />
         <div id="file-scanner" className="hidden" />
 
-        {/* Success flash */}
+        {/* Success overlay with animation */}
         {scanSuccess && (
-          <div className="absolute inset-0 z-20 flex items-center justify-center" style={{ backgroundColor: 'rgba(0,229,160,0.15)' }}>
-            <div className="text-6xl animate-bounce">✓</div>
+          <div
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center scan-success-overlay"
+          >
+            {/* Green flash */}
+            <div className="absolute inset-0 scan-flash" style={{ backgroundColor: '#00e5a0' }} />
+            {/* Checkmark */}
+            <div className="relative z-10 scan-checkmark">
+              <div
+                className="w-20 h-20 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: 'rgba(0,229,160,0.2)', border: '2px solid #00e5a0' }}
+              >
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00e5a0" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20,6 9,17 4,12" />
+                </svg>
+              </div>
+            </div>
           </div>
         )}
 
@@ -170,10 +193,7 @@ export default function Scanner() {
             className="absolute top-4 right-4 z-10 p-2.5 rounded-xl backdrop-blur-md"
             style={{ backgroundColor: torchOn ? '#00e5a030' : 'rgba(0,0,0,0.5)' }}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={torchOn ? '#00e5a0' : '#fff'} strokeWidth="2">
-              <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
-            </svg>
-            💡
+            {'\uD83D\uDCA1'}
           </button>
         )}
       </div>

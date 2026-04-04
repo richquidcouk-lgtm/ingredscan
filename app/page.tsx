@@ -8,6 +8,7 @@ import { getCategoryEmoji } from '@/lib/utils'
 import AuthModal from '@/components/AuthModal'
 import { useMarket } from '@/components/MarketProvider'
 import MarketSelector, { MarketSelectorTrigger } from '@/components/MarketSelector'
+import Onboarding, { useOnboarding, AuthBottomSheet } from '@/components/Onboarding'
 
 type RecentScan = {
   barcode: string
@@ -22,7 +23,9 @@ export default function HomePage() {
   const [recentScans, setRecentScans] = useState<RecentScan[]>([])
   const [showAuth, setShowAuth] = useState(false)
   const [showMarketSelector, setShowMarketSelector] = useState(false)
+  const [showAuthSheet, setShowAuthSheet] = useState(false)
   const { market, config } = useMarket()
+  const { needsOnboarding, checked, completeOnboarding } = useOnboarding()
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -66,8 +69,24 @@ export default function HomePage() {
     }
   }
 
+  function handleOnboardingComplete() {
+    completeOnboarding()
+    // Show auth bottom sheet after onboarding if not logged in
+    if (!user) {
+      setTimeout(() => setShowAuthSheet(true), 500)
+    }
+  }
+
+  // Don't render anything until onboarding check is done
+  if (!checked) return null
+
+  // Show onboarding if first visit
+  if (needsOnboarding) {
+    return <Onboarding onComplete={handleOnboardingComplete} />
+  }
+
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen pb-24 relative">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -122,12 +141,6 @@ export default function HomePage() {
         </h1>
         <div className="flex items-center gap-2.5">
           <MarketSelectorTrigger onClick={() => setShowMarketSelector(true)} />
-          <Link href="/history" className="p-2.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12,6 12,12 16,14" />
-            </svg>
-          </Link>
           {user ? (
             <Link href="/account" className="flex items-center gap-2 px-3 py-1.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
               {user.user_metadata?.avatar_url ? (
@@ -258,10 +271,10 @@ export default function HomePage() {
         </h3>
         <div className="grid grid-cols-2 gap-3">
           {[
-            { icon: '🎯', title: 'Dual Scoring', desc: 'NOVA processing level + quality score together for the full picture' },
-            { icon: '🛒', title: 'UK Supermarket Swaps', desc: 'Specific alternatives from Tesco, Sainsbury\'s, Asda & Waitrose' },
-            { icon: '🔍', title: 'Transparent Data', desc: 'Source shown on every scan — know where the data comes from' },
-            { icon: '💬', title: 'Plain English', desc: 'No chemistry degree needed — every additive explained simply' },
+            { icon: '\uD83C\uDFAF', title: 'Dual Scoring', desc: 'NOVA processing level + quality score together for the full picture' },
+            { icon: '\uD83D\uDED2', title: 'UK Supermarket Swaps', desc: 'Specific alternatives from Tesco, Sainsbury\'s, Asda & Waitrose' },
+            { icon: '\uD83D\uDD0D', title: 'Transparent Data', desc: 'Source shown on every scan \u2014 know where the data comes from' },
+            { icon: '\uD83D\uDCAC', title: 'Plain English', desc: 'No chemistry degree needed \u2014 every additive explained simply' },
           ].map((feature, i) => (
             <div
               key={feature.title}
@@ -280,6 +293,12 @@ export default function HomePage() {
 
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
       {showMarketSelector && <MarketSelector onClose={() => setShowMarketSelector(false)} />}
+      {showAuthSheet && !user && (
+        <AuthBottomSheet
+          onClose={() => setShowAuthSheet(false)}
+          onSignUp={() => { setShowAuthSheet(false); setShowAuth(true) }}
+        />
+      )}
     </div>
   )
 }

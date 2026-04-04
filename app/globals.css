@@ -496,3 +496,99 @@ body {
   background: rgba(124, 111, 255, 0.3);
   color: #f0f0f4;
 }
+
+/* ═══════════════════════════════════════════
+   Scan success animations
+   ═══════════════════════════════════════════ */
+
+.scan-success-overlay {
+  animation: none;
+}
+
+.scan-flash {
+  animation: scanFlash 200ms ease-out forwards;
+}
+
+@keyframes scanFlash {
+  0% { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+.scan-checkmark {
+  animation: scanCheckmark 300ms cubic-bezier(0.34, 1.56, 0.64, 1) 100ms both;
+}
+
+@keyframes scanCheckmark {
+  0% { opacity: 0; transform: scale(0.3); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ═══════════════════════════════════════════
+   Emotional indicator pulse
+   ═══════════════════════════════════════════ */
+
+.emotional-pulse {
+  animation: emotionalPulse 2s ease-in-out infinite;
+  border-radius: 50%;
+}
+
+@keyframes emotionalPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
+
+/* ═══════════════════════════════════════════
+   History floating animation
+   ═══════════════════════════════════════════ */
+
+.history-float {
+  animation: historyFloat 3s ease-in-out infinite;
+}
+
+@keyframes historyFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ═══════════════════════════════════════════
+   Shimmer animation (improved)
+   ═══════════════════════════════════════════ */
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ═══════════════════════════════════════════
+   Bottom navigation safe area
+   ═══════════════════════════════════════════ */
+
+.pb-nav {
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+}
+
+/* ═══════════════════════════════════════════
+   Reduced motion — respect user preference
+   ═══════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .scan-flash,
+  .scan-checkmark,
+  .emotional-pulse,
+  .history-float,
+  .animate-fadeUp,
+  .animate-slideUp,
+  .animate-shimmer {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

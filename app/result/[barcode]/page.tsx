@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -12,6 +12,9 @@ import ShareButton from '@/components/ShareCard'
 import ProductReport from '@/components/ProductReport'
 import SkeletonResult from '@/components/SkeletonResult'
 import UpgradeModal from '@/components/UpgradeModal'
+import EmotionalIndicator from '@/components/EmotionalIndicator'
+import FavouriteButton from '@/components/FavouriteButton'
+import ProductImage from '@/components/ProductImage'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
 import { getCategoryEmoji, incrementAnonScanCount, getAnonScanCount } from '@/lib/utils'
 import { useMarket } from '@/components/MarketProvider'
@@ -39,38 +42,30 @@ export default function ResultPage() {
   }, [barcode])
 
   async function checkScanLimit(): Promise<boolean> {
-    // Check if user is logged in
     const { data: { user } } = await supabase.auth.getUser()
 
     if (user) {
-      // Check if Pro user
       const { data: profile } = await supabase
         .from('profiles')
         .select('pro, scan_count_today, scan_date')
         .eq('id', user.id)
         .single()
 
-      if (profile?.pro) return true // Pro = unlimited
+      if (profile?.pro) return true
 
-      // Free logged-in user: 10 scans per day
       const today = new Date().toISOString().split('T')[0]
       const scanCount = profile?.scan_date === today ? (profile?.scan_count_today || 0) : 0
 
       if (scanCount >= 10) return false
 
-      // Increment count
       await supabase
         .from('profiles')
-        .update({
-          scan_count_today: scanCount + 1,
-          scan_date: today,
-        })
+        .update({ scan_count_today: scanCount + 1, scan_date: today })
         .eq('id', user.id)
 
       return true
     }
 
-    // Anonymous: 3 scans per session
     if (getAnonScanCount() >= 3) return false
     return true
   }
@@ -79,7 +74,6 @@ export default function ResultPage() {
     setLoading(true)
     setError(null)
 
-    // Check scan limit first
     const canScan = await checkScanLimit()
     if (!canScan) {
       setLimitReached(true)
@@ -89,7 +83,6 @@ export default function ResultPage() {
     }
 
     try {
-      // Check Supabase cache first
       const { data: cached } = await supabase
         .from('products')
         .select('*')
@@ -104,17 +97,13 @@ export default function ResultPage() {
         return
       }
     } catch {
-      // Not cached, proceed to API
+      // Not cached
     }
 
     try {
       const res = await fetch(`/api/scan?barcode=${barcode}`)
       if (!res.ok) {
-        if (res.status === 404) {
-          setError('not_found')
-        } else {
-          setError('api_error')
-        }
+        setError(res.status === 404 ? 'not_found' : 'api_error')
         setLoading(false)
         return
       }
@@ -156,25 +145,17 @@ export default function ResultPage() {
   if (limitReached) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative">
-        <div className="text-5xl mb-4">🔒</div>
+        <div className="text-5xl mb-4">{'\uD83D\uDD12'}</div>
         <h2 className="text-xl font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>
           Daily scan limit reached
         </h2>
         <p className="text-sm mb-6 max-w-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>
           Upgrade to Pro for unlimited scans, full additive detail, and UK supermarket swaps.
         </p>
-        <Link
-          href="/pro"
-          className="px-6 py-3 rounded-xl text-sm font-medium btn-glow"
-          style={{ color: '#0b0b0f' }}
-        >
+        <Link href="/pro" className="px-6 py-3 rounded-xl text-sm font-medium btn-glow" style={{ color: '#0b0b0f' }}>
           View Pro Plans — from £3.99/mo
         </Link>
-        <button
-          onClick={() => router.back()}
-          className="mt-3 text-sm"
-          style={{ color: 'rgba(240,240,244,0.4)' }}
-        >
+        <button onClick={() => router.back()} className="mt-3 text-sm" style={{ color: 'rgba(240,240,244,0.4)' }}>
           Go back
         </button>
         {showUpgrade && <UpgradeModal onClose={() => setShowUpgrade(false)} />}
@@ -201,7 +182,7 @@ export default function ResultPage() {
   if (error === 'not_found') {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative">
-        <div className="text-5xl mb-4">🔍</div>
+        <div className="text-5xl mb-4">{'\uD83D\uDD0D'}</div>
         <h2 className="text-xl font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>Product not found</h2>
         <p className="text-sm mb-6" style={{ color: 'rgba(240,240,244,0.4)' }}>
           We couldn&apos;t find this product in our database. It may not be listed yet.
@@ -216,7 +197,7 @@ export default function ResultPage() {
   if (error === 'api_error' || !product) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative">
-        <div className="text-5xl mb-4">⚠️</div>
+        <div className="text-5xl mb-4">{'\u26A0\uFE0F'}</div>
         <h2 className="text-xl font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>Something went wrong</h2>
         <p className="text-sm mb-6" style={{ color: 'rgba(240,240,244,0.4)' }}>
           We couldn&apos;t fetch the product data. Please try again.
@@ -240,22 +221,22 @@ export default function ResultPage() {
             <path d="M19 12H5" /><polyline points="12,19 5,12 12,5" />
           </svg>
         </button>
-        <ShareButton product={product} />
+        <div className="flex items-center gap-2">
+          <FavouriteButton barcode={barcode} />
+          <ShareButton product={product} />
+        </div>
       </header>
 
       <div className="px-5 max-w-lg mx-auto space-y-4 relative z-10">
-        {/* Product header */}
+        {/* 1. Product header */}
         <div className="rounded-2xl p-5 animate-fadeUp glass-card">
           <div className="flex items-start gap-4">
-            {product.image_url ? (
-              <div className="relative w-20 h-20 rounded-2xl overflow-hidden shrink-0" style={{ backgroundColor: '#1c1c26' }}>
-                <Image src={product.image_url} alt={product.name} fill className="object-cover" unoptimized />
-              </div>
-            ) : (
-              <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-3xl shrink-0" style={{ backgroundColor: 'rgba(28,28,38,0.8)' }}>
-                {getCategoryEmoji(product.category || '')}
-              </div>
-            )}
+            <ProductImage
+              imageUrl={product.image_url}
+              category={product.category || ''}
+              name={product.name}
+              size={80}
+            />
             <div className="flex-1 min-w-0">
               <h1 className="text-lg font-bold leading-tight heading-display" style={{ color: '#f0f0f4', letterSpacing: '-0.03em' }}>
                 {product.name}
@@ -272,19 +253,25 @@ export default function ResultPage() {
           </div>
         </div>
 
-        {/* Dual score */}
+        {/* 2. Emotional indicator */}
+        <EmotionalIndicator qualityScore={product.quality_score} />
+
+        {/* 3. Dual score cards */}
         <div className="flex gap-3 animate-fadeUp" style={{ animationDelay: '50ms' }}>
           <QualityScoreCard score={product.quality_score} />
           <NovaScoreCard score={product.nova_score} />
         </div>
 
-        {/* Data source */}
+        {/* 4. Dietary alert placeholder - shown if user has allergen profile */}
+        {/* This would check user's dietary profile from Supabase */}
+
+        {/* 5. Data source */}
         <div
           className="rounded-xl px-4 py-3 text-center animate-fadeUp glass-subtle"
           style={{ borderColor: 'rgba(124,111,255,0.15)', animationDelay: '100ms' }}
         >
           <p className="text-xs font-medium" style={{ color: '#7c6fff' }}>
-            🔍 {product.data_source} · {product.confidence}% verified
+            {'\uD83D\uDD0D'} {product.data_source} · {product.confidence}% verified
           </p>
         </div>
 
@@ -298,22 +285,19 @@ export default function ResultPage() {
               animationDelay: '110ms',
             }}
           >
-            <span className="text-base">⚠️</span>
+            <span className="text-base">{'\u26A0\uFE0F'}</span>
             <p className="text-xs" style={{ color: '#f5a623' }}>
               {(product as any).warning}
             </p>
           </div>
         )}
 
-        {/* Report issue */}
-        <ProductReport barcode={barcode} />
-
-        {/* Nutri-Score */}
+        {/* 6. Nutri-Score */}
         <div className="animate-fadeUp" style={{ animationDelay: '150ms' }}>
           <NutriScoreBar grade={product.nutriscore_grade || ''} />
         </div>
 
-        {/* Tabs */}
+        {/* 7. Tabs */}
         <div className="flex gap-1 p-1 rounded-xl animate-fadeUp glass" style={{ animationDelay: '200ms' }}>
           {[
             { id: 'overview' as Tab, label: 'Overview' },
@@ -339,7 +323,6 @@ export default function ResultPage() {
         <div className="animate-fadeUp" style={{ animationDelay: '250ms' }}>
           {activeTab === 'overview' && (
             <div className="space-y-4">
-              {/* Ingredients */}
               {product.ingredients && (
                 <div className="rounded-2xl p-5 glass-card">
                   <h3 className="text-xs uppercase tracking-wider mb-3 font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
@@ -351,7 +334,6 @@ export default function ResultPage() {
                 </div>
               )}
 
-              {/* Nutrition table */}
               <div className="rounded-2xl p-5 glass-card">
                 <h3 className="text-xs uppercase tracking-wider mb-3 font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
                   Nutrition per 100g
@@ -374,7 +356,7 @@ export default function ResultPage() {
                     >
                       <span className="text-sm" style={{ color: 'rgba(240,240,244,0.5)' }}>{row.label}</span>
                       <span className="text-sm font-medium" style={{ color: '#f0f0f4' }}>
-                        {row.value != null ? `${Number(row.value).toFixed(1)}${row.unit}` : '—'}
+                        {row.value != null ? `${Number(row.value).toFixed(1)}${row.unit}` : '\u2014'}
                       </span>
                     </div>
                   ))}
@@ -388,7 +370,7 @@ export default function ResultPage() {
               {additives.length === 0 ? (
                 <div className="rounded-2xl p-6 text-center glass-card" style={{ borderColor: 'rgba(0,229,160,0.15)' }}>
                   <p className="text-sm font-medium" style={{ color: '#00e5a0' }}>
-                    No concerning additives found ✓
+                    No concerning additives found {'\u2713'}
                   </p>
                 </div>
               ) : (
@@ -426,6 +408,11 @@ export default function ResultPage() {
               )}
             </div>
           )}
+        </div>
+
+        {/* 8. "Something not accurate?" flag - persistent on every result page */}
+        <div className="pt-2 pb-4">
+          <ProductReport barcode={barcode} />
         </div>
       </div>
 

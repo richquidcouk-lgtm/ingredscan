@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
-const protectedRoutes = ['/history', '/account']
+const protectedRoutes = ['/history', '/account', '/favourites']
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -31,5 +31,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/history/:path*', '/account/:path*'],
+  matcher: ['/history/:path*', '/account/:path*', '/favourites/:path*'],
 }
