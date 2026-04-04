@@ -59,7 +59,7 @@ export default function ProPage() {
   }
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen pb-20 relative">
       {/* Accent glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[600px] h-[400px] pointer-events-none"

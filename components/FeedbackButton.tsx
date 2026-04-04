@@ -42,7 +42,7 @@ export default function FeedbackButton() {
       {/* Floating pill button */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-20 right-5 z-40 flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium transition-all hover:scale-105"
+        className="fixed bottom-24 right-5 z-40 flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium transition-all hover:scale-105"
         style={{
           backgroundColor: 'rgba(124,111,255,0.15)',
           color: '#7c6fff',

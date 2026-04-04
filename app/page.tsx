@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
-import { getScoreColor, getNovaColor, getNovaEmoji } from '@/lib/scoring'
+import { getScoreColor } from '@/lib/scoring'
 import { getCategoryEmoji } from '@/lib/utils'
 import AuthModal from '@/components/AuthModal'
 import { useMarket } from '@/components/MarketProvider'
@@ -12,9 +12,11 @@ import MarketSelector, { MarketSelectorTrigger } from '@/components/MarketSelect
 type RecentScan = {
   barcode: string
   name: string
+  brand: string
   quality_score: number
   nova_score: number
   category: string
+  image_url?: string
 }
 
 export default function HomePage() {
@@ -48,26 +50,34 @@ export default function HomePage() {
   async function loadRecentScans(userId: string) {
     const { data } = await supabase
       .from('scans')
-      .select('barcode, products(name, quality_score, nova_score, category)')
+      .select('barcode, products(name, brand, quality_score, nova_score, category, image_url)')
       .eq('user_id', userId)
       .order('scanned_at', { ascending: false })
-      .limit(5)
+      .limit(10)
 
     if (data) {
       setRecentScans(
         data.map((s: any) => ({
           barcode: s.barcode,
           name: s.products?.name || 'Unknown',
+          brand: s.products?.brand || '',
           quality_score: s.products?.quality_score || 0,
           nova_score: s.products?.nova_score || 0,
           category: s.products?.category || '',
+          image_url: s.products?.image_url || '',
         }))
       )
     }
   }
 
+  function getScoreBg(score: number): string {
+    if (score < 4.5) return 'rgba(255,90,90,0.15)'
+    if (score <= 7) return 'rgba(245,166,35,0.15)'
+    return 'rgba(0,229,160,0.15)'
+  }
+
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen pb-20 relative">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -106,88 +116,61 @@ export default function HomePage() {
           }),
         }}
       />
-      {/* Hero radial glow */}
+
+      {/* Subtle radial glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[600px] pointer-events-none"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[500px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(0,229,160,0.07) 0%, rgba(124,111,255,0.04) 40%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(0,229,160,0.05) 0%, rgba(124,111,255,0.03) 40%, transparent 70%)',
         }}
       />
 
-      {/* Header */}
-      <header className="flex items-center justify-between px-5 py-5 max-w-lg mx-auto relative z-10">
+      {/* Header — logo centered, market selector subtle */}
+      <header className="flex items-center justify-between px-5 pt-6 pb-2 max-w-lg mx-auto relative z-10">
+        <MarketSelectorTrigger onClick={() => setShowMarketSelector(true)} />
         <h1 className="text-xl font-extrabold heading-display" style={{ letterSpacing: '-0.04em' }}>
           <span style={{ color: '#f0f0f4' }}>Ingred</span>
           <span style={{ color: '#00e5a0' }}>Scan</span>
         </h1>
-        <div className="flex items-center gap-2.5">
-          <MarketSelectorTrigger onClick={() => setShowMarketSelector(true)} />
-          <Link href="/history" className="p-2.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12,6 12,12 16,14" />
-            </svg>
+        {user ? (
+          <Link href="/account" className="p-2.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
+            {user.user_metadata?.avatar_url ? (
+              <img src={user.user_metadata.avatar_url} alt="" className="w-6 h-6 rounded-full" />
+            ) : (
+              <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold" style={{ backgroundColor: '#7c6fff', color: '#fff' }}>
+                {(user.email || '?')[0].toUpperCase()}
+              </div>
+            )}
           </Link>
-          {user ? (
-            <Link href="/account" className="flex items-center gap-2 px-3 py-1.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
-              {user.user_metadata?.avatar_url ? (
-                <img
-                  src={user.user_metadata.avatar_url}
-                  alt=""
-                  className="w-6 h-6 rounded-full"
-                />
-              ) : (
-                <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold" style={{ backgroundColor: '#7c6fff', color: '#fff' }}>
-                  {(user.email || '?')[0].toUpperCase()}
-                </div>
-              )}
-              <span className="text-xs font-medium hidden sm:inline" style={{ color: 'rgba(240,240,244,0.7)' }}>
-                {user.user_metadata?.full_name?.split(' ')[0] || 'Account'}
-              </span>
-            </Link>
-          ) : (
-            <button onClick={() => setShowAuth(true)} className="flex items-center gap-2 px-3 py-2 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-              <span className="text-xs font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>Sign in</span>
-            </button>
-          )}
-        </div>
+        ) : (
+          <button onClick={() => setShowAuth(true)} className="p-2.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </button>
+        )}
       </header>
 
-      {/* Hero */}
-      <section className="px-5 pt-16 pb-10 max-w-lg mx-auto text-center relative z-10 animate-fadeUp">
-        <h2
-          className="text-4xl sm:text-5xl heading-display mb-5"
-          style={{
-            background: 'linear-gradient(135deg, #f0f0f4 0%, #00e5a0 50%, #7c6fff 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
-        >
-          Know what&apos;s really
-          <br />
-          in your food
-        </h2>
-        <p className="text-base mb-10 max-w-sm mx-auto leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)', letterSpacing: '-0.01em' }}>
+      {/* Hero — smaller/subtler */}
+      <section className="px-5 pt-10 pb-6 max-w-lg mx-auto text-center relative z-10 animate-fadeUp">
+        <p className="text-sm mb-8 max-w-xs mx-auto leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>
           {market === 'uk'
-            ? 'Scan any UK supermarket product. Get an instant honest verdict \u2014 dual scoring, transparent data, and supermarket-specific swaps.'
+            ? 'Scan any UK supermarket product for an instant honest verdict.'
             : market === 'us'
-            ? 'Scan any product from Walmart, Kroger, Whole Foods and more. Get an instant honest verdict \u2014 dual scoring, transparent data, and swaps.'
+            ? 'Scan any product from Walmart, Kroger, Whole Foods and more.'
             : market === 'other'
-            ? 'Scan any food product anywhere in the world. Get an instant honest verdict \u2014 dual scoring, transparent data, and more.'
-            : `Scan any ${config.name} supermarket product. Get an instant honest verdict \u2014 dual scoring, transparent data, and supermarket-specific swaps.`
+            ? 'Scan any food product anywhere in the world.'
+            : `Scan any ${config.name} supermarket product for an instant verdict.`
           }
         </p>
 
         <Link
           href="/scan"
-          className="btn-glow inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-base font-semibold"
+          className="btn-glow inline-flex items-center gap-2.5 px-10 py-4 rounded-2xl text-base font-semibold"
           style={{ color: '#0b0b0f' }}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
             <path d="M3 7V5a2 2 0 0 1 2-2h2" />
             <path d="M17 3h2a2 2 0 0 1 2 2v2" />
             <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
@@ -196,86 +179,67 @@ export default function HomePage() {
           </svg>
           Scan a Product
         </Link>
-
-        {/* Stat pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 mt-10">
-          {(market === 'uk'
-            ? ['180K+ UK Products', '650+ Additives Explained', 'UK Supermarkets Covered']
-            : config.comingSoon
-            ? ['3.2M+ Products Worldwide', '650+ Additives Explained', `${config.name} Swaps Coming Soon`]
-            : ['3.2M+ Products Worldwide', '650+ Additives Explained', 'Scan Any Product']
-          ).map((stat) => (
-            <span
-              key={stat}
-              className="px-3.5 py-1.5 rounded-full text-xs font-medium glass-subtle"
-              style={{ color: 'rgba(240,240,244,0.5)' }}
-            >
-              {stat}
-            </span>
-          ))}
-        </div>
       </section>
 
-      {/* Gradient divider */}
-      <div className="gradient-divider max-w-xs mx-auto my-2" />
-
-      {/* Recent Scans */}
-      {recentScans.length > 0 && (
-        <section className="px-5 py-8 max-w-lg mx-auto relative z-10 animate-fadeUp" style={{ animationDelay: '100ms' }}>
-          <h3 className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'rgba(240,240,244,0.35)' }}>
-            Recent Scans
-          </h3>
-          <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-hide">
-            {recentScans.map((scan) => (
-              <Link
-                key={scan.barcode}
-                href={`/result/${scan.barcode}`}
-                className="shrink-0 w-36 rounded-2xl p-3.5 glass-card card-hover-glow"
-              >
-                <div className="text-2xl mb-2">{getCategoryEmoji(scan.category)}</div>
-                <p className="text-xs font-medium truncate" style={{ color: '#f0f0f4' }}>{scan.name}</p>
-                <div className="flex items-center gap-2 mt-2.5">
-                  <span className="text-xs font-bold" style={{ color: getScoreColor(scan.quality_score) }}>
+      {/* Recent Scans or Empty State */}
+      <section className="px-5 pt-4 max-w-lg mx-auto relative z-10 animate-fadeUp" style={{ animationDelay: '100ms' }}>
+        {recentScans.length > 0 ? (
+          <>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-semibold" style={{ color: 'rgba(240,240,244,0.5)' }}>
+                Recent Scans
+              </h3>
+              <Link href="/history" className="text-xs font-medium" style={{ color: '#7c6fff' }}>
+                View all
+              </Link>
+            </div>
+            <div className="space-y-1.5">
+              {recentScans.map((scan) => (
+                <Link
+                  key={scan.barcode}
+                  href={`/result/${scan.barcode}`}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl glass-card transition-all duration-200"
+                >
+                  {scan.image_url ? (
+                    <img src={scan.image_url} alt="" className="w-10 h-10 rounded-lg object-cover shrink-0" />
+                  ) : (
+                    <span className="text-xl w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(28,28,38,0.8)' }}>
+                      {getCategoryEmoji(scan.category)}
+                    </span>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium truncate" style={{ color: '#f0f0f4' }}>{scan.name}</p>
+                    <p className="text-xs truncate" style={{ color: 'rgba(240,240,244,0.4)' }}>{scan.brand}</p>
+                  </div>
+                  <span
+                    className="shrink-0 px-2.5 py-1 rounded-full text-xs font-bold"
+                    style={{
+                      backgroundColor: getScoreBg(scan.quality_score),
+                      color: getScoreColor(scan.quality_score),
+                    }}
+                  >
                     {scan.quality_score.toFixed(1)}
                   </span>
-                  <span
-                    className="text-xs px-1.5 py-0.5 rounded"
-                    style={{ backgroundColor: `${getNovaColor(scan.nova_score)}20`, color: getNovaColor(scan.nova_score) }}
-                  >
-                    {getNovaEmoji(scan.nova_score)} {scan.nova_score}
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Why IngredScan */}
-      <section className="px-5 py-10 max-w-lg mx-auto relative z-10">
-        <h3 className="text-lg font-bold heading-display mb-5" style={{ color: '#f0f0f4', letterSpacing: '-0.03em' }}>
-          Why IngredScan
-        </h3>
-        <div className="grid grid-cols-2 gap-3">
-          {[
-            { icon: '🎯', title: 'Dual Scoring', desc: 'NOVA processing level + quality score together for the full picture' },
-            { icon: '🛒', title: 'UK Supermarket Swaps', desc: 'Specific alternatives from Tesco, Sainsbury\'s, Asda & Waitrose' },
-            { icon: '🔍', title: 'Transparent Data', desc: 'Source shown on every scan — know where the data comes from' },
-            { icon: '💬', title: 'Plain English', desc: 'No chemistry degree needed — every additive explained simply' },
-          ].map((feature, i) => (
-            <div
-              key={feature.title}
-              className="rounded-2xl p-4 glass-card card-hover-glow animate-fadeUp"
-              style={{
-                animationDelay: `${200 + i * 80}ms`,
-              }}
-            >
-              <div className="text-2xl mb-3">{feature.icon}</div>
-              <h4 className="text-sm font-semibold mb-1.5" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>{feature.title}</h4>
-              <p className="text-xs leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>{feature.desc}</p>
+                </Link>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        ) : (
+          <div className="text-center py-12">
+            <div className="text-4xl mb-4">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.15)" strokeWidth="1.5" strokeLinecap="round" className="mx-auto">
+                <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+                <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+                <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+                <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+                <line x1="7" y1="12" x2="17" y2="12" />
+              </svg>
+            </div>
+            <p className="text-sm" style={{ color: 'rgba(240,240,244,0.3)' }}>
+              Recent scans will appear here
+            </p>
+          </div>
+        )}
       </section>
 
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}

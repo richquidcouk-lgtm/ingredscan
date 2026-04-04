@@ -8,6 +8,18 @@ import { searchProducts, type OFFSearchResult } from '@/lib/openFoodFacts'
 
 const Scanner = dynamic(() => import('@/components/Scanner'), { ssr: false })
 
+const categoryChips = [
+  { emoji: '🍞', label: 'Bread' },
+  { emoji: '🥣', label: 'Cereal' },
+  { emoji: '🍫', label: 'Chocolate' },
+  { emoji: '🥨', label: 'Crisps' },
+  { emoji: '🥛', label: 'Yoghurt' },
+  { emoji: '🫙', label: 'Ketchup' },
+  { emoji: '🥤', label: 'Drinks' },
+  { emoji: '🍝', label: 'Pasta' },
+  { emoji: '🧊', label: 'Frozen' },
+]
+
 export default function ScanPage() {
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
@@ -29,6 +41,10 @@ export default function ScanPage() {
     const timer = setTimeout(() => doSearch(searchQuery), 400)
     return () => clearTimeout(timer)
   }, [searchQuery, doSearch])
+
+  function handleChipClick(label: string) {
+    setSearchQuery(label)
+  }
 
   return (
     <div className="min-h-screen relative">
@@ -65,6 +81,23 @@ export default function ScanPage() {
             style={{ color: '#f0f0f4' }}
           />
         </div>
+
+        {/* Category chips */}
+        {searchResults.length === 0 && !searching && (
+          <div className="flex flex-wrap gap-2 mt-4">
+            {categoryChips.map((chip) => (
+              <button
+                key={chip.label}
+                onClick={() => handleChipClick(chip.label)}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium transition-all active:scale-95 glass-subtle"
+                style={{ color: 'rgba(240,240,244,0.6)' }}
+              >
+                <span>{chip.emoji}</span>
+                <span>{chip.label}</span>
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Search Results */}
         {searching && (

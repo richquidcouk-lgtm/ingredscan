@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 type Additive = {
   code: string
   name: string
@@ -14,45 +16,73 @@ const riskColors = {
   high: '#ff5a5a',
 }
 
-const riskLabels = {
-  low: 'Low risk',
-  medium: 'Medium risk',
-  high: 'High risk',
-}
-
 export default function AdditiveCard({ additive, index }: { additive: Additive; index: number }) {
+  const [expanded, setExpanded] = useState(false)
+
   return (
     <div
-      className="rounded-2xl p-4 glass-card card-hover-glow"
       style={{
+        borderBottom: '1px solid rgba(255,255,255,0.04)',
         animation: `fadeUp 500ms cubic-bezier(0.16,1,0.3,1) ${index * 50}ms both`,
       }}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex-1">
-          <p className="font-semibold text-sm" style={{ color: '#f0f0f4', letterSpacing: '-0.01em' }}>
-            {additive.code} — {additive.name}
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="w-full flex items-center gap-3 py-3.5 text-left transition-colors"
+      >
+        {/* Risk dot */}
+        <div
+          className="w-2.5 h-2.5 rounded-full shrink-0"
+          style={{ backgroundColor: riskColors[additive.risk] }}
+        />
+        {/* Name + code */}
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium truncate" style={{ color: '#f0f0f4' }}>
+            {additive.name}
           </p>
-          <p className="text-sm mt-1.5 leading-relaxed" style={{ color: 'rgba(240,240,244,0.45)' }}>
+          <p className="text-[11px]" style={{ color: 'rgba(240,240,244,0.35)' }}>
+            {additive.code}
+          </p>
+        </div>
+        {/* Chevron */}
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="rgba(240,240,244,0.3)"
+          strokeWidth="2"
+          strokeLinecap="round"
+          className="shrink-0 transition-transform duration-200"
+          style={{ transform: expanded ? 'rotate(90deg)' : 'rotate(0deg)' }}
+        >
+          <polyline points="9,18 15,12 9,6" />
+        </svg>
+      </button>
+
+      {/* Expanded content */}
+      {expanded && (
+        <div className="pb-3.5 pl-5.5 animate-fadeUp" style={{ paddingLeft: '22px' }}>
+          <p className="text-sm leading-relaxed mb-1.5" style={{ color: 'rgba(240,240,244,0.5)' }}>
             {additive.description}
           </p>
           {additive.regulation && (
-            <p className="text-xs mt-2" style={{ color: 'rgba(240,240,244,0.25)' }}>
+            <p className="text-xs" style={{ color: 'rgba(240,240,244,0.25)' }}>
               {additive.regulation}
             </p>
           )}
+          <span
+            className="inline-block mt-2 px-2 py-0.5 rounded-full text-[10px] font-medium"
+            style={{
+              backgroundColor: `${riskColors[additive.risk]}12`,
+              color: riskColors[additive.risk],
+              border: `1px solid ${riskColors[additive.risk]}20`,
+            }}
+          >
+            {additive.risk === 'low' ? 'Low risk' : additive.risk === 'medium' ? 'Medium risk' : 'High risk'}
+          </span>
         </div>
-        <span
-          className="shrink-0 px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap"
-          style={{
-            backgroundColor: `${riskColors[additive.risk]}12`,
-            color: riskColors[additive.risk],
-            border: `1px solid ${riskColors[additive.risk]}20`,
-          }}
-        >
-          {riskLabels[additive.risk]}
-        </span>
-      </div>
+      )}
     </div>
   )
 }
