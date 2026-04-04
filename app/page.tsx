@@ -152,17 +152,22 @@ export default function HomePage() {
         )}
       </header>
 
-      {/* Hero — smaller/subtler */}
+      {/* Hero */}
       <section className="px-5 pt-10 pb-6 max-w-lg mx-auto text-center relative z-10 animate-fadeUp">
+        <h2
+          className="text-3xl sm:text-4xl heading-display mb-4"
+          style={{
+            background: 'linear-gradient(135deg, #f0f0f4 0%, #00e5a0 50%, #7c6fff 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
+          Know what&apos;s really
+          <br />
+          in your food
+        </h2>
         <p className="text-sm mb-8 max-w-xs mx-auto leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>
-          {market === 'uk'
-            ? 'Scan any UK supermarket product for an instant honest verdict.'
-            : market === 'us'
-            ? 'Scan any product from Walmart, Kroger, Whole Foods and more.'
-            : market === 'other'
-            ? 'Scan any food product anywhere in the world.'
-            : `Scan any ${config.name} supermarket product for an instant verdict.`
-          }
+          Scan any supermarket product worldwide. Get an instant honest verdict — dual scoring, transparent data, and smarter alternatives.
         </p>
 
         <Link
@@ -179,6 +184,44 @@ export default function HomePage() {
           </svg>
           Scan a Product
         </Link>
+
+        {/* Stat pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+          {['3.2M+ Products', '650+ Additives Explained', `${config.supported ? config.name : 'Global'} Coverage`].map((stat) => (
+            <span
+              key={stat}
+              className="px-3 py-1.5 rounded-full text-xs font-medium glass-subtle"
+              style={{ color: 'rgba(240,240,244,0.5)' }}
+            >
+              {stat}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Why IngredScan */}
+      <section className="px-5 py-6 max-w-lg mx-auto relative z-10">
+        <h3 className="text-base font-semibold heading-display mb-4" style={{ color: '#f0f0f4' }}>
+          Why IngredScan
+        </h3>
+        <div className="grid grid-cols-2 gap-3">
+          {[
+            { icon: '🎯', title: 'Dual Scoring', desc: 'NOVA processing level + quality score together for the full picture' },
+            { icon: '🛒', title: 'Smarter Swaps', desc: 'Healthier alternatives from supermarkets in your market' },
+            { icon: '🔍', title: 'Transparent Data', desc: 'Source shown on every scan — know where the data comes from' },
+            { icon: '💬', title: 'Plain English', desc: 'No chemistry degree needed — every additive explained simply' },
+          ].map((feature, i) => (
+            <div
+              key={feature.title}
+              className="rounded-2xl p-4 glass-card card-hover-glow animate-fadeUp"
+              style={{ animationDelay: `${200 + i * 50}ms` }}
+            >
+              <div className="text-2xl mb-2">{feature.icon}</div>
+              <h4 className="text-sm font-semibold mb-1" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>{feature.title}</h4>
+              <p className="text-xs leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>{feature.desc}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Recent Scans or Empty State */}
