@@ -24,7 +24,7 @@ export default function HomePage() {
   const [recentScans, setRecentScans] = useState<RecentScan[]>([])
   const [showAuth, setShowAuth] = useState(false)
   const [showMarketSelector, setShowMarketSelector] = useState(false)
-  const { market, config } = useMarket()
+  const { config } = useMarket()
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
