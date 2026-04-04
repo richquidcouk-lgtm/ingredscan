@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { searchProducts, type OFFSearchResult } from '@/lib/openFoodFacts'
+import Logo from '@/components/Logo'
 
 const Scanner = dynamic(() => import('@/components/Scanner'), { ssr: false })
 
@@ -55,7 +56,7 @@ export default function ScanPage() {
             <path d="M19 12H5" /><polyline points="12,19 5,12 12,5" />
           </svg>
         </button>
-        <h1 className="text-base font-semibold" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>Scan</h1>
+        <Logo size="small" />
         <div className="w-10" />
       </header>
 

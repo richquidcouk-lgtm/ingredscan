@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import AuthModal from '@/components/AuthModal'
+import Logo from '@/components/Logo'
 
 const features = [
   'Unlimited daily scans',
@@ -19,6 +20,20 @@ export default function ProPage() {
   const router = useRouter()
   const [loading, setLoading] = useState<string | null>(null)
   const [showAuth, setShowAuth] = useState(false)
+  const [isPro, setIsPro] = useState(false)
+
+  useEffect(() => {
+    supabase.auth.getUser().then(async ({ data }) => {
+      if (data?.user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('pro')
+          .eq('id', data.user.id)
+          .single()
+        if (profile?.pro) setIsPro(true)
+      }
+    })
+  }, [])
 
   async function handleSubscribe(plan: 'monthly' | 'annual') {
     setLoading(plan)
@@ -74,10 +89,23 @@ export default function ProPage() {
             <path d="M19 12H5" /><polyline points="12,19 5,12 12,5" />
           </svg>
         </button>
+        <Logo size="small" />
         <div className="w-10" />
       </header>
 
       <div className="px-5 max-w-lg mx-auto pb-12 relative z-10">
+        {isPro ? (
+          <div className="text-center py-16 animate-fadeUp">
+            <div className="text-5xl mb-4">&#10003;</div>
+            <h1 className="text-2xl heading-display mb-3" style={{ color: '#00e5a0' }}>
+              You&apos;re on Pro
+            </h1>
+            <p className="text-sm" style={{ color: 'rgba(240,240,244,0.4)' }}>
+              You have access to all features. Enjoy unlimited scanning!
+            </p>
+          </div>
+        ) : (
+        <>
         <div className="text-center mb-10 animate-fadeUp">
           <h1 className="text-3xl heading-display mb-3" style={{ color: '#f0f0f4' }}>
             Scan smarter with Pro
@@ -143,6 +171,8 @@ export default function ProPage() {
         <p className="text-xs text-center" style={{ color: 'rgba(240,240,244,0.25)' }}>
           No credit card required for trial · Cancel anytime · Instant access
         </p>
+        </>
+        )}
       </div>
 
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}

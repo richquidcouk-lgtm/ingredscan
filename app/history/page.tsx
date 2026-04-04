@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase'
 import { getScoreColor } from '@/lib/scoring'
 import { getCategoryEmoji } from '@/lib/utils'
 import AuthModal from '@/components/AuthModal'
+import Logo from '@/components/Logo'
 
 type ScanHistory = {
   barcode: string
@@ -98,7 +99,8 @@ export default function HistoryPage() {
     <div className="min-h-screen pb-20 relative">
       {/* Header */}
       <header className="flex items-center justify-between px-5 pt-6 pb-2 max-w-lg mx-auto relative z-10">
-        <h1 className="text-2xl font-bold heading-display" style={{ color: '#f0f0f4', letterSpacing: '-0.03em' }}>
+        <Logo size="small" />
+        <h1 className="text-lg font-bold heading-display" style={{ color: '#f0f0f4', letterSpacing: '-0.03em' }}>
           Recents
         </h1>
         {scans.length > 0 && (

@@ -7,6 +7,7 @@ import { supabase, type Profile } from '@/lib/supabase'
 import AuthModal from '@/components/AuthModal'
 import { useMarket } from '@/components/MarketProvider'
 import MarketSelector from '@/components/MarketSelector'
+import Logo from '@/components/Logo'
 
 function SettingsRow({
   icon,
@@ -139,10 +140,12 @@ export default function AccountPage() {
   return (
     <div className="min-h-screen pb-20 relative">
       {/* Header */}
-      <header className="px-5 pt-6 pb-2 max-w-lg mx-auto relative z-10">
-        <h1 className="text-2xl font-bold heading-display" style={{ color: '#f0f0f4', letterSpacing: '-0.03em' }}>
+      <header className="flex items-center justify-between px-5 pt-6 pb-2 max-w-lg mx-auto relative z-10">
+        <Logo size="small" />
+        <h1 className="text-lg font-bold heading-display" style={{ color: '#f0f0f4', letterSpacing: '-0.03em' }}>
           Settings
         </h1>
+        <div className="w-10" />
       </header>
 
       <div className="px-5 max-w-lg mx-auto relative z-10 mt-4">

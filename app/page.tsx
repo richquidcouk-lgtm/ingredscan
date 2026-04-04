@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase'
 import { getScoreColor } from '@/lib/scoring'
 import { getCategoryEmoji } from '@/lib/utils'
 import AuthModal from '@/components/AuthModal'
+import Logo from '@/components/Logo'
 import { useMarket } from '@/components/MarketProvider'
 import MarketSelector, { MarketSelectorTrigger } from '@/components/MarketSelector'
 
@@ -128,10 +129,7 @@ export default function HomePage() {
       {/* Header — logo centered, market selector subtle */}
       <header className="flex items-center justify-between px-5 pt-6 pb-2 max-w-lg mx-auto relative z-10">
         <MarketSelectorTrigger onClick={() => setShowMarketSelector(true)} />
-        <h1 className="text-xl font-extrabold heading-display" style={{ letterSpacing: '-0.04em' }}>
-          <span style={{ color: '#f0f0f4' }}>Ingred</span>
-          <span style={{ color: '#00e5a0' }}>Scan</span>
-        </h1>
+        <Logo />
         {user ? (
           <Link href="/account" className="p-2.5 rounded-xl glass-card" style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
             {user.user_metadata?.avatar_url ? (

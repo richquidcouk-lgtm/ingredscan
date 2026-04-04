@@ -16,6 +16,7 @@ import { supabase, type Product, type NutritionData } from '@/lib/supabase'
 import { getCategoryEmoji, incrementAnonScanCount, getAnonScanCount } from '@/lib/utils'
 import { useMarket } from '@/components/MarketProvider'
 import ComingSoonSwaps from '@/components/ComingSoonSwaps'
+import Logo from '@/components/Logo'
 import swapsData from '@/data/swaps.json'
 
 export default function ResultPage() {
@@ -243,9 +244,7 @@ export default function ResultPage() {
             <path d="M19 12H5" /><polyline points="12,19 5,12 12,5" />
           </svg>
         </button>
-        <h1 className="text-sm font-semibold truncate max-w-[200px]" style={{ color: '#f0f0f4' }}>
-          {product.name}
-        </h1>
+        <Logo size="small" />
         <ShareButton product={product} />
       </header>
 
