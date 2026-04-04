@@ -3,19 +3,19 @@
 import { getScoreColor, getScoreLabel } from '@/lib/scoring'
 
 const RAG_CONFIG = [
-  { key: 'red', color: '#ff5a5a', label: 'Avoid if possible', min: 0, max: 4.4 },
-  { key: 'amber', color: '#f5a623', label: 'Consume in moderation', min: 4.5, max: 7.0 },
-  { key: 'green', color: '#00e5a0', label: 'Good choice', min: 7.1, max: 10 },
+  { key: 'red', color: '#ff5a5a', label: 'Low ingredient quality', min: 0, max: 4.4 },
+  { key: 'amber', color: '#f5a623', label: 'Mixed ingredient quality', min: 4.5, max: 7.0 },
+  { key: 'green', color: '#00e5a0', label: 'High ingredient quality', min: 7.1, max: 10 },
 ]
 
 export default function RAGIndicator({ score }: { score: number }) {
   const activeColor = getScoreColor(score)
   const activeLabel = getScoreLabel(score)
-  const activeAdvice = score < 4.5
-    ? 'Avoid if possible'
+  const activeDescription = score < 4.5
+    ? 'Low ingredient quality'
     : score <= 7
-    ? 'Consume in moderation'
-    : 'Good choice'
+    ? 'Mixed ingredient quality'
+    : 'High ingredient quality'
 
   return (
     <div className="rounded-2xl p-4 glass-card">
@@ -39,7 +39,7 @@ export default function RAGIndicator({ score }: { score: number }) {
                   className="text-[9px] font-medium uppercase tracking-wider"
                   style={{ color: isActive ? color : 'rgba(240,240,244,0.25)' }}
                 >
-                  {key === 'red' ? 'Poor' : key === 'amber' ? 'OK' : 'Good'}
+                  {key === 'red' ? 'Low' : key === 'amber' ? 'Mixed' : 'High'}
                 </span>
               </div>
             )
@@ -52,7 +52,7 @@ export default function RAGIndicator({ score }: { score: number }) {
             {activeLabel}
           </p>
           <p className="text-xs mt-0.5" style={{ color: 'rgba(240,240,244,0.4)' }}>
-            {activeAdvice}
+            {activeDescription}
           </p>
         </div>
       </div>
