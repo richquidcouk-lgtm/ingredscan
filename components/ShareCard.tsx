@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { getScoreLabel, getNovaLabel } from '@/lib/scoring'
 import type { Product } from '@/lib/supabase'
 
@@ -21,7 +21,6 @@ function getWorstIngredients(product: Product): string[] {
 
 export default function ShareButton({ product }: { product: Product }) {
   const [generating, setGenerating] = useState(false)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   const generateShareCard = useCallback(async (): Promise<Blob | null> => {
     const canvas = document.createElement('canvas')

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { searchProducts, type OFFSearchResult } from '@/lib/openFoodFacts'
@@ -9,7 +8,6 @@ import { searchProducts, type OFFSearchResult } from '@/lib/openFoodFacts'
 const Scanner = dynamic(() => import('@/components/Scanner'), { ssr: false })
 
 export default function ScanPage() {
-  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<OFFSearchResult['products']>([])
   const [searching, setSearching] = useState(false)

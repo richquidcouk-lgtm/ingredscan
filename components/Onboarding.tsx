@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useCallback, useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
 
 const ONBOARDED_KEY = 'ingredscan_onboarded'
 

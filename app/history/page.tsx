@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { getScoreColor, getNovaColor, getNovaEmoji } from '@/lib/scoring'
@@ -41,7 +40,6 @@ function EmptyHistorySVG() {
 }
 
 export default function HistoryPage() {
-  const router = useRouter()
   const [user, setUser] = useState<any>(null)
   const [scans, setScans] = useState<ScanHistory[]>([])
   const [loading, setLoading] = useState(true)

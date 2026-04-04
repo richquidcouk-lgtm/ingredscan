@@ -28,6 +28,7 @@ const tabs = [
     label: 'Scan',
     href: '/scan',
     isScan: true,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     icon: (_active: boolean) => (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0b0b0f" strokeWidth="2.5" strokeLinecap="round">
         <path d="M3 7V5a2 2 0 0 1 2-2h2" />
