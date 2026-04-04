@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { QualityScoreCard, NovaScoreCard } from '@/components/ScoreCard'
 import NutriScoreBar from '@/components/NutriScoreBar'
+import RAGIndicator from '@/components/RAGIndicator'
 import AdditiveCard from '@/components/AdditiveCard'
 import SwapCard from '@/components/SwapCard'
 import ShareButton from '@/components/ShareCard'
@@ -373,8 +374,13 @@ export default function ResultPage() {
           )}
         </div>
 
-        {/* 6. Nutri-Score bar */}
+        {/* 6. RAG Indicator */}
         <div className="animate-fadeUp" style={{ animationDelay: '200ms' }}>
+          <RAGIndicator score={product.quality_score} />
+        </div>
+
+        {/* 7. Nutri-Score bar */}
+        <div className="animate-fadeUp" style={{ animationDelay: '220ms' }}>
           <h3 className="text-sm font-semibold mb-3" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
             Nutri-Score
           </h3>
