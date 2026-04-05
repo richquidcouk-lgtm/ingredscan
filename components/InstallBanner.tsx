@@ -9,10 +9,35 @@ interface Props {
   variant?: 'default' | 'compact' | 'blog'
 }
 
+type BrowserType = 'chrome' | 'edge' | 'firefox' | 'samsung' | 'opera' | 'safari' | 'other'
+
+function detectBrowser(): { browser: BrowserType; isIOS: boolean; isAndroid: boolean } {
+  if (typeof navigator === 'undefined') return { browser: 'other', isIOS: false, isAndroid: false }
+  const ua = navigator.userAgent
+  const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+  const isAndroid = /Android/.test(ua)
+  let browser: BrowserType = 'other'
+  if (/SamsungBrowser/.test(ua)) browser = 'samsung'
+  else if (/Edg\//.test(ua)) browser = 'edge'
+  else if (/OPR\/|Opera/.test(ua)) browser = 'opera'
+  else if (/Firefox/.test(ua)) browser = 'firefox'
+  else if (/Chrome/.test(ua) && !/Edg/.test(ua)) browser = 'chrome'
+  else if (/Safari/.test(ua) && isIOS) browser = 'safari'
+  return { browser, isIOS, isAndroid }
+}
+
+function getInstallInstructions(browser: BrowserType, isIOS: boolean): string | null {
+  if (isIOS) return 'Tap Share ↗ then "Add to Home Screen"'
+  if (browser === 'firefox') return 'Tap the menu (⋮) then "Install"'
+  if (browser === 'samsung') return 'Tap the menu then "Add page to" → "Home screen"'
+  if (browser === 'opera') return 'Tap the menu (⋮) then "Home screen"'
+  return null // Chrome/Edge handle it via beforeinstallprompt
+}
+
 export default function InstallBanner({ variant = 'default' }: Props) {
   const [canInstall, setCanInstall] = useState(false)
   const [isInstalled, setIsInstalled] = useState(false)
-  const [isIOS, setIsIOS] = useState(false)
+  const [browserInfo, setBrowserInfo] = useState<{ browser: BrowserType; isIOS: boolean; isAndroid: boolean }>({ browser: 'other', isIOS: false, isAndroid: false })
   const deferredPromptRef = useRef<any>(null)
 
   useEffect(() => {
@@ -28,11 +53,8 @@ export default function InstallBanner({ variant = 'default' }: Props) {
       }
     }
 
-    // Detect iOS
-    const ua = navigator.userAgent
-    if (/iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
-      setIsIOS(true)
-    }
+    const info = detectBrowser()
+    setBrowserInfo(info)
 
     const handlePrompt = (e: Event) => {
       e.preventDefault()
@@ -114,9 +136,9 @@ export default function InstallBanner({ variant = 'default' }: Props) {
             </Link>
           )}
         </div>
-        {isIOS && !canInstall && (
+        {!canInstall && getInstallInstructions(browserInfo.browser, browserInfo.isIOS) && (
           <p className="text-[11px] mt-3 text-center leading-relaxed" style={{ color: 'rgba(240,240,244,0.5)' }}>
-            On iPhone: tap <span style={{ color: '#007AFF' }}>Share</span> ↗ then <strong>&quot;Add to Home Screen&quot;</strong>
+            {getInstallInstructions(browserInfo.browser, browserInfo.isIOS)}
           </p>
         )}
       </div>
@@ -194,9 +216,9 @@ export default function InstallBanner({ variant = 'default' }: Props) {
           <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ No sign-up required</span>
           <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ 100% free</span>
         </div>
-        {isIOS && !canInstall && (
+        {!canInstall && getInstallInstructions(browserInfo.browser, browserInfo.isIOS) && (
           <p className="text-xs mt-3 leading-relaxed" style={{ color: 'rgba(240,240,244,0.5)' }}>
-            On iPhone: tap <span style={{ color: '#007AFF' }}>Share</span> ↗ then <strong>&quot;Add to Home Screen&quot;</strong>
+            {getInstallInstructions(browserInfo.browser, browserInfo.isIOS)}
           </p>
         )}
       </div>

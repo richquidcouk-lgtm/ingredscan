@@ -1,25 +1,86 @@
 {
-  "name": "IngredScan — Know what's really in your food",
+  "name": "IngredScan — Know What's In Your Products",
   "short_name": "IngredScan",
-  "description": "Scan any UK supermarket product. Get an instant honest verdict — dual scoring, transparent data, and supermarket-specific swaps.",
-  "start_url": "/",
+  "description": "Free food and cosmetic barcode scanner. Instant NOVA processing score, ingredient quality score, additive breakdown, and supermarket swap suggestions.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "theme_color": "#0b0b0f",
   "background_color": "#0b0b0f",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
+  "lang": "en-GB",
+  "dir": "ltr",
+  "id": "ingredscan-pwa",
+  "categories": ["food", "health", "lifestyle", "shopping"],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
   "icons": [
     {
       "src": "/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
-  "categories": ["food", "health", "lifestyle"]
+  "screenshots": [
+    {
+      "src": "/api/og",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "IngredScan homepage showing product scanning features"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Scan Product",
+      "short_name": "Scan",
+      "url": "/scan?source=shortcut",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Scan History",
+      "short_name": "History",
+      "url": "/history?source=shortcut",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "handle_links": "preferred",
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
 }

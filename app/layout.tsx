@@ -129,8 +129,14 @@ export default function RootLayout({
     <html lang="en" className={`${spaceGrotesk.variable} ${plusJakartaSans.variable}`}>
       <head>
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="IngredScan" />
+        <meta name="application-name" content="IngredScan" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="msapplication-TileColor" content="#0b0b0f" />
+        <meta name="msapplication-tap-highlight" content="no" />
         <link rel="alternate" hrefLang="en-gb" href="https://www.ingredscan.com" />
         <link rel="alternate" hrefLang="en-us" href="https://www.ingredscan.com" />
         <link rel="alternate" hrefLang="de" href="https://www.ingredscan.com" />
