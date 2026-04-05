@@ -88,6 +88,10 @@ export const metadata: Metadata = {
     },
   },
 
+  verification: {
+    google: 'uNHR1NV37OI5x1tmg0Luj5HEIbPex7NHEEJnvbZ_oQs',
+  },
+
   alternates: {
     canonical: 'https://www.ingredscan.com',
     languages: {
