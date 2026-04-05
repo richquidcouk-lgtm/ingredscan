@@ -107,7 +107,7 @@ export default function SwapCard({
                 +{improvement.toFixed(1)} pts better
               </p>
             )}
-            <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.25)' }}>
+            <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>
               Tap to view details
             </p>
           </div>
@@ -118,7 +118,7 @@ export default function SwapCard({
           <span className="text-2xl font-extrabold heading-display" style={{ color: scoreColor }}>
             {swap.quality_score.toFixed(1)}
           </span>
-          <span className="text-[9px] font-medium uppercase tracking-wider" style={{ color: 'rgba(240,240,244,0.35)' }}>
+          <span className="text-[9px] font-medium uppercase tracking-wider" style={{ color: 'rgba(240,240,244,0.5)' }}>
             Score
           </span>
           {loading ? (

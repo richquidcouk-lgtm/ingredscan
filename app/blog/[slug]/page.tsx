@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAllPosts, getPostBySlug, getRelatedPosts } from '@/lib/blog'
 import NewsletterSignup from './NewsletterSignup'
+import InstallBanner from '@/components/InstallBanner'
 
 type Props = {
   params: { slug: string }
@@ -59,10 +60,10 @@ export default function BlogPostPage({ params }: Props) {
       />
 
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs mb-8 flex-wrap" style={{ color: 'rgba(240,240,244,0.35)' }}>
-        <Link href="/" className="hover:underline" style={{ color: 'rgba(240,240,244,0.35)' }}>Home</Link>
+      <nav className="flex items-center gap-2 text-xs mb-8 flex-wrap" style={{ color: 'rgba(240,240,244,0.5)' }}>
+        <Link href="/" className="hover:underline" style={{ color: 'rgba(240,240,244,0.5)' }}>Home</Link>
         <span>/</span>
-        <Link href="/blog" className="hover:underline" style={{ color: 'rgba(240,240,244,0.35)' }}>Blog</Link>
+        <Link href="/blog" className="hover:underline" style={{ color: 'rgba(240,240,244,0.5)' }}>Blog</Link>
         <span>/</span>
         <span style={{ color: 'rgba(240,240,244,0.6)' }} className="truncate max-w-[200px] sm:max-w-none">{post.title}</span>
       </nav>
@@ -78,7 +79,7 @@ export default function BlogPostPage({ params }: Props) {
         <h1 className="text-2xl sm:text-3xl heading-display mb-4" style={{ color: '#f0f0f4' }}>
           {post.title}
         </h1>
-        <div className="flex items-center gap-3 text-xs" style={{ color: 'rgba(240,240,244,0.35)' }}>
+        <div className="flex items-center gap-3 text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>
           <span>{new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
           <span>·</span>
           <span>{post.readTime}</span>
@@ -93,6 +94,9 @@ export default function BlogPostPage({ params }: Props) {
         style={{ animationDelay: '100ms' }}
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
+
+      {/* Install App Banner */}
+      <InstallBanner variant="blog" />
 
       {/* CTA Box */}
       <div
@@ -147,7 +151,7 @@ export default function BlogPostPage({ params }: Props) {
       {related.length > 0 && (
         <div>
           <div className="gradient-divider mb-8" />
-          <h3 className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'rgba(240,240,244,0.35)' }}>
+          <h3 className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'rgba(240,240,244,0.5)' }}>
             Related Articles
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -166,7 +170,7 @@ export default function BlogPostPage({ params }: Props) {
                 <h4 className="text-sm font-semibold mb-1.5 line-clamp-2" style={{ color: '#f0f0f4', letterSpacing: '-0.01em' }}>
                   {rp.title}
                 </h4>
-                <span className="text-xs" style={{ color: 'rgba(240,240,244,0.25)' }}>{rp.readTime}</span>
+                <span className="text-xs" style={{ color: 'rgba(240,240,244,0.4)' }}>{rp.readTime}</span>
               </Link>
             ))}
           </div>

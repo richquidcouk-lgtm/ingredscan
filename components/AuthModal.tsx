@@ -102,7 +102,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
 
             <div className="flex items-center gap-3 my-6">
               <div className="flex-1 gradient-divider" />
-              <span className="text-xs" style={{ color: 'rgba(240,240,244,0.25)' }}>or</span>
+              <span className="text-xs" style={{ color: 'rgba(240,240,244,0.4)' }}>or</span>
               <div className="flex-1 gradient-divider" />
             </div>
 

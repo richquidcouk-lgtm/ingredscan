@@ -120,23 +120,23 @@ export default function SupplementResult({ product, onBack }: Props) {
             <span className="text-xl">🔍</span>
             <div className="flex-1">
               <p className="text-sm font-medium" style={{ color: '#f0f0f4' }}>Examine.com — Supplement Research</p>
-              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.35)' }}>examine.com</p>
+              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>examine.com</p>
             </div>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.3)" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.45)" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
           </a>
           <a href="https://www.nhs.uk/conditions/vitamins-and-minerals/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl p-4 glass-card transition-all active:scale-[0.98]">
             <span className="text-xl">🏥</span>
             <div className="flex-1">
               <p className="text-sm font-medium" style={{ color: '#f0f0f4' }}>NHS Vitamins &amp; Supplements</p>
-              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.35)' }}>nhs.uk</p>
+              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>nhs.uk</p>
             </div>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.3)" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.45)" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
           </a>
         </div>
 
         {/* Report */}
         <div className="animate-fadeUp" style={{ animationDelay: '200ms' }}>
-          <p className="text-xs text-center mb-2" style={{ color: 'rgba(240,240,244,0.25)' }}>
+          <p className="text-xs text-center mb-2" style={{ color: 'rgba(240,240,244,0.4)' }}>
             If you think this product was incorrectly identified, let us know.
           </p>
           <ProductReport barcode={product.barcode} />

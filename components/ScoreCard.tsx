@@ -49,7 +49,7 @@ export function QualityScoreCard({ score }: { score: number }) {
           onClick={() => setShowInfo(!showInfo)}
           className="w-4 h-4 flex items-center justify-center rounded-full text-[10px] leading-none transition-colors"
           style={{
-            color: showInfo ? '#7c6fff' : 'rgba(240,240,244,0.35)',
+            color: showInfo ? '#7c6fff' : 'rgba(240,240,244,0.5)',
             border: `1px solid ${showInfo ? 'rgba(124,111,255,0.4)' : 'rgba(255,255,255,0.1)'}`,
           }}
           aria-label="What is Quality Score?"
@@ -61,7 +61,7 @@ export function QualityScoreCard({ score }: { score: number }) {
         <span className="text-4xl font-extrabold heading-display" style={{ color }}>
           {displayScore.toFixed(1)}
         </span>
-        <span className="text-lg font-medium" style={{ color: 'rgba(240,240,244,0.35)' }}>/10</span>
+        <span className="text-lg font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>/10</span>
       </div>
       <span
         className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-medium"
@@ -119,7 +119,7 @@ export function NovaScoreCard({ score }: { score: number }) {
           onClick={() => setShowInfo(!showInfo)}
           className="w-4 h-4 flex items-center justify-center rounded-full text-[10px] leading-none transition-colors"
           style={{
-            color: showInfo ? '#7c6fff' : 'rgba(240,240,244,0.35)',
+            color: showInfo ? '#7c6fff' : 'rgba(240,240,244,0.5)',
             border: `1px solid ${showInfo ? 'rgba(124,111,255,0.4)' : 'rgba(255,255,255,0.1)'}`,
           }}
           aria-label="What is Processing Level?"

@@ -259,7 +259,7 @@ export default function ResultPage() {
                 {product.name}
               </h2>
               {product.name && /[éèêëàâäùûüôöîïçñæœß]/.test(product.name) && (
-                <p className="text-xs mt-1" style={{ color: 'rgba(240,240,244,0.3)' }}>
+                <p className="text-xs mt-1" style={{ color: 'rgba(240,240,244,0.45)' }}>
                   Name shown in original language — English not available for this product.
                 </p>
               )}
@@ -360,7 +360,7 @@ export default function ResultPage() {
               {additives.map((additive, i) => (
                 <AdditiveDetail key={additive.code} additive={additive} index={i} />
               ))}
-              <p className="text-xs text-center pt-3" style={{ color: 'rgba(240,240,244,0.25)' }}>
+              <p className="text-xs text-center pt-3" style={{ color: 'rgba(240,240,244,0.4)' }}>
                 Risk levels based on {config.regulatoryRef}
               </p>
             </div>
@@ -390,7 +390,7 @@ export default function ResultPage() {
               {product.ingredients}
             </p>
             {product.ingredients && /[éèêëàâäùûüôöîïçñæœß]/.test(product.ingredients) && (
-              <p className="text-xs mt-2" style={{ color: 'rgba(240,240,244,0.3)' }}>
+              <p className="text-xs mt-2" style={{ color: 'rgba(240,240,244,0.45)' }}>
                 Ingredients shown in original language — English not available for this product.
               </p>
             )}

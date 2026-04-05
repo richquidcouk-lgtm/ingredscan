@@ -38,7 +38,7 @@ export default function NutriScoreBar({ grade }: { grade: string }) {
         })}
       </div>
       {!hasValidGrade && (
-        <p className="text-xs text-center mt-2" style={{ color: 'rgba(240,240,244,0.3)' }}>
+        <p className="text-xs text-center mt-2" style={{ color: 'rgba(240,240,244,0.45)' }}>
           Nutri-Score not available for this product
         </p>
       )}

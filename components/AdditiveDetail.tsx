@@ -73,7 +73,7 @@ export default function AdditiveDetail({ additive, index }: Props) {
 
             {additive.potential_risks && additive.potential_risks.length > 0 && (
               <div>
-                <p className="text-[10px] uppercase tracking-wider font-medium mb-1.5" style={{ color: 'rgba(240,240,244,0.3)' }}>Potential concerns</p>
+                <p className="text-[10px] uppercase tracking-wider font-medium mb-1.5" style={{ color: 'rgba(240,240,244,0.45)' }}>Potential concerns</p>
                 <div className="flex flex-wrap gap-1.5">
                   {additive.potential_risks.map(risk => (
                     <span key={risk} className="text-[10px] px-2 py-0.5 rounded-full" style={{ backgroundColor: `${color}10`, color }}>
@@ -85,7 +85,7 @@ export default function AdditiveDetail({ additive, index }: Props) {
             )}
 
             {additive.regulation && (
-              <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.3)' }}>
+              <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.45)' }}>
                 Regulation: {additive.regulation}
               </p>
             )}
@@ -126,7 +126,7 @@ export default function AdditiveDetail({ additive, index }: Props) {
             <div className="space-y-4">
               {additive.sources.map((source, i) => (
                 <div key={i} className="rounded-xl p-4" style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <p className="text-xs font-medium mb-1" style={{ color: 'rgba(240,240,244,0.3)' }}>({source.year})</p>
+                  <p className="text-xs font-medium mb-1" style={{ color: 'rgba(240,240,244,0.45)' }}>({source.year})</p>
                   <p className="text-sm leading-relaxed mb-2" style={{ color: 'rgba(240,240,244,0.7)' }}>
                     {source.title}
                   </p>

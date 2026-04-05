@@ -176,7 +176,7 @@ export default function AccountPage() {
         ) : (
           <>
             {/* Section: Account */}
-            <p className="text-[10px] uppercase tracking-widest font-semibold mb-2 mt-2" style={{ color: 'rgba(240,240,244,0.35)' }}>
+            <p className="text-[10px] uppercase tracking-widest font-semibold mb-2 mt-2" style={{ color: 'rgba(240,240,244,0.5)' }}>
               Account
             </p>
             {/* Name prompt if not set */}
@@ -265,7 +265,7 @@ export default function AccountPage() {
             </div>
 
             {/* Section: About */}
-            <p className="text-[10px] uppercase tracking-widest font-semibold mb-2" style={{ color: 'rgba(240,240,244,0.35)' }}>
+            <p className="text-[10px] uppercase tracking-widest font-semibold mb-2" style={{ color: 'rgba(240,240,244,0.5)' }}>
               About
             </p>
             <div className="rounded-2xl overflow-hidden glass-card mb-6">

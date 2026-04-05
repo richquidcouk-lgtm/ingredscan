@@ -131,7 +131,7 @@ export default function CosmeticResult({ product, cosmeticScore, onBack }: Cosme
             <p className="text-3xl font-bold heading-display" style={{ color: getCosmeticScoreColor(score.overallScore) }}>
               {score.overallScore.toFixed(1)}
             </p>
-            <p className="text-xs mt-0.5" style={{ color: 'rgba(240,240,244,0.3)' }}>/10</p>
+            <p className="text-xs mt-0.5" style={{ color: 'rgba(240,240,244,0.45)' }}>/10</p>
             <span
               className="inline-block mt-2 px-2.5 py-1 rounded-full text-[10px] font-semibold"
               style={{ backgroundColor: `${getCosmeticScoreColor(score.overallScore)}15`, color: getCosmeticScoreColor(score.overallScore) }}
@@ -149,7 +149,7 @@ export default function CosmeticResult({ product, cosmeticScore, onBack }: Cosme
             <p className="text-xs font-semibold uppercase" style={{ color: concernLevel.color }}>
               {concernLevel.level}
             </p>
-            <p className="text-[10px] mt-1" style={{ color: 'rgba(240,240,244,0.35)' }}>
+            <p className="text-[10px] mt-1" style={{ color: 'rgba(240,240,244,0.5)' }}>
               {concernLevel.text}
             </p>
           </div>
@@ -250,7 +250,7 @@ function OverviewTab({ product, score, ingredients }: {
       <div className="rounded-2xl p-4 glass-card">
         <p className="text-xs uppercase tracking-wider font-medium mb-2" style={{ color: 'rgba(240,240,244,0.4)' }}>Ingredients</p>
         <p className="text-2xl font-bold heading-display" style={{ color: '#f0f0f4' }}>{ingredients.length}</p>
-        <p className="text-xs mt-1" style={{ color: 'rgba(240,240,244,0.35)' }}>
+        <p className="text-xs mt-1" style={{ color: 'rgba(240,240,244,0.5)' }}>
           {ingredients.filter(i => i.risk_level === 'high').length} high concern · {ingredients.filter(i => i.risk_level === 'medium').length} medium · {ingredients.filter(i => i.risk_level === 'low').length} low
         </p>
       </div>
@@ -328,7 +328,7 @@ function IngredientsTab({ ingredients, filter, setFilter, expanded, setExpanded 
     <div className="space-y-3">
       {/* Search */}
       <div className="relative">
-        <svg className="absolute left-3 top-1/2 -translate-y-1/2" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.3)" strokeWidth="2">
+        <svg className="absolute left-3 top-1/2 -translate-y-1/2" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.45)" strokeWidth="2">
           <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
         <input
@@ -365,7 +365,7 @@ function IngredientsTab({ ingredients, filter, setFilter, expanded, setExpanded 
                   </span>
                 )}
                 <svg
-                  width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.3)" strokeWidth="2"
+                  width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.45)" strokeWidth="2"
                   className={`shrink-0 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
                 >
                   <polyline points="6,9 12,15 18,9" />
@@ -387,7 +387,7 @@ function IngredientsTab({ ingredients, filter, setFilter, expanded, setExpanded 
                     <p className="text-[10px] font-medium" style={{ color: '#f5a623' }}>⚠ Avoid during pregnancy</p>
                   )}
                   {ing.ewg_score && (
-                    <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.35)' }}>EWG score: {ing.ewg_score}/10</p>
+                    <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.5)' }}>EWG score: {ing.ewg_score}/10</p>
                   )}
                 </div>
               )}
@@ -398,7 +398,7 @@ function IngredientsTab({ ingredients, filter, setFilter, expanded, setExpanded 
 
       {filtered.length === 0 && (
         <div className="text-center py-8">
-          <p className="text-sm" style={{ color: 'rgba(240,240,244,0.3)' }}>No ingredients match your search</p>
+          <p className="text-sm" style={{ color: 'rgba(240,240,244,0.45)' }}>No ingredients match your search</p>
         </div>
       )}
     </div>
@@ -442,7 +442,7 @@ function ConcernsTab({ ingredients }: { ingredients: CosmeticIngredientMatch[] }
             {highRisk.map(ing => (
               <div key={ing.inci_name} className="rounded-xl p-4 glass-card" style={{ borderColor: 'rgba(255,90,90,0.1)' }}>
                 <p className="text-sm font-semibold" style={{ color: '#f0f0f4' }}>{ing.common_name || ing.inci_name}</p>
-                <p className="text-[10px] mt-0.5" style={{ color: 'rgba(240,240,244,0.35)' }}>{ing.inci_name}</p>
+                <p className="text-[10px] mt-0.5" style={{ color: 'rgba(240,240,244,0.5)' }}>{ing.inci_name}</p>
                 {ing.description && <p className="text-xs mt-2 leading-relaxed" style={{ color: 'rgba(240,240,244,0.6)' }}>{ing.description}</p>}
                 {ing.concerns && ing.concerns.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
@@ -469,7 +469,7 @@ function ConcernsTab({ ingredients }: { ingredients: CosmeticIngredientMatch[] }
             {mediumRisk.map(ing => (
               <div key={ing.inci_name} className="rounded-xl p-4 glass-card" style={{ borderColor: 'rgba(245,166,35,0.1)' }}>
                 <p className="text-sm font-semibold" style={{ color: '#f0f0f4' }}>{ing.common_name || ing.inci_name}</p>
-                <p className="text-[10px] mt-0.5" style={{ color: 'rgba(240,240,244,0.35)' }}>{ing.inci_name}</p>
+                <p className="text-[10px] mt-0.5" style={{ color: 'rgba(240,240,244,0.5)' }}>{ing.inci_name}</p>
                 {ing.description && <p className="text-xs mt-2 leading-relaxed" style={{ color: 'rgba(240,240,244,0.6)' }}>{ing.description}</p>}
                 {ing.concerns && ing.concerns.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
@@ -513,7 +513,7 @@ function AlternativesTab({ product }: { product: Product }) {
         <p className="text-sm font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>
           Cosmetic alternatives coming soon
         </p>
-        <p className="text-xs mt-1" style={{ color: 'rgba(240,240,244,0.3)' }}>
+        <p className="text-xs mt-1" style={{ color: 'rgba(240,240,244,0.45)' }}>
           We&apos;re analysing products to find safer alternatives matched by category.
         </p>
       </div>

@@ -79,7 +79,7 @@ export default function ScanPage() {
       {/* Manual search */}
       <div className="px-5 mt-6 max-w-lg mx-auto animate-fadeUp relative z-10" style={{ animationDelay: '100ms' }}>
         <div className="relative">
-          <svg className="absolute left-4 top-1/2 -translate-y-1/2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.3)" strokeWidth="2">
+          <svg className="absolute left-4 top-1/2 -translate-y-1/2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.45)" strokeWidth="2">
             <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
           <input

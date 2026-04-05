@@ -116,7 +116,7 @@ export default function ComingSoonSwaps() {
         )}
 
         {waitlistCount != null && waitlistCount > 0 && (
-          <p className="text-xs mt-4" style={{ color: 'rgba(240,240,244,0.3)' }}>
+          <p className="text-xs mt-4" style={{ color: 'rgba(240,240,244,0.45)' }}>
             {waitlistCount} {waitlistCount === 1 ? 'person' : 'people'} waiting for {config.name}
           </p>
         )}
@@ -136,7 +136,7 @@ export default function ComingSoonSwaps() {
                 style={{ borderBottom: i < topMarkets.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="text-sm font-medium" style={{ color: 'rgba(240,240,244,0.3)', minWidth: '16px' }}>
+                  <span className="text-sm font-medium" style={{ color: 'rgba(240,240,244,0.45)', minWidth: '16px' }}>
                     {i + 1}.
                   </span>
                   <span className="text-base">{tm.flag}</span>

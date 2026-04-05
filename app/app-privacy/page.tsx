@@ -24,7 +24,7 @@ export default function AppPrivacyPage() {
       <h1 className="text-3xl sm:text-4xl heading-display mb-3" style={{ color: '#f0f0f4' }}>
         App Privacy
       </h1>
-      <p className="text-sm mb-10" style={{ color: 'rgba(240,240,244,0.35)' }}>
+      <p className="text-sm mb-10" style={{ color: 'rgba(240,240,244,0.5)' }}>
         Apple App Store Privacy Details
       </p>
 

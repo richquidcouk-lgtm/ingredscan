@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getAllPosts } from '@/lib/blog'
+import InstallBanner from '@/components/InstallBanner'
 
 export const metadata: Metadata = {
   title: 'Blog — IngredScan',
@@ -60,7 +61,7 @@ export default function BlogPage() {
           <p className="text-sm mb-4 line-clamp-2" style={{ color: 'rgba(240,240,244,0.5)' }}>
             {featured.description}
           </p>
-          <div className="flex items-center gap-3 text-xs" style={{ color: 'rgba(240,240,244,0.3)' }}>
+          <div className="flex items-center gap-3 text-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>
             <span>{featured.readTime}</span>
             <span>·</span>
             <span>{new Date(featured.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
@@ -89,13 +90,18 @@ export default function BlogPage() {
             <p className="text-xs mb-3 line-clamp-2" style={{ color: 'rgba(240,240,244,0.4)' }}>
               {post.description}
             </p>
-            <div className="flex items-center gap-3 text-xs" style={{ color: 'rgba(240,240,244,0.25)' }}>
+            <div className="flex items-center gap-3 text-xs" style={{ color: 'rgba(240,240,244,0.4)' }}>
               <span>{post.readTime}</span>
               <span>·</span>
               <span>{new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
             </div>
           </Link>
         ))}
+      </div>
+
+      {/* Install Banner */}
+      <div className="mt-8">
+        <InstallBanner variant="compact" />
       </div>
     </div>
   )

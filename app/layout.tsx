@@ -104,7 +104,7 @@ export default function RootLayout({
                 </a>
               ))}
             </nav>
-            <p className="text-xs mb-3" style={{ color: 'rgba(240,240,244,0.25)' }}>
+            <p className="text-xs mb-3" style={{ color: 'rgba(240,240,244,0.4)' }}>
               &copy; 2026 IngredScan &middot; Made in London
             </p>
             <p className="text-xs tracking-wide" style={{ color: 'rgba(240,240,244,0.15)' }}>

@@ -166,7 +166,7 @@ function NutrientRowComponent({ row }: { row: NutrientRow }) {
               </span>
               <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: color }} />
               <svg
-                width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.3)" strokeWidth="2.5"
+                width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.45)" strokeWidth="2.5"
                 className={`shrink-0 transition-transform ${expanded ? 'rotate-180' : ''}`}
               >
                 <polyline points="6,9 12,15 18,9" />
@@ -186,8 +186,8 @@ function NutrientRowComponent({ row }: { row: NutrientRow }) {
             />
           </div>
           <div className="flex justify-between mt-1">
-            <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.25)' }}>0</span>
-            <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.25)' }}>{row.max}{row.unit}</span>
+            <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>0</span>
+            <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>{row.max}{row.unit}</span>
           </div>
         </div>
       )}
@@ -213,7 +213,7 @@ export default function NutritionBreakdown({ nutrition, additiveCount }: Props) 
             <h3 className="text-xs uppercase tracking-wider font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
               Negatives
             </h3>
-            <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.25)' }}>Per 100g</span>
+            <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>Per 100g</span>
           </div>
           <div>
             {negatives.map(row => (
@@ -230,7 +230,7 @@ export default function NutritionBreakdown({ nutrition, additiveCount }: Props) 
             <h3 className="text-xs uppercase tracking-wider font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
               Positives
             </h3>
-            <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.25)' }}>Per 100g</span>
+            <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>Per 100g</span>
           </div>
           <div>
             {positives.map(row => (

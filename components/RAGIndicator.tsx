@@ -37,7 +37,7 @@ export default function RAGIndicator({ score }: { score: number }) {
                 />
                 <span
                   className="text-[9px] font-medium uppercase tracking-wider"
-                  style={{ color: isActive ? color : 'rgba(240,240,244,0.25)' }}
+                  style={{ color: isActive ? color : 'rgba(240,240,244,0.4)' }}
                 >
                   {key === 'red' ? 'Low' : key === 'amber' ? 'Mixed' : 'High'}
                 </span>

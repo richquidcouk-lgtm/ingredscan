@@ -93,9 +93,9 @@ export default function InfantFormulaResult({ product, onBack }: Props) {
             <span className="text-xl">🏥</span>
             <div className="flex-1">
               <p className="text-sm font-medium" style={{ color: '#f0f0f4' }}>NHS Infant Feeding Guidance</p>
-              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.35)' }}>nhs.uk</p>
+              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>nhs.uk</p>
             </div>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.3)" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.45)" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
           </a>
           <a
             href="https://www.nhs.uk/start4life/feeding/bottle-feeding/"
@@ -106,14 +106,14 @@ export default function InfantFormulaResult({ product, onBack }: Props) {
             <span className="text-xl">👶</span>
             <div className="flex-1">
               <p className="text-sm font-medium" style={{ color: '#f0f0f4' }}>Start4Life Formula Guide</p>
-              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.35)' }}>nhs.uk/start4life</p>
+              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>nhs.uk/start4life</p>
             </div>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.3)" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.45)" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
           </a>
         </div>
 
         {/* Footer note */}
-        <p className="text-xs text-center leading-relaxed animate-fadeUp" style={{ color: 'rgba(240,240,244,0.25)', animationDelay: '200ms' }}>
+        <p className="text-xs text-center leading-relaxed animate-fadeUp" style={{ color: 'rgba(240,240,244,0.4)', animationDelay: '200ms' }}>
           If you have concerns about your baby&apos;s feeding or nutrition, please speak with your health visitor, midwife, or GP. Do not change your baby&apos;s formula without medical advice.
         </p>
       </div>

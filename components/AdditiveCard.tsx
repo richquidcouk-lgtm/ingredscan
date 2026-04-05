@@ -41,7 +41,7 @@ export default function AdditiveCard({ additive, index }: { additive: Additive; 
           <p className="text-sm font-medium truncate" style={{ color: '#f0f0f4' }}>
             {additive.name}
           </p>
-          <p className="text-[11px]" style={{ color: 'rgba(240,240,244,0.35)' }}>
+          <p className="text-[11px]" style={{ color: 'rgba(240,240,244,0.5)' }}>
             {additive.code}
           </p>
         </div>
@@ -51,7 +51,7 @@ export default function AdditiveCard({ additive, index }: { additive: Additive; 
           height="16"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="rgba(240,240,244,0.3)"
+          stroke="rgba(240,240,244,0.45)"
           strokeWidth="2"
           strokeLinecap="round"
           className="shrink-0 transition-transform duration-200"
@@ -68,7 +68,7 @@ export default function AdditiveCard({ additive, index }: { additive: Additive; 
             {additive.description}
           </p>
           {additive.regulation && (
-            <p className="text-xs" style={{ color: 'rgba(240,240,244,0.25)' }}>
+            <p className="text-xs" style={{ color: 'rgba(240,240,244,0.4)' }}>
               {additive.regulation}
             </p>
           )}

@@ -9,6 +9,7 @@ import AuthModal from '@/components/AuthModal'
 import Logo from '@/components/Logo'
 import { useMarket } from '@/components/MarketProvider'
 import MarketSelector, { MarketSelectorTrigger } from '@/components/MarketSelector'
+import InstallBanner from '@/components/InstallBanner'
 
 type RecentScan = {
   barcode: string
@@ -215,7 +216,7 @@ export default function HomePage() {
           >
             You deserve to know
             <br />
-            what you&apos;re eating.
+            what&apos;s in your products.
           </h3>
           <p className="text-sm leading-relaxed max-w-xs mx-auto mb-4" style={{ color: 'rgba(240,240,244,0.55)' }}>
             We&apos;re building the world&apos;s most transparent product scanner — and every scan you make helps improve it for everyone. Be part of something bigger.
@@ -242,7 +243,7 @@ export default function HomePage() {
         <h3 className="text-lg font-bold heading-display mb-1" style={{ color: '#f0f0f4' }}>
           Built for transparency
         </h3>
-        <p className="text-xs mb-4" style={{ color: 'rgba(240,240,244,0.35)' }}>Powered by you and open data</p>
+        <p className="text-xs mb-4" style={{ color: 'rgba(240,240,244,0.5)' }}>Powered by you and open data</p>
         <div className="grid grid-cols-2 gap-3">
           {[
             { icon: '🎯', title: 'Dual Scoring', desc: 'Processing level + quality score — two perspectives on every product for the full picture' },
@@ -285,10 +286,15 @@ export default function HomePage() {
             >
               <div className="text-2xl mb-2">{cat.emoji}</div>
               <h4 className="text-sm font-semibold mb-0.5" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>{cat.title}</h4>
-              <p className="text-xs" style={{ color: cat.active ? 'rgba(240,240,244,0.4)' : 'rgba(240,240,244,0.25)' }}>{cat.desc}</p>
+              <p className="text-xs" style={{ color: cat.active ? 'rgba(240,240,244,0.4)' : 'rgba(240,240,244,0.4)' }}>{cat.desc}</p>
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Install App Banner */}
+      <section className="px-5 pb-4 max-w-lg mx-auto relative z-10">
+        <InstallBanner />
       </section>
 
       {/* Recent Scans or Empty State */}
@@ -345,7 +351,7 @@ export default function HomePage() {
                 <line x1="7" y1="12" x2="17" y2="12" />
               </svg>
             </div>
-            <p className="text-sm" style={{ color: 'rgba(240,240,244,0.3)' }}>
+            <p className="text-sm" style={{ color: 'rgba(240,240,244,0.45)' }}>
               Recent scans will appear here
             </p>
           </div>
