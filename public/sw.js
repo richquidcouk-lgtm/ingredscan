@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ingredscan-v2'
+const CACHE_NAME = 'ingredscan-v3'
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
