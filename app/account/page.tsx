@@ -67,6 +67,9 @@ export default function AccountPage() {
   const [showAuth, setShowAuth] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [showMarketSelector, setShowMarketSelector] = useState(false)
+  const [editingName, setEditingName] = useState(false)
+  const [nameInput, setNameInput] = useState('')
+  const [savingName, setSavingName] = useState(false)
   const { config } = useMarket()
 
   useEffect(() => {
@@ -87,12 +90,24 @@ export default function AccountPage() {
       .eq('id', userId)
       .single()
 
-    if (data) setProfile(data as Profile)
+    if (data) {
+      setProfile(data as Profile)
+      setNameInput((data as Profile).display_name || '')
+    }
     setLoading(false)
   }
 
-  // Profile loaded for future features (e.g. preferences)
-  void profile
+  async function saveName() {
+    if (!user || !nameInput.trim()) return
+    setSavingName(true)
+    await supabase
+      .from('profiles')
+      .update({ display_name: nameInput.trim() })
+      .eq('id', user.id)
+    setProfile(prev => prev ? { ...prev, display_name: nameInput.trim() } : prev)
+    setEditingName(false)
+    setSavingName(false)
+  }
 
   async function handleSignOut() {
     await supabase.auth.signOut()
@@ -164,18 +179,73 @@ export default function AccountPage() {
             <p className="text-[10px] uppercase tracking-widest font-semibold mb-2 mt-2" style={{ color: 'rgba(240,240,244,0.35)' }}>
               Account
             </p>
+            {/* Name prompt if not set */}
+            {!loading && profile && !profile.display_name && !editingName && (
+              <div className="rounded-2xl p-4 mb-4 glass-card animate-fadeUp" style={{ borderColor: 'rgba(124,111,255,0.15)' }}>
+                <p className="text-sm font-medium mb-2" style={{ color: '#f0f0f4' }}>What should we call you?</p>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    placeholder="Your name"
+                    value={nameInput}
+                    onChange={e => setNameInput(e.target.value)}
+                    className="flex-1 px-3 py-2.5 rounded-xl text-sm outline-none glass-input"
+                    style={{ color: '#f0f0f4' }}
+                  />
+                  <button
+                    onClick={saveName}
+                    disabled={!nameInput.trim()}
+                    className="px-4 py-2.5 rounded-xl text-sm font-medium shrink-0 transition-all"
+                    style={{ backgroundColor: 'rgba(124,111,255,0.15)', color: '#7c6fff', opacity: nameInput.trim() ? 1 : 0.4 }}
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
+            )}
+
             <div className="rounded-2xl overflow-hidden glass-card mb-6">
               <SettingsRow
                 icon={
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="4" width="20" height="16" rx="2" />
-                    <path d="M22 7l-10 7L2 7" />
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
                   </svg>
                 }
-                label="Email"
-                value={user?.email}
-                chevron={false}
+                label={profile?.display_name || 'Add your name'}
+                value={profile?.display_name ? '' : undefined}
+                onClick={() => setEditingName(true)}
               />
+              {editingName && (
+                <div className="px-4 py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      value={nameInput}
+                      onChange={e => setNameInput(e.target.value)}
+                      className="flex-1 px-3 py-2 rounded-xl text-sm outline-none glass-input"
+                      style={{ color: '#f0f0f4' }}
+                      autoFocus
+                    />
+                    <button
+                      onClick={saveName}
+                      disabled={savingName || !nameInput.trim()}
+                      className="px-3 py-2 rounded-xl text-xs font-medium"
+                      style={{ backgroundColor: 'rgba(124,111,255,0.15)', color: '#7c6fff' }}
+                    >
+                      {savingName ? '...' : 'Save'}
+                    </button>
+                    <button
+                      onClick={() => setEditingName(false)}
+                      className="px-3 py-2 rounded-xl text-xs"
+                      style={{ color: 'rgba(240,240,244,0.4)' }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
               <SettingsRow
                 icon={<span className="text-base leading-none">{config.flag}</span>}
                 label={config.name}

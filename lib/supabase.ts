@@ -13,6 +13,7 @@ export function getServiceSupabase(): SupabaseClient {
 export type Profile = {
   id: string
   email: string
+  display_name: string | null
   pro: boolean
   pro_expires_at: string | null
   scan_count_today: number
