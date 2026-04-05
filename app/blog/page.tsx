@@ -26,6 +26,11 @@ export default function BlogPage() {
         Back to Home
       </Link>
 
+      {/* Install Banner — top */}
+      <div className="mb-8">
+        <InstallBanner variant="compact" />
+      </div>
+
       <div className="text-center mb-12 animate-fadeUp">
         <h1
           className="text-3xl sm:text-4xl heading-display mb-4"

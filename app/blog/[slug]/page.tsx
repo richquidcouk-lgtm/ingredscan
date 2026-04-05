@@ -92,6 +92,11 @@ export default function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
+      {/* Install Banner — top of post */}
+      <div className="mb-6">
+        <InstallBanner variant="compact" />
+      </div>
+
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs mb-8 flex-wrap" style={{ color: 'rgba(240,240,244,0.5)' }}>
         <Link href="/" className="hover:underline" style={{ color: 'rgba(240,240,244,0.5)' }}>Home</Link>
