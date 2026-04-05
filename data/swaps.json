@@ -3,90 +3,142 @@
     "category": "ketchups",
     "keywords": ["ketchup", "tomato sauce", "tomato ketchup"],
     "swaps": [
-      {"product_name": "Tesco Organic Tomato Ketchup", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.5, "price_difference": "+40p"},
-      {"product_name": "Waitrose Duchy Organic Ketchup", "retailer": "Waitrose", "nova_score": 3, "quality_score": 8.0, "price_difference": "+85p"},
-      {"product_name": "Sainsbury's SO Organic Ketchup", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.2, "price_difference": "+30p"}
+      {"product_name": "Tesco Organic Tomato Ketchup", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.5, "price_difference": "+40p", "market": "uk"},
+      {"product_name": "Waitrose Duchy Organic Ketchup", "retailer": "Waitrose", "nova_score": 3, "quality_score": 8.0, "price_difference": "+85p", "market": "uk"},
+      {"product_name": "Sainsbury's SO Organic Ketchup", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.2, "price_difference": "+30p", "market": "uk"},
+      {"product_name": "365 Organic Tomato Ketchup", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.8, "price_difference": "+$0.50", "market": "us"},
+      {"product_name": "Trader Joe's Organic Ketchup", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$0.30", "market": "us"},
+      {"product_name": "Primal Kitchen Organic Ketchup", "retailer": "Target", "nova_score": 3, "quality_score": 8.2, "price_difference": "+$2.00", "market": "us"}
     ]
   },
   {
     "category": "breads",
     "keywords": ["white bread", "sliced bread", "bread", "loaf"],
     "swaps": [
-      {"product_name": "Waitrose Sourdough Loaf", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.5, "price_difference": "+£1.20"},
-      {"product_name": "Sainsbury's Taste the Difference Sourdough", "retailer": "Sainsbury's", "nova_score": 2, "quality_score": 8.0, "price_difference": "+90p"},
-      {"product_name": "Tesco Finest Rye Bread", "retailer": "Tesco", "nova_score": 2, "quality_score": 7.8, "price_difference": "+70p"}
+      {"product_name": "Waitrose Sourdough Loaf", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.5, "price_difference": "+£1.20", "market": "uk"},
+      {"product_name": "Sainsbury's Taste the Difference Sourdough", "retailer": "Sainsbury's", "nova_score": 2, "quality_score": 8.0, "price_difference": "+90p", "market": "uk"},
+      {"product_name": "Tesco Finest Rye Bread", "retailer": "Tesco", "nova_score": 2, "quality_score": 7.8, "price_difference": "+70p", "market": "uk"},
+      {"product_name": "Dave's Killer Bread 21 Whole Grains", "retailer": "Kroger", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$1.50", "market": "us"},
+      {"product_name": "365 Organic Whole Wheat Bread", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.8, "price_difference": "+$0.80", "market": "us"},
+      {"product_name": "Trader Joe's Sourdough Bread", "retailer": "Trader Joe's", "nova_score": 2, "quality_score": 8.2, "price_difference": "+$0.50", "market": "us"}
     ]
   },
   {
     "category": "chocolate",
     "keywords": ["chocolate", "chocolate bar", "milk chocolate", "candy bar"],
     "swaps": [
-      {"product_name": "Sainsbury's Taste the Difference 70% Dark", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+60p"},
-      {"product_name": "Waitrose No.1 85% Dark Chocolate", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.5, "price_difference": "+£1.10"},
-      {"product_name": "Tesco Finest 72% Dark Chocolate", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.2, "price_difference": "+50p"}
+      {"product_name": "Sainsbury's Taste the Difference 70% Dark", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+60p", "market": "uk"},
+      {"product_name": "Waitrose No.1 85% Dark Chocolate", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.5, "price_difference": "+£1.10", "market": "uk"},
+      {"product_name": "Tesco Finest 72% Dark Chocolate", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.2, "price_difference": "+50p", "market": "uk"},
+      {"product_name": "Hu Dark Chocolate Bar", "retailer": "Whole Foods", "nova_score": 2, "quality_score": 8.5, "price_difference": "+$2.00", "market": "us"},
+      {"product_name": "Trader Joe's 72% Dark Chocolate", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$0.50", "market": "us"},
+      {"product_name": "Green & Black's Organic 85% Dark", "retailer": "Target", "nova_score": 2, "quality_score": 8.0, "price_difference": "+$1.50", "market": "us"}
     ]
   },
   {
     "category": "crisps",
     "keywords": ["crisps", "chips", "potato chips", "snacks", "tortilla chips"],
     "swaps": [
-      {"product_name": "Tesco Lentil Curls Lightly Salted", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.0, "price_difference": "-20p"},
-      {"product_name": "Asda Baked Crisps Ready Salted", "retailer": "Asda", "nova_score": 3, "quality_score": 6.8, "price_difference": "-30p"},
-      {"product_name": "Waitrose Love Life Popped Chips", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.5, "price_difference": "+40p"}
+      {"product_name": "Tesco Lentil Curls Lightly Salted", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.0, "price_difference": "-20p", "market": "uk"},
+      {"product_name": "Asda Baked Crisps Ready Salted", "retailer": "Asda", "nova_score": 3, "quality_score": 6.8, "price_difference": "-30p", "market": "uk"},
+      {"product_name": "Waitrose Love Life Popped Chips", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.5, "price_difference": "+40p", "market": "uk"},
+      {"product_name": "Siete Grain Free Tortilla Chips", "retailer": "Target", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$1.00", "market": "us"},
+      {"product_name": "Trader Joe's Baked Lentil Chips", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 7.0, "price_difference": "-$0.50", "market": "us"},
+      {"product_name": "365 Organic Blue Corn Tortilla Chips", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$0.50", "market": "us"}
     ]
   },
   {
     "category": "cereals",
-    "keywords": ["cereal", "breakfast cereal", "cornflakes", "muesli", "granola", "porridge"],
+    "keywords": ["cereal", "breakfast cereal", "cornflakes", "muesli", "granola", "porridge", "oatmeal"],
     "swaps": [
-      {"product_name": "Tesco Wholegrain Porridge Oats", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-£1.20"},
-      {"product_name": "Sainsbury's SO Organic Granola", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+30p"},
-      {"product_name": "Asda Rolled Porridge Oats", "retailer": "Asda", "nova_score": 1, "quality_score": 9.5, "price_difference": "-£1.40"}
+      {"product_name": "Tesco Wholegrain Porridge Oats", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-£1.20", "market": "uk"},
+      {"product_name": "Sainsbury's SO Organic Granola", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+30p", "market": "uk"},
+      {"product_name": "Asda Rolled Porridge Oats", "retailer": "Asda", "nova_score": 1, "quality_score": 9.5, "price_difference": "-£1.40", "market": "uk"},
+      {"product_name": "Bob's Red Mill Organic Old Fashioned Oats", "retailer": "Kroger", "nova_score": 1, "quality_score": 9.5, "price_difference": "+$1.00", "market": "us"},
+      {"product_name": "Trader Joe's Organic Rolled Oats", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$1.00", "market": "us"},
+      {"product_name": "365 Organic Old Fashioned Oats", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$0.80", "market": "us"}
     ]
   },
   {
     "category": "soft_drinks",
     "keywords": ["cola", "fizzy drink", "soda", "soft drink", "lemonade", "energy drink", "carbonated"],
     "swaps": [
-      {"product_name": "Tesco Sparkling Water with Lemon", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-80p"},
-      {"product_name": "Sainsbury's Flavoured Sparkling Water", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 9.5, "price_difference": "-70p"},
-      {"product_name": "Waitrose Sparkling Elderflower", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.0, "price_difference": "+20p"}
+      {"product_name": "Tesco Sparkling Water with Lemon", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-80p", "market": "uk"},
+      {"product_name": "Sainsbury's Flavoured Sparkling Water", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 9.5, "price_difference": "-70p", "market": "uk"},
+      {"product_name": "Waitrose Sparkling Elderflower", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.0, "price_difference": "+20p", "market": "uk"},
+      {"product_name": "Spindrift Sparkling Lemon Water", "retailer": "Target", "nova_score": 1, "quality_score": 9.0, "price_difference": "+$0.50", "market": "us"},
+      {"product_name": "Trader Joe's Sparkling Mineral Water", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$1.50", "market": "us"},
+      {"product_name": "Olipop Vintage Cola", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.0, "price_difference": "+$1.00", "market": "us"}
     ]
   },
   {
     "category": "ready_meals",
-    "keywords": ["ready meal", "microwave meal", "frozen meal", "tv dinner", "meal for one"],
+    "keywords": ["ready meal", "microwave meal", "frozen meal", "tv dinner", "meal for one", "frozen dinner"],
     "swaps": [
-      {"product_name": "Waitrose Fresh Meal for Tonight Range", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.0, "price_difference": "+£1.50"},
-      {"product_name": "Sainsbury's Just Cook Range", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.8, "price_difference": "+80p"},
-      {"product_name": "Tesco Finest Fresh Meals", "retailer": "Tesco", "nova_score": 3, "quality_score": 6.5, "price_difference": "+60p"}
+      {"product_name": "Waitrose Fresh Meal for Tonight Range", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.0, "price_difference": "+£1.50", "market": "uk"},
+      {"product_name": "Sainsbury's Just Cook Range", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.8, "price_difference": "+80p", "market": "uk"},
+      {"product_name": "Tesco Finest Fresh Meals", "retailer": "Tesco", "nova_score": 3, "quality_score": 6.5, "price_difference": "+60p", "market": "uk"},
+      {"product_name": "Amy's Organic Frozen Meals", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.0, "price_difference": "+$1.50", "market": "us"},
+      {"product_name": "Trader Joe's Frozen Indian Meals", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 6.8, "price_difference": "-$1.00", "market": "us"},
+      {"product_name": "Saffron Road Frozen Entrees", "retailer": "Target", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$0.50", "market": "us"}
     ]
   },
   {
     "category": "yoghurt",
-    "keywords": ["yoghurt", "yogurt", "fromage frais", "dairy dessert"],
+    "keywords": ["yoghurt", "yogurt", "fromage frais", "dairy dessert", "greek yogurt"],
     "swaps": [
-      {"product_name": "Tesco Greek Style Natural Yoghurt", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.0, "price_difference": "-60p"},
-      {"product_name": "Sainsbury's Greek Yoghurt Natural", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 9.0, "price_difference": "-50p"},
-      {"product_name": "Waitrose Natural Greek Yoghurt", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.2, "price_difference": "-30p"}
+      {"product_name": "Tesco Greek Style Natural Yoghurt", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.0, "price_difference": "-60p", "market": "uk"},
+      {"product_name": "Sainsbury's Greek Yoghurt Natural", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 9.0, "price_difference": "-50p", "market": "uk"},
+      {"product_name": "Waitrose Natural Greek Yoghurt", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.2, "price_difference": "-30p", "market": "uk"},
+      {"product_name": "Fage Total 2% Greek Yogurt", "retailer": "Kroger", "nova_score": 1, "quality_score": 9.2, "price_difference": "+$0.50", "market": "us"},
+      {"product_name": "Trader Joe's Greek Nonfat Yogurt", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 9.0, "price_difference": "-$1.00", "market": "us"},
+      {"product_name": "Stonyfield Organic Greek Yogurt", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 9.2, "price_difference": "+$0.80", "market": "us"}
     ]
   },
   {
     "category": "biscuits",
-    "keywords": ["biscuit", "cookie", "digestive", "shortbread"],
+    "keywords": ["biscuit", "cookie", "digestive", "shortbread", "cookies", "crackers"],
     "swaps": [
-      {"product_name": "Waitrose Duchy Organic Oat Biscuits", "retailer": "Waitrose", "nova_score": 3, "quality_score": 6.8, "price_difference": "+70p"},
-      {"product_name": "Tesco Oat Crunch Biscuits", "retailer": "Tesco", "nova_score": 3, "quality_score": 6.5, "price_difference": "-20p"},
-      {"product_name": "Sainsbury's Free From Oat Cookies", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.5, "price_difference": "+30p"}
+      {"product_name": "Waitrose Duchy Organic Oat Biscuits", "retailer": "Waitrose", "nova_score": 3, "quality_score": 6.8, "price_difference": "+70p", "market": "uk"},
+      {"product_name": "Tesco Oat Crunch Biscuits", "retailer": "Tesco", "nova_score": 3, "quality_score": 6.5, "price_difference": "-20p", "market": "uk"},
+      {"product_name": "Sainsbury's Free From Oat Cookies", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.5, "price_difference": "+30p", "market": "uk"},
+      {"product_name": "Simple Mills Almond Flour Crackers", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$1.50", "market": "us"},
+      {"product_name": "Trader Joe's Scandinavian Swimmers", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 6.5, "price_difference": "-$0.50", "market": "us"},
+      {"product_name": "Back to Nature Crackers", "retailer": "Target", "nova_score": 3, "quality_score": 6.8, "price_difference": "+$0.50", "market": "us"}
     ]
   },
   {
     "category": "processed_meat",
     "keywords": ["sausage", "bacon", "ham", "salami", "hot dog", "processed meat", "deli meat"],
     "swaps": [
-      {"product_name": "Waitrose Free Range Pork Sausages", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.0, "price_difference": "+£1.00"},
-      {"product_name": "Sainsbury's Taste the Difference Sausages", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.8, "price_difference": "+80p"},
-      {"product_name": "Tesco Finest Outdoor Bred Sausages", "retailer": "Tesco", "nova_score": 3, "quality_score": 6.5, "price_difference": "+60p"}
+      {"product_name": "Waitrose Free Range Pork Sausages", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.0, "price_difference": "+£1.00", "market": "uk"},
+      {"product_name": "Sainsbury's Taste the Difference Sausages", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.8, "price_difference": "+80p", "market": "uk"},
+      {"product_name": "Tesco Finest Outdoor Bred Sausages", "retailer": "Tesco", "nova_score": 3, "quality_score": 6.5, "price_difference": "+60p", "market": "uk"},
+      {"product_name": "Applegate Organic Uncured Turkey Hot Dogs", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.0, "price_difference": "+$2.00", "market": "us"},
+      {"product_name": "Trader Joe's Uncured Turkey Bacon", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 6.8, "price_difference": "+$0.50", "market": "us"},
+      {"product_name": "Pederson's No Sugar Added Bacon", "retailer": "Kroger", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$2.50", "market": "us"}
+    ]
+  },
+  {
+    "category": "sauces",
+    "keywords": ["sauce", "pasta sauce", "mayo", "mayonnaise", "dressing", "salad dressing", "bbq sauce"],
+    "swaps": [
+      {"product_name": "Waitrose Cooks' Ingredients Passata", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.0, "price_difference": "+20p", "market": "uk"},
+      {"product_name": "Sainsbury's Taste the Difference Pesto", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.0, "price_difference": "+50p", "market": "uk"},
+      {"product_name": "Rao's Homemade Marinara Sauce", "retailer": "Target", "nova_score": 3, "quality_score": 8.0, "price_difference": "+$3.00", "market": "us"},
+      {"product_name": "Trader Joe's Organic Marinara", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$0.50", "market": "us"},
+      {"product_name": "Primal Kitchen Avocado Oil Mayo", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.8, "price_difference": "+$4.00", "market": "us"}
+    ]
+  },
+  {
+    "category": "peanut_butter",
+    "keywords": ["peanut butter", "nut butter", "almond butter"],
+    "swaps": [
+      {"product_name": "Waitrose Whole Earth Crunchy", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.0, "price_difference": "+50p", "market": "uk"},
+      {"product_name": "Tesco Whole Nut Peanut Butter", "retailer": "Tesco", "nova_score": 1, "quality_score": 8.8, "price_difference": "-20p", "market": "uk"},
+      {"product_name": "Trader Joe's Creamy Peanut Butter", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 9.0, "price_difference": "-$1.00", "market": "us"},
+      {"product_name": "365 Organic Creamy Peanut Butter", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 9.2, "price_difference": "+$0.50", "market": "us"},
+      {"product_name": "Santa Cruz Organic Peanut Butter", "retailer": "Kroger", "nova_score": 1, "quality_score": 9.0, "price_difference": "+$1.00", "market": "us"}
     ]
   }
 ]

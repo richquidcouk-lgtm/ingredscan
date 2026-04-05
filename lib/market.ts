@@ -38,8 +38,8 @@ export const MARKETS: Record<Market, MarketConfig> = {
     regulatoryBody: 'FDA',
     regulatoryRef: 'FDA 21 CFR and GRAS guidelines',
     retailers: ['Walmart', 'Kroger', 'Whole Foods', 'Target', 'Trader Joe\'s', 'Costco'],
-    supported: false,
-    comingSoon: true,
+    supported: true,
+    comingSoon: false,
   },
   nl: {
     code: 'nl',

@@ -162,9 +162,13 @@ export default function ResultPage() {
 
   function findSwaps(category: string) {
     const categoryLower = category.toLowerCase()
+    const marketCode = config.code
     for (const group of swapsData) {
-      if (group.keywords.some(kw => categoryLower.includes(kw))) {
-        setMatchedSwaps(group.swaps)
+      if (group.keywords.some((kw: string) => categoryLower.includes(kw))) {
+        const marketSwaps = group.swaps.filter((s: any) =>
+          !s.market || s.market === marketCode
+        )
+        setMatchedSwaps(marketSwaps)
         return
       }
     }
