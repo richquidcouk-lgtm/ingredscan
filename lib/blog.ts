@@ -48,13 +48,13 @@ const posts: BlogPost[] = [
 <p>This is the category that has attracted the most attention — and concern. Ultra-processed foods are industrial formulations typically made from five or more ingredients, many of which you wouldn't find in a home kitchen.</p>
 <p>Look for ingredients like high-fructose corn syrup, hydrogenated oils, modified starches, protein isolates, emulsifiers (like polysorbate 80 or carboxymethylcellulose), flavour enhancers (like monosodium glutamate), artificial sweeteners, and colours.</p>
 <p><strong>UK examples:</strong> most breakfast cereals (Coco Pops, Frosties), soft drinks (Coca-Cola, Fanta), packaged biscuits (Digestives, Hobnobs), crisps (Walkers, Pringles), instant noodles (Pot Noodle), chicken nuggets, most ready meals, sliced white bread (Hovis, Warburtons), flavoured yoghurts.</p>
-<p>According to a 2024 study published in the BMJ, the UK has one of the highest rates of ultra-processed food consumption in Europe, with UPF making up approximately 57% of calories in the average British diet.</p>
+<p>According to a 2024 study published in the BMJ, the UK has one of the highest rates of <a href="/blog/ultra-processed-food-uk-guide">ultra-processed food consumption</a> in Europe, with UPF making up approximately 57% of calories in the average British diet.</p>
 
 <h2>Important Limitations of NOVA</h2>
 
 <h3>Not all NOVA 4 foods are equal</h3>
 <p>A plain wholemeal loaf with one emulsifier and a packet of Pringles are both NOVA 4 — but they are very different foods. NOVA tells you about processing method, not overall healthfulness.</p>
-<p>This is why IngredScan shows the processing level alongside a Quality Score — because neither measure alone tells the full story.</p>
+<p>This is why IngredScan shows the processing level alongside a <a href="/blog/how-ingredscan-scores-work">Quality Score</a> — because neither measure alone tells the full story.</p>
 
 <h3>Some NOVA 4 foods are nutritionally necessary</h3>
 <p>Infant formula is classified as NOVA 4 because it contains industrially produced vitamins, minerals, and emulsifiers. But it's a regulated, medically appropriate product for babies who cannot be breastfed.</p>
@@ -69,7 +69,7 @@ const posts: BlogPost[] = [
 <p>However, it's important to note that not all NOVA 4 foods are equal. A wholemeal bread with added emulsifiers is very different from a pack of crisps, even though both are technically NOVA 4. This is why IngredScan uses the NOVA score alongside our Quality Score — to give you a more complete picture.</p>
 
 <h2>How IngredScan Uses NOVA</h2>
-<p>When you scan a product, IngredScan determines its NOVA classification by analysing the ingredient list. We look for marker ingredients — substances that are characteristic of ultra-processing, such as emulsifiers, flavour enhancers, and hydrogenated fats.</p>
+<p>When you <a href="/scan">scan a product</a>, IngredScan determines its NOVA classification by analysing the ingredient list. We look for marker ingredients — substances that are characteristic of ultra-processing, such as emulsifiers, flavour enhancers, and hydrogenated fats.</p>
 <p>The NOVA score is displayed prominently on every scan result, alongside our Quality Score which factors in nutritional content, additive concerns, and other data points. Together, they give you a quick, honest assessment of what you're about to eat.</p>
 <p>Remember: NOVA is a tool for awareness, not a rigid rulebook. The goal isn't to eliminate all processed food — it's to help you make more informed choices about what you eat regularly.</p>
 `,
@@ -95,7 +95,7 @@ const posts: BlogPost[] = [
 <p>The most obvious ultra-processed foods are easy to spot — fizzy drinks, crisps, sweets, and ready meals. But UPF is also found in products that many people consider healthy or neutral:</p>
 
 <h3>Breakfast</h3>
-<p>Most branded breakfast cereals are NOVA 4, including many marketed as "healthy" options. Granola with added flavourings, protein bars, flavoured instant porridge sachets, and most breakfast biscuits fall into this category. Even some "multigrain" options contain emulsifiers, flavourings, and modified starches.</p>
+<p>Most branded breakfast cereals are <a href="/blog/what-is-nova-score">NOVA 4</a>, including many marketed as "healthy" options. Granola with added flavourings, protein bars, flavoured instant porridge sachets, and most breakfast biscuits fall into this category. Even some "multigrain" options contain emulsifiers, flavourings, and modified starches.</p>
 
 <h3>Bread</h3>
 <p>Most sliced bread from major UK brands (Hovis, Kingsmill, Warburtons) is NOVA 4 due to added emulsifiers (like E471, E472e), preservatives (calcium propionate), and processing aids. Freshly baked bread from bakeries with simple ingredients (flour, water, salt, yeast) is typically NOVA 3.</p>
@@ -104,7 +104,7 @@ const posts: BlogPost[] = [
 <p>Plain natural yoghurt is NOVA 1. But flavoured yoghurts, especially those marketed to children, typically contain modified starch, pectin, flavourings, and sweeteners — making them NOVA 4. The difference between the two can be stark.</p>
 
 <h3>Sauces and Condiments</h3>
-<p>Most commercial ketchups, mayonnaise, salad dressings, and cooking sauces are NOVA 4. They typically contain modified starches, flavour enhancers, and various additives beyond the basic recipe.</p>
+<p>Most commercial ketchups, mayonnaise, salad dressings, and cooking sauces are NOVA 4. They typically contain modified starches, flavour enhancers, and various <a href="/blog/worst-additives-uk-food">additives</a> beyond the basic recipe.</p>
 
 <h3>Plant-Based Alternatives</h3>
 <p>Many plant-based milks, meats, and cheeses are heavily processed. A typical plant-based burger might contain methylcellulose, maltodextrin, modified food starch, and numerous flavourings. Being plant-based doesn't automatically mean minimally processed.</p>
@@ -144,7 +144,7 @@ const posts: BlogPost[] = [
 <p>When you need convenience food, choose products with shorter, simpler ingredient lists. Tinned fish, pre-washed salads, rotisserie chicken, frozen vegetables, and pre-cooked grains are all low-processing convenience options.</p>
 
 <h3>5. Use IngredScan</h3>
-<p>Scan products when you shop to see their NOVA classification and quality score. Over time, you'll naturally learn to spot ultra-processed products and find better alternatives. Our swap feature suggests specific products available at your supermarket.</p>
+<p><a href="/scan">Scan products</a> when you shop to see their NOVA classification and quality score. Over time, you'll naturally learn to spot ultra-processed products and find better alternatives. Our swap feature suggests specific products available at your supermarket.</p>
 
 <h2>The Bottom Line</h2>
 <p>Ultra-processed food is deeply embedded in the UK food system, but awareness is growing. You don't need to be perfect — even modest reductions in UPF intake, replaced with minimally processed alternatives, can make a meaningful difference to your diet quality. The first step is simply knowing what's in your food.</p>
@@ -161,7 +161,7 @@ const posts: BlogPost[] = [
     readTime: '5 min read',
     featured: false,
     content: `
-<p>Food additives are substances added to products to preserve them, improve texture, enhance flavour, or change appearance. All additives permitted in UK food have been assessed for safety by regulatory bodies. However, ongoing research continues to examine their effects, and some have attracted more scientific scrutiny than others.</p>
+<p>Food additives are substances added to products to preserve them, improve texture, enhance flavour, or change appearance. All additives permitted in UK food have been assessed for safety by regulatory bodies. Many are characteristic of <a href="/blog/what-is-nova-score">ultra-processed (NOVA 4) foods</a>. However, ongoing research continues to examine their effects, and some have attracted more scientific scrutiny than others.</p>
 <p>Here are 10 commonly found additives in UK supermarket products, what they do, and what published research has found.</p>
 
 <h2>1. Sodium Nitrite (E250)</h2>
@@ -206,7 +206,7 @@ const posts: BlogPost[] = [
 
 <h2>The Bottom Line</h2>
 <p>All of these additives are legally permitted in UK food and have been assessed by regulatory bodies. "Permitted" means they are considered safe at the levels typically found in food. However, science evolves, and ongoing research continues to refine our understanding of these substances.</p>
-<p>IngredScan rates additive risk as low, medium, or high based on current regulatory guidance and published peer-reviewed research. These are relative classifications to help you make informed choices — not definitive safety judgments. When in doubt, choose products with shorter ingredient lists and fewer additives you don't recognise.</p>
+<p>IngredScan <a href="/blog/how-ingredscan-scores-work">rates additive risk</a> as low, medium, or high based on current regulatory guidance and published peer-reviewed research. These are relative classifications to help you make informed choices — not definitive safety judgments. When in doubt, <a href="/scan">scan your products</a> and choose those with shorter ingredient lists and fewer additives you don't recognise.</p>
 `,
   },
   {
@@ -220,10 +220,10 @@ const posts: BlogPost[] = [
     readTime: '4 min read',
     featured: false,
     content: `
-<p>Ketchup is one of the most common condiments in UK households — found in over 90% of kitchens. But not all ketchups are created equal. We scanned 8 popular UK ketchups to compare their ingredients, processing levels, and nutritional profiles.</p>
+<p>Ketchup is one of the most common condiments in UK households — found in over 90% of kitchens. But not all ketchups are created equal. We <a href="/scan">scanned</a> 8 popular UK ketchups to compare their ingredients, processing levels, and nutritional profiles.</p>
 
 <h2>What We Compared</h2>
-<p>For each ketchup, we looked at the NOVA score, IngredScan quality score, sugar content per 100g, number of additives, and overall ingredient simplicity. All products were scanned using their standard UK formulations as of early 2026.</p>
+<p>For each ketchup, we looked at the <a href="/blog/what-is-nova-score">NOVA score</a>, IngredScan quality score, sugar content per 100g, number of <a href="/blog/worst-additives-uk-food">additives</a>, and overall ingredient simplicity. All products were scanned using their standard UK formulations as of early 2026.</p>
 
 <h2>The Results</h2>
 
@@ -288,7 +288,7 @@ const posts: BlogPost[] = [
 <p>We supplement Open Food Facts with reference data from the UK Food Standards Agency (FSA) for additive regulations, USDA FoodData Central for nutritional benchmarks, and publicly available supermarket product pages.</p>
 
 <h2>NOVA Classification</h2>
-<p>We determine a product's NOVA score (1-4) by analysing its ingredient list for marker ingredients characteristic of each processing level. Specifically:</p>
+<p>We determine a product's <a href="/blog/what-is-nova-score">NOVA score</a> (1-4) by analysing its ingredient list for marker ingredients characteristic of each processing level. Specifically:</p>
 <ul>
 <li><strong>NOVA 4 markers:</strong> we check for ingredients like high-fructose corn syrup, hydrogenated oils, modified starches, protein isolates, maltodextrin, emulsifiers (e.g. E471, E433, E322 beyond natural lecithin), flavour enhancers (E621-E635), artificial sweeteners, and artificial colours</li>
 <li><strong>NOVA 3:</strong> products with salt, sugar, or oil added to whole foods, without NOVA 4 markers</li>
@@ -311,7 +311,7 @@ const posts: BlogPost[] = [
 <p>The final score is clamped between 0.0 and 10.0. A score of 7+ generally indicates a product with minimal processing and decent nutritional profile. A score below 4 indicates significant concerns.</p>
 
 <h2>Additive Risk Ratings</h2>
-<p>Each additive in our database is classified as low, medium, or high risk based on:</p>
+<p>Each <a href="/blog/worst-additives-uk-food">additive</a> in our database is classified as low, medium, or high risk based on:</p>
 <ul>
 <li><strong>EU Regulation 1333/2008</strong> — the European framework for permitted food additives, including maximum levels</li>
 <li><strong>UK FSA guidance</strong> — specific UK regulatory positions and advisory statements</li>
@@ -331,7 +331,7 @@ const posts: BlogPost[] = [
 
 <h2>Continuous Improvement</h2>
 <p>We regularly review and refine our scoring methodology based on new research, user feedback, and data quality improvements. When we make significant changes, we document them and notify users. If you spot an error in a product's data or score, use the Report button on the result page — we review every report and apply corrections within 7 days.</p>
-<p>Questions about our methodology? Contact us at <a href="mailto:richquidcouk@gmail.com">richquidcouk@gmail.com</a>.</p>
+<p>For full details, see our <a href="/disclaimer">disclaimer</a>. Questions about our methodology? Contact us at <a href="mailto:richquidcouk@gmail.com">richquidcouk@gmail.com</a>.</p>
 `,
   },
   {
@@ -351,7 +351,7 @@ const posts: BlogPost[] = [
 <h2>1. Formaldehyde and Formaldehyde Releasers</h2>
 <p><strong>Risk level: High</strong> · <strong>Found in:</strong> some nail polishes, hair straightening treatments, shampoos</p>
 <p>Formaldehyde is classified as a known human carcinogen by the International Agency for Research on Cancer (IARC). While formaldehyde itself is rarely listed on ingredient labels today, several preservatives slowly release it over time: DMDM hydantoin, quaternium-15, imidazolidinyl urea, and diazolidinyl urea.</p>
-<p>The EU restricts formaldehyde in cosmetics to 0.1% (except in nail hardeners at 5%), and products exceeding 0.05% must carry a warning label. If you see any of these formaldehyde-releasing preservatives on a label, the product will release small amounts of formaldehyde throughout its shelf life.</p>
+<p>The EU restricts formaldehyde in cosmetics to 0.1% (except in nail hardeners at 5%), and products exceeding 0.05% must carry a warning label. If you see any of these formaldehyde-releasing preservatives on a label (learn <a href="/blog/how-to-read-cosmetic-labels">how to read cosmetic labels</a>), the product will release small amounts of formaldehyde throughout its shelf life.</p>
 
 <h2>2. Oxybenzone (Benzophenone-3)</h2>
 <p><strong>Risk level: High</strong> · <strong>Found in:</strong> chemical sunscreens, lip balms with SPF</p>
@@ -360,7 +360,7 @@ const posts: BlogPost[] = [
 
 <h2>3. Parabens (Methyl, Propyl, Butyl, Isobutylparaben)</h2>
 <p><strong>Risk level: Medium</strong> · <strong>Found in:</strong> moisturisers, shampoos, makeup, deodorants</p>
-<p>Parabens are preservatives that mimic oestrogen in laboratory studies. Butylparaben and propylparaben show stronger oestrogenic activity than methylparaben. The EU has restricted butyl and propylparaben concentrations and banned them entirely in products for children under 3 (nappy area). Many UK brands have voluntarily reformulated to be paraben-free in response to consumer concern.</p>
+<p>Parabens are preservatives that mimic oestrogen in laboratory studies. Butylparaben and propylparaben show stronger oestrogenic activity than methylparaben. The EU has restricted butyl and propylparaben concentrations and banned them entirely in products for children under 3 (nappy area). Many UK brands have voluntarily reformulated to be paraben-free as part of the <a href="/blog/clean-beauty-uk-guide">clean beauty</a> movement.</p>
 <p>The scientific picture is nuanced: methylparaben at permitted concentrations is generally considered safe by European regulators. The concern increases with propyl and butylparaben, particularly during pregnancy.</p>
 
 <h2>4. Fragrance / Parfum</h2>
@@ -396,7 +396,7 @@ const posts: BlogPost[] = [
 <h2>How to Use This Information</h2>
 <p>Don&apos;t panic about your current products — the dose makes the poison, and all these ingredients are used at regulated concentrations. Instead:</p>
 <ul>
-<li><strong>Scan products with IngredScan</strong> to see which ingredients are in your cosmetics and their risk ratings</li>
+<li><strong><a href="/scan">Scan products with IngredScan</a></strong> to see which ingredients are in your cosmetics and their risk ratings</li>
 <li><strong>Prioritise changes</strong> for products that stay on your skin longest (moisturisers, sunscreens) over rinse-off products (shampoo, body wash)</li>
 <li><strong>During pregnancy</strong>, pay particular attention to retinol, salicylic acid (at high concentrations), parabens, and chemical UV filters</li>
 <li><strong>For sensitive skin</strong>, look for fragrance-free, SLS-free formulations</li>
@@ -451,7 +451,7 @@ const posts: BlogPost[] = [
 <ul>
 <li><strong>PHENOXYETHANOL</strong> = A widely used preservative. Generally well tolerated.</li>
 <li><strong>SODIUM BENZOATE / POTASSIUM SORBATE</strong> = Mild preservatives common in "clean" beauty.</li>
-<li><strong>METHYLPARABEN / PROPYLPARABEN</strong> = Paraben preservatives. Effective but controversial.</li>
+<li><strong>METHYLPARABEN / PROPYLPARABEN</strong> = Paraben preservatives. Effective but controversial — many <a href="/blog/clean-beauty-uk-guide">clean beauty</a> brands avoid them.</li>
 </ul>
 
 <h3>The Texture and Feel</h3>
@@ -486,7 +486,7 @@ const posts: BlogPost[] = [
 <p>These mineral pigments are safe. They&apos;re the coloured ingredients in foundations, eyeshadows, and blushes. "May contain" sections list all possible colours used across shade variants.</p>
 
 <h2>Red Flags to Watch For</h2>
-<p>When scanning an ingredient list, here are patterns that warrant closer inspection:</p>
+<p>When scanning an ingredient list, here are patterns that warrant closer inspection (see our full guide to <a href="/blog/ingredients-to-avoid-skincare">ingredients to avoid in skincare</a>):</p>
 <ul>
 <li><strong>PARFUM / FRAGRANCE</strong> early in the list = high fragrance concentration. Greater sensitisation risk.</li>
 <li><strong>Multiple parabens</strong> = the product uses paraben cocktails. Consider paraben-free alternatives.</li>
@@ -495,7 +495,7 @@ const posts: BlogPost[] = [
 </ul>
 
 <h2>The Easy Way: Use IngredScan</h2>
-<p>Rather than memorising INCI names, scan any cosmetic product with IngredScan. We automatically identify every ingredient, match it against our database of 100+ documented cosmetic ingredients, and flag anything of concern. Each ingredient gets a risk rating (low, medium, high) with an evidence-based explanation.</p>
+<p>Rather than memorising INCI names, <a href="/scan">scan any cosmetic product</a> with IngredScan. We automatically identify every ingredient, match it against our database of 100+ documented cosmetic ingredients, and flag anything of concern. Each ingredient gets a risk rating (low, medium, high) with an evidence-based explanation.</p>
 <p>The goal isn&apos;t to make you afraid of your products — it&apos;s to give you the knowledge to make informed choices about what you put on your skin every day.</p>
 `,
   },
@@ -520,7 +520,7 @@ const posts: BlogPost[] = [
 <h2>What Clean Beauty Usually Means in Practice</h2>
 <p>While there is no single standard, most UK brands using "clean beauty" positioning tend to exclude some or all of the following:</p>
 <ul>
-<li><strong>Parabens</strong> — preservatives with weak oestrogenic activity</li>
+<li><strong>Parabens</strong> — preservatives with weak oestrogenic activity (see our <a href="/blog/ingredients-to-avoid-skincare">ingredients to watch out for</a> guide)</li>
 <li><strong>SLS/SLES</strong> — sulphate surfactants that can be irritating</li>
 <li><strong>Silicones</strong> — synthetic polymers (dimethicone, cyclomethicone)</li>
 <li><strong>Synthetic fragrance</strong> — undisclosed chemical blends labelled as "Parfum"</li>
@@ -562,9 +562,9 @@ const posts: BlogPost[] = [
 <h2>How to Actually Shop Smarter</h2>
 <p>Instead of relying on "clean" labels, use these evidence-based approaches:</p>
 <ol>
-<li><strong>Scan the product with IngredScan</strong> — our cosmetic scoring analyses every INCI ingredient against published evidence and EU regulatory status. No marketing claims, just data.</li>
+<li><strong><a href="/scan">Scan the product with IngredScan</a></strong> — our cosmetic scoring analyses every INCI ingredient against published evidence and EU regulatory status. No marketing claims, just data.</li>
 <li><strong>Focus on your specific concerns</strong> — if you have sensitive skin, prioritise fragrance-free products. If you&apos;re pregnant, check for retinol and certain preservatives. Don&apos;t avoid everything on every list.</li>
-<li><strong>Read the ingredient list</strong> — the first 5-7 ingredients make up most of the formula. Focus your attention there.</li>
+<li><strong><a href="/blog/how-to-read-cosmetic-labels">Read the ingredient list</a></strong> — the first 5-7 ingredients make up most of the formula. Focus your attention there.</li>
 <li><strong>Look for certifications with legal backing</strong> — COSMOS, Soil Association Organic, Leaping Bunny (cruelty-free), and The Vegan Society mark all have actual audit and certification processes behind them.</li>
 <li><strong>Be sceptical of "free from" marketing</strong> — a product that is "free from 1,500 ingredients" sounds impressive but is meaningless if those ingredients were never going to be in that type of product anyway.</li>
 </ol>
