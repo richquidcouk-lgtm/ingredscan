@@ -23,23 +23,93 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 5,
   themeColor: '#0b0b0f',
 }
 
 export const metadata: Metadata = {
-  title: 'IngredScan — Know What\'s Really In Your Food',
-  description: 'Scan any UK supermarket product. Get an instant honest verdict — dual scoring, transparent data, and supermarket-specific swaps.',
+  metadataBase: new URL('https://www.ingredscan.com'),
+
+  title: {
+    default: 'IngredScan — Free Food & Cosmetic Barcode Scanner',
+    template: '%s | IngredScan',
+  },
+
+  description: 'Scan any food or cosmetic barcode and instantly see what\'s really inside. Free scanner with NOVA processing score, ingredient quality score, additive breakdown, and supermarket swap suggestions for UK and US.',
+
+  keywords: [
+    'food scanner', 'ingredient scanner', 'barcode scanner food',
+    'food scanner UK', 'food scanner app', 'NOVA score',
+    'food additives checker', 'healthy food app', 'ingredient checker',
+    'food label scanner', 'UK food scanner app', 'processed food checker',
+    'food quality score', 'additive checker', 'cosmetic ingredient scanner',
+    'ultra processed food', 'food scanner free', 'barcode food app',
+  ],
+
+  authors: [{ name: 'IngredScan', url: 'https://www.ingredscan.com' }],
+  creator: 'IngredScan',
+  publisher: 'IngredScan',
+  category: 'Health & Fitness',
+
+  openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    url: 'https://www.ingredscan.com',
+    siteName: 'IngredScan',
+    title: 'IngredScan — Free Food & Cosmetic Barcode Scanner',
+    description: 'Scan any food or cosmetic product for free. Instant dual scoring, additive breakdown, and supermarket swap suggestions.',
+    images: [{
+      url: '/api/og',
+      width: 1200,
+      height: 630,
+      alt: 'IngredScan — Know What\'s Really In Your Products',
+      type: 'image/png',
+    }],
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'IngredScan — Free Food & Cosmetic Barcode Scanner',
+    description: 'Scan any food or cosmetic product for free. Instant dual scoring, additive breakdown, and supermarket swap suggestions.',
+    images: ['/api/og'],
+    creator: '@ingredscan',
+    site: '@ingredscan',
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+
+  alternates: {
+    canonical: 'https://www.ingredscan.com',
+    languages: {
+      'en-GB': 'https://www.ingredscan.com',
+      'en-US': 'https://www.ingredscan.com',
+    },
+  },
+
   manifest: '/manifest.json',
+
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
     title: 'IngredScan',
   },
-  openGraph: {
-    title: 'IngredScan — Know what\'s really in your food',
-    description: 'Scan any UK supermarket product. Get an instant honest verdict.',
-    type: 'website',
+
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [{ url: '/icons/icon-192.png', sizes: '180x180', type: 'image/png' }],
   },
 }
 
@@ -104,10 +174,10 @@ export default function RootLayout({
                 </a>
               ))}
             </nav>
-            <p className="text-xs mb-3" style={{ color: 'rgba(240,240,244,0.4)' }}>
+            <p className="text-xs mb-3" style={{ color: 'rgba(240,240,244,0.5)' }}>
               &copy; 2026 IngredScan &middot; Made in London
             </p>
-            <p className="text-xs tracking-wide" style={{ color: 'rgba(240,240,244,0.15)' }}>
+            <p className="text-xs tracking-wide max-w-sm mx-auto leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>
               IngredScan provides informational content only and is not a substitute for professional dietary or medical advice.
             </p>
           </footer>

@@ -17,14 +17,33 @@ export function generateMetadata({ params }: Props): Metadata {
   const post = getPostBySlug(params.slug)
   if (!post) return { title: 'Post Not Found' }
   return {
-    title: `${post.title} — IngredScan Blog`,
+    title: post.title,
     description: post.description,
+    keywords: post.tags,
+    authors: [{ name: 'IngredScan Team' }],
+    alternates: {
+      canonical: `https://www.ingredscan.com/blog/${params.slug}`,
+    },
     openGraph: {
+      type: 'article',
       title: post.title,
       description: post.description,
-      type: 'article',
+      url: `https://www.ingredscan.com/blog/${params.slug}`,
       publishedTime: post.date,
-      authors: [post.author],
+      authors: ['IngredScan Team'],
+      tags: post.tags,
+      images: [{
+        url: `/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}`,
+        width: 1200,
+        height: 630,
+        alt: post.title,
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [`/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}`],
     },
   }
 }
@@ -40,16 +59,30 @@ export default function BlogPostPage({ params }: Props) {
     '@type': 'Article',
     headline: post.title,
     description: post.description,
+    image: `https://www.ingredscan.com/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}`,
     datePublished: post.date,
+    dateModified: post.date,
     author: {
       '@type': 'Organization',
-      name: post.author,
+      name: 'IngredScan',
+      url: 'https://www.ingredscan.com',
     },
     publisher: {
       '@type': 'Organization',
       name: 'IngredScan',
       url: 'https://www.ingredscan.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.ingredscan.com/icons/icon-512.png',
+      },
     },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://www.ingredscan.com/blog/${post.slug}`,
+    },
+    keywords: post.tags?.join(', '),
+    articleSection: post.category,
+    inLanguage: 'en-GB',
   }
 
   return (

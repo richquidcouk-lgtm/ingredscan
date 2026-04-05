@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Data & Scoring Disclaimer — IngredScan',
+  title: 'Data & Scoring Disclaimer',
   description: 'How IngredScan calculates NOVA scores, quality scores, additive risk ratings, and cosmetic product safety scores. Full methodology explained.',
+  alternates: { canonical: 'https://www.ingredscan.com/disclaimer' },
 }
 
 export default function DisclaimerPage() {

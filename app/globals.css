@@ -396,7 +396,7 @@ body {
    ═══════════════════════════════════════════ */
 
 .footer-link {
-  color: rgba(240, 240, 244, 0.35);
+  color: rgba(240, 240, 244, 0.55);
 }
 
 .footer-link:hover {
@@ -404,11 +404,11 @@ body {
 }
 
 .footer-link-muted {
-  color: rgba(240, 240, 244, 0.2);
+  color: rgba(240, 240, 244, 0.45);
 }
 
 .footer-link-muted:hover {
-  color: rgba(240, 240, 244, 0.5);
+  color: rgba(240, 240, 244, 0.7);
 }
 
 /* ═══════════════════════════════════════════

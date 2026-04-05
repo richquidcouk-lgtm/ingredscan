@@ -1,5 +1,41 @@
 User-agent: *
 Allow: /
-Disallow: /account
+Allow: /blog/
+Allow: /blog/*
+Allow: /privacy
+Allow: /cookies
+Allow: /terms
+Allow: /disclaimer
+Allow: /scan
+
 Disallow: /api/
+Disallow: /account
+Disallow: /history
+Disallow: /_next/
+Disallow: /admin/
+
 Sitemap: https://www.ingredscan.com/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

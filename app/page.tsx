@@ -83,27 +83,49 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'SoftwareApplication',
-            name: 'IngredScan',
-            applicationCategory: 'HealthApplication',
-            operatingSystem: 'Web, iOS, Android',
-            description: 'Scan any supermarket product. Get an instant honest verdict — dual scoring, transparent data, and supermarket-specific swaps.',
-            url: 'https://www.ingredscan.com',
-            offers: [
-              {
-                '@type': 'Offer',
-                price: '0',
-                priceCurrency: 'GBP',
-                name: 'Free',
-                description: 'Unlimited scans, all features, no paywall',
-              },
-            ],
-            featureList: 'Barcode scanning, NOVA score, Quality score, Additive analysis, Supermarket swaps, Nutritional breakdown',
-          }),
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'WebApplication',
+              name: 'IngredScan',
+              url: 'https://www.ingredscan.com',
+              description: 'Free food and cosmetic barcode scanner. Instant NOVA processing score, ingredient quality score, additive breakdown, and supermarket swap suggestions for UK and US shoppers.',
+              applicationCategory: 'HealthApplication',
+              operatingSystem: 'Web, Android, iOS',
+              browserRequirements: 'Requires JavaScript. Camera access for barcode scanning.',
+              offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
+              featureList: ['Barcode scanning', 'NOVA processing score', 'Ingredient quality score', 'Additive breakdown with scientific sources', 'UK and US supermarket swap suggestions', 'Cosmetic ingredient safety scoring'],
+              screenshot: 'https://www.ingredscan.com/api/og',
+              creator: { '@type': 'Organization', name: 'IngredScan', url: 'https://www.ingredscan.com' },
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'IngredScan',
+              url: 'https://www.ingredscan.com',
+              logo: 'https://www.ingredscan.com/icons/icon-512.png',
+              description: 'Free food and cosmetic barcode scanner.',
+              foundingDate: '2026',
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: [
+                { '@type': 'Question', name: 'What is IngredScan?', acceptedAnswer: { '@type': 'Answer', text: 'IngredScan is a free food and cosmetic barcode scanner. Scan any product to see its NOVA processing score, ingredient quality score, additive breakdown, and better alternatives from UK and US supermarkets.' } },
+                { '@type': 'Question', name: 'Is IngredScan free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, IngredScan is completely free. No subscription, no paywall, no credit card required. All features are available to everyone.' } },
+                { '@type': 'Question', name: 'What is a NOVA score?', acceptedAnswer: { '@type': 'Answer', text: 'The NOVA score classifies food by how industrially processed it is, on a scale of 1 to 4. NOVA 1 is whole unprocessed food. NOVA 4 is industrially processed. It was developed by researchers at the University of São Paulo.' } },
+                { '@type': 'Question', name: 'Which supermarkets does IngredScan cover?', acceptedAnswer: { '@type': 'Answer', text: 'IngredScan provides swap suggestions from Tesco, Sainsbury\'s, Asda, Waitrose, M&S, Aldi, Lidl (UK) and Whole Foods, Trader Joe\'s, Kroger, Target, Walmart, Costco (US).' } },
+                { '@type': 'Question', name: 'Does IngredScan work for cosmetics?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. IngredScan scans food and cosmetic products. For cosmetics it analyses INCI ingredients against known safety data and flags concerning ingredients.' } },
+              ],
+            },
+          ]),
         }}
       />
+
+      {/* Install App Banner — top of page */}
+      <section className="px-5 pt-2 max-w-lg mx-auto relative z-10">
+        <InstallBanner variant="compact" />
+      </section>
 
       {/* Subtle radial glow */}
       <div
@@ -290,11 +312,6 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* Install App Banner */}
-      <section className="px-5 pb-4 max-w-lg mx-auto relative z-10">
-        <InstallBanner />
       </section>
 
       {/* Recent Scans or Empty State */}

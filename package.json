@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "import:off": "tsx scripts/importProducts.ts --source=openfoodfacts",
@@ -43,6 +44,7 @@
     "dotenv": "^17.4.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
+    "next-sitemap": "^4.2.3",
     "node-fetch": "^3.3.2",
     "p-limit": "^7.3.0",
     "papaparse": "^5.5.3",
