@@ -44,7 +44,6 @@ export default function SwapCard({
   const improvement = Math.round((swap.quality_score - currentScore) * 10) / 10
   const scoreColor = getScoreColor(swap.quality_score)
   const novaColor = getNovaColor(swap.nova_score)
-  const isSaving = swap.price_difference.startsWith('-') || swap.price_difference.toLowerCase().startsWith('save')
   const retailerColor = retailerColors[swap.retailer] || '#555'
 
   async function handleTap() {
@@ -85,16 +84,6 @@ export default function SwapCard({
               style={{ backgroundColor: `${novaColor}15`, color: novaColor, border: `1px solid ${novaColor}20` }}
             >
               NOVA {swap.nova_score}
-            </span>
-            <span
-              className="px-2 py-0.5 rounded-full text-[10px] font-medium shrink-0"
-              style={{
-                backgroundColor: isSaving ? '#00e5a012' : '#f5a62312',
-                color: isSaving ? '#00e5a0' : '#f5a623',
-                border: `1px solid ${isSaving ? '#00e5a020' : '#f5a62320'}`,
-              }}
-            >
-              {swap.price_difference}
             </span>
           </div>
           <p className="font-semibold text-sm leading-tight" style={{ color: '#f0f0f4', letterSpacing: '-0.01em' }}>

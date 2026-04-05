@@ -310,27 +310,29 @@ export default function ResultPage() {
           )}
         </div>
 
-        {/* 4. Safer Alternatives (Swaps) */}
-        <div className="animate-fadeUp" style={{ animationDelay: '100ms' }}>
-          <h3 className="text-sm font-semibold mb-3" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
-            Safer Alternatives
-          </h3>
-          {!config.supported ? (
-            <ComingSoonSwaps />
-          ) : matchedSwaps.length > 0 ? (
-            <div className="space-y-2">
-              {matchedSwaps.map((swap, i) => (
-                <SwapCard key={i} swap={swap} currentScore={product.quality_score} index={i} />
-              ))}
-            </div>
-          ) : (
-            <div className="rounded-2xl p-5 glass-card">
-              <p className="text-sm" style={{ color: 'rgba(240,240,244,0.4)' }}>
-                No swaps available for this product category yet. We&apos;re adding more every week.
-              </p>
-            </div>
-          )}
-        </div>
+        {/* 4. Safer Alternatives (Swaps) — hidden for high-scoring products */}
+        {product.quality_score < 9 && (
+          <div className="animate-fadeUp" style={{ animationDelay: '100ms' }}>
+            <h3 className="text-sm font-semibold mb-3" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
+              Safer Alternatives
+            </h3>
+            {!config.supported ? (
+              <ComingSoonSwaps />
+            ) : matchedSwaps.length > 0 ? (
+              <div className="space-y-2">
+                {matchedSwaps.map((swap, i) => (
+                  <SwapCard key={i} swap={swap} currentScore={product.quality_score} index={i} />
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-2xl p-5 glass-card">
+                <p className="text-sm" style={{ color: 'rgba(240,240,244,0.4)' }}>
+                  No swaps available for this product category yet. We&apos;re adding more every week.
+                </p>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* 5. Nutrition Breakdown — Negatives & Positives */}
         <div className="animate-fadeUp" style={{ animationDelay: '150ms' }}>
