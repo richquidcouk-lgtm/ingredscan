@@ -85,7 +85,6 @@ export default function RootLayout({
                 { label: 'Home', href: '/' },
                 { label: 'Scan', href: '/scan' },
                 { label: 'History', href: '/history' },
-                { label: 'Pro', href: '/pro' },
                 { label: 'Blog', href: '/blog' },
               ].map((link) => (
                 <a key={link.href} href={link.href} className="footer-link text-xs font-medium transition-colors">

@@ -14,7 +14,6 @@ import SwapCard from '@/components/SwapCard'
 import ShareButton from '@/components/ShareCard'
 import ProductReport from '@/components/ProductReport'
 import SkeletonResult from '@/components/SkeletonResult'
-import UpgradeModal from '@/components/UpgradeModal'
 import CosmeticResult from '@/components/CosmeticResult'
 import FavouriteButton from '@/components/FavouriteButton'
 import InfantFormulaResult from '@/components/InfantFormulaResult'
@@ -24,7 +23,7 @@ import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
 import { getNovaEmoji, getNovaLabel } from '@/lib/scoring'
 import { detectSpecialCategory } from '@/lib/specialCategories'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
-import { getCategoryEmoji, incrementAnonScanCount, getAnonScanCount } from '@/lib/utils'
+import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
 import { useMarket } from '@/components/MarketProvider'
 import ComingSoonSwaps from '@/components/ComingSoonSwaps'
 import Logo from '@/components/Logo'
@@ -42,8 +41,6 @@ export default function ResultPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [matchedSwaps, setMatchedSwaps] = useState<any[]>([])
-  const [showUpgrade, setShowUpgrade] = useState(false)
-  const [limitReached, setLimitReached] = useState(false)
   const { config } = useMarket()
 
   useEffect(() => {
@@ -51,49 +48,9 @@ export default function ResultPage() {
     fetchProduct()
   }, [barcode])
 
-  async function checkScanLimit(): Promise<boolean> {
-    const { data: { user } } = await supabase.auth.getUser()
-
-    if (user) {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('pro, scan_count_today, scan_date')
-        .eq('id', user.id)
-        .single()
-
-      if (profile?.pro) return true
-
-      const today = new Date().toISOString().split('T')[0]
-      const scanCount = profile?.scan_date === today ? (profile?.scan_count_today || 0) : 0
-
-      if (scanCount >= 10) return false
-
-      await supabase
-        .from('profiles')
-        .update({
-          scan_count_today: scanCount + 1,
-          scan_date: today,
-        })
-        .eq('id', user.id)
-
-      return true
-    }
-
-    if (getAnonScanCount() >= 3) return false
-    return true
-  }
-
   async function fetchProduct() {
     setLoading(true)
     setError(null)
-
-    const canScan = await checkScanLimit()
-    if (!canScan) {
-      setLimitReached(true)
-      setShowUpgrade(true)
-      setLoading(false)
-      return
-    }
 
     try {
       const { data: cached } = await supabase
@@ -180,35 +137,6 @@ export default function ResultPage() {
   function scrollToSection(id: string) {
     const el = document.getElementById(id)
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
-  if (limitReached) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative pb-20">
-        <div className="text-5xl mb-4">🔒</div>
-        <h2 className="text-xl font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>
-          Daily scan limit reached
-        </h2>
-        <p className="text-sm mb-6 max-w-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>
-          Upgrade to Pro for unlimited scans, full additive detail, and supermarket swaps.
-        </p>
-        <Link
-          href="/pro"
-          className="px-6 py-3 rounded-xl text-sm font-medium btn-glow"
-          style={{ color: '#0b0b0f' }}
-        >
-          View Pro Plans — from £3.99/mo
-        </Link>
-        <button
-          onClick={() => router.back()}
-          className="mt-3 text-sm"
-          style={{ color: 'rgba(240,240,244,0.4)' }}
-        >
-          Go back
-        </button>
-        {showUpgrade && <UpgradeModal onClose={() => setShowUpgrade(false)} />}
-      </div>
-    )
   }
 
   if (loading) {
@@ -489,7 +417,37 @@ export default function ResultPage() {
           </div>
         )}
 
-        {/* 10. Report an issue */}
+        {/* 10. Share banner — every 10th scan */}
+        {typeof window !== 'undefined' && (() => {
+          try {
+            const count = JSON.parse(localStorage.getItem('ingredscan_anon_scans') || '{}').count || 0
+            if (count > 0 && count % 10 === 0) {
+              return (
+                <div className="rounded-2xl p-5 text-center glass-card animate-fadeUp" style={{ animationDelay: '380ms' }}>
+                  <p className="text-sm font-semibold mb-1" style={{ color: '#f0f0f4' }}>Enjoying IngredScan?</p>
+                  <p className="text-xs mb-3" style={{ color: 'rgba(240,240,244,0.4)' }}>Tell a friend — it helps us grow</p>
+                  <button
+                    onClick={() => {
+                      if (navigator.share) {
+                        navigator.share({ title: 'IngredScan', text: 'Scan any food or cosmetic product to see what\u2019s really in it', url: 'https://www.ingredscan.com' })
+                      } else {
+                        navigator.clipboard.writeText('https://www.ingredscan.com')
+                        alert('Link copied!')
+                      }
+                    }}
+                    className="px-5 py-2.5 rounded-xl text-xs font-medium transition-all active:scale-95"
+                    style={{ backgroundColor: 'rgba(0,229,160,0.1)', color: '#00e5a0', border: '1px solid rgba(0,229,160,0.15)' }}
+                  >
+                    Share the app
+                  </button>
+                </div>
+              )
+            }
+          } catch {}
+          return null
+        })()}
+
+        {/* 11. Report an issue */}
         <ProductReport barcode={barcode} />
       </div>
 

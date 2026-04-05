@@ -54,21 +54,8 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>4. Subscription &amp; Billing</h2>
-          <p className="text-sm mb-3">IngredScan offers the following plans:</p>
-          <ul className="list-disc list-inside text-sm space-y-1.5 ml-2">
-            <li><strong>Free:</strong> up to 10 scans per day</li>
-            <li><strong>Pro Monthly:</strong> &pound;3.99/month — unlimited scans and all features</li>
-            <li><strong>Pro Yearly:</strong> &pound;29.99/year — unlimited scans and all features</li>
-          </ul>
-          <p className="text-sm mt-3">Payment is processed securely by Stripe. By subscribing, you authorise recurring charges to your payment method. Key billing terms:</p>
-          <ul className="list-disc list-inside text-sm space-y-1.5 ml-2 mt-2">
-            <li>You can cancel your subscription at any time from your account settings</li>
-            <li>Cancellation takes effect at the end of the current billing period</li>
-            <li>No partial refunds are provided for unused portions of a billing period</li>
-            <li>We will provide at least 30 days&apos; notice before any price changes</li>
-            <li>Price changes will not affect your current billing period</li>
-          </ul>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>4. Pricing</h2>
+          <p className="text-sm">IngredScan is free to use with no subscription or paywall. All features — unlimited scans, additive analysis, supermarket swaps, scan history, and shareable cards — are available to all users at no cost. Optional one-time support payments may be made via Stripe. These are voluntary contributions and do not unlock additional features.</p>
         </section>
 
         <section>

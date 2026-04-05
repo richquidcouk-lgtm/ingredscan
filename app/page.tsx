@@ -96,21 +96,7 @@ export default function HomePage() {
                 price: '0',
                 priceCurrency: 'GBP',
                 name: 'Free',
-                description: 'Up to 10 scans per day',
-              },
-              {
-                '@type': 'Offer',
-                price: '3.99',
-                priceCurrency: 'GBP',
-                name: 'Pro Monthly',
-                description: 'Unlimited scans and all features',
-              },
-              {
-                '@type': 'Offer',
-                price: '29.99',
-                priceCurrency: 'GBP',
-                name: 'Pro Yearly',
-                description: 'Unlimited scans and all features',
+                description: 'Unlimited scans, all features, no paywall',
               },
             ],
             featureList: 'Barcode scanning, NOVA score, Quality score, Additive analysis, Supermarket swaps, Nutritional breakdown',
@@ -182,6 +168,10 @@ export default function HomePage() {
           </svg>
           Scan a Product
         </Link>
+
+        <p className="text-xs mt-3" style={{ color: 'rgba(240,240,244,0.3)' }}>
+          Free · No subscription · No paywall
+        </p>
 
         {/* Stat pills */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-8">

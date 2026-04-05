@@ -91,6 +91,9 @@ export default function AccountPage() {
     setLoading(false)
   }
 
+  // Profile loaded for future features (e.g. preferences)
+  void profile
+
   async function handleSignOut() {
     await supabase.auth.signOut()
     router.push('/')
@@ -191,77 +194,25 @@ export default function AccountPage() {
               />
             </div>
 
-            {/* Section: Subscription */}
+            {/* Section: Support */}
             <p className="text-[10px] uppercase tracking-widest font-semibold mb-2" style={{ color: 'rgba(240,240,244,0.35)' }}>
-              Subscription
+              Support IngredScan
             </p>
             <div className="rounded-2xl overflow-hidden glass-card mb-6">
-              <SettingsRow
-                icon={
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                    <path d="M2 17l10 5 10-5" />
-                    <path d="M2 12l10 5 10-5" />
-                  </svg>
-                }
-                label="Plan"
-                value={
-                  profile?.pro ? (
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ backgroundColor: '#00e5a015', color: '#00e5a0', border: '1px solid rgba(0,229,160,0.15)' }}>
-                        Pro
-                      </span>
-                    </div>
-                  ) : (
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ backgroundColor: 'rgba(28,28,38,0.8)', color: 'rgba(240,240,244,0.5)' }}>
-                      Free
-                    </span>
-                  )
-                }
-                chevron={false}
-              />
-              {profile?.pro && profile?.pro_expires_at && (
-                <SettingsRow
-                  icon={
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00e5a0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" />
-                      <polyline points="12,6 12,12 16,14" />
-                    </svg>
-                  }
-                  label="Renews"
-                  value={
-                    <span className="text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>
-                      {new Date(profile.pro_expires_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
-                    </span>
-                  }
-                  chevron={false}
-                />
-              )}
-              {!profile?.pro && (
-                <SettingsRow
-                  icon={
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00e5a0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-                    </svg>
-                  }
-                  label="Upgrade to Pro"
-                  href="/pro"
-                />
-              )}
-              <SettingsRow
-                icon={
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 7V5a2 2 0 0 1 2-2h2" />
-                    <path d="M17 3h2a2 2 0 0 1 2 2v2" />
-                    <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
-                    <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
-                    <line x1="7" y1="12" x2="17" y2="12" />
-                  </svg>
-                }
-                label="Scans today"
-                value={`${profile?.scan_count_today || 0}${!profile?.pro ? ' / 10' : ''}`}
-                chevron={false}
-              />
+              <div className="px-4 py-4">
+                <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(240,240,244,0.5)' }}>
+                  IngredScan is free forever. If it&apos;s helped you shop smarter, you can support us to keep it running and improve the database.
+                </p>
+                <a
+                  href="https://buy.stripe.com/test_placeholder"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-medium transition-all active:scale-95"
+                  style={{ backgroundColor: 'rgba(245,166,35,0.1)', color: '#f5a623', border: '1px solid rgba(245,166,35,0.15)' }}
+                >
+                  ☕ Buy us a coffee — £2.99
+                </a>
+              </div>
             </div>
 
             {/* Section: About */}
