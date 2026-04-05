@@ -39,7 +39,10 @@ export default function Scanner() {
 
         if (!mounted || !scannerRef.current) return
 
-        const scanner = new Html5Qrcode('scanner-region')
+        const scanner = new Html5Qrcode('scanner-region', {
+          formatsToSupport: [0, 1, 2, 3], // EAN_13, EAN_8, UPC_A, UPC_E
+          verbose: false,
+        } as any)
         html5QrCodeRef.current = scanner
 
         // Request camera with lower resolution for faster start
@@ -183,10 +186,9 @@ export default function Scanner() {
             className="absolute top-4 right-4 z-10 p-2.5 rounded-xl backdrop-blur-md"
             style={{ backgroundColor: torchOn ? '#00e5a030' : 'rgba(0,0,0,0.5)' }}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={torchOn ? '#00e5a0' : '#fff'} strokeWidth="2">
-              <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill={torchOn ? '#00e5a0' : 'none'} stroke={torchOn ? '#00e5a0' : '#fff'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="13,2 3,14 12,14 11,22 21,10 12,10" />
             </svg>
-            💡
           </button>
         )}
       </div>

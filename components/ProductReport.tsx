@@ -7,6 +7,7 @@ const ISSUE_TYPES = [
   'Incorrect ingredients',
   'Wrong score',
   'Missing information',
+  'Product name or ingredients in wrong language',
   'Other',
 ]
 

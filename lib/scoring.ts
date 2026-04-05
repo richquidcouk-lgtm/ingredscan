@@ -156,6 +156,12 @@ export function calculateQualityScore(product: OpenFoodFactsProduct): number {
     score = 8.0
   }
 
+  // NOVA ceiling — ultra-processed products can't score too high
+  const novaScore = inferNovaScore(product)
+  const NOVA_CEILING: Record<number, number> = { 1: 10, 2: 10, 3: 8, 4: 6.5 }
+  const ceiling = NOVA_CEILING[novaScore] ?? 10
+  score = Math.min(score, ceiling)
+
   return Math.round(score * 10) / 10
 }
 
@@ -184,15 +190,19 @@ export function scoreProduct(product: OpenFoodFactsProduct): ScoringResult {
 }
 
 export function getScoreColor(score: number): string {
-  if (score < 4.5) return '#ff5a5a'
-  if (score <= 7) return '#f5a623'
-  return '#00e5a0'
+  if (score < 4) return '#ff5a5a'     // red - Poor
+  if (score < 5.5) return '#ff8c42'   // orange - Moderate
+  if (score < 7) return '#f5a623'     // amber - Fair
+  if (score < 8.5) return '#22c77e'   // green - Good
+  return '#00e5a0'                     // bright green - Excellent
 }
 
 export function getScoreLabel(score: number): string {
-  if (score < 4.5) return 'Poor'
-  if (score <= 7) return 'Moderate'
-  return 'Good'
+  if (score < 4) return 'Poor'
+  if (score < 5.5) return 'Moderate'
+  if (score < 7) return 'Fair'
+  if (score < 8.5) return 'Good'
+  return 'Excellent'
 }
 
 export function getNovaColor(nova: number): string {
@@ -264,7 +274,7 @@ export function resolveAdditives(additiveTags: string[]): Array<{
         code,
         name: code,
         risk: 'low' as const,
-        description: 'Information not yet available for this additive.',
+        description: `${code} is a permitted food additive under EU Regulation 1333/2008. Detailed information is being added to our database.`,
       }
     })
 }

@@ -42,12 +42,12 @@ export async function GET(request: NextRequest) {
 
   const product = {
     barcode,
-    name: offProduct.product_name || 'Unknown Product',
+    name: offProduct.product_name_en || offProduct.product_name || 'Unknown Product',
     brand: offProduct.brands || 'Unknown Brand',
     nova_score: validated.nova_score,
     quality_score: validated.quality_score,
     nutriscore_grade: offProduct.nutriscore_grade || '',
-    ingredients: offProduct.ingredients_text || '',
+    ingredients: offProduct.ingredients_text_en || offProduct.ingredients_text_with_allergens_en || offProduct.ingredients_text || '',
     additives,
     nutrition: {
       energy: offProduct.nutriments?.['energy-kcal_100g'] ?? null,

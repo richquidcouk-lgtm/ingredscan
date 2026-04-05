@@ -267,7 +267,20 @@ body {
   object-fit: cover !important;
 }
 
+#scanner-region > div > div {
+  border: none !important;
+  box-shadow: none !important;
+}
+
 #scanner-region > div:last-child {
+  display: none !important;
+}
+
+#scanner-region__scan_region > img {
+  display: none !important;
+}
+
+#scanner-region__dashboard {
   display: none !important;
 }
 

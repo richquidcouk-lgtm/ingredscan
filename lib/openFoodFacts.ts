@@ -3,10 +3,13 @@ import { scoreProduct } from './scoring'
 export type OFFProduct = {
   code: string
   product_name: string
+  product_name_en: string
   brands: string
   nova_group: number
   nutriscore_grade: string
   ingredients_text: string
+  ingredients_text_en: string
+  ingredients_text_with_allergens_en: string
   ingredients_tags: string[]
   additives_tags: string[]
   categories_tags: string[]

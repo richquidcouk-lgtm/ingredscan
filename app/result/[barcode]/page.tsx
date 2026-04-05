@@ -277,6 +277,11 @@ export default function ResultPage() {
               <h2 className="text-lg font-bold leading-tight heading-display" style={{ color: '#f0f0f4', letterSpacing: '-0.03em' }}>
                 {product.name}
               </h2>
+              {product.name && /[éèêëàâäùûüôöîïçñæœß]/.test(product.name) && (
+                <p className="text-xs mt-1" style={{ color: 'rgba(240,240,244,0.3)' }}>
+                  Name shown in original language — English not available for this product.
+                </p>
+              )}
               <p className="text-sm mt-1" style={{ color: 'rgba(240,240,244,0.4)' }}>{product.brand}</p>
               {flags.length > 0 && (
                 <div className="flex flex-wrap gap-1.5 mt-2.5">
@@ -343,7 +348,7 @@ export default function ResultPage() {
           {!config.supported ? (
             <ComingSoonSwaps />
           ) : matchedSwaps.length > 0 ? (
-            <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-hide">
+            <div className="space-y-2">
               {matchedSwaps.map((swap, i) => (
                 <SwapCard key={i} swap={swap} currentScore={product.quality_score} index={i} />
               ))}
@@ -432,6 +437,11 @@ export default function ResultPage() {
             <p className="text-sm leading-relaxed" style={{ color: 'rgba(240,240,244,0.65)' }}>
               {product.ingredients}
             </p>
+            {product.ingredients && /[éèêëàâäùûüôöîïçñæœß]/.test(product.ingredients) && (
+              <p className="text-xs mt-2" style={{ color: 'rgba(240,240,244,0.3)' }}>
+                Ingredients shown in original language — English not available for this product.
+              </p>
+            )}
           </div>
         )}
 
