@@ -151,7 +151,7 @@ export default function HomePage() {
           in your products
         </h2>
         <p className="text-sm mb-8 max-w-xs mx-auto leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>
-          Scan any food or cosmetic product. Get an instant honest verdict — dual scoring, transparent data, and smarter alternatives.
+          Scan any food or cosmetic product for an instant, honest ingredient breakdown — powered by open data and independent research.
         </p>
 
         <Link
@@ -170,11 +170,11 @@ export default function HomePage() {
         </Link>
 
         <p className="text-xs mt-3" style={{ color: 'rgba(240,240,244,0.3)' }}>
-          Free · No subscription · No paywall
+          Free to use · No paywall · Open to everyone
         </p>
 
         {/* Stat pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+        <div className="flex flex-wrap items-center justify-center gap-2 mt-6">
           {['3.2M+ Food Products', '1M+ Cosmetics', '650+ Additives', `${config.supported ? config.name : 'Global'} Coverage`].map((stat) => (
             <span
               key={stat}
@@ -185,19 +185,24 @@ export default function HomePage() {
             </span>
           ))}
         </div>
+
+        {/* Mission line */}
+        <p className="text-xs mt-6 max-w-[280px] mx-auto leading-relaxed" style={{ color: 'rgba(240,240,244,0.3)' }}>
+          You deserve to know what&apos;s in your food. We&apos;re building the most transparent product scanner in the world — and you&apos;re part of it. Every scan makes the database smarter for everyone.
+        </p>
       </section>
 
       {/* Why IngredScan */}
       <section className="px-5 py-6 max-w-lg mx-auto relative z-10">
         <h3 className="text-base font-semibold heading-display mb-4" style={{ color: '#f0f0f4' }}>
-          Why IngredScan
+          Built for transparency, powered by you
         </h3>
         <div className="grid grid-cols-2 gap-3">
           {[
-            { icon: '🎯', title: 'Dual Scoring', desc: 'Processing level + quality score — understand exactly how your food was made and what\u2019s in it' },
-            { icon: '🛒', title: 'Smarter Swaps', desc: 'Healthier alternatives from supermarkets in your market' },
-            { icon: '🔍', title: 'Transparent Data', desc: 'Source shown on every scan — know where the data comes from' },
-            { icon: '💬', title: 'Plain English', desc: 'No chemistry degree needed — every ingredient explained simply' },
+            { icon: '🎯', title: 'Dual Scoring', desc: 'Processing level + quality score — two perspectives on every product for the full picture' },
+            { icon: '🛒', title: 'Smarter Swaps', desc: 'Better alternatives from real supermarkets in your area — suggested by the community' },
+            { icon: '🔍', title: 'Transparent Data', desc: 'Every score has a source. Every rating is explained. No black boxes.' },
+            { icon: '💬', title: 'Plain English', desc: 'No chemistry degree needed — join thousands of people who finally understand food labels' },
           ].map((feature, i) => (
             <div
               key={feature.title}
