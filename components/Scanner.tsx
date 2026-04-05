@@ -40,7 +40,6 @@ export default function Scanner() {
         if (!mounted || !scannerRef.current) return
 
         const scanner = new Html5Qrcode('scanner-region', {
-          formatsToSupport: [0, 1, 2, 3], // EAN_13, EAN_8, UPC_A, UPC_E
           verbose: false,
         } as any)
         html5QrCodeRef.current = scanner
