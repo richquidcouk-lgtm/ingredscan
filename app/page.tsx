@@ -124,7 +124,7 @@ export default function HomePage() {
 
       {/* Install App Banner — top of page */}
       <section className="px-5 pt-2 max-w-lg mx-auto relative z-10">
-        <InstallBanner variant="compact" />
+        <InstallBanner variant="blog" />
       </section>
 
       {/* Subtle radial glow */}

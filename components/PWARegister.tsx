@@ -54,6 +54,19 @@ export default function PWARegister() {
 
     window.addEventListener('beforeinstallprompt', handlePrompt)
 
+    // iOS detection — show install banner with Safari instructions
+    const ua = navigator.userAgent
+    const isiOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+    if (isiOS && !window.matchMedia('(display-mode: standalone)').matches) {
+      const isInstalled = localStorage.getItem(INSTALL_DONE_KEY) === 'true'
+      const dismissed = localStorage.getItem(INSTALL_DISMISSED_KEY)
+      if (!isInstalled) {
+        if (!dismissed || (Date.now() - new Date(dismissed).getTime()) / (1000 * 60 * 60 * 24) >= 3) {
+          setTimeout(() => setShowInstall(true), 2000)
+        }
+      }
+    }
+
     // Detect if already installed
     window.addEventListener('appinstalled', () => {
       localStorage.setItem(INSTALL_DONE_KEY, 'true')
@@ -150,26 +163,41 @@ export default function PWARegister() {
                   Add to your home screen for instant access. Works just like any other app — no app store needed, no storage used.
                 </p>
 
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={handleInstall}
-                    className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition-all active:scale-95"
-                    style={{
-                      background: 'linear-gradient(135deg, #00e5a0, #1ab06e)',
-                      color: '#0b0b0f',
-                      boxShadow: '0 2px 12px rgba(0,229,160,0.3)',
-                    }}
-                  >
-                    Install App
-                  </button>
-                  <button
-                    onClick={handleDismiss}
-                    className="px-4 py-2.5 rounded-xl text-sm transition-all"
-                    style={{ color: 'rgba(240,240,244,0.4)' }}
-                  >
-                    Later
-                  </button>
-                </div>
+                {deferredPromptRef.current ? (
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleInstall}
+                      className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition-all active:scale-95"
+                      style={{
+                        background: 'linear-gradient(135deg, #00e5a0, #1ab06e)',
+                        color: '#0b0b0f',
+                        boxShadow: '0 2px 12px rgba(0,229,160,0.3)',
+                      }}
+                    >
+                      Install App
+                    </button>
+                    <button
+                      onClick={handleDismiss}
+                      className="px-4 py-2.5 rounded-xl text-sm transition-all"
+                      style={{ color: 'rgba(240,240,244,0.4)' }}
+                    >
+                      Later
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <p className="text-xs leading-relaxed mb-2" style={{ color: 'rgba(240,240,244,0.6)' }}>
+                      Tap <span style={{ color: '#007AFF', fontWeight: 600 }}>Share</span> ↗ at the bottom of Safari, then tap <strong>&quot;Add to Home Screen&quot;</strong>
+                    </p>
+                    <button
+                      onClick={handleDismiss}
+                      className="text-xs"
+                      style={{ color: 'rgba(240,240,244,0.4)' }}
+                    >
+                      Got it
+                    </button>
+                  </div>
+                )}
 
                 <div className="flex items-center gap-3 mt-3">
                   <div className="flex items-center gap-1.5">

@@ -12,6 +12,7 @@ interface Props {
 export default function InstallBanner({ variant = 'default' }: Props) {
   const [canInstall, setCanInstall] = useState(false)
   const [isInstalled, setIsInstalled] = useState(false)
+  const [isIOS, setIsIOS] = useState(false)
   const deferredPromptRef = useRef<any>(null)
 
   useEffect(() => {
@@ -25,6 +26,12 @@ export default function InstallBanner({ variant = 'default' }: Props) {
         setIsInstalled(true)
         return
       }
+    }
+
+    // Detect iOS
+    const ua = navigator.userAgent
+    if (/iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+      setIsIOS(true)
     }
 
     const handlePrompt = (e: Event) => {
@@ -107,6 +114,11 @@ export default function InstallBanner({ variant = 'default' }: Props) {
             </Link>
           )}
         </div>
+        {isIOS && !canInstall && (
+          <p className="text-[11px] mt-3 text-center leading-relaxed" style={{ color: 'rgba(240,240,244,0.5)' }}>
+            On iPhone: tap <span style={{ color: '#007AFF' }}>Share</span> ↗ then <strong>&quot;Add to Home Screen&quot;</strong>
+          </p>
+        )}
       </div>
     )
   }
@@ -182,6 +194,11 @@ export default function InstallBanner({ variant = 'default' }: Props) {
           <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ No sign-up required</span>
           <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ 100% free</span>
         </div>
+        {isIOS && !canInstall && (
+          <p className="text-xs mt-3 leading-relaxed" style={{ color: 'rgba(240,240,244,0.5)' }}>
+            On iPhone: tap <span style={{ color: '#007AFF' }}>Share</span> ↗ then <strong>&quot;Add to Home Screen&quot;</strong>
+          </p>
+        )}
       </div>
     </div>
   )

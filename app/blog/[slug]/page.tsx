@@ -94,7 +94,7 @@ export default function BlogPostPage({ params }: Props) {
 
       {/* Install Banner — top of post */}
       <div className="mb-6">
-        <InstallBanner variant="compact" />
+        <InstallBanner variant="blog" />
       </div>
 
       {/* Breadcrumb */}

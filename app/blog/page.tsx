@@ -28,7 +28,7 @@ export default function BlogPage() {
 
       {/* Install Banner — top */}
       <div className="mb-8">
-        <InstallBanner variant="compact" />
+        <InstallBanner variant="blog" />
       </div>
 
       <div className="text-center mb-12 animate-fadeUp">
