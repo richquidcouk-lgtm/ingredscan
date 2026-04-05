@@ -8,13 +8,15 @@ import { QualityScoreCard } from '@/components/ScoreCard'
 import ProcessingLevelCard from '@/components/ProcessingLevelCard'
 import NutriScoreBar from '@/components/NutriScoreBar'
 import RAGIndicator from '@/components/RAGIndicator'
-import AdditiveCard from '@/components/AdditiveCard'
+import AdditiveDetail from '@/components/AdditiveDetail'
+import NutritionBreakdown from '@/components/NutritionBreakdown'
 import SwapCard from '@/components/SwapCard'
 import ShareButton from '@/components/ShareCard'
 import ProductReport from '@/components/ProductReport'
 import SkeletonResult from '@/components/SkeletonResult'
 import UpgradeModal from '@/components/UpgradeModal'
 import CosmeticResult from '@/components/CosmeticResult'
+import FavouriteButton from '@/components/FavouriteButton'
 import InfantFormulaResult from '@/components/InfantFormulaResult'
 import MedicineResult from '@/components/MedicineResult'
 import SupplementResult from '@/components/SupplementResult'
@@ -300,7 +302,10 @@ export default function ResultPage() {
           </svg>
         </button>
         <Logo size="small" />
-        <ShareButton product={product} />
+        <div className="flex items-center gap-1.5">
+          <FavouriteButton barcode={barcode} />
+          <ShareButton product={product} />
+        </div>
       </header>
 
       <div className="px-5 max-w-lg mx-auto space-y-4 relative z-10">
@@ -399,21 +404,26 @@ export default function ResultPage() {
           )}
         </div>
 
-        {/* 5. Additives section */}
-        <div id="section-additives" className="animate-fadeUp" style={{ animationDelay: '150ms' }}>
+        {/* 5. Nutrition Breakdown — Negatives & Positives */}
+        <div className="animate-fadeUp" style={{ animationDelay: '150ms' }}>
+          <NutritionBreakdown nutrition={nutrition} additiveCount={additives.length} />
+        </div>
+
+        {/* 6. Additives section */}
+        <div id="section-additives" className="animate-fadeUp" style={{ animationDelay: '180ms' }}>
           <h3 className="text-sm font-semibold mb-3" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
             Additives
           </h3>
           {additives.length === 0 ? (
             <div className="rounded-2xl p-5 text-center glass-card" style={{ borderColor: 'rgba(0,229,160,0.15)' }}>
-              <p className="text-sm font-medium" style={{ color: '#00e5a0' }}>
-                No concerning additives found
+              <p className="text-sm font-medium" style={{ color: '#22c77e' }}>
+                No additives detected
               </p>
             </div>
           ) : (
-            <div className="space-y-0">
+            <div className="space-y-1.5">
               {additives.map((additive, i) => (
-                <AdditiveCard key={additive.code} additive={additive} index={i} />
+                <AdditiveDetail key={additive.code} additive={additive} index={i} />
               ))}
               <p className="text-xs text-center pt-3" style={{ color: 'rgba(240,240,244,0.25)' }}>
                 Risk levels based on {config.regulatoryRef}
@@ -422,47 +432,17 @@ export default function ResultPage() {
           )}
         </div>
 
-        {/* 6. RAG Indicator */}
-        <div className="animate-fadeUp" style={{ animationDelay: '200ms' }}>
+        {/* 7. RAG Indicator */}
+        <div className="animate-fadeUp" style={{ animationDelay: '210ms' }}>
           <RAGIndicator score={product.quality_score} />
         </div>
 
-        {/* 7. Nutri-Score bar */}
-        <div className="animate-fadeUp" style={{ animationDelay: '220ms' }}>
+        {/* 8. Nutri-Score bar */}
+        <div className="animate-fadeUp" style={{ animationDelay: '230ms' }}>
           <h3 className="text-sm font-semibold mb-3" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
             Nutri-Score
           </h3>
           <NutriScoreBar grade={product.nutriscore_grade || ''} />
-        </div>
-
-        {/* 7. Nutrition table */}
-        <div className="rounded-2xl p-5 glass-card animate-fadeUp" style={{ animationDelay: '250ms' }}>
-          <h3 className="text-xs uppercase tracking-wider mb-3 font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
-            Nutrition per 100g
-          </h3>
-          <div className="space-y-0">
-            {[
-              { label: 'Energy', value: nutrition.energy, unit: 'kcal' },
-              { label: 'Fat', value: nutrition.fat, unit: 'g' },
-              { label: 'Saturated Fat', value: nutrition.saturated_fat, unit: 'g' },
-              { label: 'Carbohydrates', value: nutrition.carbs, unit: 'g' },
-              { label: 'Sugars', value: nutrition.sugars, unit: 'g' },
-              { label: 'Fibre', value: nutrition.fibre, unit: 'g' },
-              { label: 'Protein', value: nutrition.protein, unit: 'g' },
-              { label: 'Salt', value: nutrition.salt, unit: 'g' },
-            ].map((row, i) => (
-              <div
-                key={row.label}
-                className="flex items-center justify-between py-2.5"
-                style={{ borderBottom: i < 7 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}
-              >
-                <span className="text-sm" style={{ color: 'rgba(240,240,244,0.5)' }}>{row.label}</span>
-                <span className="text-sm font-medium" style={{ color: '#f0f0f4' }}>
-                  {row.value != null ? `${Number(row.value).toFixed(1)}${row.unit}` : '\u2014'}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* 8. Ingredients */}
