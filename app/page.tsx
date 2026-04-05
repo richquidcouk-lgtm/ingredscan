@@ -169,9 +169,18 @@ export default function HomePage() {
           Scan a Product
         </Link>
 
-        <p className="text-xs mt-3" style={{ color: 'rgba(240,240,244,0.3)' }}>
-          Free to use · No paywall · Open to everyone
-        </p>
+        {/* Free badge */}
+        <div className="flex items-center justify-center gap-2 mt-4">
+          <span className="px-4 py-1.5 rounded-full text-xs font-semibold" style={{ backgroundColor: 'rgba(0,229,160,0.1)', color: '#00e5a0', border: '1px solid rgba(0,229,160,0.15)' }}>
+            100% Free
+          </span>
+          <span className="px-4 py-1.5 rounded-full text-xs font-semibold" style={{ backgroundColor: 'rgba(124,111,255,0.1)', color: '#7c6fff', border: '1px solid rgba(124,111,255,0.15)' }}>
+            No Paywall
+          </span>
+          <span className="px-4 py-1.5 rounded-full text-xs font-semibold" style={{ backgroundColor: 'rgba(245,166,35,0.1)', color: '#f5a623', border: '1px solid rgba(245,166,35,0.15)' }}>
+            Open to All
+          </span>
+        </div>
 
         {/* Stat pills */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-6">
@@ -185,18 +194,55 @@ export default function HomePage() {
             </span>
           ))}
         </div>
+      </section>
 
-        {/* Mission line */}
-        <p className="text-xs mt-6 max-w-[280px] mx-auto leading-relaxed" style={{ color: 'rgba(240,240,244,0.3)' }}>
-          You deserve to know what&apos;s in your food. We&apos;re building the most transparent product scanner in the world — and you&apos;re part of it. Every scan makes the database smarter for everyone.
-        </p>
+      {/* Mission banner — big, bold, catchy */}
+      <section className="px-5 py-8 max-w-lg mx-auto relative z-10">
+        <div
+          className="rounded-2xl p-6 text-center relative overflow-hidden"
+          style={{
+            background: 'linear-gradient(135deg, rgba(0,229,160,0.06) 0%, rgba(124,111,255,0.06) 100%)',
+            border: '1px solid rgba(0,229,160,0.1)',
+          }}
+        >
+          <h3
+            className="text-xl sm:text-2xl font-bold heading-display mb-3"
+            style={{
+              background: 'linear-gradient(135deg, #00e5a0 0%, #7c6fff 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            You deserve to know
+            <br />
+            what you&apos;re eating.
+          </h3>
+          <p className="text-sm leading-relaxed max-w-xs mx-auto mb-4" style={{ color: 'rgba(240,240,244,0.55)' }}>
+            We&apos;re building the world&apos;s most transparent product scanner — and every scan you make helps improve it for everyone. Be part of something bigger.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <div className="flex items-center gap-1.5">
+              <span className="text-base">🌍</span>
+              <span className="text-xs font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>Open source data</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-base">🤝</span>
+              <span className="text-xs font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>Community powered</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-base">🔬</span>
+              <span className="text-xs font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>Science backed</span>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Why IngredScan */}
       <section className="px-5 py-6 max-w-lg mx-auto relative z-10">
-        <h3 className="text-base font-semibold heading-display mb-4" style={{ color: '#f0f0f4' }}>
-          Built for transparency, powered by you
+        <h3 className="text-lg font-bold heading-display mb-1" style={{ color: '#f0f0f4' }}>
+          Built for transparency
         </h3>
+        <p className="text-xs mb-4" style={{ color: 'rgba(240,240,244,0.35)' }}>Powered by you and open data</p>
         <div className="grid grid-cols-2 gap-3">
           {[
             { icon: '🎯', title: 'Dual Scoring', desc: 'Processing level + quality score — two perspectives on every product for the full picture' },
