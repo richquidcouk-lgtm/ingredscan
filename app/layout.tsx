@@ -90,6 +90,9 @@ export const metadata: Metadata = {
 
   verification: {
     google: 'uNHR1NV37OI5x1tmg0Luj5HEIbPex7NHEEJnvbZ_oQs',
+    other: {
+      'msvalidate.01': 'E0AA4BAEBA7006748D1F8712548C6C2B',
+    },
   },
 
   alternates: {
