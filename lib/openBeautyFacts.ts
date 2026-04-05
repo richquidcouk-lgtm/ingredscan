@@ -24,15 +24,21 @@ export async function fetchFromOpenBeautyFacts(
   barcode: string
 ): Promise<OBFProduct | null> {
   try {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 5000)
+
     const res = await fetch(
       `https://world.openbeautyfacts.org/api/v0/product/${barcode}.json`,
       {
         headers: {
           'User-Agent': 'IngredScan/1.0 (ingredscan.com)',
         },
+        signal: controller.signal,
         next: { revalidate: 86400 },
       }
     )
+    clearTimeout(timeout)
+
     const data: OBFResponse = await res.json()
     if (data.status === 0 || !data.product) return null
     return data.product
