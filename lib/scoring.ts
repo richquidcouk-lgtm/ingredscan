@@ -307,6 +307,10 @@ export function resolveAdditives(additiveTags: string[]): Array<{
   risk: 'low' | 'medium' | 'high'
   description: string
   regulation?: string
+  function?: string
+  detailed_description?: string
+  potential_risks?: string[]
+  sources?: Array<{ title: string; url: string; year: number }>
 }> {
   // Normalise, deduplicate, and filter out nutrients
   const normalised = additiveTags
@@ -327,7 +331,11 @@ export function resolveAdditives(additiveTags: string[]): Array<{
         code,
         name: code,
         risk: 'low' as const,
-        description: `${code} is a permitted food additive under EU Regulation 1333/2008. Detailed information is being added to our database.`,
+        function: 'Additive',
+        description: `${code} is a permitted food additive under EU Regulation 1333/2008.`,
+        detailed_description: `${code} is a permitted food additive authorised for use in the EU under Regulation 1333/2008 and in the UK under retained EU law. All permitted additives have undergone safety assessments by EFSA. Detailed information for this specific additive is being added to our database.`,
+        potential_risks: [],
+        sources: [{ title: 'EU Regulation 1333/2008 on food additives', url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333', year: 2008 }],
       }
     })
 }

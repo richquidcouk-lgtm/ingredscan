@@ -20,7 +20,7 @@ import InfantFormulaResult from '@/components/InfantFormulaResult'
 import MedicineResult from '@/components/MedicineResult'
 import SupplementResult from '@/components/SupplementResult'
 import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
-import { getNovaEmoji, getNovaLabel } from '@/lib/scoring'
+import { getNovaEmoji, getNovaLabel, resolveAdditives } from '@/lib/scoring'
 import { detectSpecialCategory } from '@/lib/specialCategories'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
 import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
@@ -210,7 +210,12 @@ export default function ResultPage() {
   }
 
   const nutrition = (product.nutrition || {}) as NutritionData
-  const additives = product.additives || []
+  // Re-resolve additives from our local database to get full detail
+  // (cached products may have older additive data without descriptions)
+  const rawAdditives = product.additives || []
+  const additives = rawAdditives.length > 0
+    ? resolveAdditives(rawAdditives.map((a: any) => `en:${a.code || a}`))
+    : []
   const flags = detectFlagsFromProduct(product)
 
   return (

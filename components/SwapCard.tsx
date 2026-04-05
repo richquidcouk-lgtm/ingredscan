@@ -47,13 +47,25 @@ export default function SwapCard({
   const retailerColor = retailerColors[swap.retailer] || '#555'
 
   async function handleTap() {
+    if (loading) return
     setLoading(true)
     try {
-      const results = await searchProducts(swap.product_name)
+      // Search by product name — try shorter query if full name fails
+      const query = swap.product_name
+      const results = await searchProducts(query)
       if (results.products && results.products.length > 0) {
         const match = results.products[0]
         router.push(`/result/${match.code}?source=scan`)
         return
+      }
+      // Try shorter query (first 3 words)
+      const shortQuery = query.split(' ').slice(0, 3).join(' ')
+      if (shortQuery !== query) {
+        const retryResults = await searchProducts(shortQuery)
+        if (retryResults.products && retryResults.products.length > 0) {
+          router.push(`/result/${retryResults.products[0].code}?source=scan`)
+          return
+        }
       }
     } catch {}
     setLoading(false)
