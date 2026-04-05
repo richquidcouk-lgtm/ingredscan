@@ -85,26 +85,6 @@ export default function Scanner() {
     }
   }, [onScanSuccess])
 
-  const handleRestart = async () => {
-    // Stop existing scanner
-    if (html5QrCodeRef.current) {
-      try { await html5QrCodeRef.current.stop() } catch {}
-      html5QrCodeRef.current = null
-    }
-    setIsStarted(false)
-    setError(null)
-
-    // Release camera streams
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
-      stream.getTracks().forEach(track => track.stop())
-    } catch {}
-
-    // Wait for camera to release, then reload the page to get a clean scanner
-    await new Promise(resolve => setTimeout(resolve, 300))
-    window.location.reload()
-  }
-
   const toggleTorch = async () => {
     if (!html5QrCodeRef.current) return
     try {
@@ -150,18 +130,6 @@ export default function Scanner() {
         >
           Try Again
         </button>
-        <div id="file-scanner" className="hidden" />
-        <label className="flex items-center justify-center gap-2 mt-4 py-3 px-6 rounded-xl cursor-pointer transition-colors"
-          style={{ backgroundColor: '#1c1c26', border: '1px solid rgba(255,255,255,0.08)' }}
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.45)" strokeWidth="2">
-            <rect x="3" y="3" width="18" height="18" rx="2" />
-            <circle cx="8.5" cy="8.5" r="1.5" />
-            <path d="m21 15-5-5L5 21" />
-          </svg>
-          <span className="text-sm" style={{ color: 'rgba(240,240,244,0.45)' }}>Upload from gallery instead</span>
-          <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
-        </label>
       </div>
     )
   }
@@ -220,23 +188,6 @@ export default function Scanner() {
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill={torchOn ? '#00e5a0' : 'none'} stroke={torchOn ? '#00e5a0' : '#fff'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="13,2 3,14 12,14 11,22 21,10 12,10" />
-            </svg>
-          </button>
-        )}
-
-        {/* Restart camera button */}
-        {isStarted && !scanSuccess && (
-          <button
-            onClick={handleRestart}
-            aria-label="Restart camera"
-            className="absolute top-4 left-4 z-10 p-2.5 rounded-xl backdrop-blur-md"
-            style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 2v6h-6" />
-              <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
-              <path d="M3 22v-6h6" />
-              <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
             </svg>
           </button>
         )}
