@@ -188,3 +188,42 @@ export function isUKProduct(product: OFFProduct): boolean {
     c.includes('united-kingdom') || c.includes('en:united-kingdom') || c.includes('uk')
   )
 }
+
+const UK_KNOWN_BRANDS = [
+  'Aptamil', 'Cow & Gate', 'HiPP Organic', 'Kendamil', 'SMA',
+  'Heinz', 'Tesco', 'Sainsburys', "Sainsbury's", 'Asda', 'Waitrose',
+  'Warburtons', 'Hovis', "Kellogg's", 'Quaker', 'Cadbury',
+  'Walkers', 'McVities', "McVitie's", 'Innocent', 'Alpro', 'Oatly',
+  'Muller', 'Müller', 'Yeo Valley', 'Anchor', 'Cathedral City',
+  'Lurpak', 'Flora', "Hellmann's", "Colman's", 'Bisto', 'Oxo',
+  'Lea & Perrins', 'Hartleys', 'Robinsons', 'Ribena',
+  'Lucozade', 'Tropicana', 'Copella', 'Pringles', 'Doritos',
+  'Kettle', 'Tyrells', 'Popchips', 'Graze', 'Nature Valley',
+  'Nakd', 'Eat Natural', 'Alpen', 'Weetabix', 'Shreddies',
+  'Cheerios', 'Special K', 'Cornflakes', 'Batchelors', 'Pot Noodle',
+  'Nissin', 'Dolmio', 'Loyd Grossman', 'Ragu', 'Philadelphia',
+  'Laughing Cow', 'Dairylea', 'Babybel', 'Cravendale', 'Arla',
+  'Yoplait', 'Danone', 'Activia', 'Actimel', 'Benecol',
+  'Flora ProActiv', 'Nescafe', 'Kenco', 'Taylors',
+  'PG Tips', 'Yorkshire Tea', 'Clipper', 'Pukka', 'Twinings',
+  'Tetley', 'Horlicks', 'Ovaltine',
+]
+
+export function getBrand(product: any): string {
+  if (product.brands) {
+    return product.brands.split(',')[0].trim()
+  }
+  if (product.brand_owner) {
+    return product.brand_owner
+  }
+  const name = product.product_name_en || product.product_name || ''
+  for (const brand of UK_KNOWN_BRANDS) {
+    if (name.toLowerCase().startsWith(brand.toLowerCase())) {
+      return brand
+    }
+  }
+  if (product.manufacturing_places) {
+    return product.manufacturing_places.split(',')[0].trim()
+  }
+  return 'Unknown Brand'
+}

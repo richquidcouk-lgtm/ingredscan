@@ -4,7 +4,8 @@ import { useEffect, useState, useRef } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { QualityScoreCard, NovaScoreCard } from '@/components/ScoreCard'
+import { QualityScoreCard } from '@/components/ScoreCard'
+import ProcessingLevelCard from '@/components/ProcessingLevelCard'
 import NutriScoreBar from '@/components/NutriScoreBar'
 import RAGIndicator from '@/components/RAGIndicator'
 import AdditiveCard from '@/components/AdditiveCard'
@@ -14,7 +15,12 @@ import ProductReport from '@/components/ProductReport'
 import SkeletonResult from '@/components/SkeletonResult'
 import UpgradeModal from '@/components/UpgradeModal'
 import CosmeticResult from '@/components/CosmeticResult'
+import InfantFormulaResult from '@/components/InfantFormulaResult'
+import MedicineResult from '@/components/MedicineResult'
+import SupplementResult from '@/components/SupplementResult'
 import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
+import { getNovaEmoji, getNovaLabel } from '@/lib/scoring'
+import { detectSpecialCategory } from '@/lib/specialCategories'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
 import { getCategoryEmoji, incrementAnonScanCount, getAnonScanCount } from '@/lib/utils'
 import { useMarket } from '@/components/MarketProvider'
@@ -256,6 +262,19 @@ export default function ResultPage() {
     )
   }
 
+  // Special category detection
+  const specialCategory = detectSpecialCategory(product)
+
+  if (specialCategory === 'infant_formula') {
+    return <InfantFormulaResult product={product} onBack={() => router.back()} />
+  }
+  if (specialCategory === 'medicine') {
+    return <MedicineResult product={product} onBack={() => router.back()} />
+  }
+  if (specialCategory === 'supplement') {
+    return <SupplementResult product={product} onBack={() => router.back()} />
+  }
+
   const nutrition = (product.nutrition || {}) as NutritionData
   const additives = product.additives || []
   const flags = detectFlagsFromProduct(product)
@@ -319,46 +338,40 @@ export default function ResultPage() {
         {/* 2. Score section */}
         <div className="flex gap-3 animate-fadeUp" style={{ animationDelay: '50ms' }}>
           <QualityScoreCard score={product.quality_score} />
-          <NovaScoreCard score={product.nova_score} />
+          <ProcessingLevelCard
+            novaScore={product.nova_score}
+            novaSource={(product as any).nova_source}
+          />
         </div>
 
-        {/* 3. Quick flags — anchor links */}
-        {(additives.length > 0 || product.nova_score === 4) && (
-          <div className="flex gap-2 animate-fadeUp" style={{ animationDelay: '80ms' }}>
-            {additives.length > 0 && (
-              <button
-                onClick={() => scrollToSection('section-additives')}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium transition-all active:scale-95"
-                style={{
-                  backgroundColor: 'rgba(255,90,90,0.08)',
-                  color: '#ff5a5a',
-                  border: '1px solid rgba(255,90,90,0.12)',
-                }}
-              >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                  <polyline points="6,9 12,15 18,9" />
-                </svg>
-                Additives ({additives.length})
-              </button>
-            )}
-            {product.nova_score === 4 && (
-              <button
-                onClick={() => scrollToSection('section-additives')}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium transition-all active:scale-95"
-                style={{
-                  backgroundColor: 'rgba(255,90,90,0.08)',
-                  color: '#ff5a5a',
-                  border: '1px solid rgba(255,90,90,0.12)',
-                }}
-              >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                  <polyline points="6,9 12,15 18,9" />
-                </svg>
-                Ultra Processed
-              </button>
-            )}
-          </div>
-        )}
+        {/* 3. Quick flags — anchor links and NOVA chips */}
+        <div className="flex flex-wrap gap-2 animate-fadeUp" style={{ animationDelay: '80ms' }}>
+          {/* NOVA chip — green for 1-2, amber for 3-4 */}
+          {product.nova_score <= 2 && (
+            <span className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium"
+              style={{ backgroundColor: 'rgba(34,199,126,0.08)', color: '#22c77e', border: '1px solid rgba(34,199,126,0.12)' }}>
+              {getNovaEmoji(product.nova_score)} {getNovaLabel(product.nova_score)}
+            </span>
+          )}
+          {product.nova_score >= 3 && (
+            <span className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium"
+              style={{ backgroundColor: 'rgba(245,166,35,0.08)', color: '#f5a623', border: '1px solid rgba(245,166,35,0.12)' }}>
+              {getNovaEmoji(product.nova_score)} {getNovaLabel(product.nova_score)}
+            </span>
+          )}
+          {additives.length > 0 && (
+            <button
+              onClick={() => scrollToSection('section-additives')}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium transition-all active:scale-95"
+              style={{ backgroundColor: 'rgba(255,90,90,0.08)', color: '#ff5a5a', border: '1px solid rgba(255,90,90,0.12)' }}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <polyline points="6,9 12,15 18,9" />
+              </svg>
+              Additives ({additives.length})
+            </button>
+          )}
+        </div>
 
         {/* 4. Safer Alternatives (Swaps) */}
         <div className="animate-fadeUp" style={{ animationDelay: '100ms' }}>
@@ -522,7 +535,6 @@ export default function ResultPage() {
 
 function detectFlagsFromProduct(product: Product): string[] {
   const flags: string[] = []
-  if (product.nova_score === 4) flags.push('Ultra-Processed')
   const n = product.nutrition as NutritionData
   if (n) {
     if ((n.sugars || 0) > 10) flags.push('High Sugar')

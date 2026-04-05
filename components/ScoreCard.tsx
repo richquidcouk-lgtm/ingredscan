@@ -150,7 +150,7 @@ export function NovaScoreCard({ score }: { score: number }) {
           style={{ borderColor: 'rgba(124,111,255,0.15)' }}
         >
           <p className="text-[11px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.55)' }}>
-            NOVA classifies foods by processing level. NOVA 1 = unprocessed (fruits, veg). NOVA 2 = processed ingredients (oils, flour). NOVA 3 = processed foods (canned, cured). NOVA 4 = ultra-processed (contains additives like emulsifiers, flavourings).
+            NOVA classifies foods by processing level. 🌿 Whole Food (fruits, veg). 🧂 Culinary Ingredient (oils, flour). ⚙️ Processed (canned, cured). 🏭 Industrially Processed (contains industrial ingredients like emulsifiers, flavourings).
           </p>
         </div>
       )}

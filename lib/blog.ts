@@ -50,6 +50,20 @@ const posts: BlogPost[] = [
 <p><strong>UK examples:</strong> most breakfast cereals (Coco Pops, Frosties), soft drinks (Coca-Cola, Fanta), packaged biscuits (Digestives, Hobnobs), crisps (Walkers, Pringles), instant noodles (Pot Noodle), chicken nuggets, most ready meals, sliced white bread (Hovis, Warburtons), flavoured yoghurts.</p>
 <p>According to a 2024 study published in the BMJ, the UK has one of the highest rates of ultra-processed food consumption in Europe, with UPF making up approximately 57% of calories in the average British diet.</p>
 
+<h2>Important Limitations of NOVA</h2>
+
+<h3>Not all NOVA 4 foods are equal</h3>
+<p>A plain wholemeal loaf with one emulsifier and a packet of Pringles are both NOVA 4 — but they are very different foods. NOVA tells you about processing method, not overall healthfulness.</p>
+<p>This is why IngredScan shows the processing level alongside a Quality Score — because neither measure alone tells the full story.</p>
+
+<h3>Some NOVA 4 foods are nutritionally necessary</h3>
+<p>Infant formula is classified as NOVA 4 because it contains industrially produced vitamins, minerals, and emulsifiers. But it's a regulated, medically appropriate product for babies who cannot be breastfed.</p>
+<p>IngredScan does not show processing level scores for infant formula or medical nutritional products for this reason.</p>
+
+<h3>NOVA scores can be inferred, not verified</h3>
+<p>Open Food Facts, the database IngredScan uses, assigns NOVA scores based on community review. Some products have verified NOVA scores; others have estimated scores based on ingredient analysis.</p>
+<p>When a score is estimated rather than verified, IngredScan shows this clearly so you know the confidence level of the information you're seeing.</p>
+
 <h2>Why NOVA Matters</h2>
 <p>A growing body of peer-reviewed research has linked high consumption of ultra-processed foods to various health outcomes. A 2023 umbrella review in the BMJ examining 45 pooled analyses found associations between higher UPF consumption and adverse health outcomes including cardiovascular disease, type 2 diabetes, and poor mental health.</p>
 <p>However, it's important to note that not all NOVA 4 foods are equal. A wholemeal bread with added emulsifiers is very different from a pack of crisps, even though both are technically NOVA 4. This is why IngredScan uses the NOVA score alongside our Quality Score — to give you a more complete picture.</p>

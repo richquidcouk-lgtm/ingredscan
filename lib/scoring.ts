@@ -206,36 +206,83 @@ export function getScoreLabel(score: number): string {
 }
 
 export function getNovaColor(nova: number): string {
-  if (nova <= 2) return '#00e5a0'
-  if (nova === 3) return '#f5a623'
-  return '#ff5a5a'
+  if (nova <= 2) return '#22c77e'
+  return '#f5a623'
 }
 
 export function getNovaEmoji(nova: number): string {
   switch (nova) {
     case 1: return '🌿'
-    case 2: return '🌾'
-    case 3: return '⚠️'
-    case 4: return '🚨'
+    case 2: return '🧂'
+    case 3: return '⚙️'
+    case 4: return '🏭'
     default: return '❓'
   }
 }
 
 export function getNovaLabel(nova: number): string {
   switch (nova) {
-    case 1: return 'Unprocessed'
-    case 2: return 'Processed Ingredients'
-    case 3: return 'Processed'
-    case 4: return 'Ultra-Processed'
+    case 1: return 'Whole Food'
+    case 2: return 'Culinary Ingredient'
+    case 3: return 'Processed Food'
+    case 4: return 'Industrially Processed'
     default: return 'Unknown'
   }
 }
 
-export function detectFlags(product: OpenFoodFactsProduct, novaScore: number): string[] {
+export function getNovaSublabel(nova: number): string {
+  switch (nova) {
+    case 1: return 'Unprocessed or minimally processed'
+    case 2: return 'Oils, flour, salt, sugar'
+    case 3: return 'Modified but recognisable'
+    case 4: return 'Contains industrial ingredients'
+    default: return ''
+  }
+}
+
+export function getNovaDescription(nova: number): string {
+  switch (nova) {
+    case 1: return 'This food is in its natural state or has had minimal processing such as drying, freezing, or pasteurisation.'
+    case 2: return 'A basic ingredient used in cooking. Rarely eaten alone — used to prepare and season whole foods.'
+    case 3: return 'Made by adding salt, sugar, or oil to whole foods. Typically 2-3 ingredients. Examples: canned fish, cheese, cured meats.'
+    case 4: return "Made using industrial processes and ingredients not found in home kitchens. This doesn't mean it's harmful — it means it's highly engineered."
+    default: return ''
+  }
+}
+
+export const ADDED_NUTRIENTS = [
+  'POTASSIUM IODIDE', 'POTASSIUM-IODIDE', 'SODIUM FLUORIDE',
+  'FERROUS SULPHATE', 'FERROUS FUMARATE', 'ZINC SULPHATE',
+  'ZINC OXIDE', 'COPPER SULPHATE', 'MANGANESE SULPHATE',
+  'SODIUM SELENATE', 'CHROMIUM CHLORIDE', 'SODIUM MOLYBDATE',
+  'VITAMIN A ACETATE', 'RETINYL ACETATE', 'RETINYL PALMITATE',
+  'THIAMINE', 'RIBOFLAVIN', 'PYRIDOXINE', 'CYANOCOBALAMIN',
+  'ASCORBIC ACID', 'CHOLECALCIFEROL', 'DL-ALPHA-TOCOPHEROL',
+  'PHYLLOQUINONE', 'FOLIC ACID', 'BIOTIN', 'NIACIN', 'NICOTINAMIDE',
+  'PANTOTHENIC ACID', 'CALCIUM PANTOTHENATE', 'L-CARNITINE',
+  'TAURINE', 'CHOLINE', 'INOSITOL', 'LUTEIN', 'LYCOPENE',
+]
+
+export function normaliseENumber(code: string): string {
+  return code
+    .toUpperCase()
+    .trim()
+    .replace(/\([ivxIVX\d]+\)/g, '')
+    .replace(/[IVXivx]+$/, '')
+    .replace(/[a-z]$/, '')
+    .replace(/\s+/g, '')
+    .trim()
+}
+
+export function isAddedNutrient(name: string): boolean {
+  const upper = name.toUpperCase().replace(/-/g, ' ').trim()
+  return ADDED_NUTRIENTS.some(n => upper.includes(n.replace(/-/g, ' ')))
+}
+
+export function detectFlags(product: OpenFoodFactsProduct): string[] {
   const flags: string[] = []
   const nutriments = product.nutriments || {}
 
-  if (novaScore === 4) flags.push('Ultra-Processed')
   if ((nutriments['sugars_100g'] || 0) > 10) flags.push('High Sugar')
   if ((nutriments['sodium_100g'] || 0) > 0.6 || (nutriments['salt_100g'] || 0) > 1.5) flags.push('High Salt')
   if ((nutriments['saturated-fat_100g'] || 0) > 5) flags.push('High Saturated Fat')
@@ -261,9 +308,15 @@ export function resolveAdditives(additiveTags: string[]): Array<{
   description: string
   regulation?: string
 }> {
-  return additiveTags
-    .map(tag => {
-      const code = tag.replace('en:', '').toUpperCase().replace(/^E-/, 'E')
+  // Normalise, deduplicate, and filter out nutrients
+  const normalised = additiveTags
+    .map(tag => normaliseENumber(tag.replace('en:', '')))
+    .filter(code => code.startsWith('E'))
+    .filter(code => !isAddedNutrient(code))
+  const unique = normalised.filter((v, i, a) => a.indexOf(v) === i)
+
+  return unique
+    .map(code => {
       const match = additiveDatabase.find(
         a => a.code.toLowerCase() === code.toLowerCase()
       )
@@ -277,4 +330,12 @@ export function resolveAdditives(additiveTags: string[]): Array<{
         description: `${code} is a permitted food additive under EU Regulation 1333/2008. Detailed information is being added to our database.`,
       }
     })
+}
+
+export function resolveAddedNutrients(additiveTags: string[]): string[] {
+  return additiveTags
+    .map(tag => tag.replace('en:', '').toUpperCase().replace(/^E-/, 'E').trim())
+    .filter(name => isAddedNutrient(name))
+    .map(name => name.replace(/-/g, ' '))
+    .filter((v, i, a) => a.indexOf(v) === i)
 }

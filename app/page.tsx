@@ -204,7 +204,7 @@ export default function HomePage() {
         </h3>
         <div className="grid grid-cols-2 gap-3">
           {[
-            { icon: '🎯', title: 'Dual Scoring', desc: 'NOVA processing level + quality score for food. Safety score for cosmetics.' },
+            { icon: '🎯', title: 'Dual Scoring', desc: 'Processing level + quality score — understand exactly how your food was made and what\u2019s in it' },
             { icon: '🛒', title: 'Smarter Swaps', desc: 'Healthier alternatives from supermarkets in your market' },
             { icon: '🔍', title: 'Transparent Data', desc: 'Source shown on every scan — know where the data comes from' },
             { icon: '💬', title: 'Plain English', desc: 'No chemistry degree needed — every ingredient explained simply' },

@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { fetchProduct, isUKProduct, validateProduct } from '@/lib/openFoodFacts'
+import { fetchProduct, isUKProduct, validateProduct, getBrand } from '@/lib/openFoodFacts'
 import { fetchFromOpenBeautyFacts, parseInciIngredients, matchCosmeticIngredients, detectCosmeticFlags } from '@/lib/openBeautyFacts'
 import { detectProductCategory } from '@/lib/categoryDetection'
 import { resolveAdditives } from '@/lib/scoring'
 import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
+import { detectSpecialCategory } from '@/lib/specialCategories'
 import { getServiceSupabase } from '@/lib/supabase'
 
 export async function GET(request: NextRequest) {
@@ -61,10 +62,14 @@ export async function GET(request: NextRequest) {
   const additives = resolveAdditives(offProduct.additives_tags || [])
   const isUK = isUKProduct(offProduct)
 
+  // Detect special categories and nova source
+  const novaSource = offProduct.nova_group ? 'off_direct' : 'inferred'
+  const specialCategory = detectSpecialCategory(offProduct)
+
   const product = {
     barcode,
     name: offProduct.product_name_en || offProduct.product_name || 'Unknown Product',
-    brand: offProduct.brands || 'Unknown Brand',
+    brand: getBrand(offProduct),
     nova_score: validated.nova_score,
     quality_score: validated.quality_score,
     nutriscore_grade: offProduct.nutriscore_grade || '',
@@ -85,6 +90,8 @@ export async function GET(request: NextRequest) {
     confidence: validated.confidence,
     category: (offProduct.categories_tags || []).join(', '),
     product_type: 'food' as const,
+    nova_source: novaSource,
+    special_category: specialCategory,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   }

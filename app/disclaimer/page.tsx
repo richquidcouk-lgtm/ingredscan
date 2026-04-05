@@ -120,6 +120,26 @@ export default function DisclaimerPage() {
         </section>
 
         <section>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>Products IngredScan Does Not Cover</h2>
+          <p className="text-sm mb-3"><strong>Infant Formula and Baby Milk</strong></p>
+          <p className="text-sm mb-3">
+            IngredScan does not score infant formula or baby milk products. When these products are detected, we show official NHS guidance instead. Infant formula is governed by strict UK and EU nutritional regulations and should not be compared using standard food processing scores.
+          </p>
+          <p className="text-sm mb-3"><strong>Medicines and Pharmaceutical Products</strong></p>
+          <p className="text-sm mb-3">
+            IngredScan does not identify or analyse medicines, prescription drugs, OTC medicines, or pharmaceutical products. If a medicine is scanned, we will tell you clearly that we cannot help and direct you to appropriate resources.
+          </p>
+          <p className="text-sm mb-3"><strong>Dietary Supplements</strong></p>
+          <p className="text-sm mb-3">
+            IngredScan does not currently score dietary supplements, vitamins, or sports nutrition products. Supplement scanning is planned for a future update.
+          </p>
+          <p className="text-sm mb-3"><strong>Incorrect Identification</strong></p>
+          <p className="text-sm">
+            If IngredScan incorrectly identifies a food product as a medicine or formula, or vice versa, please use the &apos;Report incorrect product&apos; button on the result page. We review all reports and correct misidentifications promptly.
+          </p>
+        </section>
+
+        <section>
           <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>Fresh Produce</h2>
           <p className="text-sm">
             Fresh, whole produce (fruits, vegetables, raw meat, eggs, etc.) is always classified as NOVA 1 — unprocessed or minimally processed. If you scan a fresh product and it shows a different NOVA classification, this is an error. Please use the Report feature to let us know.
