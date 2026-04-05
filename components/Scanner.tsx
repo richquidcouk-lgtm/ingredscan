@@ -65,13 +65,13 @@ export default function Scanner() {
       await scanner.start(
         { facingMode: 'environment' },
         {
-          fps: 15,
-          qrbox: { width: 250, height: 150 },
+          fps: 30,
+          qrbox: { width: 280, height: 160 },
           aspectRatio: 1.0,
           disableFlip: false,
           videoConstraints: {
-            width: { ideal: 640 },
-            height: { ideal: 480 },
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
             facingMode: 'environment',
           },
         } as any,

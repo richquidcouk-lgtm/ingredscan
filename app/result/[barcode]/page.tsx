@@ -14,6 +14,7 @@ import ProductReport from '@/components/ProductReport'
 import SkeletonResult from '@/components/SkeletonResult'
 import UpgradeModal from '@/components/UpgradeModal'
 import CosmeticResult from '@/components/CosmeticResult'
+import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
 import { getCategoryEmoji, incrementAnonScanCount, getAnonScanCount } from '@/lib/utils'
 import { useMarket } from '@/components/MarketProvider'
@@ -95,6 +96,11 @@ export default function ResultPage() {
 
       if (cached) {
         setProduct(cached as Product)
+        // Compute cosmetic score for cached cosmetic products
+        if (cached.product_type === 'cosmetic' && cached.inci_ingredients) {
+          const score = calculateCosmeticScore(cached, cached.inci_ingredients)
+          setCosmeticScore(score)
+        }
         findSwaps(cached.category || '')
         setLoading(false)
         recordScan()

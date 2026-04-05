@@ -27,6 +27,11 @@ export async function GET(request: NextRequest) {
     const updatedAt = new Date(cached.updated_at)
     const daysSince = (Date.now() - updatedAt.getTime()) / (1000 * 60 * 60 * 24)
     if (daysSince < 30) {
+      // For cached cosmetic products, compute the score on the fly
+      if (cached.product_type === 'cosmetic' && cached.inci_ingredients) {
+        const score = calculateCosmeticScore(cached, cached.inci_ingredients)
+        return NextResponse.json({ ...cached, cosmetic_score: score })
+      }
       return NextResponse.json(cached)
     }
   }
