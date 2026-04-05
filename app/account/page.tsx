@@ -91,8 +91,14 @@ export default function AccountPage() {
       .single()
 
     if (data) {
-      setProfile(data as Profile)
-      setNameInput((data as Profile).display_name || '')
+      const p = data as Profile
+      // Fallback to localStorage name if DB doesn't have it
+      if (!p.display_name && typeof window !== 'undefined') {
+        const localName = localStorage.getItem('ingredscan_display_name')
+        if (localName) p.display_name = localName
+      }
+      setProfile(p)
+      setNameInput(p.display_name || '')
     }
     setLoading(false)
   }
@@ -100,10 +106,15 @@ export default function AccountPage() {
   async function saveName() {
     if (!user || !nameInput.trim()) return
     setSavingName(true)
-    await supabase
+    const { error } = await supabase
       .from('profiles')
       .update({ display_name: nameInput.trim() })
       .eq('id', user.id)
+    if (error) {
+      console.error('Failed to save name:', error.message)
+      // Fallback: store in localStorage
+      localStorage.setItem('ingredscan_display_name', nameInput.trim())
+    }
     setProfile(prev => prev ? { ...prev, display_name: nameInput.trim() } : prev)
     setEditingName(false)
     setSavingName(false)
