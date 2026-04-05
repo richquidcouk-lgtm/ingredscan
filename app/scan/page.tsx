@@ -5,20 +5,20 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { searchProducts, type OFFSearchResult } from '@/lib/openFoodFacts'
+import { searchBeautyProducts } from '@/lib/openBeautyFacts'
 import Logo from '@/components/Logo'
 
 const Scanner = dynamic(() => import('@/components/Scanner'), { ssr: false })
 
 const categoryChips = [
-  { emoji: '🍞', label: 'Bread' },
-  { emoji: '🥣', label: 'Cereal' },
-  { emoji: '🍫', label: 'Chocolate' },
-  { emoji: '🥨', label: 'Crisps' },
-  { emoji: '🥛', label: 'Yoghurt' },
-  { emoji: '🫙', label: 'Ketchup' },
-  { emoji: '🥤', label: 'Drinks' },
-  { emoji: '🍝', label: 'Pasta' },
-  { emoji: '🧊', label: 'Frozen' },
+  { emoji: '🍞', label: 'Bread', type: 'food' as const },
+  { emoji: '🥣', label: 'Cereal', type: 'food' as const },
+  { emoji: '🧴', label: 'Moisturiser', type: 'cosmetic' as const },
+  { emoji: '🧴', label: 'Shampoo', type: 'cosmetic' as const },
+  { emoji: '🫙', label: 'Ketchup', type: 'food' as const },
+  { emoji: '🍫', label: 'Chocolate', type: 'food' as const },
+  { emoji: '☀️', label: 'Sunscreen', type: 'cosmetic' as const },
+  { emoji: '💄', label: 'Foundation', type: 'cosmetic' as const },
 ]
 
 export default function ScanPage() {
@@ -26,6 +26,7 @@ export default function ScanPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<OFFSearchResult['products']>([])
   const [searching, setSearching] = useState(false)
+  const [searchCategory, setSearchCategory] = useState<'food' | 'cosmetic'>('food')
 
   const doSearch = useCallback(async (query: string) => {
     if (query.length < 2) {
@@ -33,17 +34,25 @@ export default function ScanPage() {
       return
     }
     setSearching(true)
-    const results = await searchProducts(query)
-    setSearchResults(results.products || [])
+
+    if (searchCategory === 'cosmetic') {
+      const results = await searchBeautyProducts(query)
+      setSearchResults(results.products || [])
+    } else {
+      const results = await searchProducts(query)
+      setSearchResults(results.products || [])
+    }
+
     setSearching(false)
-  }, [])
+  }, [searchCategory])
 
   useEffect(() => {
     const timer = setTimeout(() => doSearch(searchQuery), 400)
     return () => clearTimeout(timer)
   }, [searchQuery, doSearch])
 
-  function handleChipClick(label: string) {
+  function handleChipClick(label: string, type: 'food' | 'cosmetic') {
+    setSearchCategory(type)
     setSearchQuery(label)
   }
 
@@ -89,9 +98,12 @@ export default function ScanPage() {
             {categoryChips.map((chip) => (
               <button
                 key={chip.label}
-                onClick={() => handleChipClick(chip.label)}
+                onClick={() => handleChipClick(chip.label, chip.type)}
                 className="flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium transition-all active:scale-95 glass-subtle"
-                style={{ color: 'rgba(240,240,244,0.6)' }}
+                style={{
+                  color: chip.type === 'cosmetic' ? 'rgba(168,85,247,0.7)' : 'rgba(240,240,244,0.6)',
+                  borderColor: chip.type === 'cosmetic' ? 'rgba(168,85,247,0.15)' : undefined,
+                }}
               >
                 <span>{chip.emoji}</span>
                 <span>{chip.label}</span>
@@ -118,7 +130,9 @@ export default function ScanPage() {
                 {product.image_front_small_url ? (
                   <img src={product.image_front_small_url} alt="" className="w-10 h-10 rounded-lg object-cover" />
                 ) : (
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style={{ backgroundColor: 'rgba(28,28,38,0.8)' }}>🛒</div>
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style={{ backgroundColor: 'rgba(28,28,38,0.8)' }}>
+                    {searchCategory === 'cosmetic' ? '💄' : '🛒'}
+                  </div>
                 )}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium truncate" style={{ color: '#f0f0f4' }}>
@@ -128,11 +142,15 @@ export default function ScanPage() {
                     {product.brands || 'Unknown Brand'}
                   </p>
                 </div>
-                {product.nutriscore_grade && (
+                {searchCategory === 'cosmetic' ? (
+                  <span className="text-[10px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(168,85,247,0.12)', color: '#a855f7' }}>
+                    💄
+                  </span>
+                ) : product.nutriscore_grade ? (
                   <span className="text-xs font-bold uppercase px-2 py-0.5 rounded-md" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'rgba(240,240,244,0.5)' }}>
                     {product.nutriscore_grade}
                   </span>
-                )}
+                ) : null}
               </Link>
             ))}
           </div>

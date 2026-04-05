@@ -36,6 +36,33 @@ export type Product = {
   category: string
   created_at: string
   updated_at: string
+  product_type?: 'food' | 'cosmetic'
+  // Cosmetic-specific fields
+  inci_ingredients?: CosmeticIngredientMatch[]
+  cosmetic_concerns?: string[]
+  is_vegan?: boolean
+  is_cruelty_free?: boolean
+  is_natural?: boolean
+  fragrance_free?: boolean
+  alcohol_free?: boolean
+  paraben_free?: boolean
+  sulphate_free?: boolean
+  silicone_free?: boolean
+  ewg_score?: number
+  skin_type?: string[]
+}
+
+export type CosmeticIngredientMatch = {
+  inci_name: string
+  common_name?: string
+  function?: string[]
+  risk_level: 'low' | 'medium' | 'high'
+  risk_score: number
+  description?: string
+  concerns?: string[]
+  safe_for_pregnant?: boolean
+  safe_for_children?: boolean
+  ewg_score?: number
 }
 
 export type AdditiveEntry = {

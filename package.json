@@ -9,6 +9,7 @@
     "lint": "next lint",
     "import:off": "tsx scripts/importProducts.ts --source=openfoodfacts",
     "import:off:resume": "tsx scripts/importProducts.ts --source=openfoodfacts --resume",
+    "import:obf": "tsx scripts/importProducts.ts --source=openbeautyfacts",
     "import:fsa": "tsx scripts/importProducts.ts --source=fsa",
     "import:usda": "tsx scripts/importProducts.ts --source=usda",
     "import:tesco": "tsx scripts/importProducts.ts --source=tesco",

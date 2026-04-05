@@ -162,10 +162,10 @@ export default function HomePage() {
         >
           Know what&apos;s really
           <br />
-          in your food
+          in your products
         </h2>
         <p className="text-sm mb-8 max-w-xs mx-auto leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>
-          Scan any supermarket product worldwide. Get an instant honest verdict — dual scoring, transparent data, and smarter alternatives.
+          Scan any food or cosmetic product. Get an instant honest verdict — dual scoring, transparent data, and smarter alternatives.
         </p>
 
         <Link
@@ -185,7 +185,7 @@ export default function HomePage() {
 
         {/* Stat pills */}
         <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
-          {['3.2M+ Products', '650+ Additives Explained', `${config.supported ? config.name : 'Global'} Coverage`].map((stat) => (
+          {['3.2M+ Food Products', '1M+ Cosmetics', '650+ Additives', `${config.supported ? config.name : 'Global'} Coverage`].map((stat) => (
             <span
               key={stat}
               className="px-3 py-1.5 rounded-full text-xs font-medium glass-subtle"
@@ -204,10 +204,10 @@ export default function HomePage() {
         </h3>
         <div className="grid grid-cols-2 gap-3">
           {[
-            { icon: '🎯', title: 'Dual Scoring', desc: 'NOVA processing level + quality score together for the full picture' },
+            { icon: '🎯', title: 'Dual Scoring', desc: 'NOVA processing level + quality score for food. Safety score for cosmetics.' },
             { icon: '🛒', title: 'Smarter Swaps', desc: 'Healthier alternatives from supermarkets in your market' },
             { icon: '🔍', title: 'Transparent Data', desc: 'Source shown on every scan — know where the data comes from' },
-            { icon: '💬', title: 'Plain English', desc: 'No chemistry degree needed — every additive explained simply' },
+            { icon: '💬', title: 'Plain English', desc: 'No chemistry degree needed — every ingredient explained simply' },
           ].map((feature, i) => (
             <div
               key={feature.title}
@@ -217,6 +217,34 @@ export default function HomePage() {
               <div className="text-2xl mb-2">{feature.icon}</div>
               <h4 className="text-sm font-semibold mb-1" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>{feature.title}</h4>
               <p className="text-xs leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>{feature.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* What you can scan */}
+      <section className="px-5 py-6 max-w-lg mx-auto relative z-10">
+        <h3 className="text-base font-semibold heading-display mb-4" style={{ color: '#f0f0f4' }}>
+          What you can scan
+        </h3>
+        <div className="grid grid-cols-2 gap-3">
+          {[
+            { emoji: '🥫', title: 'Food', desc: '3.2M+ products worldwide', active: true },
+            { emoji: '💄', title: 'Cosmetics', desc: '1M+ beauty products', active: true },
+            { emoji: '🐾', title: 'Pet Food', desc: 'Coming soon', active: false },
+            { emoji: '🧹', title: 'Cleaning', desc: 'Coming soon', active: false },
+          ].map((cat, i) => (
+            <div
+              key={cat.title}
+              className="rounded-2xl p-4 glass-card animate-fadeUp"
+              style={{
+                animationDelay: `${400 + i * 50}ms`,
+                opacity: cat.active ? 1 : 0.5,
+              }}
+            >
+              <div className="text-2xl mb-2">{cat.emoji}</div>
+              <h4 className="text-sm font-semibold mb-0.5" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>{cat.title}</h4>
+              <p className="text-xs" style={{ color: cat.active ? 'rgba(240,240,244,0.4)' : 'rgba(240,240,244,0.25)' }}>{cat.desc}</p>
             </div>
           ))}
         </div>

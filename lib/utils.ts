@@ -4,6 +4,16 @@ export function cn(...classes: (string | false | null | undefined)[]): string {
 
 export function getCategoryEmoji(category: string): string {
   const c = category.toLowerCase()
+  // Cosmetic categories
+  if (c.includes('cosmetic') || c.includes('beauty') || c.includes('makeup')) return '💄'
+  if (c.includes('skin-care') || c.includes('moisturis') || c.includes('face-cream') || c.includes('body-lotion')) return '🧴'
+  if (c.includes('hair-care') || c.includes('shampoo') || c.includes('conditioner')) return '🧴'
+  if (c.includes('sunscreen') || c.includes('sun-care')) return '☀️'
+  if (c.includes('perfume') || c.includes('fragrance')) return '🌸'
+  if (c.includes('nail') || c.includes('nail-polish')) return '💅'
+  if (c.includes('deodorant')) return '🧼'
+  if (c.includes('toothpaste') || c.includes('oral-care')) return '🪥'
+  // Food categories
   if (c.includes('beverage') || c.includes('drink')) return '🥤'
   if (c.includes('dairy') || c.includes('milk') || c.includes('yoghurt')) return '🥛'
   if (c.includes('bread') || c.includes('baker')) return '🍞'

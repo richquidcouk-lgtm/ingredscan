@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Data & Scoring Disclaimer — IngredScan',
-  description: 'How IngredScan calculates NOVA scores, quality scores, and additive risk ratings. Full methodology explained.',
+  description: 'How IngredScan calculates NOVA scores, quality scores, additive risk ratings, and cosmetic product safety scores. Full methodology explained.',
 }
 
 export default function DisclaimerPage() {
@@ -24,7 +24,7 @@ export default function DisclaimerPage() {
         Data &amp; Scoring Disclaimer
       </h1>
       <p className="text-sm mb-10" style={{ color: 'rgba(240,240,244,0.35)' }}>
-        Last updated: 1 April 2026
+        Last updated: 5 April 2026
       </p>
 
       <div className="space-y-8" style={{ color: 'rgba(240,240,244,0.7)', lineHeight: '1.8' }}>
@@ -102,6 +102,21 @@ export default function DisclaimerPage() {
           <p className="text-sm mt-3">
             Risk ratings are <strong>relative classifications</strong> — &quot;high risk&quot; means an additive has more published concerns relative to others, not that it is necessarily dangerous at levels found in food. All additives permitted in UK/EU food have passed regulatory safety assessments and are considered safe within established limits.
           </p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>Cosmetic Product Scoring</h2>
+          <p className="text-sm mb-3">
+            IngredScan also analyses cosmetic products using data from Open Beauty Facts and the EWG Skin Deep database. Cosmetic safety scores are calculated by analysing the INCI (International Nomenclature of Cosmetic Ingredients) ingredient list against published scientific literature and EU/UK regulatory status.
+          </p>
+          <p className="text-sm mb-3">
+            Our cosmetic Safety Score (0-10) applies deductions for high-risk ingredients (carcinogens, endocrine disruptors, formaldehyde releasers), medium-risk ingredients (potential sensitisers, parabens), and adds small bonuses for positive certifications (vegan, cruelty-free, fragrance-free).
+          </p>
+          <div className="rounded-xl p-4 mt-4 text-sm" style={{ backgroundColor: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.15)' }}>
+            <p style={{ color: '#f5a623' }}>
+              <strong>Important:</strong> IngredScan cosmetic scores are for informational purposes only and should not replace advice from a qualified dermatologist or healthcare professional. Individual skin reactions vary — an ingredient rated low risk may still cause reactions in sensitive individuals. If you have a known skin allergy or condition, always patch test new products and consult a dermatologist before use.
+            </p>
+          </div>
         </section>
 
         <section>

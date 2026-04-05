@@ -13,6 +13,7 @@ import ShareButton from '@/components/ShareCard'
 import ProductReport from '@/components/ProductReport'
 import SkeletonResult from '@/components/SkeletonResult'
 import UpgradeModal from '@/components/UpgradeModal'
+import CosmeticResult from '@/components/CosmeticResult'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
 import { getCategoryEmoji, incrementAnonScanCount, getAnonScanCount } from '@/lib/utils'
 import { useMarket } from '@/components/MarketProvider'
@@ -28,6 +29,7 @@ export default function ResultPage() {
   const isNewScan = searchParams.get('source') === 'scan'
   const hasRecorded = useRef(false)
   const [product, setProduct] = useState<Product | null>(null)
+  const [cosmeticScore, setCosmeticScore] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [matchedSwaps, setMatchedSwaps] = useState<any[]>([])
@@ -116,6 +118,7 @@ export default function ResultPage() {
 
       const data = await res.json()
       setProduct(data as Product)
+      if (data.cosmetic_score) setCosmeticScore(data.cosmetic_score)
       findSwaps(data.category || '')
       recordScan()
     } catch {
@@ -233,6 +236,17 @@ export default function ResultPage() {
           Retry
         </button>
       </div>
+    )
+  }
+
+  // Render cosmetic result if product is a cosmetic
+  if (product.product_type === 'cosmetic') {
+    return (
+      <CosmeticResult
+        product={product}
+        cosmeticScore={cosmeticScore}
+        onBack={() => router.back()}
+      />
     )
   }
 

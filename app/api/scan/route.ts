@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { fetchProduct, isUKProduct, validateProduct } from '@/lib/openFoodFacts'
+import { fetchFromOpenBeautyFacts, parseInciIngredients, matchCosmeticIngredients, detectCosmeticFlags } from '@/lib/openBeautyFacts'
+import { detectProductCategory } from '@/lib/categoryDetection'
 import { resolveAdditives } from '@/lib/scoring'
+import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
 import { getServiceSupabase } from '@/lib/supabase'
 
 export async function GET(request: NextRequest) {
@@ -28,14 +31,27 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  // Fetch from Open Food Facts
-  const offProduct = await fetchProduct(barcode)
+  // Fetch from both APIs simultaneously
+  const [offProduct, obfProduct] = await Promise.all([
+    fetchProduct(barcode),
+    fetchFromOpenBeautyFacts(barcode),
+  ])
 
+  // Detect category
+  const productType = detectProductCategory(
+    offProduct ? { product: offProduct } : null,
+    obfProduct ? { product: obfProduct } : null
+  )
+
+  if (productType === 'cosmetic') {
+    return handleCosmeticProduct(barcode, obfProduct, offProduct, supabase)
+  }
+
+  // --- FOOD FLOW (existing) ---
   if (!offProduct) {
     return NextResponse.json({ error: 'Product not found' }, { status: 404 })
   }
 
-  // Validate and score with overrides
   const validated = validateProduct(offProduct)
   const additives = resolveAdditives(offProduct.additives_tags || [])
   const isUK = isUKProduct(offProduct)
@@ -63,11 +79,12 @@ export async function GET(request: NextRequest) {
     data_source: isUK ? 'Open Food Facts + UK FSA' : 'Open Food Facts + USDA',
     confidence: validated.confidence,
     category: (offProduct.categories_tags || []).join(', '),
+    product_type: 'food' as const,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   }
 
-  // Save to cache (exclude warning field — not in DB schema)
+  // Save to cache
   const { error: upsertError } = await supabase
     .from('products')
     .upsert(product, { onConflict: 'barcode' })
@@ -76,6 +93,103 @@ export async function GET(request: NextRequest) {
     console.error('[IngredScan] Product upsert failed:', upsertError.message)
   }
 
-  // Return product with warning for display
   return NextResponse.json({ ...product, warning: validated.warning })
+}
+
+async function handleCosmeticProduct(
+  barcode: string,
+  obfProduct: any,
+  offProduct: any,
+  supabase: any
+) {
+  // Use whichever source has data, preferring OBF
+  const source = obfProduct || offProduct
+  if (!source) {
+    return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+  }
+
+  const name = source.product_name_en || source.product_name || 'Unknown Product'
+  const brand = source.brands || 'Unknown Brand'
+  const ingredientsText = source.ingredients_text_en || source.ingredients_text || ''
+  const imageUrl = source.image_front_url || ''
+  const categories = (source.categories_tags || []).join(', ')
+
+  // Parse INCI ingredients
+  const inciNames = parseInciIngredients(ingredientsText)
+  const matchedIngredients = matchCosmeticIngredients(inciNames)
+
+  // Detect cosmetic flags from product labels
+  const cosmeticFlags = obfProduct
+    ? detectCosmeticFlags(obfProduct)
+    : {
+        is_vegan: false,
+        is_cruelty_free: false,
+        is_natural: false,
+        fragrance_free: !ingredientsText.toUpperCase().includes('PARFUM'),
+        alcohol_free: !ingredientsText.toUpperCase().includes('ALCOHOL DENAT'),
+        paraben_free: !ingredientsText.toUpperCase().includes('PARABEN'),
+        sulphate_free: !ingredientsText.toUpperCase().includes('SULFATE'),
+        silicone_free: !ingredientsText.toUpperCase().includes('DIMETHICONE'),
+      }
+
+  // Calculate cosmetic score
+  const scoring = calculateCosmeticScore(cosmeticFlags, matchedIngredients)
+
+  // Confidence based on data quality
+  let confidence = ingredientsText ? 85 : 60
+  if (obfProduct) confidence = Math.min(confidence + 5, 95)
+
+  const product = {
+    barcode,
+    name,
+    brand,
+    nova_score: 0,
+    quality_score: scoring.overallScore,
+    nutriscore_grade: '',
+    ingredients: ingredientsText,
+    additives: [],
+    nutrition: {
+      energy: null,
+      fat: null,
+      saturated_fat: null,
+      carbs: null,
+      sugars: null,
+      fibre: null,
+      protein: null,
+      salt: null,
+    },
+    image_url: imageUrl,
+    data_source: obfProduct ? 'Open Beauty Facts' : 'Open Food Facts',
+    confidence,
+    category: categories,
+    product_type: 'cosmetic' as const,
+    inci_ingredients: matchedIngredients,
+    cosmetic_concerns: scoring.concerns,
+    is_vegan: cosmeticFlags.is_vegan,
+    is_cruelty_free: cosmeticFlags.is_cruelty_free,
+    is_natural: cosmeticFlags.is_natural,
+    fragrance_free: cosmeticFlags.fragrance_free,
+    alcohol_free: cosmeticFlags.alcohol_free,
+    paraben_free: cosmeticFlags.paraben_free,
+    sulphate_free: cosmeticFlags.sulphate_free,
+    silicone_free: cosmeticFlags.silicone_free,
+    ewg_score: null,
+    skin_type: [],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  }
+
+  // Save to cache
+  const { error: upsertError } = await supabase
+    .from('products')
+    .upsert(product, { onConflict: 'barcode' })
+
+  if (upsertError) {
+    console.error('[IngredScan] Cosmetic product upsert failed:', upsertError.message)
+  }
+
+  return NextResponse.json({
+    ...product,
+    cosmetic_score: scoring,
+  })
 }

@@ -1,5 +1,6 @@
 import { Command } from 'commander'
 import { importOpenFoodFacts } from './sources/openFoodFacts'
+import { importOpenBeautyFacts } from './sources/openBeautyFacts'
 import { importFSA } from './sources/fsa'
 import { importUSDA } from './sources/usda'
 import { importTesco } from './sources/tesco'
@@ -30,6 +31,7 @@ const options: ImportOptions = {
 
 const sources: Record<string, (options: ImportOptions) => Promise<void>> = {
   openfoodfacts: importOpenFoodFacts,
+  openbeautyfacts: importOpenBeautyFacts,
   fsa: importFSA,
   usda: importUSDA,
   tesco: importTesco,

@@ -320,6 +320,243 @@ const posts: BlogPost[] = [
 <p>Questions about our methodology? Contact us at <a href="mailto:richquidcouk@gmail.com">richquidcouk@gmail.com</a>.</p>
 `,
   },
+  {
+    slug: 'ingredients-to-avoid-skincare',
+    title: '10 Skincare Ingredients to Watch Out For in UK Products (Evidence-Based)',
+    description: 'A science-backed guide to 10 cosmetic ingredients found in UK skincare products that have attracted regulatory scrutiny or published safety concerns.',
+    date: '2026-04-04',
+    author: 'IngredScan Team',
+    category: 'Cosmetics',
+    tags: ['harmful skincare ingredients', 'parabens in skincare', 'fragrance in cosmetics UK', 'cosmetic safety'],
+    readTime: '7 min read',
+    featured: true,
+    content: `
+<p>The average person applies 10-15 cosmetic products to their skin every day — from moisturiser and sunscreen to shampoo and deodorant. Most ingredients in these products are safe. But some have attracted regulatory scrutiny, published safety concerns, or outright bans in certain markets.</p>
+<p>Here are 10 ingredients commonly found in UK skincare and cosmetic products that are worth understanding. We&apos;ve focused on what the evidence actually says — not internet scare stories.</p>
+
+<h2>1. Formaldehyde and Formaldehyde Releasers</h2>
+<p><strong>Risk level: High</strong> · <strong>Found in:</strong> some nail polishes, hair straightening treatments, shampoos</p>
+<p>Formaldehyde is classified as a known human carcinogen by the International Agency for Research on Cancer (IARC). While formaldehyde itself is rarely listed on ingredient labels today, several preservatives slowly release it over time: DMDM hydantoin, quaternium-15, imidazolidinyl urea, and diazolidinyl urea.</p>
+<p>The EU restricts formaldehyde in cosmetics to 0.1% (except in nail hardeners at 5%), and products exceeding 0.05% must carry a warning label. If you see any of these formaldehyde-releasing preservatives on a label, the product will release small amounts of formaldehyde throughout its shelf life.</p>
+
+<h2>2. Oxybenzone (Benzophenone-3)</h2>
+<p><strong>Risk level: High</strong> · <strong>Found in:</strong> chemical sunscreens, lip balms with SPF</p>
+<p>Oxybenzone is a UV filter that absorbs into the bloodstream — an FDA study detected it in blood within 2 hours of application at concentrations exceeding the FDA&apos;s safety threshold. It has been detected in breast milk and amniotic fluid. Research has shown weak endocrine-disrupting activity, and it is harmful to coral reefs — Hawaii and Palau have banned sunscreens containing it.</p>
+<p>Safer UV filter alternatives include zinc oxide and titanium dioxide (mineral sunscreens), which sit on the skin surface rather than being absorbed.</p>
+
+<h2>3. Parabens (Methyl, Propyl, Butyl, Isobutylparaben)</h2>
+<p><strong>Risk level: Medium</strong> · <strong>Found in:</strong> moisturisers, shampoos, makeup, deodorants</p>
+<p>Parabens are preservatives that mimic oestrogen in laboratory studies. Butylparaben and propylparaben show stronger oestrogenic activity than methylparaben. The EU has restricted butyl and propylparaben concentrations and banned them entirely in products for children under 3 (nappy area). Many UK brands have voluntarily reformulated to be paraben-free in response to consumer concern.</p>
+<p>The scientific picture is nuanced: methylparaben at permitted concentrations is generally considered safe by European regulators. The concern increases with propyl and butylparaben, particularly during pregnancy.</p>
+
+<h2>4. Fragrance / Parfum</h2>
+<p><strong>Risk level: Medium</strong> · <strong>Found in:</strong> almost everything — moisturisers, body wash, deodorant, laundry products</p>
+<p>The word "Parfum" or "Fragrance" on a label can represent a blend of dozens to hundreds of individual chemicals. Under EU and UK law, manufacturers only need to disclose 26 specific fragrance allergens if they exceed certain concentrations — everything else can be hidden under the umbrella term. Fragrance is one of the top five causes of contact dermatitis globally.</p>
+<p>If you have sensitive skin, "fragrance-free" is different from "unscented" — unscented products may still contain masking fragrances.</p>
+
+<h2>5. Sodium Lauryl Sulfate (SLS)</h2>
+<p><strong>Risk level: Medium</strong> · <strong>Found in:</strong> shampoos, body wash, toothpaste, facial cleansers</p>
+<p>SLS is a surfactant — it creates the foam and lather in cleansing products. It is <strong>not</strong> a carcinogen despite persistent online claims. However, it is a known skin and eye irritant that strips natural oils from the skin. For people with eczema, rosacea, or sensitive skin, SLS can worsen symptoms. Sodium laureth sulfate (SLES) is a milder alternative, though it can be contaminated with 1,4-dioxane during manufacturing.</p>
+
+<h2>6. BHT (Butylated Hydroxytoluene)</h2>
+<p><strong>Risk level: High</strong> · <strong>Found in:</strong> lip products, moisturisers, sunscreens, hair products</p>
+<p>BHT is a synthetic antioxidant that prevents oils from going rancid. It is permitted in the EU at restricted concentrations but has been flagged as a possible endocrine disruptor. Some studies have found it can cause skin sensitisation at higher concentrations. Many brands have switched to tocopherol (vitamin E) as a natural alternative.</p>
+
+<h2>7. Coal Tar</h2>
+<p><strong>Risk level: High</strong> · <strong>Found in:</strong> anti-dandruff shampoos, psoriasis treatments</p>
+<p>Coal tar is classified as a known human carcinogen by IARC. It is banned in EU cosmetics but still permitted in the UK in certain medicated products. If you use coal tar shampoo for dandruff, consider alternatives containing zinc pyrithione, ketoconazole, or salicylic acid — all of which are effective without the carcinogen classification.</p>
+
+<h2>8. Phthalates (Dibutyl Phthalate / DBP)</h2>
+<p><strong>Risk level: High</strong> · <strong>Found in:</strong> nail polishes, some fragrances</p>
+<p>DBP is a plasticiser banned in EU cosmetics due to strong evidence of endocrine disruption and reproductive harm. It is still permitted in some non-EU markets. Check nail polishes for "3-free" or "5-free" labels — these indicate the product is free from the most concerning nail polish chemicals including DBP, toluene, and formaldehyde.</p>
+
+<h2>9. Methylisothiazolinone (MIT) and CMIT</h2>
+<p><strong>Risk level: High</strong> · <strong>Found in:</strong> wet wipes, shampoos, liquid soaps, makeup removers</p>
+<p>MIT was widely adopted as a "safer" alternative to parabens — but it turned out to be one of the most potent skin sensitisers in cosmetics. The EU banned MIT in leave-on products in 2016 and restricted it in rinse-off products. If you developed a skin allergy to a product in the 2010s, there is a reasonable chance MIT was the culprit.</p>
+
+<h2>10. Chemical UV Filters (Octinoxate, Homosalate, Octocrylene)</h2>
+<p><strong>Risk level: Medium</strong> · <strong>Found in:</strong> sunscreens, moisturisers with SPF, foundations with SPF</p>
+<p>Several chemical UV filters have come under scrutiny: octinoxate (ethylhexyl methoxycinnamate) penetrates skin and has shown weak hormonal activity; homosalate has been recommended for lower maximum concentrations by the EU Scientific Committee; octocrylene can degrade into benzophenone over time.</p>
+<p>Mineral sunscreens using zinc oxide or titanium dioxide remain the gold standard for safety — they reflect UV rather than absorbing it, and do not penetrate the skin significantly.</p>
+
+<h2>How to Use This Information</h2>
+<p>Don&apos;t panic about your current products — the dose makes the poison, and all these ingredients are used at regulated concentrations. Instead:</p>
+<ul>
+<li><strong>Scan products with IngredScan</strong> to see which ingredients are in your cosmetics and their risk ratings</li>
+<li><strong>Prioritise changes</strong> for products that stay on your skin longest (moisturisers, sunscreens) over rinse-off products (shampoo, body wash)</li>
+<li><strong>During pregnancy</strong>, pay particular attention to retinol, salicylic acid (at high concentrations), parabens, and chemical UV filters</li>
+<li><strong>For sensitive skin</strong>, look for fragrance-free, SLS-free formulations</li>
+</ul>
+<p>Remember: "natural" does not automatically mean safe, and "synthetic" does not automatically mean harmful. The evidence for each ingredient should be assessed individually.</p>
+`,
+  },
+  {
+    slug: 'how-to-read-cosmetic-labels',
+    title: 'How to Read a Cosmetic Ingredient List: A Plain English Guide',
+    description: 'Demystify INCI names, understand ingredient order, and learn what to look for on cosmetic labels in the UK — no chemistry degree required.',
+    date: '2026-04-01',
+    author: 'IngredScan Team',
+    category: 'Education',
+    tags: ['INCI ingredients', 'cosmetic label guide', 'what ingredients mean skincare', 'cosmetic labels UK'],
+    readTime: '6 min read',
+    featured: false,
+    content: `
+<p>You&apos;ve probably turned over a moisturiser or shampoo bottle and been confronted with a wall of Latin-sounding names. "Aqua, Glycerin, Cetearyl Alcohol, Dimethicone..." — what does any of it mean? And why don&apos;t they just write it in English?</p>
+<p>Here&apos;s your complete guide to understanding cosmetic ingredient lists in the UK.</p>
+
+<h2>Why Are Cosmetic Ingredients Written in Latin?</h2>
+<p>Cosmetic ingredients use the INCI system — International Nomenclature of Cosmetic Ingredients. This standardised naming system was created so that the same ingredient has the same name regardless of what country you buy the product in. "AQUA" means water whether you&apos;re in London, Tokyo, or Sao Paulo.</p>
+<p>Under EU and UK law (EU Cosmetics Regulation 1223/2009, retained in UK law), all cosmetic products must list their ingredients using INCI names on the packaging.</p>
+
+<h2>The Order Matters</h2>
+<p>Ingredients are listed in descending order of concentration. The first ingredient is present in the highest amount, and the last ingredient in the smallest amount.</p>
+<p>There&apos;s an important exception: ingredients present at less than 1% concentration can be listed in any order after the 1% line. Unfortunately, that line isn&apos;t marked on the label — but with experience you can estimate it.</p>
+<p><strong>Rule of thumb:</strong> In most skincare products, the first 5-7 ingredients make up the vast majority of the formula. Everything after phenoxyethanol (a common preservative used at 1% or less) is likely below 1%.</p>
+
+<h2>Common INCI Names Decoded</h2>
+
+<h3>The Base (first few ingredients)</h3>
+<ul>
+<li><strong>AQUA</strong> = Water. Almost always first in water-based products.</li>
+<li><strong>GLYCERIN</strong> = Glycerine. A humectant that draws moisture to skin. One of the safest, most effective skincare ingredients.</li>
+<li><strong>DIMETHICONE</strong> = A silicone that creates a smooth, protective feel. Not absorbed by skin.</li>
+<li><strong>CETEARYL ALCOHOL / CETYL ALCOHOL</strong> = Fatty alcohols (not drying alcohols). They condition and thicken formulas.</li>
+</ul>
+
+<h3>The Active Ingredients</h3>
+<ul>
+<li><strong>NIACINAMIDE</strong> = Vitamin B3. Brightens, reduces pores, strengthens barrier. Very well evidenced.</li>
+<li><strong>RETINOL</strong> = Vitamin A. Anti-ageing gold standard. Avoid during pregnancy.</li>
+<li><strong>ASCORBIC ACID</strong> = Vitamin C. Antioxidant and brightener.</li>
+<li><strong>HYALURONIC ACID</strong> = A hydrating molecule that holds 1000x its weight in water.</li>
+<li><strong>SALICYLIC ACID</strong> = BHA. Exfoliates inside pores. Great for acne.</li>
+<li><strong>TOCOPHEROL</strong> = Vitamin E. Antioxidant and skin conditioner.</li>
+</ul>
+
+<h3>The Preservatives</h3>
+<ul>
+<li><strong>PHENOXYETHANOL</strong> = A widely used preservative. Generally well tolerated.</li>
+<li><strong>SODIUM BENZOATE / POTASSIUM SORBATE</strong> = Mild preservatives common in "clean" beauty.</li>
+<li><strong>METHYLPARABEN / PROPYLPARABEN</strong> = Paraben preservatives. Effective but controversial.</li>
+</ul>
+
+<h3>The Texture and Feel</h3>
+<ul>
+<li><strong>CARBOMER</strong> = Creates gel texture.</li>
+<li><strong>XANTHAN GUM</strong> = Natural thickener from bacterial fermentation.</li>
+<li><strong>SODIUM HYDROXIDE</strong> = Lye. Used in tiny amounts to adjust pH. Safe in finished products.</li>
+<li><strong>CITRIC ACID</strong> = pH adjuster from citrus. Completely safe.</li>
+</ul>
+
+<h2>Plant Ingredients: The Latin Names</h2>
+<p>INCI requires plant ingredients to use their Latin botanical name followed by the plant part and preparation method:</p>
+<ul>
+<li><strong>ALOE BARBADENSIS LEAF JUICE</strong> = Aloe vera</li>
+<li><strong>BUTYROSPERMUM PARKII BUTTER</strong> = Shea butter</li>
+<li><strong>COCOS NUCIFERA OIL</strong> = Coconut oil</li>
+<li><strong>HELIANTHUS ANNUUS SEED OIL</strong> = Sunflower oil</li>
+<li><strong>ARGANIA SPINOSA KERNEL OIL</strong> = Argan oil</li>
+<li><strong>CAMELLIA SINENSIS LEAF EXTRACT</strong> = Green tea extract</li>
+<li><strong>ROSA CANINA SEED OIL</strong> = Rosehip oil</li>
+</ul>
+<p>This is why ingredient lists look so intimidating — perfectly ordinary plant oils get scientific names.</p>
+
+<h2>Colour Index (CI) Numbers</h2>
+<p>Colours in cosmetics use CI (Colour Index) numbers:</p>
+<ul>
+<li><strong>CI 77891</strong> = Titanium dioxide (white pigment)</li>
+<li><strong>CI 77491</strong> = Iron oxide red</li>
+<li><strong>CI 77492</strong> = Iron oxide yellow</li>
+<li><strong>CI 77499</strong> = Iron oxide black</li>
+</ul>
+<p>These mineral pigments are safe. They&apos;re the coloured ingredients in foundations, eyeshadows, and blushes. "May contain" sections list all possible colours used across shade variants.</p>
+
+<h2>Red Flags to Watch For</h2>
+<p>When scanning an ingredient list, here are patterns that warrant closer inspection:</p>
+<ul>
+<li><strong>PARFUM / FRAGRANCE</strong> early in the list = high fragrance concentration. Greater sensitisation risk.</li>
+<li><strong>Multiple parabens</strong> = the product uses paraben cocktails. Consider paraben-free alternatives.</li>
+<li><strong>DMDM HYDANTOIN, QUATERNIUM-15</strong> = formaldehyde releasers. Avoid if possible.</li>
+<li><strong>ALCOHOL DENAT. in the first 5 ingredients</strong> = high alcohol content. Can be drying for skin.</li>
+</ul>
+
+<h2>The Easy Way: Use IngredScan</h2>
+<p>Rather than memorising INCI names, scan any cosmetic product with IngredScan. We automatically identify every ingredient, match it against our database of 100+ documented cosmetic ingredients, and flag anything of concern. Each ingredient gets a risk rating (low, medium, high) with an evidence-based explanation.</p>
+<p>The goal isn&apos;t to make you afraid of your products — it&apos;s to give you the knowledge to make informed choices about what you put on your skin every day.</p>
+`,
+  },
+  {
+    slug: 'clean-beauty-uk-guide',
+    title: 'Clean Beauty in the UK: What It Actually Means and What to Look For',
+    description: 'The clean beauty movement is booming in the UK — but the term has no legal definition. Here is what it means in practice and how to shop smarter.',
+    date: '2026-03-25',
+    author: 'IngredScan Team',
+    category: 'Cosmetics',
+    tags: ['clean beauty UK', 'natural cosmetics', 'paraben free UK', 'cosmetic shopping guide'],
+    readTime: '5 min read',
+    featured: false,
+    content: `
+<p>Walk into any Boots, Superdrug, or Space NK and you&apos;ll see "clean beauty" sections, "clean" labels, and brands marketing themselves as "clean." But what does "clean" actually mean in the context of UK cosmetics? The short answer: whatever the brand wants it to mean.</p>
+
+<h2>Clean Beauty Has No Legal Definition</h2>
+<p>Unlike "organic" (which has EU/UK certification requirements) or the EU Cosmetics Regulation (which governs ingredient safety), "clean beauty" is not defined or regulated in UK or EU law. There is no standard, no certification, and no enforcement body.</p>
+<p>This means brands set their own definitions. Some define "clean" as free from a specific list of ingredients (parabens, sulphates, silicones, fragrance). Others define it as "non-toxic" — but all legally sold cosmetics are by definition non-toxic at permitted concentrations. Some use it interchangeably with "natural" or "organic."</p>
+<p>The result: two products both labelled "clean" can have vastly different ingredient standards.</p>
+
+<h2>What Clean Beauty Usually Means in Practice</h2>
+<p>While there is no single standard, most UK brands using "clean beauty" positioning tend to exclude some or all of the following:</p>
+<ul>
+<li><strong>Parabens</strong> — preservatives with weak oestrogenic activity</li>
+<li><strong>SLS/SLES</strong> — sulphate surfactants that can be irritating</li>
+<li><strong>Silicones</strong> — synthetic polymers (dimethicone, cyclomethicone)</li>
+<li><strong>Synthetic fragrance</strong> — undisclosed chemical blends labelled as "Parfum"</li>
+<li><strong>Mineral oil</strong> — petroleum-derived occlusive</li>
+<li><strong>PEGs</strong> — polyethylene glycol compounds</li>
+<li><strong>Formaldehyde releasers</strong> — DMDM hydantoin, quaternium-15, etc.</li>
+</ul>
+<p>This list is reasonable but not universally applied. Some "clean" brands exclude all of the above; others exclude only some.</p>
+
+<h2>Clean vs Natural vs Organic</h2>
+<p>These terms are not interchangeable:</p>
+<ul>
+<li><strong>Clean</strong> = generally avoids certain controversial synthetic ingredients. No legal standard.</li>
+<li><strong>Natural</strong> = uses plant-derived or mineral ingredients. No legal standard in UK cosmetics, though COSMOS and NATRUE offer certification.</li>
+<li><strong>Organic</strong> = ingredients grown without synthetic pesticides or fertilisers. The Soil Association certifies organic cosmetics in the UK; COSMOS is the EU standard. This has legal backing.</li>
+</ul>
+<p>A product can be "clean" but synthetic (like a silicone-free, paraben-free moisturiser with synthetic humectants). A product can be "natural" but not "clean" (like a natural soap with essential oils that cause sensitisation). And a product can be organic but still contain irritating ingredients.</p>
+
+<h2>The Problem With Ingredient Fear</h2>
+<p>The clean beauty movement has done good things — it has pushed brands to disclose more, reformulate questionable products, and offer alternatives for sensitive skin. But it has also created unnecessary fear around ingredients that are perfectly safe:</p>
+<ul>
+<li><strong>Dimethicone</strong> is not absorbed by the skin and is one of the safest topical ingredients. It is excluded from many "clean" lists due to environmental persistence, not safety.</li>
+<li><strong>Mineral oil</strong> (cosmetic grade) is highly refined and does not penetrate skin. Dermatologists regularly recommend it for eczema.</li>
+<li><strong>Phenoxyethanol</strong> is a preservative that replaced parabens in many formulations — and without effective preservation, products grow mould and bacteria, which is far more dangerous than any preservative.</li>
+</ul>
+<p>The danger of ingredient blacklists is that they focus on removing things rather than evaluating the overall formula. A product with "clean" marketing but poor formulation is not better than a well-formulated product containing a trace of dimethicone.</p>
+
+<h2>Where to Find Clean Beauty in the UK</h2>
+<p>If you want to shop with ingredient awareness in the UK, here are some options:</p>
+<ul>
+<li><strong>Holland &amp; Barrett</strong> — extensive natural and organic skincare range, in-house "clean" standards</li>
+<li><strong>Boots</strong> — now has a "Clean Beauty" edit. Look for brands like The Ordinary, CeraVe, and own-brand "Botanics"</li>
+<li><strong>Superdrug</strong> — affordable options including own-brand "Naturally Radiant" range</li>
+<li><strong>Space NK</strong> — premium "clean" brands like Drunk Elephant, Tata Harper, REN</li>
+<li><strong>Content Beauty</strong> — London-based retailer specialising in genuinely clean and organic beauty</li>
+<li><strong>Look Fantastic</strong> — online retailer with clean beauty filters</li>
+</ul>
+
+<h2>How to Actually Shop Smarter</h2>
+<p>Instead of relying on "clean" labels, use these evidence-based approaches:</p>
+<ol>
+<li><strong>Scan the product with IngredScan</strong> — our cosmetic scoring analyses every INCI ingredient against published evidence and EU regulatory status. No marketing claims, just data.</li>
+<li><strong>Focus on your specific concerns</strong> — if you have sensitive skin, prioritise fragrance-free products. If you&apos;re pregnant, check for retinol and certain preservatives. Don&apos;t avoid everything on every list.</li>
+<li><strong>Read the ingredient list</strong> — the first 5-7 ingredients make up most of the formula. Focus your attention there.</li>
+<li><strong>Look for certifications with legal backing</strong> — COSMOS, Soil Association Organic, Leaping Bunny (cruelty-free), and The Vegan Society mark all have actual audit and certification processes behind them.</li>
+<li><strong>Be sceptical of "free from" marketing</strong> — a product that is "free from 1,500 ingredients" sounds impressive but is meaningless if those ingredients were never going to be in that type of product anyway.</li>
+</ol>
+<p>The bottom line: "clean beauty" is a marketing category, not a safety standard. Use it as a starting point, but verify with actual ingredient data.</p>
+`,
+  },
 ]
 
 export function getAllPosts(): BlogPost[] {
