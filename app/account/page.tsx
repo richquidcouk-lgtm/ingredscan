@@ -194,27 +194,6 @@ export default function AccountPage() {
               />
             </div>
 
-            {/* Section: Support */}
-            <p className="text-[10px] uppercase tracking-widest font-semibold mb-2" style={{ color: 'rgba(240,240,244,0.35)' }}>
-              Support IngredScan
-            </p>
-            <div className="rounded-2xl overflow-hidden glass-card mb-6">
-              <div className="px-4 py-4">
-                <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(240,240,244,0.5)' }}>
-                  IngredScan is free forever. If it&apos;s helped you shop smarter, you can support us to keep it running and improve the database.
-                </p>
-                <a
-                  href="https://buy.stripe.com/test_placeholder"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-medium transition-all active:scale-95"
-                  style={{ backgroundColor: 'rgba(245,166,35,0.1)', color: '#f5a623', border: '1px solid rgba(245,166,35,0.15)' }}
-                >
-                  ☕ Buy us a coffee — £2.99
-                </a>
-              </div>
-            </div>
-
             {/* Section: About */}
             <p className="text-[10px] uppercase tracking-widest font-semibold mb-2" style={{ color: 'rgba(240,240,244,0.35)' }}>
               About
