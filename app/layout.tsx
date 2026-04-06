@@ -6,7 +6,6 @@ import FeedbackButton from '@/components/FeedbackButton'
 import CookieConsent from '@/components/CookieConsent'
 import { MarketProvider } from '@/components/MarketProvider'
 import BottomNav from '@/components/BottomNav'
-import Script from 'next/script'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -52,6 +51,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${plusJakartaSans.variable}`}>
       <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-15E8R2CQPT" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-15E8R2CQPT');
+            `,
+          }}
+        />
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -65,18 +75,6 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="x-default" href="https://ingredscan.app" />
       </head>
       <body className="antialiased min-h-screen" style={{ backgroundColor: '#0b0b0f' }}>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-15E8R2CQPT"
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-15E8R2CQPT');
-          `}
-        </Script>
         {/* Background layers */}
         <div className="bg-mesh" />
         <div className="bg-dots" />
