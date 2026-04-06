@@ -128,6 +128,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${plusJakartaSans.variable}`}>
       <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-15E8R2CQPT" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-15E8R2CQPT');
+            `,
+          }}
+        />
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
