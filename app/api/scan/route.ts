@@ -6,6 +6,7 @@ import { resolveAdditives } from '@/lib/scoring'
 import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
 import { detectSpecialCategory } from '@/lib/specialCategories'
 import { validateProductData } from '@/lib/dataQuality'
+import { extractRetailerInfo } from '@/lib/retailers'
 import { getServiceSupabase } from '@/lib/supabase'
 
 export async function GET(request: NextRequest) {
@@ -149,10 +150,14 @@ export async function GET(request: NextRequest) {
     }
   }
 
+  // Extract retailer info from OFF data
+  const retailerInfo = extractRetailerInfo(offProduct)
+
   return NextResponse.json({
     ...product,
     warning: validated.warning,
     data_quality: dataQuality,
+    retailer_info: retailerInfo,
   })
 }
 

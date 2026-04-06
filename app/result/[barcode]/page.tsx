@@ -22,6 +22,7 @@ import SupplementResult from '@/components/SupplementResult'
 import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
 import { getNovaEmoji, getNovaLabel, resolveAdditives } from '@/lib/scoring'
 import ScoreBreakdown from '@/components/ScoreBreakdown'
+import RetailerInfo from '@/components/RetailerInfo'
 import { getRegulatoryRef } from '@/lib/regulatoryRefs'
 import { detectSpecialCategory } from '@/lib/specialCategories'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
@@ -447,7 +448,15 @@ export default function ResultPage() {
           </div>
         )}
 
-        {/* 9. Data source + confidence */}
+        {/* 9. Retailer info + where did you buy */}
+        <div className="animate-fadeUp" style={{ animationDelay: '340ms' }}>
+          <RetailerInfo
+            barcode={barcode}
+            offRetailers={(product as any).retailer_info?.retailers || []}
+          />
+        </div>
+
+        {/* 10. Data source + confidence */}
         <div
           className="rounded-xl px-4 py-3 text-center animate-fadeUp glass-subtle"
           style={{ borderColor: 'rgba(124,111,255,0.15)', animationDelay: '350ms' }}

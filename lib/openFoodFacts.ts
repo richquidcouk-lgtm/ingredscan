@@ -18,6 +18,15 @@ export type OFFProduct = {
   image_front_url: string
   image_front_small_url: string
   countries_tags: string[]
+  // Retailer & purchase data
+  stores: string
+  stores_tags: string[]
+  purchase_places: string
+  purchase_places_tags: string[]
+  origins: string
+  origins_tags: string[]
+  manufacturing_places: string
+  manufacturing_places_tags: string[]
 }
 
 export type OFFResponse = {
