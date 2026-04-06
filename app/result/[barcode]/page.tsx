@@ -122,18 +122,44 @@ export default function ResultPage() {
   }
 
   function findSwaps(category: string) {
-    const categoryLower = category.toLowerCase()
     const marketCode = config.code
+    // Split category string into individual tags for precise matching
+    const tags = category.toLowerCase().split(',').map(t => t.trim())
+    const productName = (product?.name || '').toLowerCase()
+
+    let bestMatch: any[] | null = null
+    let bestScore = 0
+
     for (const group of swapsData) {
-      if (group.keywords.some((kw: string) => categoryLower.includes(kw))) {
-        const marketSwaps = group.swaps.filter((s: any) =>
-          !s.market || s.market === marketCode
-        )
-        setMatchedSwaps(marketSwaps)
-        return
+      let matchScore = 0
+
+      for (const kw of group.keywords as string[]) {
+        const kwLower = kw.toLowerCase()
+        // Check if any individual category tag contains this keyword
+        const tagMatch = tags.some(tag => {
+          // Match whole word within tag: "en:noodles" contains "noodle"
+          // But "en:snacks" should NOT match "sauce"
+          const tagWords = tag.replace(/^en:/, '').replace(/-/g, ' ').split(/\s+/)
+          return tagWords.some(tw => tw.startsWith(kwLower) || kwLower.startsWith(tw))
+        })
+        if (tagMatch) matchScore += 2
+
+        // Check product name
+        if (productName.includes(kwLower)) matchScore += 3
+      }
+
+      if (matchScore > bestScore) {
+        bestScore = matchScore
+        bestMatch = group.swaps.filter((s: any) => !s.market || s.market === marketCode)
       }
     }
-    setMatchedSwaps([])
+
+    // Only show swaps if we have a confident match (score >= 3)
+    if (bestMatch && bestScore >= 3) {
+      setMatchedSwaps(bestMatch)
+    } else {
+      setMatchedSwaps([])
+    }
   }
 
   function scrollToSection(id: string) {
@@ -341,8 +367,11 @@ export default function ResultPage() {
               </div>
             ) : (
               <div className="rounded-2xl p-5 glass-card">
-                <p className="text-sm" style={{ color: 'rgba(240,240,244,0.4)' }}>
-                  No swaps available for this product category yet. We&apos;re adding more every week.
+                <p className="text-sm mb-1" style={{ color: 'rgba(240,240,244,0.45)' }}>
+                  No alternatives available for this specific product category yet.
+                </p>
+                <p className="text-xs" style={{ color: 'rgba(240,240,244,0.35)' }}>
+                  We only show alternatives from the same product type — never from a different category. We&apos;re expanding our database regularly.
                 </p>
               </div>
             )}
