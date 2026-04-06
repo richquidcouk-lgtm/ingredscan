@@ -9,6 +9,7 @@ import AuthModal from '@/components/AuthModal'
 import { useMarket } from '@/components/MarketProvider'
 import MarketSelector, { MarketSelectorTrigger } from '@/components/MarketSelector'
 import Onboarding, { useOnboarding, AuthBottomSheet } from '@/components/Onboarding'
+import InstallBanner from '@/components/InstallBanner'
 
 type RecentScan = {
   barcode: string
@@ -125,6 +126,11 @@ export default function HomePage() {
           }),
         }}
       />
+      {/* Install Banner */}
+      <div className="px-5 max-w-lg mx-auto relative z-10 pt-2">
+        <InstallBanner />
+      </div>
+
       {/* Hero radial glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[600px] pointer-events-none"

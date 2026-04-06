@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAllPosts, getPostBySlug, getRelatedPosts } from '@/lib/blog'
 import NewsletterSignup from './NewsletterSignup'
+import InstallBanner from '@/components/InstallBanner'
 
 type Props = {
   params: { slug: string }
@@ -57,6 +58,11 @@ export default function BlogPostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
+      {/* Install Banner */}
+      <div className="mb-8">
+        <InstallBanner />
+      </div>
 
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs mb-8 flex-wrap" style={{ color: 'rgba(240,240,244,0.35)' }}>

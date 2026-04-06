@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getAllPosts } from '@/lib/blog'
+import InstallBanner from '@/components/InstallBanner'
 
 export const metadata: Metadata = {
   title: 'Blog — IngredScan',
@@ -24,6 +25,11 @@ export default function BlogPage() {
         </svg>
         Back to Home
       </Link>
+
+      {/* Install Banner */}
+      <div className="mb-8">
+        <InstallBanner />
+      </div>
 
       <div className="text-center mb-12 animate-fadeUp">
         <h1
