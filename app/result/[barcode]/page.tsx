@@ -22,11 +22,13 @@ import SupplementResult from '@/components/SupplementResult'
 import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
 import { getNovaEmoji, getNovaLabel, resolveAdditives } from '@/lib/scoring'
 import ScoreBreakdown from '@/components/ScoreBreakdown'
+import AllergenAlert from '@/components/AllergenAlert'
 import RetailerInfo from '@/components/RetailerInfo'
 import { getRegulatoryRef } from '@/lib/regulatoryRefs'
 import { detectSpecialCategory } from '@/lib/specialCategories'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
 import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
+import { cacheProductOffline, getOfflineProduct } from '@/lib/offlineCache'
 import { useMarket } from '@/components/MarketProvider'
 import ComingSoonSwaps from '@/components/ComingSoonSwaps'
 import Logo from '@/components/Logo'
@@ -64,7 +66,7 @@ export default function ResultPage() {
 
       if (cached) {
         setProduct(cached as Product)
-        // Compute cosmetic score for cached cosmetic products
+        cacheProductOffline(cached)
         if (cached.product_type === 'cosmetic' && cached.inci_ingredients) {
           const score = calculateCosmeticScore(cached, cached.inci_ingredients)
           setCosmeticScore(score)
@@ -75,15 +77,28 @@ export default function ResultPage() {
         return
       }
     } catch {
-      // Not cached, proceed to API
+      // Not cached in Supabase, proceed to API
     }
 
     try {
       const res = await fetch(`/api/scan?barcode=${barcode}`)
       if (!res.ok) {
         if (res.status === 404) {
+          // Try offline cache before showing error
+          const offline = getOfflineProduct(barcode)
+          if (offline) {
+            setProduct(offline as Product)
+            setLoading(false)
+            return
+          }
           setError('not_found')
         } else {
+          const offline = getOfflineProduct(barcode)
+          if (offline) {
+            setProduct(offline as Product)
+            setLoading(false)
+            return
+          }
           setError('api_error')
         }
         setLoading(false)
@@ -92,10 +107,18 @@ export default function ResultPage() {
 
       const data = await res.json()
       setProduct(data as Product)
+      cacheProductOffline(data)
       if (data.cosmetic_score) setCosmeticScore(data.cosmetic_score)
       findSwaps()
       recordScan()
     } catch {
+      // Network error — try offline cache
+      const offline = getOfflineProduct(barcode)
+      if (offline) {
+        setProduct(offline as Product)
+        setLoading(false)
+        return
+      }
       setError('api_error')
     }
 
@@ -296,6 +319,9 @@ export default function ResultPage() {
             </div>
           </div>
         </div>
+
+        {/* 1b. Allergen alert */}
+        <AllergenAlert ingredientsText={product.ingredients || ''} />
 
         {/* 2. Score section */}
         <div className="flex gap-3 animate-fadeUp" style={{ animationDelay: '50ms' }}>

@@ -8,6 +8,7 @@ import AuthModal from '@/components/AuthModal'
 import { useMarket } from '@/components/MarketProvider'
 import MarketSelector from '@/components/MarketSelector'
 import Logo from '@/components/Logo'
+import AllergenSettings from '@/components/AllergenSettings'
 
 function SettingsRow({
   icon,
@@ -273,6 +274,14 @@ export default function AccountPage() {
                 label="Scan History"
                 href="/history"
               />
+            </div>
+
+            {/* Section: Allergens */}
+            <p className="text-[11px] uppercase tracking-widest font-semibold mb-2" style={{ color: 'rgba(240,240,244,0.5)' }}>
+              Health
+            </p>
+            <div className="mb-6">
+              <AllergenSettings />
             </div>
 
             {/* Section: About */}
