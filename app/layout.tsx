@@ -65,14 +65,14 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <link rel="alternate" hrefLang="en-gb" href="https://ingredscan.app" />
-        <link rel="alternate" hrefLang="en-us" href="https://ingredscan.app" />
-        <link rel="alternate" hrefLang="de" href="https://ingredscan.app" />
-        <link rel="alternate" hrefLang="fr" href="https://ingredscan.app" />
-        <link rel="alternate" hrefLang="nl" href="https://ingredscan.app" />
-        <link rel="alternate" hrefLang="it" href="https://ingredscan.app" />
-        <link rel="alternate" hrefLang="es" href="https://ingredscan.app" />
-        <link rel="alternate" hrefLang="x-default" href="https://ingredscan.app" />
+        <link rel="alternate" hrefLang="en-gb" href="https://www.ingredscan.com" />
+        <link rel="alternate" hrefLang="en-us" href="https://www.ingredscan.com" />
+        <link rel="alternate" hrefLang="de" href="https://www.ingredscan.com" />
+        <link rel="alternate" hrefLang="fr" href="https://www.ingredscan.com" />
+        <link rel="alternate" hrefLang="nl" href="https://www.ingredscan.com" />
+        <link rel="alternate" hrefLang="it" href="https://www.ingredscan.com" />
+        <link rel="alternate" hrefLang="es" href="https://www.ingredscan.com" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.ingredscan.com" />
       </head>
       <body className="antialiased min-h-screen" style={{ backgroundColor: '#0b0b0f' }}>
         {/* Background layers */}
