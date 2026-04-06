@@ -202,8 +202,8 @@ export default function RootLayout({
             <p className="text-xs mb-3" style={{ color: 'rgba(240,240,244,0.5)' }}>
               &copy; 2026 IngredScan &middot; Made in London
             </p>
-            <p className="text-xs tracking-wide max-w-sm mx-auto leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>
-              IngredScan provides informational content only and is not a substitute for professional dietary or medical advice.
+            <p className="text-xs tracking-wide max-w-md mx-auto leading-relaxed mb-2" style={{ color: 'rgba(240,240,244,0.4)' }}>
+              Product data sourced from <a href="https://world.openfoodfacts.org" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(124,111,255,0.6)' }}>Open Food Facts</a> and <a href="https://world.openbeautyfacts.org" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(124,111,255,0.6)' }}>Open Beauty Facts</a> (CC-BY-SA 4.0). Scores are estimates only. Not medical advice. IngredScan is not affiliated with any brand or retailer.
             </p>
           </footer>
         </div>

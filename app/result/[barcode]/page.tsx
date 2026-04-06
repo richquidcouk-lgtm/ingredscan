@@ -322,12 +322,15 @@ export default function ResultPage() {
           )}
         </div>
 
-        {/* 4. Safer Alternatives (Swaps) — hidden for high-scoring products */}
+        {/* 4. Alternative Products — hidden for high-scoring products */}
         {product.quality_score < 9 && (
           <div className="animate-fadeUp" style={{ animationDelay: '100ms' }}>
-            <h3 className="text-sm font-semibold mb-3" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
-              Safer Alternatives
+            <h3 className="text-sm font-semibold mb-1" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
+              Higher-Scoring Alternatives
             </h3>
+            <p className="text-[10px] mb-3" style={{ color: 'rgba(240,240,244,0.35)' }}>
+              Products that score higher on IngredScan&apos;s criteria. Not affiliated with any retailer. Availability may vary.
+            </p>
             {!config.supported ? (
               <ComingSoonSwaps />
             ) : matchedSwaps.length > 0 ? (
@@ -421,9 +424,17 @@ export default function ResultPage() {
           style={{ borderColor: 'rgba(124,111,255,0.15)', animationDelay: '350ms' }}
         >
           <p className="text-xs font-medium" style={{ color: '#7c6fff' }}>
-            {product.data_source} · {product.confidence}% verified
+            {product.data_source} · {product.confidence}% match
+          </p>
+          <p className="text-[10px] mt-1" style={{ color: 'rgba(240,240,244,0.35)' }}>
+            Sourced from community databases. Always check the physical label.
           </p>
         </div>
+
+        {/* Informational disclaimer */}
+        <p className="text-[10px] text-center leading-relaxed animate-fadeUp" style={{ color: 'rgba(240,240,244,0.35)', animationDelay: '360ms' }}>
+          Scores are for informational purposes only and do not constitute medical, dietary, or clinical advice. Consult a qualified professional for health decisions.
+        </p>
 
         {/* Low confidence warning */}
         {(product as any)?.warning && (

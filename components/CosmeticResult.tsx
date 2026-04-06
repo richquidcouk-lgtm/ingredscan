@@ -41,8 +41,8 @@ export default function CosmeticResult({ product, cosmeticScore, onBack }: Cosme
   const positiveFlags: string[] = []
   const negativeFlags: string[] = []
 
-  if (product.is_vegan) positiveFlags.push('Vegan')
-  if (product.is_cruelty_free) positiveFlags.push('Cruelty-Free')
+  if (product.is_vegan) positiveFlags.push('Labelled Vegan')
+  if (product.is_cruelty_free) positiveFlags.push('Labelled Cruelty-Free')
   if (product.fragrance_free) positiveFlags.push('Fragrance-Free')
   if (product.paraben_free) positiveFlags.push('Paraben-Free')
   if (product.sulphate_free) positiveFlags.push('Sulphate-Free')
@@ -207,6 +207,11 @@ export default function CosmeticResult({ product, cosmeticScore, onBack }: Cosme
             <AlternativesTab product={product} />
           )}
         </div>
+
+        {/* Informational disclaimer */}
+        <p className="text-[10px] text-center leading-relaxed" style={{ color: 'rgba(240,240,244,0.35)' }}>
+          Scores are for informational purposes only and do not constitute medical or clinical advice. Sourced from community databases. Always check the physical label.
+        </p>
 
         {/* Report */}
         <ProductReport barcode={product.barcode} />
@@ -496,7 +501,7 @@ function AlternativesTab({ product }: { product: Product }) {
   return (
     <div className="space-y-4">
       <div className="rounded-2xl p-5 glass-card">
-        <h4 className="text-sm font-semibold mb-2" style={{ color: '#f0f0f4' }}>Better alternatives for {categoryName}</h4>
+        <h4 className="text-sm font-semibold mb-2" style={{ color: '#f0f0f4' }}>Higher-scoring alternatives for {categoryName}</h4>
         <p className="text-xs leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>
           We&apos;re building our cosmetic alternatives database. Soon you&apos;ll see products with higher safety scores from these retailers:
         </p>
@@ -514,7 +519,7 @@ function AlternativesTab({ product }: { product: Product }) {
           Cosmetic alternatives coming soon
         </p>
         <p className="text-xs mt-1" style={{ color: 'rgba(240,240,244,0.45)' }}>
-          We&apos;re analysing products to find safer alternatives matched by category.
+          We&apos;re analysing products to find higher-scoring alternatives matched by category.
         </p>
       </div>
     </div>

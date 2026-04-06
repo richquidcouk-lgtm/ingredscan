@@ -111,7 +111,7 @@ export default function HomePage() {
               '@context': 'https://schema.org',
               '@type': 'FAQPage',
               mainEntity: [
-                { '@type': 'Question', name: 'What is IngredScan?', acceptedAnswer: { '@type': 'Answer', text: 'IngredScan is a free food and cosmetic barcode scanner. Scan any product to see its NOVA processing score, ingredient quality score, additive breakdown, and better alternatives from UK and US supermarkets.' } },
+                { '@type': 'Question', name: 'What is IngredScan?', acceptedAnswer: { '@type': 'Answer', text: 'IngredScan is a free food and cosmetic barcode scanner. Scan any product to see its NOVA processing score, ingredient quality score, additive breakdown, and products that score higher on our criteria from UK and US supermarkets.' } },
                 { '@type': 'Question', name: 'Is IngredScan free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, IngredScan is completely free. No subscription, no paywall, no credit card required. All features are available to everyone.' } },
                 { '@type': 'Question', name: 'What is a NOVA score?', acceptedAnswer: { '@type': 'Answer', text: 'The NOVA score classifies food by how industrially processed it is, on a scale of 1 to 4. NOVA 1 is whole unprocessed food. NOVA 4 is industrially processed. It was developed by researchers at the University of São Paulo.' } },
                 { '@type': 'Question', name: 'Which supermarkets does IngredScan cover?', acceptedAnswer: { '@type': 'Answer', text: 'IngredScan provides swap suggestions from Tesco, Sainsbury\'s, Asda, Waitrose, M&S, Aldi, Lidl (UK) and Whole Foods, Trader Joe\'s, Kroger, Target, Walmart, Costco (US).' } },
@@ -269,7 +269,7 @@ export default function HomePage() {
         <div className="grid grid-cols-2 gap-3">
           {[
             { icon: '🎯', title: 'Dual Scoring', desc: 'Processing level + quality score — two perspectives on every product for the full picture' },
-            { icon: '🛒', title: 'Smarter Swaps', desc: 'Better alternatives from real supermarkets in your area — suggested by the community' },
+            { icon: '🛒', title: 'Smarter Swaps', desc: 'Products that score higher on our criteria from supermarkets in your area — based on available data. Not affiliated with any retailer' },
             { icon: '🔍', title: 'Transparent Data', desc: 'Every score has a source. Every rating is explained. No black boxes.' },
             { icon: '💬', title: 'Plain English', desc: 'No chemistry degree needed — join thousands of people who finally understand food labels' },
           ].map((feature, i) => (

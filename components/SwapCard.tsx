@@ -104,7 +104,7 @@ export default function SwapCard({
           <div className="flex items-center gap-2 mt-1">
             {improvement > 0 && (
               <p className="text-[10px] font-medium" style={{ color: '#00e5a0' }}>
-                +{improvement.toFixed(1)} pts better
+                +{improvement.toFixed(1)} on our criteria
               </p>
             )}
             <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>
