@@ -379,7 +379,7 @@ const posts: BlogPost[] = [
 
 <h2>Continuous Improvement</h2>
 <p>We regularly review and refine our scoring methodology based on new research, user feedback, and data quality improvements. When we make significant changes, we document them and notify users. If you spot an error in a product's data or score, use the Report button on the result page — we review every report and apply corrections within 7 days.</p>
-<p>For full details, see our <a href="/disclaimer">disclaimer</a>. Questions about our methodology? Contact us at <a href="mailto:richquidcouk@gmail.com">richquidcouk@gmail.com</a>.</p>
+<p>For full details, see our <a href="/disclaimer">disclaimer</a>. Questions about our methodology? Contact us at <a href="mailto:support@ingredscan.com">support@ingredscan.com</a>.</p>
 `,
   },
   {

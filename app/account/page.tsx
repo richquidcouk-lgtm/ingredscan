@@ -312,7 +312,7 @@ export default function AccountPage() {
                   </svg>
                 }
                 label="Need help?"
-                onClick={() => window.location.href = 'mailto:richquidcouk@gmail.com'}
+                onClick={() => window.location.href = 'mailto:support@ingredscan.com'}
               />
               <SettingsRow
                 icon={

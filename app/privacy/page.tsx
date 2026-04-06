@@ -32,7 +32,7 @@ export default function PrivacyPage() {
           <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>1. Who We Are</h2>
           <p className="text-sm">
             IngredScan is operated from London, United Kingdom. If you have any questions about this privacy policy or how we handle your data, you can contact us at{' '}
-            <a href="mailto:richquidcouk@gmail.com" style={{ color: '#00e5a0' }}>richquidcouk@gmail.com</a>.
+            <a href="mailto:support@ingredscan.com" style={{ color: '#00e5a0' }}>support@ingredscan.com</a>.
           </p>
         </section>
 
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
           </ul>
           <p className="text-sm mt-3">
             To exercise any of these rights, email us at{' '}
-            <a href="mailto:richquidcouk@gmail.com" style={{ color: '#00e5a0' }}>richquidcouk@gmail.com</a>{' '}
+            <a href="mailto:support@ingredscan.com" style={{ color: '#00e5a0' }}>support@ingredscan.com</a>{' '}
             or use Settings &gt; Delete Account within the app to delete your account and all associated data.
           </p>
         </section>
@@ -141,7 +141,7 @@ export default function PrivacyPage() {
           <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>9. Children&apos;s Privacy</h2>
           <p className="text-sm">
             IngredScan is not intended for children under 13 years of age. We do not knowingly collect personal data from children under 13. If you believe a child under 13 has provided us with personal data, please contact us at{' '}
-            <a href="mailto:richquidcouk@gmail.com" style={{ color: '#00e5a0' }}>richquidcouk@gmail.com</a>{' '}
+            <a href="mailto:support@ingredscan.com" style={{ color: '#00e5a0' }}>support@ingredscan.com</a>{' '}
             and we will delete it promptly.
           </p>
         </section>
@@ -157,7 +157,7 @@ export default function PrivacyPage() {
           <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>11. Contact</h2>
           <p className="text-sm">
             For any privacy-related questions or requests, contact us at{' '}
-            <a href="mailto:richquidcouk@gmail.com" style={{ color: '#00e5a0' }}>richquidcouk@gmail.com</a>.
+            <a href="mailto:support@ingredscan.com" style={{ color: '#00e5a0' }}>support@ingredscan.com</a>.
           </p>
         </section>
       </div>

@@ -121,7 +121,7 @@ export default function TermsPage() {
           <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>10. Contact</h2>
           <p className="text-sm">
             For questions about these terms, contact us at{' '}
-            <a href="mailto:richquidcouk@gmail.com" style={{ color: '#00e5a0' }}>richquidcouk@gmail.com</a>.
+            <a href="mailto:support@ingredscan.com" style={{ color: '#00e5a0' }}>support@ingredscan.com</a>.
           </p>
         </section>
       </div>

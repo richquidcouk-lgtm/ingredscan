@@ -18,7 +18,7 @@ export default function MethodologyPage() {
           mainEntity: [
             { '@type': 'Question', name: 'How does IngredScan calculate its quality score?', acceptedAnswer: { '@type': 'Answer', text: 'The IngredScan quality score combines four factors: nutritional quality (50%, based on Nutri-Score algorithm), processing level (25%, based on NOVA classification), additive safety (20%, based on UK FSA and EFSA data), and organic certification (5%). The final score is out of 10.' } },
             { '@type': 'Question', name: 'Where does IngredScan get its data?', acceptedAnswer: { '@type': 'Answer', text: 'IngredScan uses Open Food Facts as its primary product database, enriched with data from the UK Food Standards Agency, EFSA, and the FDA. All sources are cited on individual product pages.' } },
-            { '@type': 'Question', name: 'Can a brand challenge their product score?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Brands can email hello@ingredscan.com with the product barcode and evidence of incorrect data. We review all challenges within 14 business days and correct factual errors promptly.' } },
+            { '@type': 'Question', name: 'Can a brand challenge their product score?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Brands can email support@ingredscan.com with the product barcode and evidence of incorrect data. We review all challenges within 14 business days and correct factual errors promptly.' } },
           ],
         }) }}
       />
@@ -212,7 +212,7 @@ export default function MethodologyPage() {
         {/* Challenge */}
         <section id="challenge">
           <h2 className="text-xl font-bold heading-display mb-4" style={{ color: '#f0f0f4' }}>Challenging a Score</h2>
-          <p className="text-sm mb-3">Brands and manufacturers can email <a href="mailto:hello@ingredscan.com" style={{ color: '#7c6fff' }}>hello@ingredscan.com</a> with the product barcode and evidence of incorrect data. We review all challenges within 14 business days. Scores are not changed based on commercial considerations — our methodology applies equally to all products.</p>
+          <p className="text-sm mb-3">Brands and manufacturers can email <a href="mailto:support@ingredscan.com" style={{ color: '#7c6fff' }}>support@ingredscan.com</a> with the product barcode and evidence of incorrect data. We review all challenges within 14 business days. Scores are not changed based on commercial considerations — our methodology applies equally to all products.</p>
           <p className="text-sm">Consumers can use the &quot;Report an issue&quot; button on any scan result page.</p>
         </section>
 
@@ -234,7 +234,7 @@ export default function MethodologyPage() {
         {/* Footer CTA */}
         <div className="rounded-xl p-5 text-center" style={{ backgroundColor: 'rgba(34,199,126,0.04)', border: '1px solid rgba(34,199,126,0.1)' }}>
           <p className="text-sm mb-2" style={{ color: '#f0f0f4' }}>Have a question about our methodology?</p>
-          <a href="mailto:hello@ingredscan.com" className="text-sm font-medium" style={{ color: '#7c6fff' }}>hello@ingredscan.com →</a>
+          <a href="mailto:support@ingredscan.com" className="text-sm font-medium" style={{ color: '#7c6fff' }}>support@ingredscan.com →</a>
         </div>
       </div>
     </div>
