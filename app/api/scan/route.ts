@@ -5,6 +5,7 @@ import { detectProductCategory } from '@/lib/categoryDetection'
 import { resolveAdditives } from '@/lib/scoring'
 import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
 import { detectSpecialCategory } from '@/lib/specialCategories'
+import { validateProductData } from '@/lib/dataQuality'
 import { getServiceSupabase } from '@/lib/supabase'
 
 export async function GET(request: NextRequest) {
@@ -98,6 +99,13 @@ export async function GET(request: NextRequest) {
     updated_at: new Date().toISOString(),
   }
 
+  // Data quality validation
+  const dataQuality = validateProductData({
+    ingredients_text: offProduct.ingredients_text || offProduct.ingredients_text_en,
+    nutriments: offProduct.nutriments,
+    product_name: offProduct.product_name,
+  })
+
   // Save to cache
   const { error: upsertError } = await supabase
     .from('products')
@@ -107,7 +115,11 @@ export async function GET(request: NextRequest) {
     console.error('[IngredScan] Product upsert failed:', upsertError.message)
   }
 
-  return NextResponse.json({ ...product, warning: validated.warning })
+  return NextResponse.json({
+    ...product,
+    warning: validated.warning,
+    data_quality: dataQuality,
+  })
 }
 
 async function handleCosmeticProduct(

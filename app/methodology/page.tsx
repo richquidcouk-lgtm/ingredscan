@@ -231,6 +231,35 @@ export default function MethodologyPage() {
           </div>
         </section>
 
+        {/* Data Verification */}
+        <section id="data-verification">
+          <h2 className="text-xl font-bold heading-display mb-4" style={{ color: '#f0f0f4' }}>How Product Data is Verified</h2>
+          <p className="text-sm mb-4">IngredScan sources product data from Open Food Facts and Open Beauty Facts, two open-source community databases. While we cannot guarantee the absolute reliability of all product data, we take the following steps:</p>
+          <div className="space-y-4">
+            <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(19,19,26,0.6)', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <p className="text-sm font-semibold mb-1" style={{ color: '#f0f0f4' }}>Automated data quality checks</p>
+              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>Our system automatically flags incomplete or inconsistent entries — such as missing ingredient lists, implausible nutrient values, or unrecognised ingredient formats. Products with insufficient data are shown with a warning rather than a score.</p>
+            </div>
+            <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(19,19,26,0.6)', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <p className="text-sm font-semibold mb-1" style={{ color: '#f0f0f4' }}>Ingredient parsing</p>
+              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>Our ingredient parser identifies likely errors — including formatting inconsistencies, encoding issues, truncated text, and entries that do not match known ingredient patterns. Flagged products are marked as &quot;data may be incomplete&quot; until resolved.</p>
+            </div>
+            <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(19,19,26,0.6)', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <p className="text-sm font-semibold mb-1" style={{ color: '#f0f0f4' }}>Community corrections</p>
+              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>Since Open Food Facts and Open Beauty Facts are community-maintained, errors can be corrected directly at source by any contributor. IngredScan reflects the latest available data from these databases.</p>
+            </div>
+            <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(19,19,26,0.6)', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <p className="text-sm font-semibold mb-1" style={{ color: '#f0f0f4' }}>User reporting</p>
+              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>Users can report incorrect product data directly in the app. Reported issues are reviewed and, where possible, corrections are submitted back to the Open Food Facts / Open Beauty Facts community.</p>
+            </div>
+          </div>
+          <div className="rounded-xl p-4 mt-4" style={{ backgroundColor: 'rgba(245,166,35,0.06)', border: '1px solid rgba(245,166,35,0.1)' }}>
+            <p className="text-xs leading-relaxed" style={{ color: 'rgba(240,240,244,0.5)' }}>
+              IngredScan does not have a dedicated data verification team. Always check the physical product label for the most accurate and up-to-date information. Scores and ingredient analyses are estimates based on available community data.
+            </p>
+          </div>
+        </section>
+
         {/* Footer CTA */}
         <div className="rounded-xl p-5 text-center" style={{ backgroundColor: 'rgba(34,199,126,0.04)', border: '1px solid rgba(34,199,126,0.1)' }}>
           <p className="text-sm mb-2" style={{ color: '#f0f0f4' }}>Have a question about our methodology?</p>
