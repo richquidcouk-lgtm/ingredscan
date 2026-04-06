@@ -23,7 +23,7 @@ export const MARKETS: Record<Market, MarketConfig> = {
     currencySymbol: '\u00A3',
     language: 'en-GB',
     regulatoryBody: 'UK FSA',
-    regulatoryRef: 'EU Reg 1333/2008 and UK FSA guidelines',
+    regulatoryRef: 'UK FSA Approved Additives Register and UK assimilated food law',
     retailers: ['Tesco', 'Sainsbury\'s', 'Asda', 'Waitrose', 'Morrisons', 'Aldi', 'Lidl', 'M&S'],
     supported: true,
     comingSoon: false,

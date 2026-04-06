@@ -21,6 +21,7 @@ import MedicineResult from '@/components/MedicineResult'
 import SupplementResult from '@/components/SupplementResult'
 import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
 import { getNovaEmoji, getNovaLabel, resolveAdditives } from '@/lib/scoring'
+import { getRegulatoryRef } from '@/lib/regulatoryRefs'
 import { detectSpecialCategory } from '@/lib/specialCategories'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
 import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
@@ -360,9 +361,20 @@ export default function ResultPage() {
               {additives.map((additive, i) => (
                 <AdditiveDetail key={additive.code} additive={additive} index={i} />
               ))}
-              <p className="text-xs text-center pt-3" style={{ color: 'rgba(240,240,244,0.4)' }}>
-                Risk levels based on {config.regulatoryRef}
-              </p>
+              {(() => {
+                const reg = getRegulatoryRef(config.code, 'food')
+                return (
+                  <a
+                    href={reg.primaryUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-xs text-center pt-3 transition-colors"
+                    style={{ color: 'rgba(124,111,255,0.6)' }}
+                  >
+                    Risk levels based on {reg.primaryRef} →
+                  </a>
+                )
+              })()}
             </div>
           )}
         </div>

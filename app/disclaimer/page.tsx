@@ -91,17 +91,24 @@ export default function DisclaimerPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>Additive Risk Ratings</h2>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>Regulatory Framework</h2>
+          <p className="text-sm mb-3"><strong>United Kingdom (England, Scotland, Wales):</strong> Food additive safety in Great Britain is governed by UK assimilated law — retained EU regulations that became part of UK domestic law following Brexit and are now published on <a href="https://www.legislation.gov.uk/eur/2008/1333/contents" style={{ color: '#7c6fff' }}>legislation.gov.uk</a>. The <a href="https://www.food.gov.uk" style={{ color: '#7c6fff' }}>Food Standards Agency (FSA)</a> is the primary authority, maintaining a public register of approved additives at <a href="https://www.food.gov.uk/business-guidance/approved-additives-and-e-numbers" style={{ color: '#7c6fff' }}>food.gov.uk</a>.</p>
+          <p className="text-sm mb-3"><strong>Northern Ireland:</strong> Follows EU food regulations under the Windsor Framework. EU Regulation (EC) No. 1333/2008 directly applies.</p>
+          <p className="text-sm mb-3"><strong>Post-Brexit Divergence:</strong> Since Brexit, the UK and EU food safety regulators operate independently. In most cases their decisions align, but differences exist. A notable example is Titanium Dioxide (E171), which was banned in EU food in 2022 but remains permitted in Great Britain following an independent FSA review. Where we are aware of UK/EU differences, we flag these clearly.</p>
+          <p className="text-sm mb-3"><strong>United States:</strong> Food additive safety is governed by the FDA under Title 21 of the Code of Federal Regulations (21 CFR). Additives may be classified as GRAS (Generally Recognized as Safe).</p>
+
+          <h2 className="text-lg font-semibold mb-3 mt-8" style={{ color: '#f0f0f4' }}>Additive Risk Ratings</h2>
           <p className="text-sm mb-3">
             Each additive in our database is classified as low, medium, or high risk. These classifications are based on:
           </p>
           <ul className="list-disc list-inside text-sm space-y-1.5 ml-2">
-            <li><strong>EU Regulation 1333/2008</strong> — the European regulation on food additives</li>
-            <li><strong>UK Food Standards Agency</strong> guidance and assessments</li>
+            <li><strong>UK FSA Approved Additives Register</strong> and UK assimilated food law</li>
+            <li><strong>EFSA scientific opinions</strong> — European Food Safety Authority assessments</li>
+            <li><strong>FDA 21 CFR and GRAS database</strong> — US regulatory assessments</li>
             <li><strong>Peer-reviewed scientific literature</strong> — published studies on additive safety</li>
           </ul>
           <p className="text-sm mt-3">
-            Risk ratings are <strong>relative classifications</strong> — &quot;high risk&quot; means an additive has more published concerns relative to others, not that it is necessarily dangerous at levels found in food. All additives permitted in UK/EU food have passed regulatory safety assessments and are considered safe within established limits.
+            Risk ratings are <strong>relative classifications</strong> — &quot;high risk&quot; means an additive has more published concerns relative to others, not that it is necessarily dangerous at levels found in food. All additives permitted in UK food have passed regulatory safety assessments and are considered safe within established limits.
           </p>
         </section>
 

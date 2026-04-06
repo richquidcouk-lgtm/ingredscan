@@ -12,6 +12,11 @@ interface AdditiveInfo {
   detailed_description?: string
   potential_risks?: string[]
   sources?: Array<{ title: string; url: string; year: number }>
+  uk_status?: string
+  eu_status?: string
+  us_status?: string
+  uk_notes?: string | null
+  divergence_alert?: boolean
 }
 
 interface Props {
@@ -84,9 +89,37 @@ export default function AdditiveDetail({ additive, index }: Props) {
               </div>
             )}
 
+            {/* Market-specific status */}
+            {additive.uk_status && (
+              <div className="flex items-center gap-2">
+                <span className="text-[10px]">🇬🇧</span>
+                <span className="text-[10px] font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>
+                  UK: {additive.uk_status === 'permitted' ? 'Permitted' : additive.uk_status === 'permitted_with_warning' ? 'Permitted (warning required)' : additive.uk_status === 'permitted_restricted' ? 'Permitted (restricted)' : additive.uk_status === 'banned' ? 'Banned' : additive.uk_status}
+                </span>
+              </div>
+            )}
+
+            {/* Divergence alert */}
+            {additive.divergence_alert && additive.uk_status !== additive.eu_status && (
+              <div className="rounded-lg px-3 py-2" style={{ backgroundColor: 'rgba(245,166,35,0.06)', border: '1px solid rgba(245,166,35,0.1)' }}>
+                <p className="text-[10px] font-medium mb-1" style={{ color: '#f5a623' }}>🇬🇧🇪🇺 UK/EU Regulatory Difference</p>
+                <p className="text-[10px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.45)' }}>
+                  This additive has different status in the UK ({additive.uk_status}) and EU ({additive.eu_status}).
+                  {additive.uk_notes && ` ${additive.uk_notes}`}
+                </p>
+              </div>
+            )}
+
+            {/* UK notes (non-divergence) */}
+            {additive.uk_notes && !additive.divergence_alert && (
+              <p className="text-[10px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>
+                🇬🇧 {additive.uk_notes}
+              </p>
+            )}
+
             {additive.regulation && (
-              <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.45)' }}>
-                Regulation: {additive.regulation}
+              <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>
+                {additive.regulation}
               </p>
             )}
 
