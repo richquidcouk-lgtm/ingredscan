@@ -92,6 +92,8 @@ export async function GET(request: NextRequest) {
     product_type: 'food' as const,
     nova_source: novaSource,
     special_category: specialCategory,
+    quality_score_breakdown: validated.quality_breakdown,
+    quality_score_version: 2,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   }

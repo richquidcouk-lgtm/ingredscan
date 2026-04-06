@@ -21,6 +21,7 @@ import MedicineResult from '@/components/MedicineResult'
 import SupplementResult from '@/components/SupplementResult'
 import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
 import { getNovaEmoji, getNovaLabel, resolveAdditives } from '@/lib/scoring'
+import ScoreBreakdown from '@/components/ScoreBreakdown'
 import { getRegulatoryRef } from '@/lib/regulatoryRefs'
 import { detectSpecialCategory } from '@/lib/specialCategories'
 import { supabase, type Product, type NutritionData } from '@/lib/supabase'
@@ -286,6 +287,11 @@ export default function ResultPage() {
             novaSource={(product as any).nova_source}
           />
         </div>
+
+        {/* 2b. Score breakdown */}
+        {(product as any).quality_breakdown ? (
+          <ScoreBreakdown breakdown={(product as any).quality_breakdown} />
+        ) : null}
 
         {/* 3. Quick flags — anchor links and NOVA chips */}
         <div className="flex flex-wrap gap-2 animate-fadeUp" style={{ animationDelay: '80ms' }}>

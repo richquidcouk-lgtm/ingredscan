@@ -41,6 +41,7 @@ export type ValidatedProduct = {
   product: OFFProduct
   nova_score: number
   quality_score: number
+  quality_breakdown: import('@/lib/scoring').QualityScoreBreakdown
   confidence: number
   warning: string | null
   overrides_applied: string[]
@@ -102,6 +103,7 @@ export function validateProduct(product: OFFProduct): ValidatedProduct {
     ingredients_text: product.ingredients_text,
   })
 
+  const { quality_breakdown } = scoring
   let { nova_score, quality_score, confidence, warning } = scoring
 
   // Override 1: Name suggests fresh produce but NOVA is 4
@@ -137,6 +139,7 @@ export function validateProduct(product: OFFProduct): ValidatedProduct {
     product,
     nova_score,
     quality_score,
+    quality_breakdown,
     confidence,
     warning,
     overrides_applied: overrides,

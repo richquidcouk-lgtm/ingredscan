@@ -37,9 +37,21 @@ const NOVA4_INGREDIENT_INDICATORS = [
   'mechanically separated',
 ]
 
+export type QualityScoreBreakdown = {
+  nutritional: number    // 0-5.0
+  processing: number     // 0-2.5
+  additives: number      // 0-2.0
+  organic: number        // 0-0.5
+  total: number          // 0-10.0
+  nutriscore: string     // A-E or 'unknown'
+  nova: number
+  version: number
+}
+
 export type ScoringResult = {
   nova_score: number
   quality_score: number
+  quality_breakdown: QualityScoreBreakdown
   confidence: number
   warning: string | null
   is_fresh_produce: boolean
@@ -112,64 +124,193 @@ export function inferNovaScore(product: OpenFoodFactsProduct): number {
   return 3
 }
 
+// --- BEVERAGE DETECTION ---
+const BEVERAGE_CATEGORIES = [
+  'en:beverages', 'en:drinks', 'en:soft-drinks', 'en:juices',
+  'en:waters', 'en:energy-drinks', 'en:fruit-juices', 'en:sodas',
+  'en:mineral-waters', 'en:iced-teas',
+]
+
+function isBeverage(categories: string[]): boolean {
+  return categories.some(c => BEVERAGE_CATEGORIES.includes(c))
+}
+
+// --- NUTRI-SCORE CALCULATION ---
+function pointsFromThresholds(value: number, thresholds: number[]): number {
+  for (let i = 0; i < thresholds.length; i++) {
+    if (value <= thresholds[i]) return i
+  }
+  return thresholds.length
+}
+
+function calculateNutriScoreFromData(
+  nutriments: Record<string, number>,
+  beverage: boolean
+): { grade: string; points: number } {
+  const energy_kj = (nutriments['energy_100g'] || nutriments['energy-kcal_100g'] || 0) * 4.184
+  const sat_fat = nutriments['saturated-fat_100g'] || 0
+  const sugars = nutriments['sugars_100g'] || 0
+  const sodium_mg = (nutriments['sodium_100g'] || (nutriments['salt_100g'] || 0) * 400) * 1000
+  const fibre = nutriments['fiber_100g'] || nutriments['fibre_100g'] || 0
+  const protein = nutriments['proteins_100g'] || 0
+
+  // Negative points
+  const energy_pts = pointsFromThresholds(energy_kj, [335, 670, 1005, 1340, 1675, 2010, 2345, 2680, 3015, 3350])
+  const sat_pts = pointsFromThresholds(sat_fat, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+  let sugar_pts: number
+  if (beverage) {
+    sugar_pts = sugars <= 0 ? 0 : sugars <= 1 ? 1 : sugars <= 2 ? 2 : sugars <= 5 ? 3 : sugars <= 7.5 ? 5 : sugars <= 10 ? 7 : 10
+  } else {
+    sugar_pts = pointsFromThresholds(sugars, [4.5, 9, 13.5, 18, 22.5, 27, 31, 36, 40, 45])
+  }
+
+  const sodium_pts = pointsFromThresholds(sodium_mg, [90, 180, 270, 360, 450, 540, 630, 720, 810, 900])
+
+  const negative = energy_pts + sat_pts + sugar_pts + sodium_pts
+
+  // Positive points
+  const fibre_pts = fibre < 0.9 ? 0 : fibre < 1.9 ? 1 : fibre < 2.8 ? 2 : fibre < 3.7 ? 3 : fibre < 4.7 ? 4 : 5
+  const protein_pts = protein < 1.6 ? 0 : protein < 3.2 ? 1 : protein < 4.8 ? 2 : protein < 6.4 ? 3 : protein < 8.0 ? 4 : 5
+  const fruit_veg_pts = 0 // Cannot determine from OFF data reliably
+
+  const positive = fibre_pts + protein_pts + fruit_veg_pts
+
+  let total: number
+  if (negative >= 11 && fruit_veg_pts < 5) {
+    total = negative - fibre_pts - fruit_veg_pts
+  } else {
+    total = negative - positive
+  }
+
+  // Grade
+  let grade: string
+  if (beverage) {
+    grade = total <= 1 ? 'a' : total <= 5 ? 'b' : total <= 9 ? 'c' : total <= 13 ? 'd' : 'e'
+  } else {
+    grade = total <= -1 ? 'a' : total <= 2 ? 'b' : total <= 10 ? 'c' : total <= 18 ? 'd' : 'e'
+  }
+
+  return { grade, points: total }
+}
+
+// --- COMPONENT 1: NUTRITIONAL QUALITY (50%) ---
+function calcNutritionalComponent(product: OpenFoodFactsProduct): { score: number; grade: string } {
+  const categories = (product.categories_tags || []).map(c => c.toLowerCase())
+  const beverage = isBeverage(categories)
+
+  // Use OFF nutri-score if available
+  let grade = (product.nutriscore_grade || '').toLowerCase()
+
+  // If not available, calculate from nutriments
+  if (!grade || !['a', 'b', 'c', 'd', 'e'].includes(grade)) {
+    const nutriments = product.nutriments || {}
+    const hasData = nutriments['energy-kcal_100g'] || nutriments['sugars_100g'] || nutriments['fat_100g']
+    if (hasData) {
+      const calc = calculateNutriScoreFromData(nutriments, beverage)
+      grade = calc.grade
+    } else {
+      return { score: 2.5, grade: 'unknown' } // Neutral when no data
+    }
+  }
+
+  const GRADE_SCORES: Record<string, number> = { a: 5.0, b: 4.0, c: 3.0, d: 2.0, e: 1.0 }
+  return { score: GRADE_SCORES[grade] || 2.5, grade }
+}
+
+// --- COMPONENT 2: PROCESSING LEVEL (25%) ---
+function calcProcessingComponent(novaScore: number, isInferred: boolean): number {
+  const NOVA_SCORES: Record<number, number> = { 1: 2.5, 2: 2.5, 3: 1.5, 4: 0.5 }
+  let score = NOVA_SCORES[novaScore] ?? 1.5
+  // Slightly less penalty for inferred NOVA 4
+  if (novaScore === 4 && isInferred) score = 0.75
+  return score
+}
+
+// --- COMPONENT 3: ADDITIVES (20%) ---
+function calcAdditiveComponent(additiveTags: string[]): number {
+  let score = 2.0
+  const resolved = resolveAdditives(additiveTags)
+
+  for (const add of resolved) {
+    if (add.risk === 'high') score -= 0.4
+    if (add.risk === 'medium') score -= 0.15
+
+    // Southampton Six warning label penalty
+    const warnCodes = ['E102', 'E104', 'E110', 'E122', 'E124', 'E129']
+    if (warnCodes.includes(add.code.toUpperCase())) score -= 0.3
+
+    // Formaldehyde releaser penalty
+    const formaldehydeReleasers = ['E211']
+    if (formaldehydeReleasers.includes(add.code.toUpperCase())) score -= 0.2
+  }
+
+  return Math.max(0, Math.min(2.0, score))
+}
+
+// --- COMPONENT 4: ORGANIC/CERTIFICATION (5%) ---
+function calcOrganicComponent(labels: string[]): number {
+  const lower = labels.map(l => l.toLowerCase())
+  if (lower.some(l =>
+    l.includes('organic') || l.includes('bio') ||
+    l.includes('en:organic') || l.includes('en:eu-organic') ||
+    l.includes('en:usda-organic') || l.includes('en:soil-association')
+  )) {
+    return 0.5
+  }
+  if (
+    lower.some(l => l.includes('no-artificial-colours') || l.includes('no-artificial-flavours')) &&
+    lower.some(l => l.includes('no-preservatives'))
+  ) {
+    return 0.25
+  }
+  return 0
+}
+
+// --- MAIN QUALITY SCORE ---
 export function calculateQualityScore(product: OpenFoodFactsProduct): number {
+  const breakdown = calculateQualityBreakdown(product)
+  return breakdown.total
+}
+
+export function calculateQualityBreakdown(product: OpenFoodFactsProduct): QualityScoreBreakdown {
   const categories = (product.categories_tags || []).map(c => c.toLowerCase())
   const freshProduce = isFreshProduce(categories)
-
-  let score = 10
-
-  const additives = product.additives_tags || []
-  // Only deduct for non-natural additives
-  const nonNaturalCount = additives.filter(tag => {
-    const code = tag.replace('en:', '').toLowerCase().replace(/^e-/, 'e')
-    return !NATURAL_ADDITIVES.some(nat => code.includes(nat))
-  }).length
-  score -= Math.min(nonNaturalCount * 1.5, 4)
-
-  const nutriscore = (product.nutriscore_grade || '').toLowerCase()
-  if (nutriscore === 'd' || nutriscore === 'e') {
-    score -= 1
-  } else if (nutriscore === 'c') {
-    score -= 0.5
-  }
-
-  const nutriments = product.nutriments || {}
-  if ((nutriments['saturated-fat_100g'] || 0) > 5) {
-    score -= 1
-  }
-  if ((nutriments['sugars_100g'] || 0) > 10) {
-    score -= 0.5
-  }
-  if ((nutriments['sodium_100g'] || 0) > 0.6) {
-    score -= 1
-  }
-
-  const labels = (product.labels_tags || []).map(l => l.toLowerCase())
-  if (labels.some(l => l.includes('organic') || l.includes('bio'))) {
-    score += 0.5
-  }
-
-  score = Math.max(0, Math.min(10, score))
-
-  // Fresh produce minimum score
-  if (freshProduce && score < 8.0) {
-    score = 8.0
-  }
-
-  // NOVA ceiling — ultra-processed products can't score too high
   const novaScore = inferNovaScore(product)
-  const NOVA_CEILING: Record<number, number> = { 1: 10, 2: 10, 3: 8, 4: 6.5 }
-  const ceiling = NOVA_CEILING[novaScore] ?? 10
-  score = Math.min(score, ceiling)
+  const isInferred = !product.nova_group
 
-  return Math.round(score * 10) / 10
+  // Calculate 4 components
+  const nutritional = calcNutritionalComponent(product)
+  const processing = calcProcessingComponent(novaScore, isInferred)
+  const additives = calcAdditiveComponent(product.additives_tags || [])
+  const organic = calcOrganicComponent(product.labels_tags || [])
+
+  let total = nutritional.score + processing + additives + organic
+
+  // Fresh produce floor
+  if (freshProduce && total < 8.5) total = 8.5
+
+  // Clamp
+  total = Math.max(0, Math.min(10, total))
+  total = Math.round(total * 10) / 10
+
+  return {
+    nutritional: Math.round(nutritional.score * 10) / 10,
+    processing: Math.round(processing * 10) / 10,
+    additives: Math.round(additives * 10) / 10,
+    organic: Math.round(organic * 10) / 10,
+    total,
+    nutriscore: nutritional.grade,
+    nova: novaScore,
+    version: 2,
+  }
 }
 
 export function scoreProduct(product: OpenFoodFactsProduct): ScoringResult {
   const categories = (product.categories_tags || []).map(c => c.toLowerCase())
   const freshProduce = isFreshProduce(categories)
   const novaScore = inferNovaScore(product)
-  const qualityScore = calculateQualityScore(product)
+  const breakdown = calculateQualityBreakdown(product)
 
   let confidence = product.ingredients_text ? 97 : 78
   let warning: string | null = null
@@ -182,7 +323,8 @@ export function scoreProduct(product: OpenFoodFactsProduct): ScoringResult {
 
   return {
     nova_score: novaScore,
-    quality_score: qualityScore,
+    quality_score: breakdown.total,
+    quality_breakdown: breakdown,
     confidence,
     warning,
     is_fresh_produce: freshProduce,
@@ -201,7 +343,7 @@ export function getScoreLabel(score: number): string {
   if (score < 4) return 'Poor'
   if (score < 5.5) return 'Moderate'
   if (score < 7) return 'Fair'
-  if (score < 8.5) return 'Good'
+  if (score < 9) return 'Good'
   return 'Excellent'
 }
 
