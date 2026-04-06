@@ -4,33 +4,51 @@
     "name": "Curcumin",
     "risk": "low",
     "description": "A natural yellow colouring derived from turmeric, widely considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Curcumin is a naturally occurring bright yellow pigment extracted from the rhizome of the turmeric plant (Curcuma longa). It is commonly found in mustard, dairy products, ice cream, and confectionery to provide yellow-orange colour. It is permitted under EU/UK regulation at established limits and is widely regarded as one of the safest food colourings available.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E101",
     "name": "Riboflavin",
     "risk": "low",
     "description": "Vitamin B2 — a natural yellow colouring and essential nutrient, considered very safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Riboflavin, also known as Vitamin B2, is an essential water-soluble nutrient that also serves as a yellow food colouring. It is found naturally in milk, eggs, and green vegetables, and is added to cereals, baby foods, and processed cheese for both nutritional fortification and colour. It is permitted under EU/UK regulation at established limits and is considered very safe as it is a necessary vitamin for human health.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E102",
     "name": "Tartrazine",
     "risk": "high",
     "description": "A synthetic yellow dye linked to hyperactivity in children and allergic reactions.",
-    "regulation": "EU Reg 1333/2008 — requires warning label",
+    "regulation": "UK Food Information Regulations 2014 — mandatory warning label",
     "function": "Colouring",
     "detailed_description": "Tartrazine is a synthetic lemon-yellow azo dye widely used in soft drinks, confectionery, sauces, and snack foods. It is one of the six 'Southampton dyes' that were the focus of a 2007 UK Food Standards Agency study on hyperactivity in children. It is permitted under EU/UK regulation at established limits but requires a warning label stating it 'may have an adverse effect on activity and attention in children'.",
     "potential_risks": [
@@ -39,16 +57,29 @@
       "Some research suggests it may exacerbate asthma symptoms in susceptible individuals"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of Tartrazine (E 102)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/1331", "year": 2009},
-      {"title": "Food additives and hyperactive behaviour in 3-year-old and 8/9-year-old children (McCann et al.)", "url": "https://pubmed.ncbi.nlm.nih.gov/17825405/", "year": 2007}
-    ]
+      {
+        "title": "EFSA re-evaluation of Tartrazine (E 102)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/1331",
+        "year": 2009
+      },
+      {
+        "title": "Food additives and hyperactive behaviour in 3-year-old and 8/9-year-old children (McCann et al.)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17825405/",
+        "year": 2007
+      }
+    ],
+    "uk_status": "permitted_with_warning",
+    "eu_status": "permitted_with_warning",
+    "us_status": "permitted",
+    "uk_notes": "Requires mandatory warning label in UK: 'may have an adverse effect on activity and attention in children'. Required under UK Food Information Regulations 2014.",
+    "divergence_alert": false
   },
   {
     "code": "E104",
     "name": "Quinoline Yellow",
     "risk": "high",
     "description": "A synthetic yellow-green dye associated with hyperactivity in children.",
-    "regulation": "EU Reg 1333/2008 — requires warning label",
+    "regulation": "UK Food Information Regulations 2014 — mandatory warning label",
     "function": "Colouring",
     "detailed_description": "Quinoline Yellow is a synthetic greenish-yellow dye used in soft drinks, confectionery, and smoked fish. It is one of the six Southampton dyes identified in research linking artificial colourings to hyperactivity in children. It is permitted under EU/UK regulation at established limits but must carry a warning label about potential effects on activity and attention in children.",
     "potential_risks": [
@@ -57,16 +88,29 @@
       "Some research suggests potential genotoxicity, though EFSA found insufficient evidence to change its approval"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of Quinoline Yellow (E 104)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/1329", "year": 2009},
-      {"title": "Food additives and hyperactive behaviour in 3-year-old and 8/9-year-old children (McCann et al.)", "url": "https://pubmed.ncbi.nlm.nih.gov/17825405/", "year": 2007}
-    ]
+      {
+        "title": "EFSA re-evaluation of Quinoline Yellow (E 104)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/1329",
+        "year": 2009
+      },
+      {
+        "title": "Food additives and hyperactive behaviour in 3-year-old and 8/9-year-old children (McCann et al.)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17825405/",
+        "year": 2007
+      }
+    ],
+    "uk_status": "permitted_with_warning",
+    "eu_status": "permitted_with_warning",
+    "us_status": "permitted",
+    "uk_notes": "Requires mandatory warning label in UK: 'may have an adverse effect on activity and attention in children'. Required under UK Food Information Regulations 2014.",
+    "divergence_alert": false
   },
   {
     "code": "E110",
     "name": "Sunset Yellow",
     "risk": "high",
     "description": "A synthetic orange-yellow dye linked to hyperactivity in children.",
-    "regulation": "EU Reg 1333/2008 — requires warning label",
+    "regulation": "UK Food Information Regulations 2014 — mandatory warning label",
     "function": "Colouring",
     "detailed_description": "Sunset Yellow FCF is a synthetic orange-yellow azo dye commonly found in orange squash, marmalade, confectionery, and packet soups. It is one of the six Southampton dyes studied for links to hyperactivity in children. It is permitted under EU/UK regulation at established limits but requires a warning label regarding potential effects on activity and attention in children.",
     "potential_risks": [
@@ -75,16 +119,29 @@
       "Some studies suggest it may worsen symptoms of asthma and urticaria in sensitive individuals"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of Sunset Yellow FCF (E 110)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/1330", "year": 2009},
-      {"title": "Food additives and hyperactive behaviour in 3-year-old and 8/9-year-old children (McCann et al.)", "url": "https://pubmed.ncbi.nlm.nih.gov/17825405/", "year": 2007}
-    ]
+      {
+        "title": "EFSA re-evaluation of Sunset Yellow FCF (E 110)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/1330",
+        "year": 2009
+      },
+      {
+        "title": "Food additives and hyperactive behaviour in 3-year-old and 8/9-year-old children (McCann et al.)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17825405/",
+        "year": 2007
+      }
+    ],
+    "uk_status": "permitted_with_warning",
+    "eu_status": "permitted_with_warning",
+    "us_status": "permitted",
+    "uk_notes": "Requires mandatory warning label in UK: 'may have an adverse effect on activity and attention in children'. Required under UK Food Information Regulations 2014.",
+    "divergence_alert": false
   },
   {
     "code": "E120",
     "name": "Cochineal",
     "risk": "medium",
     "description": "A natural red dye made from crushed insects, may cause allergic reactions in some people.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Cochineal (carminic acid) is a natural red colouring derived from the dried bodies of the female cochineal insect (Dactylopius coccus). It is commonly found in yoghurts, confectionery, drinks, and processed meats to provide red-pink colouring. It is permitted under EU/UK regulation at established limits, though some individuals may experience allergic reactions, and it is unsuitable for vegetarians and vegans.",
     "potential_risks": [
@@ -92,16 +149,29 @@
       "Linked to occupational asthma in workers handling the raw material"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of cochineal, carminic acid, carmines (E 120)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/985", "year": 2015},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA re-evaluation of cochineal, carminic acid, carmines (E 120)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/985",
+        "year": 2015
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E122",
     "name": "Carmoisine",
     "risk": "high",
     "description": "A synthetic red dye associated with hyperactivity in children.",
-    "regulation": "EU Reg 1333/2008 — requires warning label",
+    "regulation": "UK Food Information Regulations 2014 — mandatory warning label",
     "function": "Colouring",
     "detailed_description": "Carmoisine (Azorubine) is a synthetic red azo dye used in blancmange, marzipan, Swiss rolls, jams, and confectionery. It is one of the six Southampton dyes identified in research on hyperactivity in children. It is permitted under EU/UK regulation at established limits but requires a warning label about potential effects on activity and attention in children.",
     "potential_risks": [
@@ -110,16 +180,29 @@
       "Some research suggests potential links to skin rashes in sensitive individuals"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of Azorubine/Carmoisine (E 122)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/1332", "year": 2009},
-      {"title": "Food additives and hyperactive behaviour in 3-year-old and 8/9-year-old children (McCann et al.)", "url": "https://pubmed.ncbi.nlm.nih.gov/17825405/", "year": 2007}
-    ]
+      {
+        "title": "EFSA re-evaluation of Azorubine/Carmoisine (E 122)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/1332",
+        "year": 2009
+      },
+      {
+        "title": "Food additives and hyperactive behaviour in 3-year-old and 8/9-year-old children (McCann et al.)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17825405/",
+        "year": 2007
+      }
+    ],
+    "uk_status": "permitted_with_warning",
+    "eu_status": "permitted_with_warning",
+    "us_status": "permitted",
+    "uk_notes": "Requires mandatory warning label in UK: 'may have an adverse effect on activity and attention in children'. Required under UK Food Information Regulations 2014.",
+    "divergence_alert": false
   },
   {
     "code": "E124",
     "name": "Ponceau 4R",
     "risk": "high",
     "description": "A synthetic red dye linked to hyperactivity in children and banned in some countries.",
-    "regulation": "EU Reg 1333/2008 — requires warning label",
+    "regulation": "UK Food Information Regulations 2014 — mandatory warning label",
     "function": "Colouring",
     "detailed_description": "Ponceau 4R is a synthetic red azo dye used in dessert toppings, tinned fruit, salami, and confectionery. It is one of the six Southampton dyes and is banned in the United States and Norway due to safety concerns. It is permitted under EU/UK regulation at established limits but requires a warning label about potential effects on activity and attention in children.",
     "potential_risks": [
@@ -128,16 +211,29 @@
       "May trigger allergic-type reactions in aspirin-sensitive individuals"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of Ponceau 4R (E 124)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/1328", "year": 2009},
-      {"title": "Food additives and hyperactive behaviour in 3-year-old and 8/9-year-old children (McCann et al.)", "url": "https://pubmed.ncbi.nlm.nih.gov/17825405/", "year": 2007}
-    ]
+      {
+        "title": "EFSA re-evaluation of Ponceau 4R (E 124)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/1328",
+        "year": 2009
+      },
+      {
+        "title": "Food additives and hyperactive behaviour in 3-year-old and 8/9-year-old children (McCann et al.)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17825405/",
+        "year": 2007
+      }
+    ],
+    "uk_status": "permitted_with_warning",
+    "eu_status": "permitted_with_warning",
+    "us_status": "permitted",
+    "uk_notes": "Requires mandatory warning label in UK: 'may have an adverse effect on activity and attention in children'. Required under UK Food Information Regulations 2014.",
+    "divergence_alert": false
   },
   {
     "code": "E129",
     "name": "Allura Red",
     "risk": "medium",
     "description": "A synthetic red dye that may cause allergic reactions and is restricted in some countries.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Allura Red AC is a synthetic red azo dye commonly used in soft drinks, sweets, cake mixes, and sauces. It is one of the six Southampton dyes studied for effects on child behaviour, though the evidence for this additive specifically is less consistent. It is permitted under EU/UK regulation at established limits and requires a warning label in the EU.",
     "potential_risks": [
@@ -145,16 +241,29 @@
       "May trigger allergic reactions in sensitive individuals, particularly those with aspirin intolerance"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of Allura Red AC (E 129)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/1327", "year": 2009},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA re-evaluation of Allura Red AC (E 129)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/1327",
+        "year": 2009
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted_with_warning",
+    "eu_status": "permitted_with_warning",
+    "us_status": "permitted",
+    "uk_notes": "Requires mandatory warning label in UK: 'may have an adverse effect on activity and attention in children'. Required under UK Food Information Regulations 2014.",
+    "divergence_alert": false
   },
   {
     "code": "E131",
     "name": "Patent Blue V",
     "risk": "medium",
     "description": "A synthetic blue dye that may cause allergic reactions in sensitive individuals.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Patent Blue V is a synthetic blue dye used in confectionery, baked goods, and as a diagnostic dye in medicine. It is not permitted for food use in the United States or Australia. It is permitted under EU/UK regulation at established limits, though allergic reactions including anaphylaxis have been reported in rare cases, primarily from medical diagnostic use.",
     "potential_risks": [
@@ -162,42 +271,73 @@
       "Not approved for food use in several countries including the USA and Australia"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of Patent Blue V (E 131)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/2818", "year": 2013},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA re-evaluation of Patent Blue V (E 131)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/2818",
+        "year": 2013
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E133",
     "name": "Brilliant Blue",
     "risk": "low",
     "description": "A synthetic blue dye generally considered safe in approved quantities.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Brilliant Blue FCF is a synthetic blue dye used in confectionery, ice cream, canned peas, and dairy products. It is one of the better-studied synthetic dyes and is approved in both the EU and the USA. It is permitted under EU/UK regulation at established limits and is generally considered safe at normal dietary intake levels.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E150a",
     "name": "Caramel I (Plain)",
     "risk": "low",
     "description": "Simple caramel colouring made by heating sugar, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Caramel I (Plain Caramel) is the simplest form of caramel colouring, made by controlled heating of sugar without the use of ammonium or sulphite compounds. It is found in a wide range of foods including bakery products, sauces, and confectionery. It is permitted under EU/UK regulation at established limits and is considered the safest of the four caramel colouring classes.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E150b",
     "name": "Caramel II",
     "risk": "medium",
     "description": "Caramel colouring made with sulphite, some concerns about byproducts.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Caramel II (Caustic Sulphite Caramel) is produced by heating sugars in the presence of sulphite compounds. It is used in cognac, sherry, and some vinegars. It is permitted under EU/UK regulation at established limits, though some researchers have raised concerns about sulphite-related byproducts formed during its manufacture.",
     "potential_risks": [
@@ -205,16 +345,29 @@
       "Some concerns about processing byproducts, though levels in food are generally low"
     ],
     "sources": [
-      {"title": "EFSA scientific opinion on the re-evaluation of caramel colours (E 150a, b, c, d)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/2004", "year": 2011},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA scientific opinion on the re-evaluation of caramel colours (E 150a, b, c, d)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/2004",
+        "year": 2011
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E150c",
     "name": "Caramel III",
     "risk": "medium",
     "description": "Caramel colouring made with ammonia, some concerns about byproducts.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Caramel III (Ammonia Caramel) is produced by heating sugars with ammonia compounds, and is commonly used in beer, soy sauce, and bakery products. The ammonia process can produce a byproduct called 2-methylimidazole (2-MEI), which some research has flagged as a concern. It is permitted under EU/UK regulation at established limits, and EFSA has set a group ADI for caramel colours.",
     "potential_risks": [
@@ -222,16 +375,29 @@
       "Some research suggests potential immunotoxic effects at high doses in animal studies"
     ],
     "sources": [
-      {"title": "EFSA scientific opinion on the re-evaluation of caramel colours (E 150a, b, c, d)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/2004", "year": 2011},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA scientific opinion on the re-evaluation of caramel colours (E 150a, b, c, d)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/2004",
+        "year": 2011
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E150d",
     "name": "Caramel IV",
     "risk": "medium",
     "description": "The most processed caramel colouring, contains compounds some researchers flag as potentially concerning.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Caramel IV (Sulphite Ammonia Caramel) is the most widely used caramel colouring, produced using both sulphite and ammonia compounds. It is found extensively in cola drinks, dark breads, sauces, and gravy products. It is permitted under EU/UK regulation at established limits, though it has attracted the most scrutiny of the four caramel classes due to the byproduct 4-methylimidazole (4-MEI).",
     "potential_risks": [
@@ -240,29 +406,51 @@
       "Some animal studies suggest potential immunotoxic effects at high doses, though EFSA considers current dietary exposure safe"
     ],
     "sources": [
-      {"title": "EFSA scientific opinion on the re-evaluation of caramel colours (E 150a, b, c, d)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/2004", "year": 2011},
-      {"title": "Toxicology and carcinogenesis studies of 4-methylimidazole", "url": "https://pubmed.ncbi.nlm.nih.gov/17530953/", "year": 2007}
-    ]
+      {
+        "title": "EFSA scientific opinion on the re-evaluation of caramel colours (E 150a, b, c, d)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/2004",
+        "year": 2011
+      },
+      {
+        "title": "Toxicology and carcinogenesis studies of 4-methylimidazole",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17530953/",
+        "year": 2007
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E160a",
     "name": "Beta-Carotene",
     "risk": "low",
     "description": "A natural orange pigment found in carrots and other vegetables, converts to Vitamin A in the body.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Beta-carotene is a natural orange-red pigment abundant in carrots, sweet potatoes, spinach, and other fruits and vegetables. It is used as a food colouring in margarine, cheese, and beverages, and the body converts it into vitamin A as needed. It is permitted under EU/UK regulation at established limits and is considered very safe as a food additive.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E160b",
     "name": "Annatto",
     "risk": "medium",
     "description": "A natural orange-red dye from seeds that can occasionally cause allergic reactions.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Annatto (bixin, norbixin) is a natural orange-red colouring extracted from the seeds of the achiote tree (Bixa orellana). It is commonly used in cheese (such as Red Leicester and Cheddar), margarine, and snack foods. It is permitted under EU/UK regulation at established limits, though it can occasionally cause allergic or intolerance reactions in some individuals.",
     "potential_risks": [
@@ -270,68 +458,148 @@
       "Reported cases of urticaria and angioedema in sensitive individuals"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of annatto extracts (E 160b)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4544", "year": 2016},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA re-evaluation of annatto extracts (E 160b)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4544",
+        "year": 2016
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E160c",
     "name": "Paprika Extract",
     "risk": "low",
     "description": "A natural red-orange colouring extracted from paprika peppers, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Paprika extract (capsanthin, capsorubin) is a natural red-orange colouring obtained from the fruits of Capsicum annuum peppers. It is commonly found in sauces, snack foods, processed cheese, and meat products. It is permitted under EU/UK regulation at established limits and is generally considered safe as a food colouring.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E170",
     "name": "Calcium Carbonate",
     "risk": "low",
     "description": "Chalk — used as a white colouring and calcium supplement, completely safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Colouring",
     "detailed_description": "Calcium carbonate is a naturally occurring mineral (chalk/limestone) used as a white colouring agent, acidity regulator, and calcium supplement. It is found in bread (added to white flour by law in the UK), confectionery, and dietary supplements. It is permitted under EU/UK regulation at established limits and is considered completely safe at normal dietary levels.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
+  },
+  {
+    "code": "E171",
+    "name": "Titanium Dioxide",
+    "risk": "medium",
+    "description": "A white pigment used as a food colouring.",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
+    "function": "Colouring",
+    "detailed_description": "Titanium dioxide is a white pigment used in sweets, chewing gum, white sauces, and icing. The EU banned it in food in August 2022 following EFSA's conclusion that it could not be considered safe due to potential genotoxicity from nanoparticles. The UK FSA reviewed the same evidence independently and decided to maintain its permitted status, concluding the evidence was not sufficient to withdraw authorisation.",
+    "potential_risks": [
+      "Potential genotoxicity (EU assessment)",
+      "Banned in EU food since 2022",
+      "UK and EU have diverged on this additive"
+    ],
+    "sources": [
+      {
+        "title": "EFSA safety assessment of titanium dioxide (E 171)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/6585",
+        "year": 2021
+      },
+      {
+        "title": "UK FSA statement on titanium dioxide",
+        "url": "https://www.food.gov.uk/news-alerts/news/fsa-publishes-updated-risk-assessment-of-titanium-dioxide",
+        "year": 2022
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "banned",
+    "us_status": "permitted",
+    "uk_notes": "Currently permitted in GB following independent FSA review. The FSA concluded the evidence for genotoxicity was not sufficient to withdraw authorisation.",
+    "divergence_alert": true
   },
   {
     "code": "E200",
     "name": "Sorbic Acid",
     "risk": "low",
     "description": "A naturally occurring preservative found in berries, considered very safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Preservative",
     "detailed_description": "Sorbic acid is a naturally occurring organic acid first isolated from the berries of the rowan tree (Sorbus aucuparia). It is widely used as a preservative in cheese, wine, baked goods, and personal care products to inhibit moulds and yeasts. It is permitted under EU/UK regulation at established limits and is considered one of the safest food preservatives available.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E202",
     "name": "Potassium Sorbate",
     "risk": "low",
     "description": "A common preservative that prevents mould growth, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Preservative",
     "detailed_description": "Potassium sorbate is the potassium salt of sorbic acid, widely used as a preservative to inhibit mould and yeast growth in foods. It is commonly found in cheese, yoghurt, wine, dried meats, and soft drinks. It is permitted under EU/UK regulation at established limits and is considered safe, being metabolised by the body in the same way as naturally occurring fatty acids.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E211",
     "name": "Sodium Benzoate",
     "risk": "high",
     "description": "A preservative that can form benzene when combined with vitamin C, linked to hyperactivity.",
-    "regulation": "EU Reg 1333/2008 — UK FSA advises caution",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Preservative",
     "detailed_description": "Sodium benzoate is a widely used synthetic preservative effective against yeasts, moulds, and some bacteria. It is commonly found in soft drinks, fruit juices, pickles, and sauces. It is permitted under EU/UK regulation at established limits, but concerns have been raised about its potential to form benzene (a known carcinogen) when combined with ascorbic acid (vitamin C) in acidic beverages, and it was included in the 2007 Southampton study on hyperactivity.",
     "potential_risks": [
@@ -340,17 +608,34 @@
       "Some individuals may experience allergic-type reactions including urticaria and asthma exacerbation"
     ],
     "sources": [
-      {"title": "EFSA opinion on the safety of benzoic acid and its salts", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4210", "year": 2016},
-      {"title": "Food additives and hyperactive behaviour in 3-year-old and 8/9-year-old children (McCann et al.)", "url": "https://pubmed.ncbi.nlm.nih.gov/17825405/", "year": 2007},
-      {"title": "UK FSA survey of benzene in soft drinks", "url": "https://www.food.gov.uk/research/chemical-hazards-in-food-and-feed/survey-of-benzene-in-soft-drinks", "year": 2006}
-    ]
+      {
+        "title": "EFSA opinion on the safety of benzoic acid and its salts",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4210",
+        "year": 2016
+      },
+      {
+        "title": "Food additives and hyperactive behaviour in 3-year-old and 8/9-year-old children (McCann et al.)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17825405/",
+        "year": 2007
+      },
+      {
+        "title": "UK FSA survey of benzene in soft drinks",
+        "url": "https://www.food.gov.uk/research/chemical-hazards-in-food-and-feed/survey-of-benzene-in-soft-drinks",
+        "year": 2006
+      }
+    ],
+    "uk_status": "permitted_with_warning",
+    "eu_status": "permitted_with_warning",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E220",
     "name": "Sulphur Dioxide",
     "risk": "medium",
     "description": "A preservative commonly used in dried fruits and wine, can trigger asthma symptoms.",
-    "regulation": "EU Reg 1333/2008 — allergen labelling required",
+    "regulation": "UK Food Information Regulations 2014 — allergen labelling required",
     "function": "Preservative",
     "detailed_description": "Sulphur dioxide is a gaseous preservative and antioxidant used to prevent browning and microbial spoilage in a wide range of foods. It is commonly found in dried fruits, wine, fruit juices, and processed potatoes. It is permitted under EU/UK regulation at established limits but is classified as an allergen requiring mandatory labelling, as it can trigger adverse reactions in sulphite-sensitive individuals, particularly asthmatics.",
     "potential_risks": [
@@ -359,16 +644,29 @@
       "Classified as an allergen under EU food labelling regulations"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of sulphur dioxide and sulphites (E 220-228)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4438", "year": 2016},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA re-evaluation of sulphur dioxide and sulphites (E 220-228)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4438",
+        "year": 2016
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E223",
     "name": "Sodium Metabisulphite",
     "risk": "medium",
     "description": "A sulphite preservative that can trigger breathing difficulties in asthmatics.",
-    "regulation": "EU Reg 1333/2008 — allergen labelling required",
+    "regulation": "UK Food Information Regulations 2014 — allergen labelling required",
     "function": "Preservative",
     "detailed_description": "Sodium metabisulphite is a sulphite-based preservative and antioxidant used to prevent browning and inhibit bacterial growth. It is commonly found in wine, beer, dried fruits, and processed seafood. It is permitted under EU/UK regulation at established limits but must be declared on labels as a sulphite allergen, as it can trigger respiratory symptoms in susceptible individuals, particularly those with asthma.",
     "potential_risks": [
@@ -376,16 +674,29 @@
       "May cause allergic-type reactions including skin rashes and gastrointestinal distress in sensitive individuals"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of sulphur dioxide and sulphites (E 220-228)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4438", "year": 2016},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA re-evaluation of sulphur dioxide and sulphites (E 220-228)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4438",
+        "year": 2016
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E249",
     "name": "Potassium Nitrite",
     "risk": "high",
     "description": "A curing agent in processed meats linked to formation of potentially harmful nitrosamines.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Preservative",
     "detailed_description": "Potassium nitrite is a preservative and curing agent used primarily in processed and cured meats such as ham, bacon, and sausages, where it inhibits the growth of Clostridium botulinum (botulism). It is permitted under EU/UK regulation at established limits. Some research has linked nitrite-cured meats to the formation of nitrosamines, which are associated with increased risk in epidemiological studies, though the additive also serves an important food safety function.",
     "potential_risks": [
@@ -394,16 +705,29 @@
       "IARC classifies processed meat as a Group 1 carcinogen, partly due to nitrosamine formation"
     ],
     "sources": [
-      {"title": "EFSA opinion on nitrites in meat products", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/14", "year": 2003},
-      {"title": "IARC Monographs on processed meat", "url": "https://pubmed.ncbi.nlm.nih.gov/26514947/", "year": 2015}
-    ]
+      {
+        "title": "EFSA opinion on nitrites in meat products",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/14",
+        "year": 2003
+      },
+      {
+        "title": "IARC Monographs on processed meat",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26514947/",
+        "year": 2015
+      }
+    ],
+    "uk_status": "permitted_restricted",
+    "eu_status": "permitted_with_warning",
+    "us_status": "permitted",
+    "uk_notes": "Permitted only in cured and preserved meats at specified maximum levels under UK assimilated law.",
+    "divergence_alert": false
   },
   {
     "code": "E250",
     "name": "Sodium Nitrite",
     "risk": "high",
     "description": "Used in processed meats for colour and preservation, linked to formation of harmful nitrosamines.",
-    "regulation": "EU Reg 1333/2008 — UK FSA monitoring",
+    "regulation": "UK FSA — actively monitoring",
     "function": "Preservative",
     "detailed_description": "Sodium nitrite is one of the most widely used curing agents in processed meats including bacon, ham, hot dogs, and salami, where it prevents botulism and gives the characteristic pink colour. It is permitted under EU/UK regulation at established limits and serves a critical food safety function. However, some research has linked it to the formation of nitrosamines during high-temperature cooking, and epidemiological studies associate high processed meat consumption with increased health risks.",
     "potential_risks": [
@@ -413,17 +737,34 @@
       "The UK FSA continues to monitor research on nitrite levels in food"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of sodium nitrite (E 250) and potassium nitrite (E 249)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/14", "year": 2003},
-      {"title": "Red meat and processed meat - IARC Monographs", "url": "https://pubmed.ncbi.nlm.nih.gov/26514947/", "year": 2015},
-      {"title": "UK FSA guidance on nitrites in food", "url": "https://www.food.gov.uk/safety-hygiene/nitrites-and-nitrates", "year": 2022}
-    ]
+      {
+        "title": "EFSA re-evaluation of sodium nitrite (E 250) and potassium nitrite (E 249)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/14",
+        "year": 2003
+      },
+      {
+        "title": "Red meat and processed meat - IARC Monographs",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26514947/",
+        "year": 2015
+      },
+      {
+        "title": "UK FSA guidance on nitrites in food",
+        "url": "https://www.food.gov.uk/safety-hygiene/nitrites-and-nitrates",
+        "year": 2022
+      }
+    ],
+    "uk_status": "permitted_restricted",
+    "eu_status": "permitted_with_warning",
+    "us_status": "permitted",
+    "uk_notes": "Permitted only in cured and preserved meats at specified maximum levels under UK assimilated law.",
+    "divergence_alert": false
   },
   {
     "code": "E251",
     "name": "Sodium Nitrate",
     "risk": "high",
     "description": "A preservative in cured meats that can convert to nitrites, linked to health concerns.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Preservative",
     "detailed_description": "Sodium nitrate is a preservative used in cured and processed meats such as salami, chorizo, and some traditionally cured hams. It acts as a reservoir that slowly converts to sodium nitrite during the curing process. It is permitted under EU/UK regulation at established limits, but shares the same concerns as sodium nitrite regarding nitrosamine formation, particularly when cured meats are cooked at high temperatures.",
     "potential_risks": [
@@ -432,42 +773,73 @@
       "Some studies suggest associations with other health outcomes, though causation is not established"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of sodium nitrate (E 251) and potassium nitrate (E 252)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4787", "year": 2017},
-      {"title": "IARC Monographs on processed meat", "url": "https://pubmed.ncbi.nlm.nih.gov/26514947/", "year": 2015}
-    ]
+      {
+        "title": "EFSA re-evaluation of sodium nitrate (E 251) and potassium nitrate (E 252)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4787",
+        "year": 2017
+      },
+      {
+        "title": "IARC Monographs on processed meat",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26514947/",
+        "year": 2015
+      }
+    ],
+    "uk_status": "permitted_restricted",
+    "eu_status": "permitted_with_warning",
+    "us_status": "permitted",
+    "uk_notes": "Permitted only in cured and preserved meats at specified maximum levels under UK assimilated law.",
+    "divergence_alert": false
   },
   {
     "code": "E260",
     "name": "Acetic Acid",
     "risk": "low",
     "description": "Simply vinegar — a natural preservative and flavouring, completely safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Preservative",
     "detailed_description": "Acetic acid is the primary component of vinegar and has been used as a food preservative and flavouring for thousands of years. It is found in pickled vegetables, condiments, sauces, and baked goods. It is permitted under EU/UK regulation at established limits and is considered completely safe at the levels used in food.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E270",
     "name": "Lactic Acid",
     "risk": "low",
     "description": "A naturally occurring acid found in fermented foods like yoghurt, very safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Preservative",
     "detailed_description": "Lactic acid is a naturally occurring organic acid produced during the fermentation of lactose by lactic acid bacteria. It is found in yoghurt, sauerkraut, sourdough bread, and is used as an acidity regulator and preservative in many processed foods. It is permitted under EU/UK regulation at established limits and is considered very safe, as it is naturally produced in the human body during exercise.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E282",
     "name": "Calcium Propionate",
     "risk": "medium",
     "description": "A mould inhibitor used in bread, some studies link it to behavioural changes in children.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Preservative",
     "detailed_description": "Calcium propionate is a preservative primarily used in bread and bakery products to inhibit mould and bacterial growth, extending shelf life. It is one of the most common bread preservatives worldwide. It is permitted under EU/UK regulation at established limits, though some research, including a notable Australian study, has suggested associations with behavioural changes in some children.",
     "potential_risks": [
@@ -475,159 +847,271 @@
       "An Australian study linked it to behavioural changes, though the evidence base is limited"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of propionic acid and its salts (E 280-283)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4459", "year": 2016},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA re-evaluation of propionic acid and its salts (E 280-283)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4459",
+        "year": 2016
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E296",
     "name": "Malic Acid",
     "risk": "low",
     "description": "A naturally occurring acid found in apples and other fruits, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Preservative",
     "detailed_description": "Malic acid is a naturally occurring dicarboxylic acid found in apples, grapes, and many other fruits. It is used as a flavouring agent and acidity regulator in confectionery, fruit-flavoured drinks, and jams. It is permitted under EU/UK regulation at established limits and is considered safe, as it is a normal intermediate in human metabolism.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E300",
     "name": "Ascorbic Acid",
     "risk": "low",
     "description": "Vitamin C — a natural antioxidant that is beneficial to health.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Antioxidant",
     "detailed_description": "Ascorbic acid is Vitamin C, an essential nutrient and powerful natural antioxidant. It is used in fruit juices, cured meats, bread, and many other products to prevent oxidation and preserve freshness. It is permitted under EU/UK regulation at established limits and is considered entirely safe, providing nutritional benefit as an essential vitamin.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E306",
     "name": "Mixed Tocopherols",
     "risk": "low",
     "description": "A mixture of natural Vitamin E compounds used as an antioxidant, considered safe and beneficial.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Antioxidant",
     "detailed_description": "Mixed tocopherols are a combination of naturally occurring forms of Vitamin E extracted from vegetable oils. They are used as antioxidants in fats, oils, cereals, and snack foods to prevent rancidity. They are permitted under EU/UK regulation at established limits and are considered safe and beneficial, as Vitamin E is an essential nutrient.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E307",
     "name": "Alpha-Tocopherol",
     "risk": "low",
     "description": "Synthetic Vitamin E used as an antioxidant to prevent fats from going rancid, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Antioxidant",
     "detailed_description": "Alpha-tocopherol is the most biologically active form of Vitamin E, used as an antioxidant to prevent oxidation of fats and oils in food products. It is found in vegetable oils, margarine, and processed foods. It is permitted under EU/UK regulation at established limits and is considered safe, functioning both as a food preservative and a beneficial nutrient.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E308",
     "name": "Gamma-Tocopherol",
     "risk": "low",
     "description": "A form of Vitamin E used as an antioxidant, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Antioxidant",
     "detailed_description": "Gamma-tocopherol is a form of Vitamin E used as a natural antioxidant in food products to prevent fat oxidation. It is found naturally in soybean oil, corn oil, and various nuts. It is permitted under EU/UK regulation at established limits and is considered safe as both a food additive and a naturally occurring nutrient.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E309",
     "name": "Delta-Tocopherol",
     "risk": "low",
     "description": "A form of Vitamin E used as an antioxidant, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Antioxidant",
     "detailed_description": "Delta-tocopherol is a form of Vitamin E used as a natural antioxidant in food to prevent rancidity of fats and oils. It is found naturally in soybean oil and rice bran oil. It is permitted under EU/UK regulation at established limits and is considered safe as a food antioxidant.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E316",
     "name": "Sodium Erythorbate",
     "risk": "low",
     "description": "An antioxidant used in cured meats to speed up curing and preserve colour, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Antioxidant",
     "detailed_description": "Sodium erythorbate is a synthetic antioxidant chemically related to ascorbic acid (Vitamin C), used primarily in cured meats to accelerate the curing process and maintain colour. It is commonly found in hot dogs, sausages, and deli meats. It is permitted under EU/UK regulation at established limits and is considered safe at the levels used in food.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E322",
     "name": "Lecithins",
     "risk": "low",
     "description": "A natural emulsifier found in egg yolks and soybeans, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Emulsifier",
     "detailed_description": "Lecithins are a group of naturally occurring phospholipids found abundantly in egg yolks, soybeans, and sunflower seeds. They are one of the most widely used emulsifiers in the food industry, found in chocolate, margarine, baked goods, and instant foods. They are permitted under EU/UK regulation at established limits and are considered safe, being a natural component of cell membranes.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E330",
     "name": "Citric Acid",
     "risk": "low",
     "description": "A natural acid found in citrus fruits, widely used and very safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Acidity regulator",
     "detailed_description": "Citric acid is a naturally occurring weak organic acid found in high concentrations in citrus fruits such as lemons and limes. It is one of the most widely used food additives, found in soft drinks, confectionery, canned foods, and preserves as an acidity regulator and flavouring. It is permitted under EU/UK regulation at established limits and is considered very safe, being a normal part of human metabolism.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E331",
     "name": "Sodium Citrate",
     "risk": "low",
     "description": "The sodium salt of citric acid, used as a flavouring and preservative, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Acidity regulator",
     "detailed_description": "Sodium citrate is the sodium salt of citric acid, used as an acidity regulator, emulsifier, and flavouring agent. It is commonly found in gelatin desserts, processed cheese, carbonated beverages, and pharmaceutical preparations. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E332",
     "name": "Potassium Citrates",
     "risk": "low",
     "description": "Potassium salts of citric acid used as acidity regulators and stabilisers, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Acidity regulator",
     "detailed_description": "Potassium citrates are the potassium salts of citric acid, used as acidity regulators, stabilisers, and buffering agents in food products. They are commonly found in jams, jellies, confectionery, and evaporated milk. They are permitted under EU/UK regulation at established limits and are considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E338",
     "name": "Phosphoric Acid",
     "risk": "medium",
     "description": "Used in cola drinks, excessive intake may affect calcium absorption and bone health.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Acidity regulator",
     "detailed_description": "Phosphoric acid is a mineral acid used as an acidity regulator and flavouring agent, most notably providing the sharp tangy taste in cola-type beverages. It is also found in processed cheese and some jams. It is permitted under EU/UK regulation at established limits, though some research suggests that excessive phosphoric acid intake from soft drinks may be associated with reduced calcium absorption and potential effects on bone health.",
     "potential_risks": [
@@ -635,16 +1119,29 @@
       "Excessive phosphate intake may interfere with calcium absorption and phosphorus-calcium balance"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of phosphoric acid and phosphates (E 338-341, E 343, E 450-452)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/5674", "year": 2019},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA re-evaluation of phosphoric acid and phosphates (E 338-341, E 343, E 450-452)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/5674",
+        "year": 2019
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E339",
     "name": "Sodium Phosphates",
     "risk": "medium",
     "description": "Emulsifiers and stabilisers, excessive phosphate intake may affect kidney function.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Acidity regulator",
     "detailed_description": "Sodium phosphates are a group of sodium salts of phosphoric acid used as emulsifiers, stabilisers, and acidity regulators. They are commonly found in processed cheese, processed meats, and baking powders. They are permitted under EU/UK regulation at established limits, though EFSA has noted that combined phosphate intake from all food sources may exceed the acceptable daily intake in some population groups, which may be a concern for individuals with impaired kidney function.",
     "potential_risks": [
@@ -652,42 +1149,73 @@
       "EFSA noted that combined dietary phosphate intake may exceed the ADI in some population groups"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of phosphoric acid and phosphates (E 338-341, E 343, E 450-452)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/5674", "year": 2019},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA re-evaluation of phosphoric acid and phosphates (E 338-341, E 343, E 450-452)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/5674",
+        "year": 2019
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E340",
     "name": "Potassium Phosphates",
     "risk": "low",
     "description": "Used as acidity regulators and emulsifiers, considered safe in normal food amounts.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Acidity regulator",
     "detailed_description": "Potassium phosphates are a group of potassium salts of phosphoric acid used as acidity regulators, emulsifiers, and stabilisers. They are found in coffee creamers, processed cheese, and powdered foods. They are permitted under EU/UK regulation at established limits and are considered safe in normal food amounts, though general guidance on phosphate intake applies.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E401",
     "name": "Sodium Alginate",
     "risk": "low",
     "description": "A natural thickener and gelling agent derived from brown seaweed, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Thickener",
     "detailed_description": "Sodium alginate is a natural polysaccharide extracted from brown seaweed (kelp), used as a thickener, gelling agent, and stabiliser. It is commonly found in ice cream, desserts, salad dressings, and as a coating on frozen fish. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E407",
     "name": "Carrageenan",
     "risk": "medium",
     "description": "A thickener from seaweed, some studies suggest it may cause gut inflammation.",
-    "regulation": "EU Reg 1333/2008 — under EFSA review",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008 — under review",
     "function": "Thickener",
     "detailed_description": "Carrageenan is a natural polysaccharide extracted from red seaweed, widely used as a thickener, gelling agent, and stabiliser in dairy products, plant-based milks, deli meats, and desserts. It is permitted under EU/UK regulation at established limits. Some in vitro and animal studies have suggested it may promote gut inflammation, though regulatory bodies including EFSA have concluded that food-grade carrageenan is safe at current usage levels, and the topic remains under ongoing scientific review.",
     "potential_risks": [
@@ -696,120 +1224,205 @@
       "Under periodic review by EFSA due to ongoing scientific debate"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of carrageenan (E 407) and processed Eucheuma seaweed (E 407a)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/5238", "year": 2018},
-      {"title": "Review of harmful gastrointestinal effects of carrageenan in animal experiments", "url": "https://pubmed.ncbi.nlm.nih.gov/11340093/", "year": 2001}
-    ]
+      {
+        "title": "EFSA re-evaluation of carrageenan (E 407) and processed Eucheuma seaweed (E 407a)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/5238",
+        "year": 2018
+      },
+      {
+        "title": "Review of harmful gastrointestinal effects of carrageenan in animal experiments",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11340093/",
+        "year": 2001
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E410",
     "name": "Locust Bean Gum",
     "risk": "low",
     "description": "A natural thickener from carob seeds, commonly used in ice cream and dairy, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Thickener",
     "detailed_description": "Locust bean gum (carob gum) is a natural galactomannan polysaccharide extracted from the seeds of the carob tree (Ceratonia siliqua). It is commonly used as a thickener and stabiliser in ice cream, cream cheese, and bakery fillings. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E412",
     "name": "Guar Gum",
     "risk": "low",
     "description": "A natural thickener from guar beans, considered safe in food amounts.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Thickener",
     "detailed_description": "Guar gum is a natural polysaccharide extracted from the seeds of the guar plant (Cyamopsis tetragonoloba), primarily grown in India. It is widely used as a thickener and stabiliser in ice cream, sauces, soups, and gluten-free baked goods. It is permitted under EU/UK regulation at established limits and is considered safe in normal food amounts.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E414",
     "name": "Acacia Gum",
     "risk": "low",
     "description": "A natural gum from acacia trees used as an emulsifier and stabiliser, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Stabiliser",
     "detailed_description": "Acacia gum (gum arabic) is a natural gum harvested from the sap of Acacia senegal and Acacia seyal trees, primarily from the Sahel region of Africa. It is used as an emulsifier, stabiliser, and thickener in confectionery, soft drinks, and wine. It is permitted under EU/UK regulation at established limits and is considered safe, being one of the oldest and most widely used natural food additives.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E415",
     "name": "Xanthan Gum",
     "risk": "low",
     "description": "A common thickener produced by fermentation, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Thickener",
     "detailed_description": "Xanthan gum is a polysaccharide produced by bacterial fermentation of glucose or sucrose by the bacterium Xanthomonas campestris. It is one of the most common thickeners in the food industry, found in salad dressings, sauces, gluten-free products, and ice cream. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E420",
     "name": "Sorbitol",
     "risk": "low",
     "description": "A sugar alcohol found naturally in fruits, safe but may cause digestive discomfort in large amounts.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Sweetener",
     "detailed_description": "Sorbitol is a sugar alcohol (polyol) found naturally in apples, pears, and stone fruits, and is produced commercially from glucose. It is commonly used as a sweetener in sugar-free confectionery, chewing gum, and diabetic products. It is permitted under EU/UK regulation at established limits and is considered safe, though products containing more than 10% added polyols must carry a warning that excessive consumption may produce laxative effects.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E421",
     "name": "Mannitol",
     "risk": "low",
     "description": "A sugar alcohol used as a sweetener, safe but may cause digestive issues in excess.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Sweetener",
     "detailed_description": "Mannitol is a sugar alcohol found naturally in seaweed, mushrooms, and tree bark, and is produced commercially by hydrogenation of fructose. It is used as a sweetener and anti-caking agent in sugar-free confectionery, chewing gum, and pharmaceutical tablets. It is permitted under EU/UK regulation at established limits and is considered safe, though excessive consumption may cause gastrointestinal discomfort.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E422",
     "name": "Glycerol",
     "risk": "low",
     "description": "A naturally occurring sugar alcohol used as a sweetener and humectant, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Stabiliser",
     "detailed_description": "Glycerol (glycerine) is a naturally occurring sugar alcohol that is a component of all animal and vegetable fats and oils. It is widely used as a humectant, sweetener, and solvent in confectionery, cake icings, and soft drinks. It is permitted under EU/UK regulation at established limits and is considered safe, being a normal metabolic intermediate in the human body.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E440",
     "name": "Pectin",
     "risk": "low",
     "description": "A natural gelling agent found in fruit, completely safe and used in jams.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Thickener",
     "detailed_description": "Pectin is a naturally occurring polysaccharide found in the cell walls of fruits, particularly apples and citrus peel. It is used as a gelling agent, thickener, and stabiliser in jams, jellies, marmalades, and fruit-based desserts. It is permitted under EU/UK regulation at established limits and is considered completely safe, also being valued as a source of soluble dietary fibre.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E450",
     "name": "Diphosphates",
     "risk": "medium",
     "description": "Raising agents used in baking, excessive phosphate intake may affect mineral absorption.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Raising agent",
     "detailed_description": "Diphosphates (pyrophosphates) are a group of phosphate salts used as raising agents in baking powders, self-raising flour, and cake mixes, and as emulsifiers in processed cheese and meat products. They are permitted under EU/UK regulation at established limits, though EFSA has noted that total phosphate intake from all food additive sources may exceed the acceptable daily intake in some population groups.",
     "potential_risks": [
@@ -817,16 +1430,29 @@
       "Excessive phosphate intake may interfere with calcium absorption and affect bone health"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of phosphoric acid and phosphates (E 338-341, E 343, E 450-452)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/5674", "year": 2019},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA re-evaluation of phosphoric acid and phosphates (E 338-341, E 343, E 450-452)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/5674",
+        "year": 2019
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E451",
     "name": "Triphosphates",
     "risk": "medium",
     "description": "Used in processed meats, excessive phosphate intake is linked to cardiovascular concerns.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Stabiliser",
     "detailed_description": "Triphosphates are phosphate salts used as water-retention agents and emulsifiers in processed meats, seafood, and cheese products. They help improve texture and moisture in cooked ham, sausages, and surimi. They are permitted under EU/UK regulation at established limits, though some research has associated excessive dietary phosphate intake with cardiovascular concerns, particularly in individuals with kidney disease.",
     "potential_risks": [
@@ -835,55 +1461,95 @@
       "May be a particular concern for individuals with impaired kidney function"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of phosphoric acid and phosphates (E 338-341, E 343, E 450-452)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/5674", "year": 2019},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA re-evaluation of phosphoric acid and phosphates (E 338-341, E 343, E 450-452)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/5674",
+        "year": 2019
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E460",
     "name": "Cellulose",
     "risk": "low",
     "description": "Plant fibre used as a bulking agent, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Thickener",
     "detailed_description": "Cellulose is a natural polysaccharide that forms the structural component of plant cell walls, making it the most abundant organic compound on Earth. It is used as a bulking agent, anti-caking agent, and thickener in grated cheese, bread, and low-calorie foods. It is permitted under EU/UK regulation at established limits and is considered safe, being an insoluble dietary fibre.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E471",
     "name": "Mono- and Diglycerides",
     "risk": "low",
     "description": "Common emulsifiers made from fats, considered safe in normal food amounts.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Emulsifier",
     "detailed_description": "Mono- and diglycerides of fatty acids are among the most widely used emulsifiers in the food industry, produced from glycerol and natural fatty acids. They are found in bread, margarine, ice cream, cakes, and many other processed foods. They are permitted under EU/UK regulation at established limits and are considered safe, as they are digested and metabolised in the same way as natural fats.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E472e",
     "name": "DATEM",
     "risk": "low",
     "description": "An emulsifier used in bread to improve texture, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Emulsifier",
     "detailed_description": "DATEM (diacetyl tartaric acid esters of mono- and diglycerides) is an emulsifier widely used in bread and bakery products to improve dough strength, texture, and volume. It is also found in some confectionery and coffee whiteners. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E476",
     "name": "PGPR",
     "risk": "medium",
     "description": "An emulsifier made from castor oil, used in chocolate — safe but highly processed.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Emulsifier",
     "detailed_description": "PGPR (polyglycerol polyricinoleate) is an emulsifier derived from castor oil and glycerol, primarily used in chocolate and chocolate-flavoured coatings to reduce viscosity and improve flow properties. It is permitted under EU/UK regulation at established limits, with EFSA setting an ADI of 25 mg/kg body weight per day. While it is considered safe within these limits, it is a highly processed additive that some consumers prefer to avoid.",
     "potential_risks": [
@@ -891,68 +1557,117 @@
       "EFSA has set a specific ADI, indicating that intake should be monitored within limits"
     ],
     "sources": [
-      {"title": "EFSA opinion on polyglycerol polyricinoleate (E 476)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/5765", "year": 2017},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA opinion on polyglycerol polyricinoleate (E 476)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/5765",
+        "year": 2017
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E500",
     "name": "Sodium Carbonates",
     "risk": "low",
     "description": "Baking soda — a natural raising agent, completely safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Raising agent",
     "detailed_description": "Sodium carbonates include sodium carbonate, sodium bicarbonate (baking soda), and sodium sesquicarbonate, used as raising agents, acidity regulators, and anti-caking agents. They are found in baked goods, confectionery, and effervescent drinks. They are permitted under EU/UK regulation at established limits and are considered completely safe at normal usage levels.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E503",
     "name": "Ammonium Carbonates",
     "risk": "low",
     "description": "A raising agent used in baking, breaks down during cooking and is considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Raising agent",
     "detailed_description": "Ammonium carbonates are raising agents that decompose during baking to release carbon dioxide, ammonia, and water, leaving no residue in the finished product. They are traditionally used in flat baked goods such as gingerbread, crackers, and biscuits. They are permitted under EU/UK regulation at established limits and are considered safe, as they fully decompose during the cooking process.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E516",
     "name": "Calcium Sulphate",
     "risk": "low",
     "description": "A natural mineral used as a firming agent and flour treatment agent, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Acidity regulator",
     "detailed_description": "Calcium sulphate is a naturally occurring mineral (gypsum) used as a firming agent, flour treatment agent, and coagulant in tofu production. It is commonly found in bread, canned vegetables, and tofu. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E551",
     "name": "Silicon Dioxide",
     "risk": "low",
     "description": "A natural anti-caking agent found in sand and quartz, considered safe in food amounts.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Anti-caking agent",
     "detailed_description": "Silicon dioxide (silica) is a naturally occurring mineral found abundantly in sand, quartz, and many plants. It is used as an anti-caking agent in powdered foods such as spices, salt, coffee whiteners, and powdered sugar. It is permitted under EU/UK regulation at established limits and is considered safe in food amounts, as it passes through the body without being absorbed.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E553b",
     "name": "Talc",
     "risk": "medium",
     "description": "A mineral anti-caking agent, food-grade talc is generally considered safe but some concerns exist about contamination.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Anti-caking agent",
     "detailed_description": "Talc is a naturally occurring mineral (hydrated magnesium silicate) used as an anti-caking agent and surface coating in confectionery, chewing gum, and rice. Food-grade talc is purified to strict standards. It is permitted under EU/UK regulation at established limits, though some concerns have been raised about potential asbestos contamination in talc from certain geological sources, which is why food-grade specifications require rigorous purity testing.",
     "potential_risks": [
@@ -960,133 +1675,227 @@
       "Ongoing scientific discussion about long-term safety, primarily related to non-food-grade talc exposure"
     ],
     "sources": [
-      {"title": "EFSA re-evaluation of talc (E 553b) as a food additive", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/3540", "year": 2013},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA re-evaluation of talc (E 553b) as a food additive",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/3540",
+        "year": 2013
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E570",
     "name": "Fatty Acids",
     "risk": "low",
     "description": "Naturally occurring fats used as emulsifiers and anti-caking agents, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Anti-caking agent",
     "detailed_description": "Fatty acids (stearic acid, palmitic acid, and others) are naturally occurring components of animal and vegetable fats. They are used as anti-caking agents, emulsifiers, and glazing agents in confectionery, baked goods, and dietary supplements. They are permitted under EU/UK regulation at established limits and are considered safe, as they are identical to the fatty acids found naturally in food.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E620",
     "name": "Glutamic Acid",
     "risk": "low",
     "description": "A naturally occurring amino acid and flavour enhancer found in many foods, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Flavour enhancer",
     "detailed_description": "Glutamic acid is a naturally occurring amino acid that is one of the most abundant in nature, found in high concentrations in tomatoes, Parmesan cheese, mushrooms, and soy sauce. It provides the characteristic 'umami' (savoury) taste. It is permitted under EU/UK regulation at established limits and is considered safe, being a natural component of proteins in the human body.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E621",
     "name": "Monosodium Glutamate (MSG)",
     "risk": "low",
     "description": "A flavour enhancer found naturally in tomatoes and cheese, safe for most people.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Flavour enhancer",
     "detailed_description": "Monosodium glutamate (MSG) is the sodium salt of glutamic acid, used as a flavour enhancer to provide umami (savoury) taste. It is commonly found in crisps, instant noodles, soups, sauces, and Chinese cuisine. It is permitted under EU/UK regulation at established limits, and extensive scientific reviews by EFSA, the FDA, and other bodies have concluded it is safe for the general population at normal dietary levels, though a small number of individuals report sensitivity.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E627",
     "name": "Disodium Guanylate",
     "risk": "low",
     "description": "A flavour enhancer often used alongside MSG, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Flavour enhancer",
     "detailed_description": "Disodium guanylate is a flavour enhancer that works synergistically with MSG to intensify umami (savoury) taste. It is commonly found in crisps, instant noodles, snack seasonings, and stock cubes. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E631",
     "name": "Disodium Inosinate",
     "risk": "low",
     "description": "A flavour enhancer often used alongside MSG, derived from meat or fish, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Flavour enhancer",
     "detailed_description": "Disodium inosinate is a flavour enhancer that works synergistically with MSG and disodium guanylate to intensify savoury umami flavour. It is commonly found in crisps, instant noodles, stock cubes, and savoury snacks. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E900",
     "name": "Dimethyl Polysiloxane",
     "risk": "low",
     "description": "An anti-foaming agent used in cooking oils and frying, considered safe in food amounts.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Other",
     "detailed_description": "Dimethyl polysiloxane (polydimethylsiloxane, PDMS) is a silicone-based anti-foaming agent used in cooking oils, frying fats, and some beverages to prevent excessive foaming. It is commonly added to deep-frying oil in fast food outlets and found in some soft drinks and juices. It is permitted under EU/UK regulation at established limits and is considered safe in food amounts, as it is inert and passes through the body without being absorbed.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E901",
     "name": "Beeswax",
     "risk": "low",
     "description": "A natural wax used as a glazing agent on confectionery and fruit, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Glazing agent",
     "detailed_description": "Beeswax is a natural wax produced by honey bees, used as a glazing agent and coating on confectionery, fresh fruit, nuts, and coffee beans to provide a shiny appearance and protective barrier. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption, having been used in food for centuries.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E903",
     "name": "Carnauba Wax",
     "risk": "low",
     "description": "A natural plant wax used as a glazing agent, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Glazing agent",
     "detailed_description": "Carnauba wax is a natural wax obtained from the leaves of the Brazilian palm tree Copernicia prunifera. It is used as a glazing agent on confectionery, chewing gum, fresh fruit, and pharmaceutical tablets to provide a glossy coating. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E904",
     "name": "Shellac",
     "risk": "low",
     "description": "A natural resin secreted by lac insects, used as a glazing agent on confectionery and pills, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Glazing agent",
     "detailed_description": "Shellac is a natural resin secreted by the female lac insect (Kerria lacca), primarily harvested in India and Thailand. It is used as a glazing agent on confectionery, chocolate, citrus fruits, and pharmaceutical tablets to provide a shiny, protective coating. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E951",
     "name": "Aspartame",
     "risk": "medium",
     "description": "An artificial sweetener that is safe at approved levels but remains controversial.",
-    "regulation": "EU Reg 1333/2008 — EFSA ADI: 40mg/kg/day",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008 — EFSA ADI: 40mg/kg/day",
     "function": "Sweetener",
     "detailed_description": "Aspartame is a low-calorie artificial sweetener approximately 200 times sweeter than sugar, used in diet soft drinks, sugar-free confectionery, tabletop sweeteners, and many reduced-calorie products. It is permitted under EU/UK regulation at established limits with an ADI of 40 mg/kg body weight per day. EFSA re-evaluated aspartame in 2013 and concluded it is safe at current exposure levels, though IARC classified it as 'possibly carcinogenic to humans' (Group 2B) in 2023, noting limited evidence; the topic remains an area of active scientific discussion.",
     "potential_risks": [
@@ -1095,17 +1904,34 @@
       "Some observational studies have reported associations with headaches and other symptoms, though controlled trials have not consistently confirmed these"
     ],
     "sources": [
-      {"title": "EFSA scientific opinion on the re-evaluation of aspartame (E 951)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/3496", "year": 2013},
-      {"title": "IARC Monographs evaluation of aspartame", "url": "https://pubmed.ncbi.nlm.nih.gov/37369354/", "year": 2023},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA scientific opinion on the re-evaluation of aspartame (E 951)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/3496",
+        "year": 2013
+      },
+      {
+        "title": "IARC Monographs evaluation of aspartame",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37369354/",
+        "year": 2023
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E955",
     "name": "Sucralose",
     "risk": "medium",
     "description": "An artificial sweetener, generally considered safe but some studies question gut health effects.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Sweetener",
     "detailed_description": "Sucralose is a zero-calorie artificial sweetener approximately 600 times sweeter than sugar, made by chlorinating sucrose. It is commonly found in diet drinks, sugar-free confectionery, baked goods, and tabletop sweeteners. It is permitted under EU/UK regulation at established limits with an ADI of 15 mg/kg body weight per day, though some recent studies have raised questions about potential effects on gut bacteria and glucose metabolism.",
     "potential_risks": [
@@ -1113,99 +1939,175 @@
       "A few studies have reported potential effects on glucose and insulin responses, though findings are inconsistent"
     ],
     "sources": [
-      {"title": "EFSA opinion on sucralose (E 955)", "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4361", "year": 2016},
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EFSA opinion on sucralose (E 955)",
+        "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4361",
+        "year": 2016
+      },
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E960",
     "name": "Steviol Glycosides",
     "risk": "low",
     "description": "A natural sweetener from stevia leaves, considered a safer alternative to artificial sweeteners.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Sweetener",
     "detailed_description": "Steviol glycosides are natural high-intensity sweeteners extracted from the leaves of the Stevia rebaudiana plant, native to South America. They are approximately 200-300 times sweeter than sugar and are used in beverages, confectionery, and tabletop sweeteners. They are permitted under EU/UK regulation at established limits and are considered safe, offering a plant-derived alternative to synthetic sweeteners.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E965",
     "name": "Maltitol",
     "risk": "low",
     "description": "A sugar alcohol used in sugar-free products, safe but may cause digestive discomfort.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Sweetener",
     "detailed_description": "Maltitol is a sugar alcohol (polyol) produced by hydrogenation of maltose, with about 75-90% of the sweetness of sugar but significantly fewer calories. It is commonly found in sugar-free chocolate, confectionery, chewing gum, and ice cream. It is permitted under EU/UK regulation at established limits and is considered safe, though products containing more than 10% added polyols must carry a warning about potential laxative effects from excessive consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E1404",
     "name": "Oxidised Starch",
     "risk": "low",
     "description": "A modified starch used as a thickener and emulsifier, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Modified starch",
     "detailed_description": "Oxidised starch is a chemically modified starch produced by treating native starch with an oxidising agent. It is used as a thickener, emulsifier, and binder in sauces, confectionery coatings, and bakery products. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E1420",
     "name": "Acetylated Starch",
     "risk": "low",
     "description": "A modified starch used as a thickener and stabiliser, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Modified starch",
     "detailed_description": "Acetylated starch is a modified starch produced by treating native starch with acetic anhydride or vinyl acetate. It is used as a thickener, stabiliser, and texturiser in canned foods, frozen foods, and sauces. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E1422",
     "name": "Acetylated Distarch Adipate",
     "risk": "low",
     "description": "A modified starch used as a thickener and stabiliser, commonly found in sauces, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Modified starch",
     "detailed_description": "Acetylated distarch adipate is a modified starch produced by cross-linking starch with adipic anhydride and then acetylating it. It is one of the most commonly used modified starches, found in sauces, gravies, soups, yoghurts, and ready meals. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E1442",
     "name": "Hydroxy Propyl Distarch Phosphate",
     "risk": "low",
     "description": "A modified starch used as a thickener in many processed foods, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Modified starch",
     "detailed_description": "Hydroxy propyl distarch phosphate is a modified starch that has been cross-linked and hydroxypropylated to improve its stability under heat, acid, and freeze-thaw conditions. It is widely used in ready meals, sauces, soups, and dairy desserts. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   },
   {
     "code": "E1450",
     "name": "Starch Sodium Octenyl Succinate",
     "risk": "low",
     "description": "A modified starch used as an emulsifier and stabiliser, considered safe.",
-    "regulation": "EU Reg 1333/2008",
+    "regulation": "UK FSA / Assimilated Regulation (EC) No. 1333/2008",
     "function": "Modified starch",
     "detailed_description": "Starch sodium octenyl succinate (OSA starch) is a modified starch with emulsifying properties, produced by treating starch with octenyl succinic anhydride. It is commonly used in beverage emulsions, encapsulated flavourings, and salad dressings. It is permitted under EU/UK regulation at established limits and is considered safe for general consumption.",
     "potential_risks": [],
     "sources": [
-      {"title": "EU Regulation 1333/2008 on food additives", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333", "year": 2008}
-    ]
+      {
+        "title": "EU Regulation 1333/2008 on food additives",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333",
+        "year": 2008
+      }
+    ],
+    "uk_status": "permitted",
+    "eu_status": "permitted",
+    "us_status": "permitted",
+    "uk_notes": null,
+    "divergence_alert": false
   }
 ]

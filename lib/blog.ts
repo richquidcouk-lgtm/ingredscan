@@ -13,6 +13,54 @@ export interface BlogPost {
 
 const posts: BlogPost[] = [
   {
+    slug: 'uk-eu-food-additives-differences',
+    title: 'UK vs EU Food Additives After Brexit: What\'s Different in 2026',
+    description: 'Since Brexit, the UK and EU regulate food additives independently. We explain the key differences, which additives have different status, and what it means for UK shoppers.',
+    date: '2026-04-06',
+    author: 'IngredScan Team',
+    category: 'Food Science',
+    tags: ['uk food additives', 'eu food additives', 'brexit food', 'e171 uk', 'titanium dioxide banned', 'uk fsa', 'food regulation'],
+    readTime: '5 min read',
+    featured: false,
+    content: `
+<p>Since Brexit, the UK and European Union regulate food additives independently. For the first time in decades, the UK's Food Standards Agency (FSA) and the EU's European Food Safety Authority (EFSA) can — and do — reach different conclusions about the same additive. Here's what that means for UK shoppers in 2026.</p>
+
+<h2>How UK Food Law Changed After Brexit</h2>
+<p>Before Brexit, UK food additive law was EU Regulation (EC) No. 1333/2008 — the same rules applied across all EU member states. When the UK left the EU, this regulation was "retained" into UK domestic law through a process called "assimilation." The result is that the UK now has its own version of the same regulation, published on <a href="https://www.legislation.gov.uk/eur/2008/1333/contents">legislation.gov.uk</a>.</p>
+<p>In practice, this means the <a href="https://www.food.gov.uk">Food Standards Agency (FSA)</a> — not EFSA — is now the authority that decides which additives are safe for use in food sold in Great Britain (England, Scotland, and Wales).</p>
+<p>From April 2025, the FSA introduced a new register-based system for approved food additives and other regulated products, accessible at <a href="https://data.food.gov.uk/regulated-products">data.food.gov.uk</a>.</p>
+
+<h2>The Key Difference: Titanium Dioxide (E171)</h2>
+<p>The most significant UK/EU divergence on food additives is <strong>titanium dioxide (E171)</strong> — a white pigment used in sweets, chewing gum, white sauces, and icing.</p>
+<p>In 2021, EFSA published a safety assessment concluding that titanium dioxide could no longer be considered safe as a food additive, citing concerns about potential genotoxicity (DNA damage) from nanoparticles. The EU subsequently banned E171 in food products from 7 August 2022 under Regulation (EU) 2022/63.</p>
+<p>The UK FSA reviewed the same scientific evidence independently and reached a different conclusion. The FSA determined that the evidence for genotoxicity was not sufficient to withdraw authorisation, and E171 remains permitted in food sold in Great Britain.</p>
+<p>This means a product bought in Tesco or Sainsbury's may contain titanium dioxide, while the same product sold in a French or German supermarket would not.</p>
+
+<h2>The Southampton Six: Warning Labels</h2>
+<p>Six artificial food colours — known as the "Southampton Six" after the university study that linked them to hyperactivity in children — require mandatory warning labels in both the UK and EU.</p>
+<p>The six colours are: <strong>E102</strong> (Tartrazine), <strong>E104</strong> (Quinoline Yellow), <strong>E110</strong> (Sunset Yellow), <strong>E122</strong> (Carmoisine), <strong>E124</strong> (Ponceau 4R), and <strong>E129</strong> (Allura Red). Products containing any of these must display: "may have an adverse effect on activity and attention in children."</p>
+<p>In the UK, this requirement comes from the UK Food Information Regulations 2014 — not directly from EU law. So even though the warning text is the same, the legal basis is different.</p>
+
+<h2>Northern Ireland: A Special Case</h2>
+<p>Northern Ireland occupies a unique position. Under the Windsor Framework, NI follows EU food regulations — not GB rules. This means titanium dioxide (E171) is banned in food products sold in Northern Ireland, even though it remains permitted in England, Scotland, and Wales.</p>
+<p>For shoppers in Northern Ireland, EU food additive rules apply. For shoppers in the rest of the UK, GB assimilated law applies.</p>
+
+<h2>What This Means for UK Shoppers</h2>
+<p>In most cases, UK and EU food additive rules are still aligned — the same additives are permitted at the same levels. The divergences are limited but significant when they occur.</p>
+<p>As an informed shopper, it's worth knowing:</p>
+<ul>
+<li>The FSA, not EFSA, is your regulatory authority for food sold in GB</li>
+<li>Some additives banned in the EU may still be legal in UK food</li>
+<li>Products imported from the EU may have different formulations than UK versions</li>
+<li>The FSA maintains a public register of all approved additives at <a href="https://www.food.gov.uk/business-guidance/approved-additives-and-e-numbers">food.gov.uk</a></li>
+</ul>
+
+<h2>How IngredScan Handles This</h2>
+<p>IngredScan shows UK-specific regulatory status for every additive. When the UK and EU have taken different positions on an additive, we flag this clearly so you have the full picture. Our <a href="/blog/what-is-nova-score">scoring system</a> and additive risk ratings are based on the UK FSA's position, supplemented by EFSA scientific opinions and published peer-reviewed research.</p>
+<p>You can <a href="/scan">scan any product</a> to see its full additive breakdown with UK regulatory status for each ingredient.</p>
+`,
+  },
+  {
     slug: 'what-is-nova-score',
     title: 'What Is the NOVA Score? A Simple Guide to Food Processing Levels',
     description: 'Learn how the NOVA classification system works, what each level means, and why it matters for your health — with real UK product examples.',
