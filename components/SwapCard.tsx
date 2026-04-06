@@ -1,16 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { getNovaColor, getScoreColor } from '@/lib/scoring'
-import { searchProducts } from '@/lib/openFoodFacts'
 
 type Swap = {
   product_name: string
   retailer: string
   nova_score: number
   quality_score: number
-  price_difference: string
+  price_difference?: string
 }
 
 const retailerColors: Record<string, string> = {
@@ -39,50 +36,19 @@ export default function SwapCard({
   currentScore: number
   index: number
 }) {
-  const router = useRouter()
-  const [loading, setLoading] = useState(false)
   const improvement = Math.round((swap.quality_score - currentScore) * 10) / 10
   const scoreColor = getScoreColor(swap.quality_score)
   const novaColor = getNovaColor(swap.nova_score)
   const retailerColor = retailerColors[swap.retailer] || '#555'
 
-  async function handleTap() {
-    if (loading) return
-    setLoading(true)
-    try {
-      // Search by product name — try shorter query if full name fails
-      const query = swap.product_name
-      const results = await searchProducts(query)
-      if (results.products && results.products.length > 0) {
-        const match = results.products[0]
-        router.push(`/result/${match.code}?source=scan`)
-        return
-      }
-      // Try shorter query (first 3 words)
-      const shortQuery = query.split(' ').slice(0, 3).join(' ')
-      if (shortQuery !== query) {
-        const retryResults = await searchProducts(shortQuery)
-        if (retryResults.products && retryResults.products.length > 0) {
-          router.push(`/result/${retryResults.products[0].code}?source=scan`)
-          return
-        }
-      }
-    } catch {}
-    setLoading(false)
-  }
-
   return (
-    <button
-      onClick={handleTap}
-      disabled={loading}
-      className="w-full text-left rounded-2xl p-4 glass-card transition-all active:scale-[0.98]"
+    <div
+      className="w-full rounded-2xl p-4 glass-card"
       style={{
         animation: `fadeUp 500ms cubic-bezier(0.16,1,0.3,1) ${index * 50}ms both`,
-        opacity: loading ? 0.6 : 1,
       }}
     >
       <div className="flex items-center gap-3">
-        {/* Left: retailer + product info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1.5">
             <span
@@ -101,35 +67,22 @@ export default function SwapCard({
           <p className="font-semibold text-sm leading-tight" style={{ color: '#f0f0f4', letterSpacing: '-0.01em' }}>
             {swap.product_name}
           </p>
-          <div className="flex items-center gap-2 mt-1">
-            {improvement > 0 && (
-              <p className="text-[10px] font-medium" style={{ color: '#00e5a0' }}>
-                +{improvement.toFixed(1)} on our criteria
-              </p>
-            )}
-            <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>
-              Tap to view details
+          {improvement > 0 && (
+            <p className="text-[10px] mt-1 font-medium" style={{ color: '#00e5a0' }}>
+              +{improvement.toFixed(1)} on our criteria
             </p>
-          </div>
+          )}
         </div>
 
-        {/* Right: score + arrow */}
-        <div className="shrink-0 flex flex-col items-center gap-1">
+        <div className="shrink-0 flex flex-col items-center">
           <span className="text-2xl font-extrabold heading-display" style={{ color: scoreColor }}>
             {swap.quality_score.toFixed(1)}
           </span>
           <span className="text-[9px] font-medium uppercase tracking-wider" style={{ color: 'rgba(240,240,244,0.5)' }}>
             Score
           </span>
-          {loading ? (
-            <div className="w-3 h-3 border border-t-transparent rounded-full animate-spin mt-1" style={{ borderColor: '#7c6fff', borderTopColor: 'transparent' }} />
-          ) : (
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.2)" strokeWidth="2" className="mt-1">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          )}
         </div>
       </div>
-    </button>
+    </div>
   )
 }

@@ -1,331 +1,1899 @@
 [
   {
     "category": "ketchups",
-    "keywords": ["ketchup", "tomato sauce", "tomato ketchup"],
+    "keywords": [
+      "ketchup",
+      "tomato sauce",
+      "tomato ketchup"
+    ],
     "swaps": [
-      {"product_name": "Tesco Organic Tomato Ketchup", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.5, "price_difference": "+40p", "market": "uk"},
-      {"product_name": "Waitrose Duchy Organic Ketchup", "retailer": "Waitrose", "nova_score": 3, "quality_score": 8.0, "price_difference": "+85p", "market": "uk"},
-      {"product_name": "Sainsbury's SO Organic Ketchup", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.2, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "M&S Organic Tomato Ketchup", "retailer": "M&S", "nova_score": 3, "quality_score": 7.6, "price_difference": "+60p", "market": "uk"},
-      {"product_name": "Aldi Bramwells Organic Ketchup", "retailer": "Aldi", "nova_score": 3, "quality_score": 7.0, "price_difference": "-10p", "market": "uk"},
-      {"product_name": "365 Organic Tomato Ketchup", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.8, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Trader Joe's Organic Ketchup", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$0.30", "market": "us"},
-      {"product_name": "Primal Kitchen Organic Ketchup", "retailer": "Target", "nova_score": 3, "quality_score": 8.2, "price_difference": "+$2.00", "market": "us"},
-      {"product_name": "Good & Gather Organic Ketchup", "retailer": "Target", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$0.40", "market": "us"},
-      {"product_name": "Kroger Simple Truth Organic Ketchup", "retailer": "Kroger", "nova_score": 3, "quality_score": 7.3, "price_difference": "+$0.30", "market": "us"},
-      {"product_name": "Great Value Organic Ketchup", "retailer": "Walmart", "nova_score": 3, "quality_score": 7.0, "price_difference": "-$0.20", "market": "us"}
+      {
+        "product_name": "Tesco Organic Tomato Ketchup",
+        "retailer": "Tesco",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+40p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Waitrose Duchy Organic Ketchup",
+        "retailer": "Waitrose",
+        "nova_score": 3,
+        "quality_score": 8,
+        "price_difference": "+85p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's SO Organic Ketchup",
+        "retailer": "Sainsbury's",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Organic Tomato Ketchup",
+        "retailer": "M&S",
+        "nova_score": 3,
+        "quality_score": 7.6,
+        "price_difference": "+60p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Aldi Bramwells Organic Ketchup",
+        "retailer": "Aldi",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "-10p",
+        "market": "uk"
+      },
+      {
+        "product_name": "365 Organic Tomato Ketchup",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 7.8,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Organic Ketchup",
+        "retailer": "Trader Joe's",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+$0.30",
+        "market": "us"
+      },
+      {
+        "product_name": "Primal Kitchen Organic Ketchup",
+        "retailer": "Target",
+        "nova_score": 3,
+        "quality_score": 8.2,
+        "price_difference": "+$2.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Good & Gather Organic Ketchup",
+        "retailer": "Target",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+$0.40",
+        "market": "us"
+      },
+      {
+        "product_name": "Kroger Simple Truth Organic Ketchup",
+        "retailer": "Kroger",
+        "nova_score": 3,
+        "quality_score": 7.3,
+        "price_difference": "+$0.30",
+        "market": "us"
+      },
+      {
+        "product_name": "Great Value Organic Ketchup",
+        "retailer": "Walmart",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "-$0.20",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "breads",
-    "keywords": ["white bread", "sliced bread", "bread", "loaf", "sandwich bread"],
+    "keywords": [
+      "white bread",
+      "sliced bread",
+      "bread",
+      "loaf",
+      "sandwich bread"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Sourdough Loaf", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.5, "price_difference": "+£1.20", "market": "uk"},
-      {"product_name": "Sainsbury's Taste the Difference Sourdough", "retailer": "Sainsbury's", "nova_score": 2, "quality_score": 8.0, "price_difference": "+90p", "market": "uk"},
-      {"product_name": "Tesco Finest Rye Bread", "retailer": "Tesco", "nova_score": 2, "quality_score": 7.8, "price_difference": "+70p", "market": "uk"},
-      {"product_name": "M&S Sourdough Bloomer", "retailer": "M&S", "nova_score": 2, "quality_score": 8.2, "price_difference": "+£1.00", "market": "uk"},
-      {"product_name": "Lidl Bakery Sourdough Loaf", "retailer": "Lidl", "nova_score": 2, "quality_score": 7.8, "price_difference": "+40p", "market": "uk"},
-      {"product_name": "Morrisons The Best Sourdough", "retailer": "Morrisons", "nova_score": 2, "quality_score": 7.9, "price_difference": "+80p", "market": "uk"},
-      {"product_name": "Dave's Killer Bread 21 Whole Grains", "retailer": "Kroger", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$1.50", "market": "us"},
-      {"product_name": "365 Organic Whole Wheat Bread", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.8, "price_difference": "+$0.80", "market": "us"},
-      {"product_name": "Trader Joe's Sourdough Bread", "retailer": "Trader Joe's", "nova_score": 2, "quality_score": 8.2, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Ezekiel 4:9 Sprouted Bread", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 9.0, "price_difference": "+$2.50", "market": "us"},
-      {"product_name": "Great Value Whole Wheat Bread", "retailer": "Walmart", "nova_score": 3, "quality_score": 6.8, "price_difference": "-$1.00", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Bread", "retailer": "Costco", "nova_score": 3, "quality_score": 7.5, "price_difference": "-$0.50", "market": "us"}
+      {
+        "product_name": "Waitrose Sourdough Loaf",
+        "retailer": "Waitrose",
+        "nova_score": 2,
+        "quality_score": 8.5,
+        "price_difference": "+£1.20",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Taste the Difference Sourdough",
+        "retailer": "Sainsbury's",
+        "nova_score": 2,
+        "quality_score": 8,
+        "price_difference": "+90p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Tesco Finest Rye Bread",
+        "retailer": "Tesco",
+        "nova_score": 2,
+        "quality_score": 7.8,
+        "price_difference": "+70p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Sourdough Bloomer",
+        "retailer": "M&S",
+        "nova_score": 2,
+        "quality_score": 8.2,
+        "price_difference": "+£1.00",
+        "market": "uk"
+      },
+      {
+        "product_name": "Lidl Bakery Sourdough Loaf",
+        "retailer": "Lidl",
+        "nova_score": 2,
+        "quality_score": 7.8,
+        "price_difference": "+40p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Morrisons The Best Sourdough",
+        "retailer": "Morrisons",
+        "nova_score": 2,
+        "quality_score": 7.9,
+        "price_difference": "+80p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Dave's Killer Bread 21 Whole Grains",
+        "retailer": "Kroger",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+$1.50",
+        "market": "us"
+      },
+      {
+        "product_name": "365 Organic Whole Wheat Bread",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 7.8,
+        "price_difference": "+$0.80",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Sourdough Bread",
+        "retailer": "Trader Joe's",
+        "nova_score": 2,
+        "quality_score": 8.2,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Ezekiel 4:9 Sprouted Bread",
+        "retailer": "Whole Foods",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "+$2.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Great Value Whole Wheat Bread",
+        "retailer": "Walmart",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "-$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Bread",
+        "retailer": "Costco",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "-$0.50",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "chocolate",
-    "keywords": ["chocolate", "chocolate bar", "milk chocolate", "candy bar", "dark chocolate"],
+    "keywords": [
+      "chocolate",
+      "chocolate bar",
+      "milk chocolate",
+      "candy bar",
+      "dark chocolate"
+    ],
     "swaps": [
-      {"product_name": "Sainsbury's Taste the Difference 70% Dark", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+60p", "market": "uk"},
-      {"product_name": "Waitrose No.1 85% Dark Chocolate", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.5, "price_difference": "+£1.10", "market": "uk"},
-      {"product_name": "Tesco Finest 72% Dark Chocolate", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.2, "price_difference": "+50p", "market": "uk"},
-      {"product_name": "M&S Swiss Dark Chocolate 72%", "retailer": "M&S", "nova_score": 3, "quality_score": 7.8, "price_difference": "+80p", "market": "uk"},
-      {"product_name": "Aldi Moser Roth 85% Dark", "retailer": "Aldi", "nova_score": 2, "quality_score": 8.2, "price_difference": "-30p", "market": "uk"},
-      {"product_name": "Hu Dark Chocolate Bar", "retailer": "Whole Foods", "nova_score": 2, "quality_score": 8.5, "price_difference": "+$2.00", "market": "us"},
-      {"product_name": "Trader Joe's 72% Dark Chocolate", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Green & Black's Organic 85% Dark", "retailer": "Target", "nova_score": 2, "quality_score": 8.0, "price_difference": "+$1.50", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Dark Chocolate", "retailer": "Costco", "nova_score": 3, "quality_score": 7.5, "price_difference": "-$1.00", "market": "us"},
-      {"product_name": "Lily's No Sugar Added Chocolate", "retailer": "Kroger", "nova_score": 3, "quality_score": 7.0, "price_difference": "+$1.00", "market": "us"},
-      {"product_name": "Alter Eco Dark Chocolate Truffles", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.8, "price_difference": "+$2.50", "market": "us"}
+      {
+        "product_name": "Sainsbury's Taste the Difference 70% Dark",
+        "retailer": "Sainsbury's",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+60p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Waitrose No.1 85% Dark Chocolate",
+        "retailer": "Waitrose",
+        "nova_score": 2,
+        "quality_score": 8.5,
+        "price_difference": "+£1.10",
+        "market": "uk"
+      },
+      {
+        "product_name": "Tesco Finest 72% Dark Chocolate",
+        "retailer": "Tesco",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Swiss Dark Chocolate 72%",
+        "retailer": "M&S",
+        "nova_score": 3,
+        "quality_score": 7.8,
+        "price_difference": "+80p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Aldi Moser Roth 85% Dark",
+        "retailer": "Aldi",
+        "nova_score": 2,
+        "quality_score": 8.2,
+        "price_difference": "-30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Hu Dark Chocolate Bar",
+        "retailer": "Whole Foods",
+        "nova_score": 2,
+        "quality_score": 8.5,
+        "price_difference": "+$2.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's 72% Dark Chocolate",
+        "retailer": "Trader Joe's",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Green & Black's Organic 85% Dark",
+        "retailer": "Target",
+        "nova_score": 2,
+        "quality_score": 8,
+        "price_difference": "+$1.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Dark Chocolate",
+        "retailer": "Costco",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "-$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Lily's No Sugar Added Chocolate",
+        "retailer": "Kroger",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Alter Eco Dark Chocolate Truffles",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 7.8,
+        "price_difference": "+$2.50",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "crisps",
-    "keywords": ["crisps", "chips", "potato chips", "snacks", "tortilla chips", "corn chips"],
+    "keywords": [
+      "crisps",
+      "chips",
+      "potato chips",
+      "snacks",
+      "tortilla chips",
+      "corn chips"
+    ],
     "swaps": [
-      {"product_name": "Tesco Lentil Curls Lightly Salted", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.0, "price_difference": "-20p", "market": "uk"},
-      {"product_name": "Asda Baked Crisps Ready Salted", "retailer": "Asda", "nova_score": 3, "quality_score": 6.8, "price_difference": "-30p", "market": "uk"},
-      {"product_name": "Waitrose Love Life Popped Chips", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.5, "price_difference": "+40p", "market": "uk"},
-      {"product_name": "M&S Eat Well Lentil Crisps", "retailer": "M&S", "nova_score": 3, "quality_score": 7.2, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "Aldi Harvest Basket Veggie Straws", "retailer": "Aldi", "nova_score": 3, "quality_score": 6.5, "price_difference": "-40p", "market": "uk"},
-      {"product_name": "Morrisons The Best Root Veg Crisps", "retailer": "Morrisons", "nova_score": 3, "quality_score": 7.0, "price_difference": "+20p", "market": "uk"},
-      {"product_name": "Siete Grain Free Tortilla Chips", "retailer": "Target", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$1.00", "market": "us"},
-      {"product_name": "Trader Joe's Baked Lentil Chips", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 7.0, "price_difference": "-$0.50", "market": "us"},
-      {"product_name": "365 Organic Blue Corn Tortilla Chips", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Good & Gather Veggie Chips", "retailer": "Target", "nova_score": 3, "quality_score": 6.8, "price_difference": "+$0.30", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Tortilla Chips", "retailer": "Costco", "nova_score": 3, "quality_score": 7.2, "price_difference": "-$0.80", "market": "us"},
-      {"product_name": "Kroger Simple Truth Organic Chips", "retailer": "Kroger", "nova_score": 3, "quality_score": 7.0, "price_difference": "+$0.20", "market": "us"}
+      {
+        "product_name": "Tesco Lentil Curls Lightly Salted",
+        "retailer": "Tesco",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "-20p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Asda Baked Crisps Ready Salted",
+        "retailer": "Asda",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "-30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Waitrose Love Life Popped Chips",
+        "retailer": "Waitrose",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+40p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Eat Well Lentil Crisps",
+        "retailer": "M&S",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Aldi Harvest Basket Veggie Straws",
+        "retailer": "Aldi",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "-40p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Morrisons The Best Root Veg Crisps",
+        "retailer": "Morrisons",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+20p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Siete Grain Free Tortilla Chips",
+        "retailer": "Target",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Baked Lentil Chips",
+        "retailer": "Trader Joe's",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "-$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "365 Organic Blue Corn Tortilla Chips",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Good & Gather Veggie Chips",
+        "retailer": "Target",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "+$0.30",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Tortilla Chips",
+        "retailer": "Costco",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "-$0.80",
+        "market": "us"
+      },
+      {
+        "product_name": "Kroger Simple Truth Organic Chips",
+        "retailer": "Kroger",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+$0.20",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "cereals",
-    "keywords": ["cereal", "breakfast cereal", "cornflakes", "muesli", "granola", "porridge", "oatmeal"],
+    "keywords": [
+      "cereal",
+      "breakfast cereal",
+      "cornflakes",
+      "muesli",
+      "granola",
+      "porridge",
+      "oatmeal"
+    ],
     "swaps": [
-      {"product_name": "Tesco Wholegrain Porridge Oats", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-£1.20", "market": "uk"},
-      {"product_name": "Sainsbury's SO Organic Granola", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "Asda Rolled Porridge Oats", "retailer": "Asda", "nova_score": 1, "quality_score": 9.5, "price_difference": "-£1.40", "market": "uk"},
-      {"product_name": "Waitrose Duchy Organic Porridge Oats", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.5, "price_difference": "+20p", "market": "uk"},
-      {"product_name": "Aldi Harvest Morn Porridge Oats", "retailer": "Aldi", "nova_score": 1, "quality_score": 9.5, "price_difference": "-£1.50", "market": "uk"},
-      {"product_name": "Lidl Crownfield Porridge Oats", "retailer": "Lidl", "nova_score": 1, "quality_score": 9.5, "price_difference": "-£1.50", "market": "uk"},
-      {"product_name": "Bob's Red Mill Organic Old Fashioned Oats", "retailer": "Kroger", "nova_score": 1, "quality_score": 9.5, "price_difference": "+$1.00", "market": "us"},
-      {"product_name": "Trader Joe's Organic Rolled Oats", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$1.00", "market": "us"},
-      {"product_name": "365 Organic Old Fashioned Oats", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$0.80", "market": "us"},
-      {"product_name": "Great Value Old Fashioned Oats", "retailer": "Walmart", "nova_score": 1, "quality_score": 9.0, "price_difference": "-$2.00", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Rolled Oats", "retailer": "Costco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$1.50", "market": "us"},
-      {"product_name": "Bear Naked Organic Granola", "retailer": "Target", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$0.50", "market": "us"}
+      {
+        "product_name": "Tesco Wholegrain Porridge Oats",
+        "retailer": "Tesco",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-£1.20",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's SO Organic Granola",
+        "retailer": "Sainsbury's",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Asda Rolled Porridge Oats",
+        "retailer": "Asda",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-£1.40",
+        "market": "uk"
+      },
+      {
+        "product_name": "Waitrose Duchy Organic Porridge Oats",
+        "retailer": "Waitrose",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+20p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Aldi Harvest Morn Porridge Oats",
+        "retailer": "Aldi",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-£1.50",
+        "market": "uk"
+      },
+      {
+        "product_name": "Lidl Crownfield Porridge Oats",
+        "retailer": "Lidl",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-£1.50",
+        "market": "uk"
+      },
+      {
+        "product_name": "Bob's Red Mill Organic Old Fashioned Oats",
+        "retailer": "Kroger",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Organic Rolled Oats",
+        "retailer": "Trader Joe's",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "365 Organic Old Fashioned Oats",
+        "retailer": "Whole Foods",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-$0.80",
+        "market": "us"
+      },
+      {
+        "product_name": "Great Value Old Fashioned Oats",
+        "retailer": "Walmart",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "-$2.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Rolled Oats",
+        "retailer": "Costco",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-$1.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Bear Naked Organic Granola",
+        "retailer": "Target",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+$0.50",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "soft_drinks",
-    "keywords": ["cola", "fizzy drink", "soda", "soft drink", "lemonade", "energy drink", "carbonated", "pop"],
+    "keywords": [
+      "cola",
+      "fizzy drink",
+      "soda",
+      "soft drink",
+      "lemonade",
+      "energy drink",
+      "carbonated",
+      "pop"
+    ],
     "swaps": [
-      {"product_name": "Tesco Sparkling Water with Lemon", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-80p", "market": "uk"},
-      {"product_name": "Sainsbury's Flavoured Sparkling Water", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 9.5, "price_difference": "-70p", "market": "uk"},
-      {"product_name": "Waitrose Sparkling Elderflower", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.0, "price_difference": "+20p", "market": "uk"},
-      {"product_name": "M&S Sparkling Lemonade", "retailer": "M&S", "nova_score": 3, "quality_score": 7.0, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "Aldi Everyday Essentials Sparkling Water", "retailer": "Aldi", "nova_score": 1, "quality_score": 9.5, "price_difference": "-£1.00", "market": "uk"},
-      {"product_name": "Spindrift Sparkling Lemon Water", "retailer": "Target", "nova_score": 1, "quality_score": 9.0, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Trader Joe's Sparkling Mineral Water", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$1.50", "market": "us"},
-      {"product_name": "Olipop Vintage Cola", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.0, "price_difference": "+$1.00", "market": "us"},
-      {"product_name": "Costco Kirkland Sparkling Water", "retailer": "Costco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$2.00", "market": "us"},
-      {"product_name": "Zevia Zero Calorie Soda", "retailer": "Kroger", "nova_score": 3, "quality_score": 6.5, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Waterloo Sparkling Water", "retailer": "Walmart", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$0.80", "market": "us"}
+      {
+        "product_name": "Tesco Sparkling Water with Lemon",
+        "retailer": "Tesco",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-80p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Flavoured Sparkling Water",
+        "retailer": "Sainsbury's",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-70p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Waitrose Sparkling Elderflower",
+        "retailer": "Waitrose",
+        "nova_score": 2,
+        "quality_score": 8,
+        "price_difference": "+20p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Sparkling Lemonade",
+        "retailer": "M&S",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Aldi Everyday Essentials Sparkling Water",
+        "retailer": "Aldi",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-£1.00",
+        "market": "uk"
+      },
+      {
+        "product_name": "Spindrift Sparkling Lemon Water",
+        "retailer": "Target",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Sparkling Mineral Water",
+        "retailer": "Trader Joe's",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-$1.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Olipop Vintage Cola",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Sparkling Water",
+        "retailer": "Costco",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-$2.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Zevia Zero Calorie Soda",
+        "retailer": "Kroger",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Waterloo Sparkling Water",
+        "retailer": "Walmart",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-$0.80",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "ready_meals",
-    "keywords": ["ready meal", "microwave meal", "frozen meal", "tv dinner", "meal for one", "frozen dinner", "prepared meal"],
+    "keywords": [
+      "ready meal",
+      "microwave meal",
+      "frozen meal",
+      "tv dinner",
+      "meal for one",
+      "frozen dinner",
+      "prepared meal",
+      "noodle",
+      "noodles",
+      "instant noodle",
+      "ramen",
+      "pot noodle",
+      "super noodle",
+      "cup noodle"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Fresh Meal for Tonight Range", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.0, "price_difference": "+£1.50", "market": "uk"},
-      {"product_name": "Sainsbury's Just Cook Range", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.8, "price_difference": "+80p", "market": "uk"},
-      {"product_name": "Tesco Finest Fresh Meals", "retailer": "Tesco", "nova_score": 3, "quality_score": 6.5, "price_difference": "+60p", "market": "uk"},
-      {"product_name": "M&S Count on Us Range", "retailer": "M&S", "nova_score": 3, "quality_score": 7.2, "price_difference": "+£1.00", "market": "uk"},
-      {"product_name": "Morrisons The Best Ready Meals", "retailer": "Morrisons", "nova_score": 3, "quality_score": 6.5, "price_difference": "+50p", "market": "uk"},
-      {"product_name": "Amy's Organic Frozen Meals", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.0, "price_difference": "+$1.50", "market": "us"},
-      {"product_name": "Trader Joe's Frozen Indian Meals", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 6.8, "price_difference": "-$1.00", "market": "us"},
-      {"product_name": "Saffron Road Frozen Entrees", "retailer": "Target", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Kevin's Natural Foods Paleo Meals", "retailer": "Costco", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$1.00", "market": "us"},
-      {"product_name": "Kroger Simple Truth Organic Bowls", "retailer": "Kroger", "nova_score": 3, "quality_score": 6.8, "price_difference": "+$0.30", "market": "us"},
-      {"product_name": "Tattooed Chef Plant-Based Bowls", "retailer": "Walmart", "nova_score": 3, "quality_score": 6.5, "price_difference": "-$0.50", "market": "us"}
+      {
+        "product_name": "Waitrose Fresh Meal for Tonight Range",
+        "retailer": "Waitrose",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+£1.50",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Just Cook Range",
+        "retailer": "Sainsbury's",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "+80p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Tesco Finest Fresh Meals",
+        "retailer": "Tesco",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "+60p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Count on Us Range",
+        "retailer": "M&S",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+£1.00",
+        "market": "uk"
+      },
+      {
+        "product_name": "Morrisons The Best Ready Meals",
+        "retailer": "Morrisons",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "+50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Amy's Organic Frozen Meals",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+$1.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Frozen Indian Meals",
+        "retailer": "Trader Joe's",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "-$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Saffron Road Frozen Entrees",
+        "retailer": "Target",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Kevin's Natural Foods Paleo Meals",
+        "retailer": "Costco",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Kroger Simple Truth Organic Bowls",
+        "retailer": "Kroger",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "+$0.30",
+        "market": "us"
+      },
+      {
+        "product_name": "Tattooed Chef Plant-Based Bowls",
+        "retailer": "Walmart",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "-$0.50",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "yoghurt",
-    "keywords": ["yoghurt", "yogurt", "fromage frais", "dairy dessert", "greek yogurt", "skyr"],
+    "keywords": [
+      "yoghurt",
+      "yogurt",
+      "fromage frais",
+      "dairy dessert",
+      "greek yogurt",
+      "skyr"
+    ],
     "swaps": [
-      {"product_name": "Tesco Greek Style Natural Yoghurt", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.0, "price_difference": "-60p", "market": "uk"},
-      {"product_name": "Sainsbury's Greek Yoghurt Natural", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 9.0, "price_difference": "-50p", "market": "uk"},
-      {"product_name": "Waitrose Natural Greek Yoghurt", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.2, "price_difference": "-30p", "market": "uk"},
-      {"product_name": "M&S Greek Style Yoghurt", "retailer": "M&S", "nova_score": 1, "quality_score": 9.0, "price_difference": "-20p", "market": "uk"},
-      {"product_name": "Aldi Brooklea Greek Style Yoghurt", "retailer": "Aldi", "nova_score": 1, "quality_score": 8.8, "price_difference": "-80p", "market": "uk"},
-      {"product_name": "Lidl Milbona Greek Yoghurt", "retailer": "Lidl", "nova_score": 1, "quality_score": 8.8, "price_difference": "-80p", "market": "uk"},
-      {"product_name": "Fage Total 2% Greek Yogurt", "retailer": "Kroger", "nova_score": 1, "quality_score": 9.2, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Trader Joe's Greek Nonfat Yogurt", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 9.0, "price_difference": "-$1.00", "market": "us"},
-      {"product_name": "Stonyfield Organic Greek Yogurt", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 9.2, "price_difference": "+$0.80", "market": "us"},
-      {"product_name": "Good & Gather Greek Yogurt", "retailer": "Target", "nova_score": 1, "quality_score": 8.8, "price_difference": "-$0.50", "market": "us"},
-      {"product_name": "Costco Kirkland Greek Yogurt", "retailer": "Costco", "nova_score": 1, "quality_score": 9.0, "price_difference": "-$1.50", "market": "us"},
-      {"product_name": "Siggi's Icelandic Skyr", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 9.2, "price_difference": "+$1.00", "market": "us"}
+      {
+        "product_name": "Tesco Greek Style Natural Yoghurt",
+        "retailer": "Tesco",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "-60p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Greek Yoghurt Natural",
+        "retailer": "Sainsbury's",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "-50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Waitrose Natural Greek Yoghurt",
+        "retailer": "Waitrose",
+        "nova_score": 1,
+        "quality_score": 9.2,
+        "price_difference": "-30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Greek Style Yoghurt",
+        "retailer": "M&S",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "-20p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Aldi Brooklea Greek Style Yoghurt",
+        "retailer": "Aldi",
+        "nova_score": 1,
+        "quality_score": 8.8,
+        "price_difference": "-80p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Lidl Milbona Greek Yoghurt",
+        "retailer": "Lidl",
+        "nova_score": 1,
+        "quality_score": 8.8,
+        "price_difference": "-80p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Fage Total 2% Greek Yogurt",
+        "retailer": "Kroger",
+        "nova_score": 1,
+        "quality_score": 9.2,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Greek Nonfat Yogurt",
+        "retailer": "Trader Joe's",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "-$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Stonyfield Organic Greek Yogurt",
+        "retailer": "Whole Foods",
+        "nova_score": 1,
+        "quality_score": 9.2,
+        "price_difference": "+$0.80",
+        "market": "us"
+      },
+      {
+        "product_name": "Good & Gather Greek Yogurt",
+        "retailer": "Target",
+        "nova_score": 1,
+        "quality_score": 8.8,
+        "price_difference": "-$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Greek Yogurt",
+        "retailer": "Costco",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "-$1.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Siggi's Icelandic Skyr",
+        "retailer": "Whole Foods",
+        "nova_score": 1,
+        "quality_score": 9.2,
+        "price_difference": "+$1.00",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "biscuits",
-    "keywords": ["biscuit", "cookie", "digestive", "shortbread", "cookies", "crackers"],
+    "keywords": [
+      "biscuit",
+      "cookie",
+      "digestive",
+      "shortbread",
+      "cookies",
+      "crackers"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Duchy Organic Oat Biscuits", "retailer": "Waitrose", "nova_score": 3, "quality_score": 6.8, "price_difference": "+70p", "market": "uk"},
-      {"product_name": "Tesco Oat Crunch Biscuits", "retailer": "Tesco", "nova_score": 3, "quality_score": 6.5, "price_difference": "-20p", "market": "uk"},
-      {"product_name": "Sainsbury's Free From Oat Cookies", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.5, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "M&S All Butter Shortbread", "retailer": "M&S", "nova_score": 3, "quality_score": 6.8, "price_difference": "+50p", "market": "uk"},
-      {"product_name": "Aldi Belmont Oat Biscuits", "retailer": "Aldi", "nova_score": 3, "quality_score": 6.2, "price_difference": "-40p", "market": "uk"},
-      {"product_name": "Simple Mills Almond Flour Crackers", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$1.50", "market": "us"},
-      {"product_name": "Trader Joe's Triple Ginger Snaps", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 6.5, "price_difference": "-$0.50", "market": "us"},
-      {"product_name": "Back to Nature Crackers", "retailer": "Target", "nova_score": 3, "quality_score": 6.8, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Mary's Gone Crackers Organic", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$1.50", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Animal Crackers", "retailer": "Costco", "nova_score": 3, "quality_score": 6.5, "price_difference": "-$1.00", "market": "us"}
+      {
+        "product_name": "Waitrose Duchy Organic Oat Biscuits",
+        "retailer": "Waitrose",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "+70p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Tesco Oat Crunch Biscuits",
+        "retailer": "Tesco",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "-20p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Free From Oat Cookies",
+        "retailer": "Sainsbury's",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S All Butter Shortbread",
+        "retailer": "M&S",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "+50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Aldi Belmont Oat Biscuits",
+        "retailer": "Aldi",
+        "nova_score": 3,
+        "quality_score": 6.2,
+        "price_difference": "-40p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Simple Mills Almond Flour Crackers",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+$1.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Triple Ginger Snaps",
+        "retailer": "Trader Joe's",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "-$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Back to Nature Crackers",
+        "retailer": "Target",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Mary's Gone Crackers Organic",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+$1.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Animal Crackers",
+        "retailer": "Costco",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "-$1.00",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "processed_meat",
-    "keywords": ["sausage", "bacon", "ham", "salami", "hot dog", "processed meat", "deli meat", "turkey", "pepperoni"],
+    "keywords": [
+      "sausage",
+      "bacon",
+      "ham",
+      "salami",
+      "hot dog",
+      "processed meat",
+      "deli meat",
+      "turkey",
+      "pepperoni"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Free Range Pork Sausages", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.0, "price_difference": "+£1.00", "market": "uk"},
-      {"product_name": "Sainsbury's Taste the Difference Sausages", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.8, "price_difference": "+80p", "market": "uk"},
-      {"product_name": "Tesco Finest Outdoor Bred Sausages", "retailer": "Tesco", "nova_score": 3, "quality_score": 6.5, "price_difference": "+60p", "market": "uk"},
-      {"product_name": "M&S Outdoor Bred Pork Sausages", "retailer": "M&S", "nova_score": 3, "quality_score": 7.2, "price_difference": "+£1.20", "market": "uk"},
-      {"product_name": "Morrisons The Best Sausages", "retailer": "Morrisons", "nova_score": 3, "quality_score": 6.5, "price_difference": "+50p", "market": "uk"},
-      {"product_name": "Applegate Organic Uncured Turkey Hot Dogs", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.0, "price_difference": "+$2.00", "market": "us"},
-      {"product_name": "Trader Joe's Uncured Turkey Bacon", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 6.8, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Pederson's No Sugar Added Bacon", "retailer": "Kroger", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$2.50", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Ground Turkey", "retailer": "Costco", "nova_score": 1, "quality_score": 8.5, "price_difference": "-$1.00", "market": "us"},
-      {"product_name": "Good & Gather Uncured Bacon", "retailer": "Target", "nova_score": 3, "quality_score": 6.8, "price_difference": "+$0.80", "market": "us"}
+      {
+        "product_name": "Waitrose Free Range Pork Sausages",
+        "retailer": "Waitrose",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+£1.00",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Taste the Difference Sausages",
+        "retailer": "Sainsbury's",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "+80p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Tesco Finest Outdoor Bred Sausages",
+        "retailer": "Tesco",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "+60p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Outdoor Bred Pork Sausages",
+        "retailer": "M&S",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+£1.20",
+        "market": "uk"
+      },
+      {
+        "product_name": "Morrisons The Best Sausages",
+        "retailer": "Morrisons",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "+50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Applegate Organic Uncured Turkey Hot Dogs",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+$2.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Uncured Turkey Bacon",
+        "retailer": "Trader Joe's",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Pederson's No Sugar Added Bacon",
+        "retailer": "Kroger",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+$2.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Ground Turkey",
+        "retailer": "Costco",
+        "nova_score": 1,
+        "quality_score": 8.5,
+        "price_difference": "-$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Good & Gather Uncured Bacon",
+        "retailer": "Target",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "+$0.80",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "sauces",
-    "keywords": ["sauce", "pasta sauce", "marinara", "pesto", "bbq sauce", "cooking sauce", "stir fry sauce"],
+    "keywords": [
+      "sauce",
+      "pasta sauce",
+      "marinara",
+      "pesto",
+      "bbq sauce",
+      "cooking sauce",
+      "stir fry sauce"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Cooks' Ingredients Passata", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.0, "price_difference": "+20p", "market": "uk"},
-      {"product_name": "Sainsbury's Taste the Difference Pesto", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.0, "price_difference": "+50p", "market": "uk"},
-      {"product_name": "Tesco Finest Tomato & Basil Sauce", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.2, "price_difference": "+40p", "market": "uk"},
-      {"product_name": "M&S Made Without Tomato & Basil Sauce", "retailer": "M&S", "nova_score": 3, "quality_score": 7.5, "price_difference": "+80p", "market": "uk"},
-      {"product_name": "Rao's Homemade Marinara Sauce", "retailer": "Target", "nova_score": 3, "quality_score": 8.0, "price_difference": "+$3.00", "market": "us"},
-      {"product_name": "Trader Joe's Organic Marinara", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Primal Kitchen Avocado Oil Mayo", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.8, "price_difference": "+$4.00", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Marinara", "retailer": "Costco", "nova_score": 3, "quality_score": 7.5, "price_difference": "-$1.00", "market": "us"},
-      {"product_name": "Kroger Simple Truth Organic Pasta Sauce", "retailer": "Kroger", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$0.50", "market": "us"}
+      {
+        "product_name": "Waitrose Cooks' Ingredients Passata",
+        "retailer": "Waitrose",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "+20p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Taste the Difference Pesto",
+        "retailer": "Sainsbury's",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Tesco Finest Tomato & Basil Sauce",
+        "retailer": "Tesco",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+40p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Made Without Tomato & Basil Sauce",
+        "retailer": "M&S",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+80p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Rao's Homemade Marinara Sauce",
+        "retailer": "Target",
+        "nova_score": 3,
+        "quality_score": 8,
+        "price_difference": "+$3.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Organic Marinara",
+        "retailer": "Trader Joe's",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Primal Kitchen Avocado Oil Mayo",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 7.8,
+        "price_difference": "+$4.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Marinara",
+        "retailer": "Costco",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "-$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Kroger Simple Truth Organic Pasta Sauce",
+        "retailer": "Kroger",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+$0.50",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "peanut_butter",
-    "keywords": ["peanut butter", "nut butter", "almond butter", "cashew butter"],
+    "keywords": [
+      "peanut butter",
+      "nut butter",
+      "almond butter",
+      "cashew butter"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Whole Earth Crunchy", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.0, "price_difference": "+50p", "market": "uk"},
-      {"product_name": "Tesco Whole Nut Peanut Butter", "retailer": "Tesco", "nova_score": 1, "quality_score": 8.8, "price_difference": "-20p", "market": "uk"},
-      {"product_name": "Sainsbury's Crunchy Peanut Butter", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 8.5, "price_difference": "-30p", "market": "uk"},
-      {"product_name": "M&S Crunchy Peanut Butter", "retailer": "M&S", "nova_score": 1, "quality_score": 8.8, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "Aldi Bramwells Peanut Butter", "retailer": "Aldi", "nova_score": 1, "quality_score": 8.5, "price_difference": "-50p", "market": "uk"},
-      {"product_name": "Trader Joe's Creamy Peanut Butter", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 9.0, "price_difference": "-$1.00", "market": "us"},
-      {"product_name": "365 Organic Creamy Peanut Butter", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 9.2, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Santa Cruz Organic Peanut Butter", "retailer": "Kroger", "nova_score": 1, "quality_score": 9.0, "price_difference": "+$1.00", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Peanut Butter", "retailer": "Costco", "nova_score": 1, "quality_score": 9.2, "price_difference": "-$1.50", "market": "us"},
-      {"product_name": "Great Value Natural Peanut Butter", "retailer": "Walmart", "nova_score": 1, "quality_score": 8.5, "price_difference": "-$2.00", "market": "us"}
+      {
+        "product_name": "Waitrose Whole Earth Crunchy",
+        "retailer": "Waitrose",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "+50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Tesco Whole Nut Peanut Butter",
+        "retailer": "Tesco",
+        "nova_score": 1,
+        "quality_score": 8.8,
+        "price_difference": "-20p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Crunchy Peanut Butter",
+        "retailer": "Sainsbury's",
+        "nova_score": 1,
+        "quality_score": 8.5,
+        "price_difference": "-30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Crunchy Peanut Butter",
+        "retailer": "M&S",
+        "nova_score": 1,
+        "quality_score": 8.8,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Aldi Bramwells Peanut Butter",
+        "retailer": "Aldi",
+        "nova_score": 1,
+        "quality_score": 8.5,
+        "price_difference": "-50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Trader Joe's Creamy Peanut Butter",
+        "retailer": "Trader Joe's",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "-$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "365 Organic Creamy Peanut Butter",
+        "retailer": "Whole Foods",
+        "nova_score": 1,
+        "quality_score": 9.2,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Santa Cruz Organic Peanut Butter",
+        "retailer": "Kroger",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "+$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Peanut Butter",
+        "retailer": "Costco",
+        "nova_score": 1,
+        "quality_score": 9.2,
+        "price_difference": "-$1.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Great Value Natural Peanut Butter",
+        "retailer": "Walmart",
+        "nova_score": 1,
+        "quality_score": 8.5,
+        "price_difference": "-$2.00",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "mayo",
-    "keywords": ["mayo", "mayonnaise", "salad cream"],
+    "keywords": [
+      "mayo",
+      "mayonnaise",
+      "salad cream"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Free Range Egg Mayonnaise", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.5, "price_difference": "+60p", "market": "uk"},
-      {"product_name": "Sainsbury's Free Range Mayonnaise", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.0, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "M&S Free Range Mayonnaise", "retailer": "M&S", "nova_score": 3, "quality_score": 7.5, "price_difference": "+70p", "market": "uk"},
-      {"product_name": "Primal Kitchen Avocado Oil Mayo", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.8, "price_difference": "+$3.00", "market": "us"},
-      {"product_name": "Trader Joe's Organic Mayonnaise", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Sir Kensington's Avocado Oil Mayo", "retailer": "Target", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$2.00", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Mayonnaise", "retailer": "Costco", "nova_score": 3, "quality_score": 7.0, "price_difference": "-$0.50", "market": "us"}
+      {
+        "product_name": "Waitrose Free Range Egg Mayonnaise",
+        "retailer": "Waitrose",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+60p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Free Range Mayonnaise",
+        "retailer": "Sainsbury's",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Free Range Mayonnaise",
+        "retailer": "M&S",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+70p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Primal Kitchen Avocado Oil Mayo",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 7.8,
+        "price_difference": "+$3.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Organic Mayonnaise",
+        "retailer": "Trader Joe's",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Sir Kensington's Avocado Oil Mayo",
+        "retailer": "Target",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+$2.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Mayonnaise",
+        "retailer": "Costco",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "-$0.50",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "milk",
-    "keywords": ["milk", "whole milk", "semi-skimmed", "oat milk", "almond milk", "plant milk", "soy milk"],
+    "keywords": [
+      "milk",
+      "whole milk",
+      "semi-skimmed",
+      "oat milk",
+      "almond milk",
+      "plant milk",
+      "soy milk"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Duchy Organic Whole Milk", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.5, "price_difference": "+40p", "market": "uk"},
-      {"product_name": "Tesco Organic Whole Milk", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.5, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "Sainsbury's SO Organic Milk", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 9.5, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "M&S Organic Whole Milk", "retailer": "M&S", "nova_score": 1, "quality_score": 9.5, "price_difference": "+40p", "market": "uk"},
-      {"product_name": "Aldi Organic Whole Milk", "retailer": "Aldi", "nova_score": 1, "quality_score": 9.5, "price_difference": "+10p", "market": "uk"},
-      {"product_name": "365 Organic Whole Milk", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 9.5, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Trader Joe's Organic Whole Milk", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 9.5, "price_difference": "+$0.30", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Whole Milk", "retailer": "Costco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$1.00", "market": "us"},
-      {"product_name": "Kroger Simple Truth Organic Milk", "retailer": "Kroger", "nova_score": 1, "quality_score": 9.5, "price_difference": "+$0.40", "market": "us"},
-      {"product_name": "Horizon Organic Whole Milk", "retailer": "Target", "nova_score": 1, "quality_score": 9.5, "price_difference": "+$1.00", "market": "us"}
+      {
+        "product_name": "Waitrose Duchy Organic Whole Milk",
+        "retailer": "Waitrose",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+40p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Tesco Organic Whole Milk",
+        "retailer": "Tesco",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's SO Organic Milk",
+        "retailer": "Sainsbury's",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Organic Whole Milk",
+        "retailer": "M&S",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+40p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Aldi Organic Whole Milk",
+        "retailer": "Aldi",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+10p",
+        "market": "uk"
+      },
+      {
+        "product_name": "365 Organic Whole Milk",
+        "retailer": "Whole Foods",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Organic Whole Milk",
+        "retailer": "Trader Joe's",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+$0.30",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Whole Milk",
+        "retailer": "Costco",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Kroger Simple Truth Organic Milk",
+        "retailer": "Kroger",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+$0.40",
+        "market": "us"
+      },
+      {
+        "product_name": "Horizon Organic Whole Milk",
+        "retailer": "Target",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+$1.00",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "cheese",
-    "keywords": ["cheese", "cheddar", "mozzarella", "parmesan", "cream cheese", "sliced cheese"],
+    "keywords": [
+      "cheese",
+      "cheddar",
+      "mozzarella",
+      "parmesan",
+      "cream cheese",
+      "sliced cheese"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Duchy Organic Cheddar", "retailer": "Waitrose", "nova_score": 3, "quality_score": 8.0, "price_difference": "+£1.00", "market": "uk"},
-      {"product_name": "Sainsbury's Taste the Difference Mature Cheddar", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 7.8, "price_difference": "+80p", "market": "uk"},
-      {"product_name": "M&S Extra Mature Cheddar", "retailer": "M&S", "nova_score": 3, "quality_score": 8.0, "price_difference": "+£1.20", "market": "uk"},
-      {"product_name": "Tesco Finest Vintage Cheddar", "retailer": "Tesco", "nova_score": 3, "quality_score": 7.5, "price_difference": "+60p", "market": "uk"},
-      {"product_name": "Tillamook Sharp Cheddar", "retailer": "Kroger", "nova_score": 3, "quality_score": 7.8, "price_difference": "+$1.00", "market": "us"},
-      {"product_name": "365 Organic Sharp Cheddar", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 8.0, "price_difference": "+$1.50", "market": "us"},
-      {"product_name": "Trader Joe's Unexpected Cheddar", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 7.8, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Cheddar", "retailer": "Costco", "nova_score": 3, "quality_score": 7.8, "price_difference": "-$0.80", "market": "us"}
+      {
+        "product_name": "Waitrose Duchy Organic Cheddar",
+        "retailer": "Waitrose",
+        "nova_score": 3,
+        "quality_score": 8,
+        "price_difference": "+£1.00",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Taste the Difference Mature Cheddar",
+        "retailer": "Sainsbury's",
+        "nova_score": 3,
+        "quality_score": 7.8,
+        "price_difference": "+80p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Extra Mature Cheddar",
+        "retailer": "M&S",
+        "nova_score": 3,
+        "quality_score": 8,
+        "price_difference": "+£1.20",
+        "market": "uk"
+      },
+      {
+        "product_name": "Tesco Finest Vintage Cheddar",
+        "retailer": "Tesco",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+60p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Tillamook Sharp Cheddar",
+        "retailer": "Kroger",
+        "nova_score": 3,
+        "quality_score": 7.8,
+        "price_difference": "+$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "365 Organic Sharp Cheddar",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 8,
+        "price_difference": "+$1.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Unexpected Cheddar",
+        "retailer": "Trader Joe's",
+        "nova_score": 3,
+        "quality_score": 7.8,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Cheddar",
+        "retailer": "Costco",
+        "nova_score": 3,
+        "quality_score": 7.8,
+        "price_difference": "-$0.80",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "ice_cream",
-    "keywords": ["ice cream", "gelato", "frozen dessert", "ice lolly", "sorbet", "frozen yogurt"],
+    "keywords": [
+      "ice cream",
+      "gelato",
+      "frozen dessert",
+      "ice lolly",
+      "sorbet",
+      "frozen yogurt"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Duchy Organic Vanilla Ice Cream", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.0, "price_difference": "+£1.00", "market": "uk"},
-      {"product_name": "Sainsbury's Taste the Difference Vanilla", "retailer": "Sainsbury's", "nova_score": 3, "quality_score": 6.8, "price_difference": "+80p", "market": "uk"},
-      {"product_name": "M&S Extremely Chocolatey Ice Cream", "retailer": "M&S", "nova_score": 3, "quality_score": 6.5, "price_difference": "+£1.20", "market": "uk"},
-      {"product_name": "Jude's Ice Cream", "retailer": "Waitrose", "nova_score": 3, "quality_score": 7.2, "price_difference": "+£1.50", "market": "uk"},
-      {"product_name": "Three Twins Organic Ice Cream", "retailer": "Whole Foods", "nova_score": 3, "quality_score": 7.2, "price_difference": "+$2.00", "market": "us"},
-      {"product_name": "Trader Joe's Organic Vanilla Ice Cream", "retailer": "Trader Joe's", "nova_score": 3, "quality_score": 7.0, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Costco Kirkland Vanilla Ice Cream", "retailer": "Costco", "nova_score": 3, "quality_score": 6.5, "price_difference": "-$2.00", "market": "us"},
-      {"product_name": "Jeni's Splendid Ice Cream", "retailer": "Target", "nova_score": 3, "quality_score": 7.0, "price_difference": "+$3.00", "market": "us"}
+      {
+        "product_name": "Waitrose Duchy Organic Vanilla Ice Cream",
+        "retailer": "Waitrose",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+£1.00",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Taste the Difference Vanilla",
+        "retailer": "Sainsbury's",
+        "nova_score": 3,
+        "quality_score": 6.8,
+        "price_difference": "+80p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Extremely Chocolatey Ice Cream",
+        "retailer": "M&S",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "+£1.20",
+        "market": "uk"
+      },
+      {
+        "product_name": "Jude's Ice Cream",
+        "retailer": "Waitrose",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+£1.50",
+        "market": "uk"
+      },
+      {
+        "product_name": "Three Twins Organic Ice Cream",
+        "retailer": "Whole Foods",
+        "nova_score": 3,
+        "quality_score": 7.2,
+        "price_difference": "+$2.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Organic Vanilla Ice Cream",
+        "retailer": "Trader Joe's",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Vanilla Ice Cream",
+        "retailer": "Costco",
+        "nova_score": 3,
+        "quality_score": 6.5,
+        "price_difference": "-$2.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Jeni's Splendid Ice Cream",
+        "retailer": "Target",
+        "nova_score": 3,
+        "quality_score": 7,
+        "price_difference": "+$3.00",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "pasta",
-    "keywords": ["pasta", "spaghetti", "penne", "fusilli", "macaroni", "noodle", "noodles", "ramen", "instant noodle"],
+    "keywords": [
+      "pasta",
+      "spaghetti",
+      "penne",
+      "fusilli",
+      "macaroni"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Duchy Organic Spaghetti", "retailer": "Waitrose", "nova_score": 2, "quality_score": 8.5, "price_difference": "+40p", "market": "uk"},
-      {"product_name": "Sainsbury's Wholewheat Penne", "retailer": "Sainsbury's", "nova_score": 2, "quality_score": 8.2, "price_difference": "+20p", "market": "uk"},
-      {"product_name": "Tesco Finest Bronze Die Spaghetti", "retailer": "Tesco", "nova_score": 2, "quality_score": 8.0, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "Aldi Cucina Spaghetti", "retailer": "Aldi", "nova_score": 2, "quality_score": 7.8, "price_difference": "-20p", "market": "uk"},
-      {"product_name": "365 Organic Whole Wheat Spaghetti", "retailer": "Whole Foods", "nova_score": 2, "quality_score": 8.5, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Trader Joe's Organic Penne", "retailer": "Trader Joe's", "nova_score": 2, "quality_score": 8.2, "price_difference": "-$0.30", "market": "us"},
-      {"product_name": "Banza Chickpea Pasta", "retailer": "Target", "nova_score": 3, "quality_score": 7.5, "price_difference": "+$1.50", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Spaghetti", "retailer": "Costco", "nova_score": 2, "quality_score": 8.0, "price_difference": "-$1.00", "market": "us"}
+      {
+        "product_name": "Waitrose Duchy Organic Spaghetti",
+        "retailer": "Waitrose",
+        "nova_score": 2,
+        "quality_score": 8.5,
+        "price_difference": "+40p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Wholewheat Penne",
+        "retailer": "Sainsbury's",
+        "nova_score": 2,
+        "quality_score": 8.2,
+        "price_difference": "+20p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Tesco Finest Bronze Die Spaghetti",
+        "retailer": "Tesco",
+        "nova_score": 2,
+        "quality_score": 8,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Aldi Cucina Spaghetti",
+        "retailer": "Aldi",
+        "nova_score": 2,
+        "quality_score": 7.8,
+        "price_difference": "-20p",
+        "market": "uk"
+      },
+      {
+        "product_name": "365 Organic Whole Wheat Spaghetti",
+        "retailer": "Whole Foods",
+        "nova_score": 2,
+        "quality_score": 8.5,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Organic Penne",
+        "retailer": "Trader Joe's",
+        "nova_score": 2,
+        "quality_score": 8.2,
+        "price_difference": "-$0.30",
+        "market": "us"
+      },
+      {
+        "product_name": "Banza Chickpea Pasta",
+        "retailer": "Target",
+        "nova_score": 3,
+        "quality_score": 7.5,
+        "price_difference": "+$1.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Spaghetti",
+        "retailer": "Costco",
+        "nova_score": 2,
+        "quality_score": 8,
+        "price_difference": "-$1.00",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "rice",
-    "keywords": ["rice", "brown rice", "basmati", "jasmine rice", "white rice"],
+    "keywords": [
+      "rice",
+      "brown rice",
+      "basmati",
+      "jasmine rice",
+      "white rice"
+    ],
     "swaps": [
-      {"product_name": "Tesco Wholegrain Brown Rice", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.5, "price_difference": "+20p", "market": "uk"},
-      {"product_name": "Sainsbury's Wholegrain Brown Basmati", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 9.5, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "Waitrose Organic Brown Rice", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.5, "price_difference": "+50p", "market": "uk"},
-      {"product_name": "365 Organic Brown Basmati Rice", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 9.5, "price_difference": "+$0.80", "market": "us"},
-      {"product_name": "Trader Joe's Organic Brown Rice", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 9.5, "price_difference": "+$0.30", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Brown Rice", "retailer": "Costco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$1.00", "market": "us"},
-      {"product_name": "Lundberg Organic Brown Rice", "retailer": "Kroger", "nova_score": 1, "quality_score": 9.5, "price_difference": "+$1.00", "market": "us"}
+      {
+        "product_name": "Tesco Wholegrain Brown Rice",
+        "retailer": "Tesco",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+20p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Wholegrain Brown Basmati",
+        "retailer": "Sainsbury's",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Waitrose Organic Brown Rice",
+        "retailer": "Waitrose",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "365 Organic Brown Basmati Rice",
+        "retailer": "Whole Foods",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+$0.80",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Organic Brown Rice",
+        "retailer": "Trader Joe's",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+$0.30",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Brown Rice",
+        "retailer": "Costco",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Lundberg Organic Brown Rice",
+        "retailer": "Kroger",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+$1.00",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "juice",
-    "keywords": ["juice", "orange juice", "apple juice", "smoothie", "fruit juice"],
+    "keywords": [
+      "juice",
+      "orange juice",
+      "apple juice",
+      "smoothie",
+      "fruit juice"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Pressed Apple Juice", "retailer": "Waitrose", "nova_score": 1, "quality_score": 8.0, "price_difference": "+50p", "market": "uk"},
-      {"product_name": "Sainsbury's Pure Orange Juice", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 7.8, "price_difference": "+20p", "market": "uk"},
-      {"product_name": "Tesco Pure Squeezed Orange Juice", "retailer": "Tesco", "nova_score": 1, "quality_score": 7.8, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "M&S Freshly Squeezed Orange Juice", "retailer": "M&S", "nova_score": 1, "quality_score": 8.5, "price_difference": "+£1.00", "market": "uk"},
-      {"product_name": "Trader Joe's Fresh Squeezed Orange Juice", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 8.0, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "365 Organic Orange Juice", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 8.0, "price_difference": "+$1.00", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Orange Juice", "retailer": "Costco", "nova_score": 1, "quality_score": 8.0, "price_difference": "-$1.00", "market": "us"},
-      {"product_name": "Kroger Simple Truth Organic OJ", "retailer": "Kroger", "nova_score": 1, "quality_score": 7.8, "price_difference": "+$0.50", "market": "us"}
+      {
+        "product_name": "Waitrose Pressed Apple Juice",
+        "retailer": "Waitrose",
+        "nova_score": 1,
+        "quality_score": 8,
+        "price_difference": "+50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Pure Orange Juice",
+        "retailer": "Sainsbury's",
+        "nova_score": 1,
+        "quality_score": 7.8,
+        "price_difference": "+20p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Tesco Pure Squeezed Orange Juice",
+        "retailer": "Tesco",
+        "nova_score": 1,
+        "quality_score": 7.8,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Freshly Squeezed Orange Juice",
+        "retailer": "M&S",
+        "nova_score": 1,
+        "quality_score": 8.5,
+        "price_difference": "+£1.00",
+        "market": "uk"
+      },
+      {
+        "product_name": "Trader Joe's Fresh Squeezed Orange Juice",
+        "retailer": "Trader Joe's",
+        "nova_score": 1,
+        "quality_score": 8,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "365 Organic Orange Juice",
+        "retailer": "Whole Foods",
+        "nova_score": 1,
+        "quality_score": 8,
+        "price_difference": "+$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Orange Juice",
+        "retailer": "Costco",
+        "nova_score": 1,
+        "quality_score": 8,
+        "price_difference": "-$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Kroger Simple Truth Organic OJ",
+        "retailer": "Kroger",
+        "nova_score": 1,
+        "quality_score": 7.8,
+        "price_difference": "+$0.50",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "butter",
-    "keywords": ["butter", "margarine", "spread", "plant butter"],
+    "keywords": [
+      "butter",
+      "margarine",
+      "spread",
+      "plant butter"
+    ],
     "swaps": [
-      {"product_name": "Waitrose Organic Butter", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.0, "price_difference": "+40p", "market": "uk"},
-      {"product_name": "Sainsbury's Organic Butter", "retailer": "Sainsbury's", "nova_score": 1, "quality_score": 9.0, "price_difference": "+30p", "market": "uk"},
-      {"product_name": "M&S British Butter", "retailer": "M&S", "nova_score": 1, "quality_score": 9.0, "price_difference": "+50p", "market": "uk"},
-      {"product_name": "Aldi Organic Butter", "retailer": "Aldi", "nova_score": 1, "quality_score": 9.0, "price_difference": "-10p", "market": "uk"},
-      {"product_name": "Kerrygold Irish Butter", "retailer": "Kroger", "nova_score": 1, "quality_score": 9.0, "price_difference": "+$1.00", "market": "us"},
-      {"product_name": "365 Organic Butter", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 9.0, "price_difference": "+$0.80", "market": "us"},
-      {"product_name": "Trader Joe's Cultured Butter", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 9.0, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Butter", "retailer": "Costco", "nova_score": 1, "quality_score": 9.0, "price_difference": "-$0.50", "market": "us"}
+      {
+        "product_name": "Waitrose Organic Butter",
+        "retailer": "Waitrose",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "+40p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Sainsbury's Organic Butter",
+        "retailer": "Sainsbury's",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "+30p",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S British Butter",
+        "retailer": "M&S",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "+50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Aldi Organic Butter",
+        "retailer": "Aldi",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "-10p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Kerrygold Irish Butter",
+        "retailer": "Kroger",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "+$1.00",
+        "market": "us"
+      },
+      {
+        "product_name": "365 Organic Butter",
+        "retailer": "Whole Foods",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "+$0.80",
+        "market": "us"
+      },
+      {
+        "product_name": "Trader Joe's Cultured Butter",
+        "retailer": "Trader Joe's",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Butter",
+        "retailer": "Costco",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "-$0.50",
+        "market": "us"
+      }
     ]
   },
   {
     "category": "tea_coffee",
-    "keywords": ["tea", "coffee", "instant coffee", "green tea", "herbal tea"],
+    "keywords": [
+      "tea",
+      "coffee",
+      "instant coffee",
+      "green tea",
+      "herbal tea"
+    ],
     "swaps": [
-      {"product_name": "Tesco Finest Kenyan Coffee Beans", "retailer": "Tesco", "nova_score": 1, "quality_score": 9.5, "price_difference": "+50p", "market": "uk"},
-      {"product_name": "Waitrose Organic Fairtrade Coffee", "retailer": "Waitrose", "nova_score": 1, "quality_score": 9.5, "price_difference": "+£1.00", "market": "uk"},
-      {"product_name": "M&S Organic Loose Leaf Tea", "retailer": "M&S", "nova_score": 1, "quality_score": 9.5, "price_difference": "+80p", "market": "uk"},
-      {"product_name": "Aldi Diplomat Fairtrade Coffee", "retailer": "Aldi", "nova_score": 1, "quality_score": 9.0, "price_difference": "-50p", "market": "uk"},
-      {"product_name": "Trader Joe's Organic French Roast", "retailer": "Trader Joe's", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$2.00", "market": "us"},
-      {"product_name": "365 Organic Breakfast Blend Coffee", "retailer": "Whole Foods", "nova_score": 1, "quality_score": 9.5, "price_difference": "+$0.50", "market": "us"},
-      {"product_name": "Costco Kirkland Organic Coffee", "retailer": "Costco", "nova_score": 1, "quality_score": 9.5, "price_difference": "-$3.00", "market": "us"},
-      {"product_name": "Stash Organic Green Tea", "retailer": "Target", "nova_score": 1, "quality_score": 9.5, "price_difference": "+$0.50", "market": "us"}
+      {
+        "product_name": "Tesco Finest Kenyan Coffee Beans",
+        "retailer": "Tesco",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Waitrose Organic Fairtrade Coffee",
+        "retailer": "Waitrose",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+£1.00",
+        "market": "uk"
+      },
+      {
+        "product_name": "M&S Organic Loose Leaf Tea",
+        "retailer": "M&S",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+80p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Aldi Diplomat Fairtrade Coffee",
+        "retailer": "Aldi",
+        "nova_score": 1,
+        "quality_score": 9,
+        "price_difference": "-50p",
+        "market": "uk"
+      },
+      {
+        "product_name": "Trader Joe's Organic French Roast",
+        "retailer": "Trader Joe's",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-$2.00",
+        "market": "us"
+      },
+      {
+        "product_name": "365 Organic Breakfast Blend Coffee",
+        "retailer": "Whole Foods",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+$0.50",
+        "market": "us"
+      },
+      {
+        "product_name": "Costco Kirkland Organic Coffee",
+        "retailer": "Costco",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "-$3.00",
+        "market": "us"
+      },
+      {
+        "product_name": "Stash Organic Green Tea",
+        "retailer": "Target",
+        "nova_score": 1,
+        "quality_score": 9.5,
+        "price_difference": "+$0.50",
+        "market": "us"
+      }
     ]
   }
 ]
