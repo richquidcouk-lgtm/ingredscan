@@ -59,7 +59,14 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>5. Intellectual Property</h2>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>5. Regulatory Information &amp; Brand Neutrality</h2>
+          <p className="text-sm mb-3">IngredScan provides information about food additives and cosmetic ingredients based on publicly available data from official regulatory bodies. All risk assessments are based on the published positions of the UK Food Standards Agency, EFSA, FDA, and other recognised authorities. IngredScan does not make independent scientific assessments.</p>
+          <p className="text-sm mb-3">IngredScan scores products based on their ingredient composition and nutritional content using publicly available data. We do not target, endorse, or disparage any specific brand or manufacturer. Score calculations apply consistently to all products using the same methodology, which is publicly documented at <a href="/methodology" style={{ color: '#7c6fff' }}>ingredscan.com/methodology</a>. No brand or manufacturer can influence scores or descriptions on IngredScan. We receive no payment from brands.</p>
+          <p className="text-sm">If you are a brand or manufacturer and believe a product has been incorrectly scored, please see our <a href="/methodology" style={{ color: '#7c6fff' }}>challenge process</a>.</p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>6. Intellectual Property</h2>
           <p className="text-sm">
             The IngredScan brand, logo, design, and original content are owned by IngredScan. Product data sourced from Open Food Facts is available under the Open Database License (ODbL). You may not copy, modify, or redistribute our proprietary content without permission.
           </p>

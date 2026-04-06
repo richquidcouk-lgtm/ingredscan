@@ -192,6 +192,7 @@ export default function RootLayout({
                 { label: 'Cookie Policy', href: '/cookies' },
                 { label: 'Terms', href: '/terms' },
                 { label: 'Disclaimer', href: '/disclaimer' },
+                { label: 'Methodology', href: '/methodology' },
               ].map((link) => (
                 <a key={link.href} href={link.href} className="footer-link-muted text-[11px] transition-colors">
                   {link.label}
