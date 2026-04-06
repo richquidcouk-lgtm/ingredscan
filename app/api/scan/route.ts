@@ -106,13 +106,47 @@ export async function GET(request: NextRequest) {
     product_name: offProduct.product_name,
   })
 
-  // Save to cache
+  // Save to cache — use only base columns that definitely exist
+  // Additional columns from migrations are optional
+  const cacheProduct: Record<string, any> = {
+    barcode: product.barcode,
+    name: product.name,
+    brand: product.brand,
+    nova_score: product.nova_score,
+    quality_score: product.quality_score,
+    nutriscore_grade: product.nutriscore_grade,
+    ingredients: product.ingredients,
+    additives: product.additives,
+    nutrition: product.nutrition,
+    image_url: product.image_url,
+    data_source: product.data_source,
+    confidence: product.confidence,
+    category: product.category,
+    created_at: product.created_at,
+    updated_at: product.updated_at,
+  }
+
+  // Try with all columns first, fall back to base columns
   const { error: upsertError } = await supabase
     .from('products')
-    .upsert(product, { onConflict: 'barcode' })
+    .upsert({
+      ...cacheProduct,
+      product_type: product.product_type,
+      nova_source: novaSource,
+      special_category: specialCategory,
+      quality_score_breakdown: validated.quality_breakdown,
+      quality_score_version: 2,
+    }, { onConflict: 'barcode' })
 
   if (upsertError) {
-    console.error('[IngredScan] Product upsert failed:', upsertError.message)
+    console.error('[IngredScan] Full upsert failed, trying base columns:', upsertError.message)
+    // Fallback — save with base columns only
+    const { error: fallbackError } = await supabase
+      .from('products')
+      .upsert(cacheProduct, { onConflict: 'barcode' })
+    if (fallbackError) {
+      console.error('[IngredScan] Base upsert also failed:', fallbackError.message)
+    }
   }
 
   return NextResponse.json({
