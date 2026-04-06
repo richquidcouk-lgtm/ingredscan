@@ -68,7 +68,7 @@ function BreakdownRow({ label, score, max, detail }: {
           style={{ width: `${pct}%`, backgroundColor: color }}
         />
       </div>
-      <p className="text-[10px] mt-1" style={{ color: 'rgba(240,240,244,0.4)' }}>{detail}</p>
+      <p className="text-[11px] mt-1" style={{ color: 'rgba(240,240,244,0.4)' }}>{detail}</p>
     </div>
   )
 }
@@ -126,7 +126,7 @@ export default function ScoreBreakdown({ breakdown }: Props) {
             </span>
           </div>
 
-          <a href="/methodology" className="block text-[10px] mt-3 text-center" style={{ color: 'rgba(124,111,255,0.6)' }}>
+          <a href="/methodology" className="block text-[11px] mt-3 text-center" style={{ color: 'rgba(124,111,255,0.6)' }}>
             Full methodology →
           </a>
         </div>

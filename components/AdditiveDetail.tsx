@@ -57,7 +57,7 @@ export default function AdditiveDetail({ additive, index }: Props) {
             <div className="flex items-center gap-2">
               <span className="text-sm font-semibold" style={{ color: '#f0f0f4' }}>{additive.code}</span>
               {additive.function && (
-                <span className="text-[10px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'rgba(240,240,244,0.4)' }}>
+                <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'rgba(240,240,244,0.4)' }}>
                   {additive.function}
                 </span>
               )}
@@ -65,7 +65,7 @@ export default function AdditiveDetail({ additive, index }: Props) {
             <p className="text-xs mt-0.5" style={{ color: 'rgba(240,240,244,0.5)' }}>{additive.name}</p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <span className="text-[10px] font-medium" style={{ color }}>{getRiskLabel(additive.risk)}</span>
+            <span className="text-[11px] font-medium" style={{ color }}>{getRiskLabel(additive.risk)}</span>
             <span className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
           </div>
         </div>
@@ -78,10 +78,10 @@ export default function AdditiveDetail({ additive, index }: Props) {
 
             {additive.potential_risks && additive.potential_risks.length > 0 && (
               <div>
-                <p className="text-[10px] uppercase tracking-wider font-medium mb-1.5" style={{ color: 'rgba(240,240,244,0.45)' }}>Potential concerns</p>
+                <p className="text-[11px] uppercase tracking-wider font-medium mb-1.5" style={{ color: 'rgba(240,240,244,0.45)' }}>Potential concerns</p>
                 <div className="flex flex-wrap gap-1.5">
                   {additive.potential_risks.map(risk => (
-                    <span key={risk} className="text-[10px] px-2 py-0.5 rounded-full" style={{ backgroundColor: `${color}10`, color }}>
+                    <span key={risk} className="text-[11px] px-2 py-0.5 rounded-full" style={{ backgroundColor: `${color}10`, color }}>
                       {risk}
                     </span>
                   ))}
@@ -92,8 +92,8 @@ export default function AdditiveDetail({ additive, index }: Props) {
             {/* Market-specific status */}
             {additive.uk_status && (
               <div className="flex items-center gap-2">
-                <span className="text-[10px]">🇬🇧</span>
-                <span className="text-[10px] font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>
+                <span className="text-[11px]">🇬🇧</span>
+                <span className="text-[11px] font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>
                   UK: {additive.uk_status === 'permitted' ? 'Permitted' : additive.uk_status === 'permitted_with_warning' ? 'Permitted (warning required)' : additive.uk_status === 'permitted_restricted' ? 'Permitted (restricted)' : additive.uk_status === 'banned' ? 'Banned' : additive.uk_status}
                 </span>
               </div>
@@ -102,8 +102,8 @@ export default function AdditiveDetail({ additive, index }: Props) {
             {/* Divergence alert */}
             {additive.divergence_alert && additive.uk_status !== additive.eu_status && (
               <div className="rounded-lg px-3 py-2" style={{ backgroundColor: 'rgba(245,166,35,0.06)', border: '1px solid rgba(245,166,35,0.1)' }}>
-                <p className="text-[10px] font-medium mb-1" style={{ color: '#f5a623' }}>🇬🇧🇪🇺 UK/EU Regulatory Difference</p>
-                <p className="text-[10px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.45)' }}>
+                <p className="text-[11px] font-medium mb-1" style={{ color: '#f5a623' }}>🇬🇧🇪🇺 UK/EU Regulatory Difference</p>
+                <p className="text-[11px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.45)' }}>
                   This additive has different status in the UK ({additive.uk_status}) and EU ({additive.eu_status}).
                   {additive.uk_notes && ` ${additive.uk_notes}`}
                 </p>
@@ -112,13 +112,13 @@ export default function AdditiveDetail({ additive, index }: Props) {
 
             {/* UK notes (non-divergence) */}
             {additive.uk_notes && !additive.divergence_alert && (
-              <p className="text-[10px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>
+              <p className="text-[11px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>
                 🇬🇧 {additive.uk_notes}
               </p>
             )}
 
             {additive.regulation && (
-              <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>
+              <p className="text-[11px]" style={{ color: 'rgba(240,240,244,0.4)' }}>
                 {additive.regulation}
               </p>
             )}
@@ -126,7 +126,7 @@ export default function AdditiveDetail({ additive, index }: Props) {
             {additive.sources && additive.sources.length > 0 && (
               <button
                 onClick={(e) => { e.stopPropagation(); setShowSheet(true) }}
-                className="flex items-center gap-1.5 text-[10px] font-medium"
+                className="flex items-center gap-1.5 text-[11px] font-medium"
                 style={{ color: '#7c6fff' }}
               >
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -177,7 +177,7 @@ export default function AdditiveDetail({ additive, index }: Props) {
             </div>
 
             <div className="rounded-xl p-3 mt-5" style={{ backgroundColor: 'rgba(245,166,35,0.06)', border: '1px solid rgba(245,166,35,0.08)' }}>
-              <p className="text-[10px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>
+              <p className="text-[11px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.4)' }}>
                 Risk classifications reflect published peer-reviewed research and EU/UK regulatory assessments. All additives listed are legally permitted in UK and EU food at regulated concentrations. IngredScan provides informational context — not medical advice.
               </p>
             </div>

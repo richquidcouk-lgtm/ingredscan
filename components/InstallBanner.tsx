@@ -212,9 +212,9 @@ export default function InstallBanner({ variant = 'default' }: Props) {
           </Link>
         )}
         <div className="flex items-center gap-4">
-          <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ No download</span>
-          <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ No sign-up required</span>
-          <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ 100% free</span>
+          <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ No download</span>
+          <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ No sign-up required</span>
+          <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ 100% free</span>
         </div>
         {!canInstall && getInstallInstructions(browserInfo.browser, browserInfo.isIOS) && (
           <p className="text-xs mt-3 leading-relaxed" style={{ color: 'rgba(240,240,244,0.5)' }}>

@@ -186,8 +186,8 @@ function NutrientRowComponent({ row }: { row: NutrientRow }) {
             />
           </div>
           <div className="flex justify-between mt-1">
-            <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>0</span>
-            <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>{row.max}{row.unit}</span>
+            <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.4)' }}>0</span>
+            <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.4)' }}>{row.max}{row.unit}</span>
           </div>
         </div>
       )}
@@ -213,7 +213,7 @@ export default function NutritionBreakdown({ nutrition, additiveCount }: Props) 
             <h3 className="text-xs uppercase tracking-wider font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
               Negatives
             </h3>
-            <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>Per 100g</span>
+            <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.4)' }}>Per 100g</span>
           </div>
           <div>
             {negatives.map(row => (
@@ -230,7 +230,7 @@ export default function NutritionBreakdown({ nutrition, additiveCount }: Props) 
             <h3 className="text-xs uppercase tracking-wider font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
               Positives
             </h3>
-            <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>Per 100g</span>
+            <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.4)' }}>Per 100g</span>
           </div>
           <div>
             {positives.map(row => (

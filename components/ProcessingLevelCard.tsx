@@ -47,29 +47,29 @@ export default function ProcessingLevelCard({
         {/* Info button */}
         <button
           onClick={() => setShowInfo(true)}
-          className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px]"
+          className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full flex items-center justify-center text-[11px]"
           style={{ backgroundColor: 'rgba(255,255,255,0.06)', color: 'rgba(240,240,244,0.5)' }}
           aria-label="What is processing level?"
         >
           ℹ️
         </button>
 
-        <p className="text-[10px] uppercase tracking-wider font-medium mb-1.5" style={{ color: 'rgba(240,240,244,0.4)' }}>
+        <p className="text-[11px] uppercase tracking-wider font-medium mb-1.5" style={{ color: 'rgba(240,240,244,0.4)' }}>
           Processing Level
         </p>
         <p className="text-3xl mb-1">{emoji}</p>
         <p className="text-sm font-bold" style={{ color }}>
           {isInferred ? `Likely ${label}` : label}
         </p>
-        <p className="text-[10px] mt-0.5" style={{ color: 'rgba(240,240,244,0.5)' }}>
+        <p className="text-[11px] mt-0.5" style={{ color: 'rgba(240,240,244,0.5)' }}>
           NOVA {novaScore}
         </p>
         {isInferred && (
           <div className="mt-2">
-            <span className="text-[9px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(245,166,35,0.1)', color: '#f5a623' }}>
+            <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(245,166,35,0.1)', color: '#f5a623' }}>
               Estimated
             </span>
-            <p className="text-[9px] mt-1.5 leading-relaxed" style={{ color: 'rgba(240,240,244,0.45)' }}>
+            <p className="text-[11px] mt-1.5 leading-relaxed" style={{ color: 'rgba(240,240,244,0.45)' }}>
               Processing level estimated — limited data available for this product.
             </p>
           </div>

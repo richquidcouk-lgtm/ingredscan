@@ -47,7 +47,7 @@ export function QualityScoreCard({ score }: { score: number }) {
         </p>
         <button
           onClick={() => setShowInfo(!showInfo)}
-          className="w-4 h-4 flex items-center justify-center rounded-full text-[10px] leading-none transition-colors"
+          className="w-4 h-4 flex items-center justify-center rounded-full text-[11px] leading-none transition-colors"
           style={{
             color: showInfo ? '#7c6fff' : 'rgba(240,240,244,0.5)',
             border: `1px solid ${showInfo ? 'rgba(124,111,255,0.4)' : 'rgba(255,255,255,0.1)'}`,
@@ -117,7 +117,7 @@ export function NovaScoreCard({ score }: { score: number }) {
         </p>
         <button
           onClick={() => setShowInfo(!showInfo)}
-          className="w-4 h-4 flex items-center justify-center rounded-full text-[10px] leading-none transition-colors"
+          className="w-4 h-4 flex items-center justify-center rounded-full text-[11px] leading-none transition-colors"
           style={{
             color: showInfo ? '#7c6fff' : 'rgba(240,240,244,0.5)',
             border: `1px solid ${showInfo ? 'rgba(124,111,255,0.4)' : 'rgba(255,255,255,0.1)'}`,

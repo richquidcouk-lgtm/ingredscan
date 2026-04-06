@@ -202,15 +202,15 @@ export default function PWARegister() {
                 <div className="flex items-center gap-3 mt-3">
                   <div className="flex items-center gap-1.5">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c77e" strokeWidth="2.5"><polyline points="20,6 9,17 4,12" /></svg>
-                    <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.5)' }}>Instant access</span>
+                    <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.5)' }}>Instant access</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c77e" strokeWidth="2.5"><polyline points="20,6 9,17 4,12" /></svg>
-                    <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.5)' }}>Works offline</span>
+                    <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.5)' }}>Works offline</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c77e" strokeWidth="2.5"><polyline points="20,6 9,17 4,12" /></svg>
-                    <span className="text-[10px]" style={{ color: 'rgba(240,240,244,0.5)' }}>Always up to date</span>
+                    <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.5)' }}>Always up to date</span>
                   </div>
                 </div>
               </div>
@@ -241,7 +241,7 @@ export default function PWARegister() {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium" style={{ color: '#f0f0f4' }}>Update available</p>
-              <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.4)' }}>Tap to get the latest version</p>
+              <p className="text-[11px]" style={{ color: 'rgba(240,240,244,0.4)' }}>Tap to get the latest version</p>
             </div>
             <button
               onClick={handleUpdate}

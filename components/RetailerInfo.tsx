@@ -99,7 +99,7 @@ export default function RetailerInfo({ barcode, offRetailers = [] }: Props) {
               </span>
             ))}
           </div>
-          <p className="text-[10px] mt-2" style={{ color: 'rgba(240,240,244,0.3)' }}>
+          <p className="text-[11px] mt-2" style={{ color: 'rgba(240,240,244,0.3)' }}>
             Based on Open Food Facts data and community reports. Availability may vary.
           </p>
         </div>
@@ -109,19 +109,26 @@ export default function RetailerInfo({ barcode, offRetailers = [] }: Props) {
       {!submitted ? (
         <button
           onClick={() => setShowReport(!showReport)}
-          className="flex items-center gap-2 text-xs font-medium transition-all"
-          style={{ color: 'rgba(240,240,244,0.4)' }}
+          className="w-full rounded-2xl p-4 glass-card text-left transition-all active:scale-[0.98]"
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-            <circle cx="12" cy="10" r="3" />
-          </svg>
-          Where did you buy this? Help us improve
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(34,199,126,0.1)' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c77e" strokeWidth="2" strokeLinecap="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-semibold" style={{ color: '#f0f0f4' }}>Where did you buy this?</p>
+              <p className="text-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>Help others find this product — tap to report</p>
+            </div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.3)" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
+          </div>
         </button>
       ) : (
-        <p className="text-xs font-medium" style={{ color: '#22c77e' }}>
-          Thanks for reporting! This helps other users.
-        </p>
+        <div className="rounded-2xl p-4 text-center" style={{ backgroundColor: 'rgba(34,199,126,0.06)', border: '1px solid rgba(34,199,126,0.12)' }}>
+          <p className="text-sm font-medium" style={{ color: '#22c77e' }}>Thanks for reporting! This helps other users.</p>
+        </div>
       )}
 
       {showReport && !submitted && (
@@ -173,7 +180,7 @@ export default function RetailerInfo({ barcode, offRetailers = [] }: Props) {
             </>
           )}
 
-          <p className="text-[10px] mt-2 text-center" style={{ color: 'rgba(240,240,244,0.3)' }}>
+          <p className="text-[11px] mt-2 text-center" style={{ color: 'rgba(240,240,244,0.3)' }}>
             Community-submitted data has not been independently verified by IngredScan.
           </p>
         </div>

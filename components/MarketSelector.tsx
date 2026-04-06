@@ -61,7 +61,7 @@ export default function MarketSelector({ onClose }: { onClose: () => void }) {
         </p>
 
         {/* Available now */}
-        <p className="text-[10px] uppercase tracking-widest font-semibold mb-2" style={{ color: '#00e5a0' }}>
+        <p className="text-[11px] uppercase tracking-widest font-semibold mb-2" style={{ color: '#00e5a0' }}>
           Available now
         </p>
         <div className="space-y-1 mb-5">
@@ -89,7 +89,7 @@ export default function MarketSelector({ onClose }: { onClose: () => void }) {
         </div>
 
         {/* Coming soon */}
-        <p className="text-[10px] uppercase tracking-widest font-semibold mb-2" style={{ color: 'rgba(240,240,244,0.5)' }}>
+        <p className="text-[11px] uppercase tracking-widest font-semibold mb-2" style={{ color: 'rgba(240,240,244,0.5)' }}>
           Coming soon
         </p>
         <div className="space-y-1 max-h-60 overflow-y-auto">

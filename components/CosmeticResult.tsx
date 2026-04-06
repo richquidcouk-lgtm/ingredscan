@@ -90,7 +90,7 @@ export default function CosmeticResult({ product, cosmeticScore, onBack }: Cosme
               </h2>
               <p className="text-sm mt-1" style={{ color: 'rgba(240,240,244,0.4)' }}>{product.brand}</p>
               <span
-                className="inline-block mt-2 px-2.5 py-0.5 rounded-full text-[10px] font-medium"
+                className="inline-block mt-2 px-2.5 py-0.5 rounded-full text-[11px] font-medium"
                 style={{ backgroundColor: 'rgba(168,85,247,0.12)', color: '#a855f7', border: '1px solid rgba(168,85,247,0.15)' }}
               >
                 💄 Cosmetics
@@ -102,7 +102,7 @@ export default function CosmeticResult({ product, cosmeticScore, onBack }: Cosme
           {negativeFlags.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mt-3">
               {negativeFlags.map(flag => (
-                <span key={flag} className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ backgroundColor: '#ff5a5a15', color: '#ff5a5a', border: '1px solid rgba(255,90,90,0.1)' }}>
+                <span key={flag} className="px-2 py-0.5 rounded-full text-[11px] font-medium" style={{ backgroundColor: '#ff5a5a15', color: '#ff5a5a', border: '1px solid rgba(255,90,90,0.1)' }}>
                   ⚠ {flag}
                 </span>
               ))}
@@ -113,7 +113,7 @@ export default function CosmeticResult({ product, cosmeticScore, onBack }: Cosme
           {positiveFlags.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mt-2">
               {positiveFlags.map(flag => (
-                <span key={flag} className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ backgroundColor: 'rgba(34,199,126,0.1)', color: '#22c77e', border: '1px solid rgba(34,199,126,0.1)' }}>
+                <span key={flag} className="px-2 py-0.5 rounded-full text-[11px] font-medium" style={{ backgroundColor: 'rgba(34,199,126,0.1)', color: '#22c77e', border: '1px solid rgba(34,199,126,0.1)' }}>
                   ✓ {flag}
                 </span>
               ))}
@@ -125,7 +125,7 @@ export default function CosmeticResult({ product, cosmeticScore, onBack }: Cosme
         <div className="flex gap-3 animate-fadeUp" style={{ animationDelay: '50ms' }}>
           {/* Safety Score */}
           <div className="flex-1 rounded-2xl p-4 glass-card text-center">
-            <p className="text-[10px] uppercase tracking-wider font-medium mb-2" style={{ color: 'rgba(240,240,244,0.4)' }}>
+            <p className="text-[11px] uppercase tracking-wider font-medium mb-2" style={{ color: 'rgba(240,240,244,0.4)' }}>
               Safety Score
             </p>
             <p className="text-3xl font-bold heading-display" style={{ color: getCosmeticScoreColor(score.overallScore) }}>
@@ -133,7 +133,7 @@ export default function CosmeticResult({ product, cosmeticScore, onBack }: Cosme
             </p>
             <p className="text-xs mt-0.5" style={{ color: 'rgba(240,240,244,0.45)' }}>/10</p>
             <span
-              className="inline-block mt-2 px-2.5 py-1 rounded-full text-[10px] font-semibold"
+              className="inline-block mt-2 px-2.5 py-1 rounded-full text-[11px] font-semibold"
               style={{ backgroundColor: `${getCosmeticScoreColor(score.overallScore)}15`, color: getCosmeticScoreColor(score.overallScore) }}
             >
               {score.label}
@@ -142,14 +142,14 @@ export default function CosmeticResult({ product, cosmeticScore, onBack }: Cosme
 
           {/* Concern Level */}
           <div className="flex-1 rounded-2xl p-4 glass-card text-center">
-            <p className="text-[10px] uppercase tracking-wider font-medium mb-2" style={{ color: 'rgba(240,240,244,0.4)' }}>
+            <p className="text-[11px] uppercase tracking-wider font-medium mb-2" style={{ color: 'rgba(240,240,244,0.4)' }}>
               Concern Level
             </p>
             <p className="text-3xl mb-1">{concernLevel.emoji}</p>
             <p className="text-xs font-semibold uppercase" style={{ color: concernLevel.color }}>
               {concernLevel.level}
             </p>
-            <p className="text-[10px] mt-1" style={{ color: 'rgba(240,240,244,0.5)' }}>
+            <p className="text-[11px] mt-1" style={{ color: 'rgba(240,240,244,0.5)' }}>
               {concernLevel.text}
             </p>
           </div>
@@ -209,7 +209,7 @@ export default function CosmeticResult({ product, cosmeticScore, onBack }: Cosme
         </div>
 
         {/* Informational disclaimer */}
-        <p className="text-[10px] text-center leading-relaxed" style={{ color: 'rgba(240,240,244,0.35)' }}>
+        <p className="text-[11px] text-center leading-relaxed" style={{ color: 'rgba(240,240,244,0.35)' }}>
           Scores are for informational purposes only and do not constitute medical or clinical advice. Sourced from community databases. Always check the physical label.
         </p>
 
@@ -365,7 +365,7 @@ function IngredientsTab({ ingredients, filter, setFilter, expanded, setExpanded 
                   )}
                 </div>
                 {ing.function && ing.function.length > 0 && (
-                  <span className="text-[10px] px-2 py-0.5 rounded-full shrink-0" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'rgba(240,240,244,0.4)' }}>
+                  <span className="text-[11px] px-2 py-0.5 rounded-full shrink-0" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'rgba(240,240,244,0.4)' }}>
                     {ing.function[0]}
                   </span>
                 )}
@@ -382,17 +382,17 @@ function IngredientsTab({ ingredients, filter, setFilter, expanded, setExpanded 
                   {ing.concerns && ing.concerns.length > 0 && (
                     <div className="flex flex-wrap gap-1">
                       {ing.concerns.map(c => (
-                        <span key={c} className="text-[10px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(255,90,90,0.08)', color: '#ff5a5a' }}>
+                        <span key={c} className="text-[11px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(255,90,90,0.08)', color: '#ff5a5a' }}>
                           {c}
                         </span>
                       ))}
                     </div>
                   )}
                   {ing.safe_for_pregnant === false && (
-                    <p className="text-[10px] font-medium" style={{ color: '#f5a623' }}>⚠ Avoid during pregnancy</p>
+                    <p className="text-[11px] font-medium" style={{ color: '#f5a623' }}>⚠ Avoid during pregnancy</p>
                   )}
                   {ing.ewg_score && (
-                    <p className="text-[10px]" style={{ color: 'rgba(240,240,244,0.5)' }}>EWG score: {ing.ewg_score}/10</p>
+                    <p className="text-[11px]" style={{ color: 'rgba(240,240,244,0.5)' }}>EWG score: {ing.ewg_score}/10</p>
                   )}
                 </div>
               )}
@@ -447,12 +447,12 @@ function ConcernsTab({ ingredients }: { ingredients: CosmeticIngredientMatch[] }
             {highRisk.map(ing => (
               <div key={ing.inci_name} className="rounded-xl p-4 glass-card" style={{ borderColor: 'rgba(255,90,90,0.1)' }}>
                 <p className="text-sm font-semibold" style={{ color: '#f0f0f4' }}>{ing.common_name || ing.inci_name}</p>
-                <p className="text-[10px] mt-0.5" style={{ color: 'rgba(240,240,244,0.5)' }}>{ing.inci_name}</p>
+                <p className="text-[11px] mt-0.5" style={{ color: 'rgba(240,240,244,0.5)' }}>{ing.inci_name}</p>
                 {ing.description && <p className="text-xs mt-2 leading-relaxed" style={{ color: 'rgba(240,240,244,0.6)' }}>{ing.description}</p>}
                 {ing.concerns && ing.concerns.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
                     {ing.concerns.map(c => (
-                      <span key={c} className="text-[10px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(255,90,90,0.08)', color: '#ff5a5a' }}>
+                      <span key={c} className="text-[11px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(255,90,90,0.08)', color: '#ff5a5a' }}>
                         {c}
                       </span>
                     ))}
@@ -474,12 +474,12 @@ function ConcernsTab({ ingredients }: { ingredients: CosmeticIngredientMatch[] }
             {mediumRisk.map(ing => (
               <div key={ing.inci_name} className="rounded-xl p-4 glass-card" style={{ borderColor: 'rgba(245,166,35,0.1)' }}>
                 <p className="text-sm font-semibold" style={{ color: '#f0f0f4' }}>{ing.common_name || ing.inci_name}</p>
-                <p className="text-[10px] mt-0.5" style={{ color: 'rgba(240,240,244,0.5)' }}>{ing.inci_name}</p>
+                <p className="text-[11px] mt-0.5" style={{ color: 'rgba(240,240,244,0.5)' }}>{ing.inci_name}</p>
                 {ing.description && <p className="text-xs mt-2 leading-relaxed" style={{ color: 'rgba(240,240,244,0.6)' }}>{ing.description}</p>}
                 {ing.concerns && ing.concerns.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
                     {ing.concerns.map(c => (
-                      <span key={c} className="text-[10px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(245,166,35,0.08)', color: '#f5a623' }}>
+                      <span key={c} className="text-[11px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(245,166,35,0.08)', color: '#f5a623' }}>
                         {c}
                       </span>
                     ))}

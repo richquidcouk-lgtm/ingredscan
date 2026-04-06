@@ -73,7 +73,7 @@ export default function AdditiveCard({ additive, index }: { additive: Additive; 
             </p>
           )}
           <span
-            className="inline-block mt-2 px-2 py-0.5 rounded-full text-[10px] font-medium"
+            className="inline-block mt-2 px-2 py-0.5 rounded-full text-[11px] font-medium"
             style={{
               backgroundColor: `${riskColors[additive.risk]}12`,
               color: riskColors[additive.risk],

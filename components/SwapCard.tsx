@@ -52,13 +52,13 @@ export default function SwapCard({
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1.5">
             <span
-              className="px-2 py-0.5 rounded-md text-[10px] font-medium text-white shrink-0"
+              className="px-2 py-0.5 rounded-md text-[11px] font-medium text-white shrink-0"
               style={{ backgroundColor: retailerColor }}
             >
               {swap.retailer}
             </span>
             <span
-              className="px-2 py-0.5 rounded-full text-[10px] font-medium shrink-0"
+              className="px-2 py-0.5 rounded-full text-[11px] font-medium shrink-0"
               style={{ backgroundColor: `${novaColor}15`, color: novaColor, border: `1px solid ${novaColor}20` }}
             >
               NOVA {swap.nova_score}
@@ -68,7 +68,7 @@ export default function SwapCard({
             {swap.product_name}
           </p>
           {improvement > 0 && (
-            <p className="text-[10px] mt-1 font-medium" style={{ color: '#00e5a0' }}>
+            <p className="text-[11px] mt-1 font-medium" style={{ color: '#00e5a0' }}>
               +{improvement.toFixed(1)} on our criteria
             </p>
           )}
@@ -78,7 +78,7 @@ export default function SwapCard({
           <span className="text-2xl font-extrabold heading-display" style={{ color: scoreColor }}>
             {swap.quality_score.toFixed(1)}
           </span>
-          <span className="text-[9px] font-medium uppercase tracking-wider" style={{ color: 'rgba(240,240,244,0.5)' }}>
+          <span className="text-[11px] font-medium uppercase tracking-wider" style={{ color: 'rgba(240,240,244,0.5)' }}>
             Score
           </span>
         </div>

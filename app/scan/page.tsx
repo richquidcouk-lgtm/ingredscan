@@ -143,7 +143,7 @@ export default function ScanPage() {
                   </p>
                 </div>
                 {searchCategory === 'cosmetic' ? (
-                  <span className="text-[10px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(168,85,247,0.12)', color: '#a855f7' }}>
+                  <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(168,85,247,0.12)', color: '#a855f7' }}>
                     💄
                   </span>
                 ) : product.nutriscore_grade ? (

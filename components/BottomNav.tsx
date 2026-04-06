@@ -96,7 +96,7 @@ export default function BottomNav() {
                   {tab.icon(true)}
                 </div>
                 <span
-                  className="text-[10px] font-medium mt-1"
+                  className="text-[11px] font-medium mt-1"
                   style={{ color: '#00e5a0' }}
                 >
                   {tab.label}
@@ -113,7 +113,7 @@ export default function BottomNav() {
             >
               {tab.icon(isActive)}
               <span
-                className="text-[10px] font-medium mt-1"
+                className="text-[11px] font-medium mt-1"
                 style={{ color: isActive ? '#00e5a0' : 'rgba(240,240,244,0.4)' }}
               >
                 {tab.label}

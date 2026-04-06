@@ -69,7 +69,7 @@ export default function ResultPage() {
           const score = calculateCosmeticScore(cached, cached.inci_ingredients)
           setCosmeticScore(score)
         }
-        findSwaps(cached.category || '')
+        findSwaps()
         setLoading(false)
         recordScan()
         return
@@ -93,7 +93,7 @@ export default function ResultPage() {
       const data = await res.json()
       setProduct(data as Product)
       if (data.cosmetic_score) setCosmeticScore(data.cosmetic_score)
-      findSwaps(data.category || '')
+      findSwaps()
       recordScan()
     } catch {
       setError('api_error')
@@ -122,41 +122,32 @@ export default function ResultPage() {
     }
   }
 
-  function findSwaps(category: string) {
+  function findSwaps() {
     const marketCode = config.code
-    // Split category string into individual tags for precise matching
-    const tags = category.toLowerCase().split(',').map(t => t.trim())
     const productName = (product?.name || '').toLowerCase()
 
+    // Only match swaps if the product name directly contains a keyword
+    // Category tags are too broad and cause cross-category matches
     let bestMatch: any[] | null = null
     let bestScore = 0
 
     for (const group of swapsData) {
-      let matchScore = 0
+      let nameMatches = 0
 
       for (const kw of group.keywords as string[]) {
-        const kwLower = kw.toLowerCase()
-        // Check if any individual category tag contains this keyword
-        const tagMatch = tags.some(tag => {
-          // Match whole word within tag: "en:noodles" contains "noodle"
-          // But "en:snacks" should NOT match "sauce"
-          const tagWords = tag.replace(/^en:/, '').replace(/-/g, ' ').split(/\s+/)
-          return tagWords.some(tw => tw.startsWith(kwLower) || kwLower.startsWith(tw))
-        })
-        if (tagMatch) matchScore += 2
-
-        // Check product name
-        if (productName.includes(kwLower)) matchScore += 3
+        if (productName.includes(kw.toLowerCase())) {
+          nameMatches++
+        }
       }
 
-      if (matchScore > bestScore) {
-        bestScore = matchScore
+      // Require at least one keyword match in the product name
+      if (nameMatches > 0 && nameMatches > bestScore) {
+        bestScore = nameMatches
         bestMatch = group.swaps.filter((s: any) => !s.market || s.market === marketCode)
       }
     }
 
-    // Only show swaps if we have a confident match (score >= 3)
-    if (bestMatch && bestScore >= 3) {
+    if (bestMatch && bestScore > 0) {
       setMatchedSwaps(bestMatch)
     } else {
       setMatchedSwaps([])
@@ -296,7 +287,7 @@ export default function ResultPage() {
               {flags.length > 0 && (
                 <div className="flex flex-wrap gap-1.5 mt-2.5">
                   {flags.map((flag) => (
-                    <span key={flag} className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ backgroundColor: '#ff5a5a15', color: '#ff5a5a', border: '1px solid rgba(255,90,90,0.1)' }}>
+                    <span key={flag} className="px-2 py-0.5 rounded-full text-[11px] font-medium" style={{ backgroundColor: '#ff5a5a15', color: '#ff5a5a', border: '1px solid rgba(255,90,90,0.1)' }}>
                       {flag}
                     </span>
                   ))}
@@ -355,7 +346,7 @@ export default function ResultPage() {
             <h3 className="text-sm font-semibold mb-1" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
               Higher-Scoring Alternatives
             </h3>
-            <p className="text-[10px] mb-3" style={{ color: 'rgba(240,240,244,0.35)' }}>
+            <p className="text-[11px] mb-3" style={{ color: 'rgba(240,240,244,0.35)' }}>
               Products that score higher on IngredScan&apos;s criteria. Not affiliated with any retailer. Availability may vary.
             </p>
             {!config.supported ? (
@@ -464,13 +455,13 @@ export default function ResultPage() {
           <p className="text-xs font-medium" style={{ color: '#7c6fff' }}>
             {product.data_source} · {product.confidence}% match
           </p>
-          <p className="text-[10px] mt-1" style={{ color: 'rgba(240,240,244,0.35)' }}>
+          <p className="text-[11px] mt-1" style={{ color: 'rgba(240,240,244,0.35)' }}>
             Sourced from community databases. Always check the physical label.
           </p>
         </div>
 
         {/* Informational disclaimer */}
-        <p className="text-[10px] text-center leading-relaxed animate-fadeUp" style={{ color: 'rgba(240,240,244,0.35)', animationDelay: '360ms' }}>
+        <p className="text-[11px] text-center leading-relaxed animate-fadeUp" style={{ color: 'rgba(240,240,244,0.35)', animationDelay: '360ms' }}>
           Scores are for informational purposes only and do not constitute medical, dietary, or clinical advice. Consult a qualified professional for health decisions.
         </p>
 
