@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { getDisplayScore, getScoreClass } from '@/lib/scoring'
 import { getCategoryEmoji } from '@/lib/utils'
-import { getFavouriteBarcodes } from '@/components/FavouriteButton'
 import AuthModal from '@/components/AuthModal'
 
 type ScanHistory = {
