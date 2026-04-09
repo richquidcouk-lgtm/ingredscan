@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
@@ -33,6 +33,24 @@ const FILTERS: Array<{ key: FilterKey; label: string }> = [
 ]
 
 export default function SwapsPage() {
+  // useSearchParams() needs a Suspense boundary so the page can still be
+  // statically prerendered at build time.
+  return (
+    <Suspense fallback={<SwapsFallback />}>
+      <SwapsPageBody />
+    </Suspense>
+  )
+}
+
+function SwapsFallback() {
+  return (
+    <div className="max-w-[480px] mx-auto pt-20 pb-24 px-6 text-center" style={{ color: 'var(--muted)' }}>
+      Loading…
+    </div>
+  )
+}
+
+function SwapsPageBody() {
   const searchParams = useSearchParams()
   const sourceBarcode = searchParams.get('for')
   const [source, setSource] = useState<AltProduct | null>(null)

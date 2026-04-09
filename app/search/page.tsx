@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { getDisplayScore, getScoreClass } from '@/lib/scoring'
@@ -60,6 +60,35 @@ const BEAUTY_CATEGORIES: Array<{ emoji: string; label: string; term: string }> =
 ]
 
 export default function SearchPage() {
+  // useSearchParams() needs a Suspense boundary so the page can still be
+  // statically prerendered at build time.
+  return (
+    <Suspense fallback={<SearchFallback />}>
+      <SearchPageBody />
+    </Suspense>
+  )
+}
+
+function SearchFallback() {
+  return (
+    <div className="max-w-[480px] mx-auto pt-20 pb-24 px-6 text-center" style={{ color: 'var(--muted)' }}>
+      <div
+        className="mx-auto"
+        style={{
+          width: 28,
+          height: 28,
+          border: '2px solid var(--border)',
+          borderTopColor: 'var(--green)',
+          borderRadius: '50%',
+          animation: 'spin 0.8s linear infinite',
+        }}
+      />
+      <style jsx>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    </div>
+  )
+}
+
+function SearchPageBody() {
   const params = useSearchParams()
   const initialTerm = params.get('term') || ''
   const [mode, setMode] = useState<'food' | 'cosmetic'>('food')
