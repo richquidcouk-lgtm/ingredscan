@@ -6,6 +6,7 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { searchProducts, type OFFSearchResult } from '@/lib/openFoodFacts'
 import { searchBeautyProducts } from '@/lib/openBeautyFacts'
+import { getScoreColor, getScoreLabel } from '@/lib/scoring'
 import Logo from '@/components/Logo'
 
 const Scanner = dynamic(() => import('@/components/Scanner'), { ssr: false })
@@ -142,7 +143,19 @@ export default function ScanPage() {
                     {product.brands || 'Unknown Brand'}
                   </p>
                 </div>
-                {searchCategory === 'cosmetic' ? (
+                {typeof product.quality_score === 'number' ? (
+                  <span
+                    className="text-xs font-bold px-2 py-1 rounded-md whitespace-nowrap"
+                    title={getScoreLabel(product.quality_score)}
+                    style={{
+                      backgroundColor: `${getScoreColor(product.quality_score)}22`,
+                      color: getScoreColor(product.quality_score),
+                      border: `1px solid ${getScoreColor(product.quality_score)}55`,
+                    }}
+                  >
+                    {product.quality_score.toFixed(1)}
+                  </span>
+                ) : searchCategory === 'cosmetic' ? (
                   <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(168,85,247,0.12)', color: '#a855f7' }}>
                     💄
                   </span>

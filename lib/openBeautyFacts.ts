@@ -48,18 +48,17 @@ export async function fetchFromOpenBeautyFacts(
 }
 
 export async function searchBeautyProducts(query: string) {
+  // Searches local Supabase (cosmetics imported from Open Beauty Facts) via
+  // /api/search. The OBF live search APIs are unreliable.
   try {
-    const res = await fetch(
-      `https://world.openbeautyfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(query)}&search_simple=1&action=process&json=1&page_size=10`,
-      {
-        headers: {
-          'User-Agent': 'IngredScan/1.0 (ingredscan.com)',
-        },
-      }
-    )
-    if (!res.ok) return { products: [], count: 0 }
+    const res = await fetch(`/api/search?type=cosmetic&q=${encodeURIComponent(query)}`)
+    if (!res.ok) {
+      console.error(`[OBF search] HTTP ${res.status} for query "${query}"`)
+      return { products: [], count: 0 }
+    }
     return await res.json()
-  } catch {
+  } catch (err) {
+    console.error(`[OBF search] failed for query "${query}":`, err)
     return { products: [], count: 0 }
   }
 }

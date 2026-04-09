@@ -41,6 +41,7 @@ export type OFFSearchResult = {
     brands: string
     nova_group: number
     nutriscore_grade: string
+    quality_score?: number | null
     image_front_small_url: string
   }>
   count: number
@@ -178,18 +179,18 @@ export async function fetchProduct(barcode: string): Promise<OFFProduct | null> 
 }
 
 export async function searchProducts(query: string): Promise<OFFSearchResult> {
+  // Searches local Supabase (165k UK products from Open Food Facts dump)
+  // via /api/search. The OFF live search APIs (cgi/search.pl, /api/v2/search)
+  // are both frequently down so we don't depend on them anymore.
   try {
-    const response = await fetch(
-      `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(query)}&search_simple=1&action=process&json=1&page_size=10`,
-      {
-        headers: { 'User-Agent': 'IngredScan/1.0 (https://ingredscan.com)' },
-      }
-    )
-
-    if (!response.ok) return { products: [], count: 0 }
-
+    const response = await fetch(`/api/search?type=food&q=${encodeURIComponent(query)}`)
+    if (!response.ok) {
+      console.error(`[search] HTTP ${response.status} for query "${query}"`)
+      return { products: [], count: 0 }
+    }
     return await response.json()
-  } catch {
+  } catch (err) {
+    console.error(`[search] failed for query "${query}":`, err)
     return { products: [], count: 0 }
   }
 }

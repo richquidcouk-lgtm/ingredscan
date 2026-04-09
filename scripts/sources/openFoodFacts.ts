@@ -1,7 +1,6 @@
 import axios from 'axios'
 import * as zlib from 'zlib'
-import Papa from 'papaparse'
-import { Readable } from 'stream'
+import * as readline from 'readline'
 import { createLogger } from '../utils/logger'
 import { ProgressTracker, ImportLogger } from '../utils/progress'
 import { processProduct } from '../utils/scoring'
@@ -23,11 +22,18 @@ function csvRowToRawProduct(row: any): RawProduct | null {
   const barcode = row.code?.toString().trim()
   if (!barcode || !row.product_name?.trim()) return null
 
-  const countriesTags = (row.countries_tags || '').split(',').map((s: string) => s.trim())
-  const isUKOrGlobal = countriesTags.some(
-    (c: string) => c.includes('united-kingdom') || c.includes('en:united-kingdom') || c === 'en:world'
+  const countriesTags = (row.countries_tags || '')
+    .split(',')
+    .map((s: string) => s.trim().toLowerCase())
+    .filter(Boolean)
+  // Accept products explicitly tagged as sold in the UK or US.
+  const isUK = countriesTags.some(
+    (c: string) => c === 'en:united-kingdom' || c === 'united-kingdom'
   )
-  if (!isUKOrGlobal) return null
+  const isUS = countriesTags.some(
+    (c: string) => c === 'en:united-states' || c === 'united-states'
+  )
+  if (!isUK && !isUS) return null
 
   const labelsTags = (row.labels_tags || '').split(',').map((s: string) => s.trim())
   const isOrganic = labelsTags.some((l: string) => l.includes('organic') || l.includes('bio'))
@@ -53,12 +59,14 @@ function csvRowToRawProduct(row: any): RawProduct | null {
     image_url: row.image_url?.trim() || null,
     categories_tags: (row.categories_tags || '').split(',').map((s: string) => s.trim()).filter(Boolean),
     labels_tags: labelsTags.filter(Boolean),
-    countries_tags: countriesTags.filter(Boolean),
+    countries_tags: countriesTags,
     is_organic: isOrganic,
     import_source: 'openfoodfacts',
     retailer_availability: [],
     avg_price: null,
-    country: 'UK',
+    // If a product is sold in both, prefer UK tag (matches our existing rows
+    // so the upsert priority logic doesn't churn).
+    country: isUK ? 'UK' : 'US',
   }
 }
 
@@ -79,10 +87,22 @@ export async function importOpenFoodFacts(options: ImportOptions): Promise<void>
   }
 
   let processed = 0
+  let matched = 0 // UK rows that passed the filter (drives --limit)
   let imported = 0
   let failed = 0
   let skipped = 0
   let batch: ProcessedProduct[] = []
+
+  // Hold refs so we can destroy on abort/error and free socket + memory.
+  let httpStream: any = null
+  let gunzipStream: zlib.Gunzip | null = null
+  let rl: readline.Interface | null = null
+
+  const tearDown = () => {
+    try { rl?.close() } catch {}
+    try { gunzipStream?.destroy() } catch {}
+    try { httpStream?.destroy?.() } catch {}
+  }
 
   try {
     logger.info('Downloading CSV from Open Food Facts...')
@@ -91,58 +111,81 @@ export async function importOpenFoodFacts(options: ImportOptions): Promise<void>
       headers: { 'User-Agent': 'IngredScan/1.0 (ingredscan.com)' },
     })
 
-    const gunzip = zlib.createGunzip()
-    const stream = response.data.pipe(gunzip)
+    httpStream = response.data
+    gunzipStream = zlib.createGunzip()
+    const stream = httpStream.pipe(gunzipStream)
 
-    await new Promise<void>((resolve, reject) => {
-      Papa.parse(stream as unknown as Readable, {
-        header: true,
-        delimiter: '\t',
-        skipEmptyLines: true,
-        step: async (result: any) => {
-          processed++
-
-          if (processed <= resumeOffset) return
-          if (options.limit > 0 && imported >= options.limit) return
-
-          const raw = csvRowToRawProduct(result.data)
-          if (!raw) {
-            skipped++
-            return
-          }
-
-          const product = processProduct(raw)
-          batch.push(product)
-
-          if (batch.length >= 100) {
-            const result = await batchUpsert(batch, { dryRun: options.dryRun }, logger)
-            imported += result.success
-            failed += result.failed
-            batch = []
-          }
-
-          if (processed % 1000 === 0) {
-            await progress.save(raw.barcode, processed)
-            await importLog.update(processed, imported, failed)
-            logger.info({ processed, imported, failed, skipped }, 'Progress')
-          }
-        },
-        complete: () => resolve(),
-        error: (err: any) => reject(err),
-      })
+    // Native readline = true line-by-line backpressure. We use the async
+    // iterator form so DB awaits naturally pause the underlying stream
+    // without any manual pause/resume gymnastics.
+    rl = readline.createInterface({
+      input: stream,
+      crlfDelay: Infinity,
     })
 
-    // Flush remaining batch
+    let header: string[] | null = null
+    let stop = false
+
+    for await (const line of rl) {
+      if (stop) break
+      if (!line) continue
+
+      // First non-empty line = TSV header
+      if (!header) {
+        header = line.split('\t')
+        continue
+      }
+
+      processed++
+      if (processed <= resumeOffset) continue
+
+      // Manual TSV split — OFF uses tab as delimiter precisely because
+      // commas appear in many fields. No quoting in this dump.
+      const cols = line.split('\t')
+      const row: Record<string, string> = {}
+      for (let i = 0; i < header.length; i++) row[header[i]] = cols[i] || ''
+
+      const raw = csvRowToRawProduct(row)
+      if (!raw) {
+        skipped++
+      } else {
+        matched++
+        batch.push(processProduct(raw))
+
+        if (options.limit > 0 && matched >= options.limit) {
+          stop = true
+        }
+      }
+
+      // Flush whenever batch fills OR we're stopping (limit hit)
+      if (batch.length >= 100 || (stop && batch.length > 0)) {
+        const flushBatch = batch
+        batch = []
+        const res = await batchUpsert(flushBatch, { dryRun: options.dryRun }, logger)
+        imported += res.success
+        failed += res.failed
+      }
+
+      if (processed % 5000 === 0) {
+        await progress.save(raw?.barcode || '', processed)
+        await importLog.update(processed, imported, failed)
+        logger.info({ processed, matched, imported, failed, skipped }, 'Progress')
+      }
+    }
+
+    // Final flush
     if (batch.length > 0) {
       const result = await batchUpsert(batch, { dryRun: options.dryRun }, logger)
       imported += result.success
       failed += result.failed
     }
 
+    tearDown()
     await progress.complete()
     await importLog.finish('completed')
-    logger.info({ processed, imported, failed, skipped }, 'Import completed')
+    logger.info({ processed, matched, imported, failed, skipped }, 'Import completed')
   } catch (error: any) {
+    tearDown()
     logger.error({ error: error.message }, 'Import failed')
     await importLog.finish('failed')
     throw error

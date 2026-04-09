@@ -1,63 +1,35 @@
 import type { RawProduct, ProcessedProduct } from '../types/product'
-
-const NOVA4_ADDITIVE_PREFIXES = [
-  'en:flavouring', 'en:colour', 'en:sweetener',
-  'en:emulsifier', 'en:preservative', 'en:stabiliser',
-  'en:thickener', 'en:anti-caking-agent',
-]
-
-export function inferNovaScore(product: RawProduct): number {
-  if (product.nova_group && product.nova_group >= 1 && product.nova_group <= 4) {
-    return product.nova_group
-  }
-
-  const additives = product.additives_tags || []
-
-  if (additives.length === 0) {
-    const ingredients = (product.ingredients || '').toLowerCase()
-    const isSingleIngredient = !ingredients.includes(',') && ingredients.length < 50
-    if (isSingleIngredient && ingredients.length > 0) return 1
-
-    const culinaryIndicators = ['oil', 'butter', 'salt', 'sugar', 'flour', 'vinegar', 'honey']
-    if (culinaryIndicators.some((ind) => ingredients.includes(ind))) return 2
-
-    return 3
-  }
-
-  const hasNova4Indicators = additives.some((tag) =>
-    NOVA4_ADDITIVE_PREFIXES.some((prefix) => tag.toLowerCase().startsWith(prefix))
-  )
-
-  return hasNova4Indicators ? 4 : 3
-}
-
-export function calculateQualityScore(product: RawProduct): number {
-  let score = 10
-
-  const additives = product.additives_tags || []
-  const nova4Count = additives.filter((tag) =>
-    NOVA4_ADDITIVE_PREFIXES.some((prefix) => tag.toLowerCase().startsWith(prefix))
-  ).length
-  score -= Math.min(nova4Count * 1.5, 4)
-
-  const nutriscore = (product.nutriscore_grade || '').toLowerCase()
-  if (nutriscore === 'd' || nutriscore === 'e') score -= 1
-  else if (nutriscore === 'c') score -= 0.5
-
-  const n = product.nutrition
-  if (n.saturated_fat_100g && n.saturated_fat_100g > 5) score -= 1
-  if (n.sugars_100g && n.sugars_100g > 10) score -= 0.5
-  if (n.salt_100g && n.salt_100g > 0.6) score -= 1
-
-  if (product.is_organic) score += 0.5
-
-  score = Math.max(0, Math.min(10, score))
-  return Math.round(score * 10) / 10
-}
+// Single source of truth: delegate to the same scoring used by the live scan
+// path. The previous standalone implementation here was broken — it ignored
+// nova_group entirely and matched additive tags by category prefixes
+// (`en:flavouring`) when OFF actually uses E-number tags (`en:e621`), so
+// every product scored 9-10/10 regardless of how processed it was.
+import { scoreProduct } from '../../lib/scoring'
 
 export function processProduct(raw: RawProduct): ProcessedProduct {
-  const novaScore = inferNovaScore(raw)
-  const qualityScore = calculateQualityScore(raw)
+  // Adapt RawProduct → the OpenFoodFactsProduct shape lib/scoring expects.
+  // lib/scoring reads nutriments via OFF-style flat keys (e.g.
+  // `saturated-fat_100g`) so we map our nested nutrition object to that.
+  const n = raw.nutrition
+  const nutriments: Record<string, number> = {}
+  if (n.energy_100g != null) nutriments['energy_100g'] = n.energy_100g
+  if (n.fat_100g != null) nutriments['fat_100g'] = n.fat_100g
+  if (n.saturated_fat_100g != null) nutriments['saturated-fat_100g'] = n.saturated_fat_100g
+  if (n.carbohydrates_100g != null) nutriments['carbohydrates_100g'] = n.carbohydrates_100g
+  if (n.sugars_100g != null) nutriments['sugars_100g'] = n.sugars_100g
+  if (n.fiber_100g != null) nutriments['fiber_100g'] = n.fiber_100g
+  if (n.proteins_100g != null) nutriments['proteins_100g'] = n.proteins_100g
+  if (n.salt_100g != null) nutriments['salt_100g'] = n.salt_100g
+
+  const result = scoreProduct({
+    nova_group: raw.nova_group ?? undefined,
+    nutriscore_grade: raw.nutriscore_grade ?? undefined,
+    additives_tags: raw.additives_tags || [],
+    categories_tags: raw.categories_tags || [],
+    labels_tags: raw.labels_tags || [],
+    nutriments,
+    ingredients_text: raw.ingredients,
+  })
 
   const isUK = raw.countries_tags?.some(
     (c) => c.includes('united-kingdom') || c.includes('en:united-kingdom')
@@ -65,10 +37,10 @@ export function processProduct(raw: RawProduct): ProcessedProduct {
 
   return {
     ...raw,
-    nova_group: novaScore,
-    quality_score: qualityScore,
-    data_source: isUK ? 'Open Food Facts + UK FSA' : `Open Food Facts + USDA`,
-    confidence: raw.name && raw.ingredients ? 97 : 78,
+    nova_group: result.nova_score,
+    quality_score: result.quality_score,
+    data_source: isUK ? 'Open Food Facts + UK FSA' : 'Open Food Facts + USDA',
+    confidence: result.confidence,
     last_imported_at: new Date().toISOString(),
   }
 }
