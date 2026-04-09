@@ -4,15 +4,9 @@ import { useEffect, useState, useRef } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { supabase, type Product, type NutritionData, type AdditiveEntry } from '@/lib/supabase'
-import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
 import { resolveAdditives, calculateQualityBreakdown, getDisplayScore, getScoreClass } from '@/lib/scoring'
-import { detectSpecialCategory } from '@/lib/specialCategories'
 import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
 import { cacheProductOffline, getOfflineProduct } from '@/lib/offlineCache'
-import CosmeticResult from '@/components/CosmeticResult'
-import InfantFormulaResult from '@/components/InfantFormulaResult'
-import MedicineResult from '@/components/MedicineResult'
-import SupplementResult from '@/components/SupplementResult'
 import FavouriteButton from '@/components/FavouriteButton'
 
 type ResolvedAdditive = ReturnType<typeof resolveAdditives>[number]
@@ -26,7 +20,6 @@ export default function ResultPage() {
   const hasRecorded = useRef(false)
 
   const [product, setProduct] = useState<Product | null>(null)
-  const [cosmeticScore, setCosmeticScore] = useState<ReturnType<typeof calculateCosmeticScore> | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [openAdditive, setOpenAdditive] = useState<string | null>(null)
@@ -47,9 +40,6 @@ export default function ResultPage() {
       if (cached) {
         setProduct(cached as Product)
         cacheProductOffline(cached)
-        if (cached.product_type === 'cosmetic' && cached.inci_ingredients) {
-          setCosmeticScore(calculateCosmeticScore(cached, cached.inci_ingredients))
-        }
         setLoading(false)
         recordScan()
         return
@@ -141,14 +131,11 @@ export default function ResultPage() {
     )
   }
 
-  // Special-category routes keep their existing dedicated views
-  if (product.product_type === 'cosmetic') {
-    return <CosmeticResult product={product} cosmeticScore={cosmeticScore ?? undefined} onBack={() => router.back()} />
-  }
-  const specialCategory = detectSpecialCategory(product)
-  if (specialCategory === 'infant_formula') return <InfantFormulaResult product={product} onBack={() => router.back()} />
-  if (specialCategory === 'medicine')      return <MedicineResult     product={product} onBack={() => router.back()} />
-  if (specialCategory === 'supplement')    return <SupplementResult   product={product} onBack={() => router.back()} />
+  // Every product type — food, beauty, infant formula, medicine, supplement
+  // — now renders through the shared cream-theme layout below. The previously-
+  // forked CosmeticResult / MedicineResult / InfantFormulaResult / SupplementResult
+  // components still exist as standalone files but are no longer routed to;
+  // they will be reintroduced once each has been individually restyled.
 
   // Standard food product
   const nutrition = (product.nutrition || {}) as NutritionData

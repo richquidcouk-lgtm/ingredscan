@@ -130,10 +130,12 @@ export default function ScanPage() {
 
   return (
     <div className="fixed inset-0 flex flex-col" style={{ background: '#000', color: '#fff' }}>
-      {/* Camera viewport */}
-      <div className="relative flex-1 overflow-hidden flex items-center justify-center">
-        {/* The library injects a <video> into this region. We size it to fill. */}
-        <div id="camera-region" className="absolute inset-0" />
+      {/* Camera viewport — html5-qrcode injects a <video> directly inside
+          #camera-region. The region must have explicit dimensions so the
+          library can autosize the video correctly. flex-1 + width/height
+          100% gives us the available space below the bottom controls. */}
+      <div className="relative flex-1 overflow-hidden">
+        <div id="camera-region" style={{ width: '100%', height: '100%' }} />
 
         {/* Top bar */}
         <div
@@ -182,8 +184,10 @@ export default function ScanPage() {
           </button>
         </div>
 
-        {/* Single set of corner brackets + scan line */}
-        <div className="relative z-10 pointer-events-none">
+        {/* Single set of corner brackets + scan line, centred over the
+            camera as an absolute overlay so the camera region itself is
+            never resized by the overlay's intrinsic content. */}
+        <div className="absolute inset-0 z-10 pointer-events-none flex flex-col items-center justify-center">
           <div style={{ width: 240, height: 240, position: 'relative' }}>
             <Corner pos="tl" />
             <Corner pos="tr" />
@@ -201,7 +205,7 @@ export default function ScanPage() {
               }}
             />
           </div>
-          <div className="text-center mt-2.5" style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>
+          <div className="text-center mt-2.5" style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)' }}>
             {starting ? 'Starting camera…' : 'Hold steady over the barcode'}
           </div>
         </div>

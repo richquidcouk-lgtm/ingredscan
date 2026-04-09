@@ -86,7 +86,7 @@ export default function BlogPostPage({ params }: Props) {
   }
 
   return (
-    <div className="min-h-screen px-5 py-10 max-w-2xl mx-auto relative z-10">
+    <div className="legacy-page min-h-screen px-5 py-10 max-w-2xl mx-auto relative z-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
