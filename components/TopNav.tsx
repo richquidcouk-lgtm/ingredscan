@@ -27,12 +27,14 @@ export default function TopNav() {
           Ingred<span style={{ color: 'var(--green)' }}>Scan</span>
         </Link>
         <div className="flex items-center gap-2">
-          <button className="icon-btn" aria-label="Notifications" type="button">
+          {/* Bell links to history — closest thing to "notifications" today.
+              When a real notifications inbox lands, swap the href. */}
+          <Link href="/history" className="icon-btn" aria-label="Notifications & history">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
               <path d="M13.73 21a2 2 0 01-3.46 0" />
             </svg>
-          </button>
+          </Link>
           <Link href="/account" className="icon-btn" aria-label="Profile">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />

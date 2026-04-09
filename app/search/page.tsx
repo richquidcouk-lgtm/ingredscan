@@ -390,13 +390,24 @@ function SearchPageBody() {
                     </div>
                     <div style={{ fontSize: 12, color: 'var(--muted)' }}>{p.brands || 'Unknown brand'}</div>
                   </div>
-                  {typeof p.quality_score === 'number' ? (
-                    <div className="heading-display" style={{ fontSize: 22, color }}>
-                      {getDisplayScore(p.quality_score)}
-                    </div>
-                  ) : (
-                    <span className="chip chip-gray">no score</span>
-                  )}
+                  {/* Fixed-width score column so food and beauty rows align
+                      identically — beauty products usually have null
+                      quality_score and were rendering with a different
+                      footprint than food rows. */}
+                  <div
+                    className="flex items-center justify-end flex-shrink-0"
+                    style={{ width: 56 }}
+                  >
+                    {typeof p.quality_score === 'number' && p.quality_score > 0 ? (
+                      <div className="heading-display" style={{ fontSize: 22, color }}>
+                        {getDisplayScore(p.quality_score)}
+                      </div>
+                    ) : (
+                      <span style={{ fontSize: 22, color: 'var(--muted)', fontFamily: 'var(--font-display), Fraunces, serif', fontWeight: 700 }}>
+                        —
+                      </span>
+                    )}
+                  </div>
                 </Link>
               )
             })}

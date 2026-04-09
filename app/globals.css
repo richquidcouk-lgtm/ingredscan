@@ -197,6 +197,60 @@ h3.heading-display {
 #scanner-region span { display: none !important; }
 
 /* ============================================================
+   Legacy inline-style overrides
+   ----------------------------------------------------------------
+   The blog posts, methodology, terms/privacy, compare, and other
+   not-yet-restyled pages still use inline styles authored against
+   the previous dark theme (e.g. style={{ color: '#f0f0f4' }}). On
+   the new cream canvas those off-white text colours are invisible.
+   The selectors below catch the most common legacy values and
+   remap them to the cream-theme equivalents so that every page
+   remains legible without having to edit each file individually.
+   `[style*=...]` is a substring match — it only ever sets `color`
+   here, so it cannot accidentally clobber background-color or
+   border-color rules in the same inline style.
+   ============================================================ */
+
+/* Off-white text → ink */
+[style*="color: #f0f0f4"],
+[style*="color:#f0f0f4"],
+[style*="color: #fff"],
+[style*="color:#fff"],
+[style*="color: white"] { color: var(--dark) !important; }
+
+/* Translucent off-white text → muted */
+[style*="rgba(240, 240, 244"],
+[style*="rgba(240,240,244"],
+[style*="rgba(255, 255, 255, 0.4"],
+[style*="rgba(255,255,255,0.4"],
+[style*="rgba(255, 255, 255, 0.5"],
+[style*="rgba(255,255,255,0.5"],
+[style*="rgba(255, 255, 255, 0.6"],
+[style*="rgba(255,255,255,0.6"],
+[style*="rgba(255, 255, 255, 0.7"],
+[style*="rgba(255,255,255,0.7"] { color: var(--muted) !important; }
+
+/* Old purple accent → green */
+[style*="color: #7c6fff"],
+[style*="color:#7c6fff"],
+[style*="color: #00e5a0"],
+[style*="color:#00e5a0"] { color: var(--green) !important; }
+
+/* These colour rules are scoped to the legacy non-restyled pages by
+   excluding any element inside the dark surfaces we INTENTIONALLY use
+   in the new theme (the dark scan page, dark score card, dark
+   onboarding, dark sign-in hero). On those surfaces white-on-dark text
+   is correct and we don't want to override it. */
+.dark-surface [style*="color: #fff"],
+.dark-surface [style*="color:#fff"],
+.dark-surface [style*="color: white"] { color: #fff !important; }
+
+.dark-surface [style*="rgba(240, 240, 244"],
+.dark-surface [style*="rgba(240,240,244"],
+.dark-surface [style*="rgba(255, 255, 255"],
+.dark-surface [style*="rgba(255,255,255"] { color: rgba(255, 255, 255, 0.7) !important; }
+
+/* ============================================================
    Legacy utility classes — kept so non-mockup pages don't break.
    They now render against the cream theme instead of pure black.
    These will be cleaned up as each remaining page is restyled.

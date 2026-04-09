@@ -78,24 +78,53 @@ function SwapsPageBody() {
       if (data) {
         sourceProduct = mapRow(data)
         setSource(sourceProduct)
-        categoryFilter = data.category?.split(',')[0]?.trim() || null
+        // Use a meaningful category fragment from the source product if it
+        // has one — long category strings get split by " - " or "," and we
+        // pick the most specific (last) word group as the search hint.
+        const cat = data.category || ''
+        const tokens = cat
+          .split(/[,\-/]+/)
+          .map((s: string) => s.trim())
+          .filter((s: string) => s.length > 3)
+        categoryFilter = tokens[tokens.length - 1] || null
       }
     }
 
-    let query = supabase
+    // Lowered threshold from 7.0 to 5.5 — there were too few NOVA-3/4 rows
+    // hitting 7.0 to populate the swaps list, so users were getting an
+    // empty page. 5.5 is "Fair" or above on the 0-10 scale.
+    const baseSelect = 'barcode, name, brand, quality_score, category, image_url, additives, is_organic'
+    const minScore = 5.5
+
+    // First try: filtered by category (if we have a source).
+    if (categoryFilter) {
+      const { data: scoped } = await supabase
+        .from('products')
+        .select(baseSelect)
+        .eq('import_source', 'openfoodfacts')
+        .gte('quality_score', minScore)
+        .ilike('category', `%${categoryFilter}%`)
+        .order('quality_score', { ascending: false })
+        .limit(40)
+
+      if (scoped && scoped.length > 0) {
+        setAlts((scoped as Array<Record<string, unknown>>).map(mapRow))
+        setLoading(false)
+        return
+      }
+      // Fall through to the unscoped query if the category filter empties out.
+    }
+
+    // Fallback: highest-quality products globally (no category filter).
+    const { data: global } = await supabase
       .from('products')
-      .select('barcode, name, brand, quality_score, category, image_url, additives, is_organic')
+      .select(baseSelect)
       .eq('import_source', 'openfoodfacts')
-      .gte('quality_score', 7.0)
+      .gte('quality_score', minScore)
       .order('quality_score', { ascending: false })
       .limit(40)
 
-    if (categoryFilter) {
-      query = query.ilike('category', `%${categoryFilter}%`)
-    }
-
-    const { data } = await query
-    setAlts(((data || []) as Array<Record<string, unknown>>).map(mapRow))
+    setAlts(((global || []) as Array<Record<string, unknown>>).map(mapRow))
     setLoading(false)
   }
 

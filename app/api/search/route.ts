@@ -23,10 +23,23 @@ export async function GET(request: NextRequest) {
 
   const supabase = getServiceSupabase()
 
+  // Escape commas/parens/percent which would break the PostgREST `or` filter.
+  const escape = (s: string) => s.replace(/[%,()]/g, ' ').trim()
+
+  // The search page sends EITHER q (free-text) OR category (a keyword from
+  // the curated category list). Treat them identically: ILIKE the term
+  // against name + brand + category. Single .or() call avoids the chaining
+  // pitfall where two separate .or() filters were producing empty results.
+  const term = (q.length >= 2 ? q : category).trim()
+  if (!term) {
+    return NextResponse.json({ products: [], count: 0 })
+  }
+  const pattern = `%${escape(term)}%`
+
   let query = supabase
     .from('products')
     .select('barcode, name, brand, image_url, nutriscore_grade, nova_score, quality_score')
-    // Highest quality first. nullsFirst: false keeps unscored products at the bottom.
+    .or(`name.ilike.${pattern},brand.ilike.${pattern},category.ilike.${pattern}`)
     .order('quality_score', { ascending: false, nullsFirst: false })
     .limit(limit)
 
@@ -36,26 +49,11 @@ export async function GET(request: NextRequest) {
     query = query.eq('import_source', 'openfoodfacts')
   }
 
-  // Escape commas/parens/percent which would break the PostgREST `or` filter.
-  const escape = (s: string) => s.replace(/[%,()]/g, ' ').trim()
-
-  if (q.length >= 2) {
-    const pattern = `%${escape(q)}%`
-    query = query.or(`name.ilike.${pattern},brand.ilike.${pattern}`)
-  }
-
-  if (category) {
-    const pattern = `%${escape(category)}%`
-    // Match either the free-text name or the joined `category` column.
-    // This works for rows whose categories_tags array is empty.
-    query = query.or(`name.ilike.${pattern},category.ilike.${pattern}`)
-  }
-
   const { data, error } = await query
 
   if (error) {
     console.error('[api/search] supabase error:', error.message)
-    return NextResponse.json({ products: [], count: 0 }, { status: 500 })
+    return NextResponse.json({ products: [], count: 0, error: error.message }, { status: 500 })
   }
 
   // Return shape compatible with the existing OFFSearchResult type.
