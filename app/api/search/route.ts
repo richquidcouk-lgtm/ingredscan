@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServiceSupabase } from '@/lib/supabase'
 
-// Searches the local Supabase products table (~1M food products from Open
-// Food Facts + ~40k cosmetics from Open Beauty Facts). Accepts:
+// Searches the local Supabase products table. Accepts:
 //   - q: free-text name/brand match (min 2 chars)
 //   - type: 'food' | 'cosmetic'  (default: food)
-//   - category: categories_tags contains filter, e.g. 'en:breads'
+//   - category: a keyword that gets ILIKE'd against name AND the joined
+//     `category` text column. We deliberately do NOT filter on the
+//     structured `categories_tags` array because it is sparsely populated
+//     in the OFF dump (many products have only free-text categories).
 // Either q or category must be provided; both together intersect.
 export async function GET(request: NextRequest) {
   const q = request.nextUrl.searchParams.get('q')?.trim() || ''
@@ -34,16 +36,19 @@ export async function GET(request: NextRequest) {
     query = query.eq('import_source', 'openfoodfacts')
   }
 
+  // Escape commas/parens/percent which would break the PostgREST `or` filter.
+  const escape = (s: string) => s.replace(/[%,()]/g, ' ').trim()
+
   if (q.length >= 2) {
-    // Escape commas/parens which would break the PostgREST `or` filter.
-    const safe = q.replace(/[%,()]/g, ' ').trim()
-    const pattern = `%${safe}%`
+    const pattern = `%${escape(q)}%`
     query = query.or(`name.ilike.${pattern},brand.ilike.${pattern}`)
   }
 
   if (category) {
-    // categories_tags is a text[] column — postgrest `cs` = contains.
-    query = query.contains('categories_tags', [category])
+    const pattern = `%${escape(category)}%`
+    // Match either the free-text name or the joined `category` column.
+    // This works for rows whose categories_tags array is empty.
+    query = query.or(`name.ilike.${pattern},category.ilike.${pattern}`)
   }
 
   const { data, error } = await query

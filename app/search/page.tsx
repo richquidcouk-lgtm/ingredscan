@@ -16,54 +16,63 @@ type SearchResult = {
   image_front_small_url: string
 }
 
-// Curated high-level categories shown on the search landing page. Each tag
-// must be a valid OFF `categories_tags` entry — we filter via
-// `.contains('categories_tags', [tag])` on the server.
-const FOOD_CATEGORIES: Array<{ emoji: string; label: string; tag: string }> = [
-  { emoji: '🍞', label: 'Bread & Bakery', tag: 'en:breads' },
-  { emoji: '🥣', label: 'Breakfast Cereals', tag: 'en:breakfast-cereals' },
-  { emoji: '🥛', label: 'Dairy & Yogurt', tag: 'en:dairies' },
-  { emoji: '🧀', label: 'Cheese', tag: 'en:cheeses' },
-  { emoji: '🍫', label: 'Chocolate', tag: 'en:chocolates' },
-  { emoji: '🍪', label: 'Biscuits & Sweets', tag: 'en:biscuits-and-cakes' },
-  { emoji: '🥤', label: 'Beverages', tag: 'en:beverages' },
-  { emoji: '💧', label: 'Waters', tag: 'en:waters' },
-  { emoji: '🍺', label: 'Alcoholic Drinks', tag: 'en:alcoholic-beverages' },
-  { emoji: '🍝', label: 'Pasta & Rice', tag: 'en:pastas' },
-  { emoji: '🥫', label: 'Canned & Jarred', tag: 'en:canned-foods' },
-  { emoji: '🍲', label: 'Ready Meals', tag: 'en:meals' },
-  { emoji: '🥓', label: 'Meat', tag: 'en:meats' },
-  { emoji: '🐟', label: 'Fish & Seafood', tag: 'en:seafood' },
-  { emoji: '🥬', label: 'Fresh Produce', tag: 'en:fresh-foods' },
-  { emoji: '🧊', label: 'Frozen Foods', tag: 'en:frozen-foods' },
-  { emoji: '🍿', label: 'Snacks', tag: 'en:snacks' },
-  { emoji: '🧂', label: 'Condiments & Sauces', tag: 'en:condiments' },
-  { emoji: '🍯', label: 'Spreads', tag: 'en:spreads' },
-  { emoji: '🍼', label: 'Baby Food', tag: 'en:baby-foods' },
+// Curated high-level categories shown on the search landing page. The `term`
+// is a search keyword that the API ILIKEs against name + category columns —
+// not a structured OFF tag. The OFF dump's categories_tags array is too
+// sparsely populated to use directly (many products have only free-text
+// category info), so a keyword match is more reliable.
+const FOOD_CATEGORIES: Array<{ emoji: string; label: string; term: string }> = [
+  { emoji: '🍞', label: 'Bread & Bakery', term: 'bread' },
+  { emoji: '🥣', label: 'Breakfast Cereals', term: 'cereal' },
+  { emoji: '🥛', label: 'Dairy & Yogurt', term: 'yogurt' },
+  { emoji: '🧀', label: 'Cheese', term: 'cheese' },
+  { emoji: '🍫', label: 'Chocolate', term: 'chocolate' },
+  { emoji: '🍪', label: 'Biscuits & Cookies', term: 'biscuit' },
+  { emoji: '🥤', label: 'Soft Drinks', term: 'drink' },
+  { emoji: '☕', label: 'Coffee & Tea', term: 'coffee' },
+  { emoji: '💧', label: 'Waters', term: 'water' },
+  { emoji: '🍺', label: 'Beer & Cider', term: 'beer' },
+  { emoji: '🍷', label: 'Wine', term: 'wine' },
+  { emoji: '🍝', label: 'Pasta', term: 'pasta' },
+  { emoji: '🍚', label: 'Rice', term: 'rice' },
+  { emoji: '🥫', label: 'Canned Foods', term: 'canned' },
+  { emoji: '🍲', label: 'Ready Meals', term: 'meal' },
+  { emoji: '🥓', label: 'Meat', term: 'meat' },
+  { emoji: '🐟', label: 'Fish & Seafood', term: 'fish' },
+  { emoji: '🥬', label: 'Vegetables', term: 'vegetable' },
+  { emoji: '🍎', label: 'Fruits', term: 'fruit' },
+  { emoji: '🧊', label: 'Frozen', term: 'frozen' },
+  { emoji: '🍿', label: 'Snacks', term: 'snack' },
+  { emoji: '🍬', label: 'Sweets & Candy', term: 'candy' },
+  { emoji: '🧂', label: 'Sauces', term: 'sauce' },
+  { emoji: '🍯', label: 'Spreads & Jams', term: 'jam' },
+  { emoji: '🌰', label: 'Nuts & Seeds', term: 'nuts' },
+  { emoji: '🍼', label: 'Baby Food', term: 'baby' },
 ]
 
-const BEAUTY_CATEGORIES: Array<{ emoji: string; label: string; tag: string }> = [
-  { emoji: '🧴', label: 'Moisturisers', tag: 'en:moisturizers' },
-  { emoji: '🧼', label: 'Cleansers', tag: 'en:face-cleansing' },
-  { emoji: '✨', label: 'Serums', tag: 'en:serums' },
-  { emoji: '☀️', label: 'Sunscreen', tag: 'en:sun-protection' },
-  { emoji: '💇', label: 'Shampoo', tag: 'en:shampoos' },
-  { emoji: '🧖', label: 'Conditioner', tag: 'en:conditioners' },
-  { emoji: '🛁', label: 'Body Wash', tag: 'en:shower-gels' },
-  { emoji: '🫧', label: 'Soap', tag: 'en:soaps' },
-  { emoji: '💄', label: 'Makeup', tag: 'en:makeup' },
-  { emoji: '💋', label: 'Lip Care', tag: 'en:lip-care' },
-  { emoji: '🪒', label: 'Shaving', tag: 'en:shaving' },
-  { emoji: '🦷', label: 'Oral Care', tag: 'en:oral-hygiene' },
-  { emoji: '👃', label: 'Deodorants', tag: 'en:deodorants' },
-  { emoji: '👶', label: 'Baby Care', tag: 'en:baby-care' },
+const BEAUTY_CATEGORIES: Array<{ emoji: string; label: string; term: string }> = [
+  { emoji: '🧴', label: 'Moisturisers', term: 'moisturiz' },
+  { emoji: '🧼', label: 'Face Cleansers', term: 'cleans' },
+  { emoji: '✨', label: 'Serums', term: 'serum' },
+  { emoji: '☀️', label: 'Sunscreen', term: 'sun' },
+  { emoji: '💇', label: 'Shampoo', term: 'shampoo' },
+  { emoji: '🧖', label: 'Conditioner', term: 'conditioner' },
+  { emoji: '🛁', label: 'Body Wash', term: 'shower' },
+  { emoji: '🫧', label: 'Soap', term: 'soap' },
+  { emoji: '💄', label: 'Makeup', term: 'makeup' },
+  { emoji: '💋', label: 'Lip Care', term: 'lip' },
+  { emoji: '🪒', label: 'Shaving', term: 'shav' },
+  { emoji: '🦷', label: 'Toothpaste', term: 'toothpaste' },
+  { emoji: '👃', label: 'Deodorants', term: 'deodorant' },
+  { emoji: '🌸', label: 'Perfume', term: 'perfume' },
+  { emoji: '👶', label: 'Baby Care', term: 'baby' },
 ]
 
 export default function SearchPage() {
   const router = useRouter()
   const [mode, setMode] = useState<'food' | 'cosmetic'>('food')
   const [query, setQuery] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState<{ label: string; tag: string } | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<{ label: string; term: string } | null>(null)
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
   const [hasSearched, setHasSearched] = useState(false)
@@ -97,7 +106,7 @@ export default function SearchPage() {
 
   // Debounced free-text search
   useEffect(() => {
-    const t = setTimeout(() => runSearch(query, selectedCategory?.tag ?? null), 400)
+    const t = setTimeout(() => runSearch(query, selectedCategory?.term ?? null), 400)
     return () => clearTimeout(t)
   }, [query, selectedCategory, runSearch])
 
@@ -108,7 +117,7 @@ export default function SearchPage() {
     setHasSearched(false)
   }, [mode])
 
-  function handleCategoryTap(cat: { label: string; tag: string }) {
+  function handleCategoryTap(cat: { label: string; term: string }) {
     setSelectedCategory(cat)
     setQuery('')
   }
@@ -224,7 +233,7 @@ export default function SearchPage() {
             <div className="space-y-1.5">
               {categories.map((cat) => (
                 <button
-                  key={cat.tag}
+                  key={cat.term}
                   onClick={() => handleCategoryTap(cat)}
                   className="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl glass-card text-left transition-all active:scale-[0.99] hover:bg-white/5"
                 >
