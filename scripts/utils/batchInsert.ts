@@ -46,12 +46,22 @@ export async function batchUpsert(
       continue
     }
 
+    const now = new Date().toISOString()
     const rows = toUpsert.map((p) => ({
       barcode: p.barcode,
       name: p.name,
       brand: p.brand,
+      // IngredScan-computed NOVA (passthrough when OFF supplied one, otherwise
+      // inferred). The raw OFF NOVA is preserved separately in off_nova_group.
       nova_score: p.nova_group,
+      nova_source: p.nova_source,
+      off_nova_group: p.off_nova_group,
+      // IngredScan-computed quality score + breakdown + version, for audit.
       quality_score: p.quality_score,
+      quality_score_version: p.quality_score_version,
+      quality_score_breakdown: p.quality_score_breakdown,
+      quality_score_updated_at: now,
+      // Raw Nutri-Score from OFF, preserved verbatim.
       nutriscore_grade: p.nutriscore_grade || '',
       ingredients: p.ingredients,
       additives: resolveAdditives(p.additives_tags),
@@ -77,7 +87,7 @@ export async function batchUpsert(
       import_source: p.import_source,
       country: p.country,
       last_imported_at: p.last_imported_at,
-      updated_at: new Date().toISOString(),
+      updated_at: now,
     }))
 
     const { error } = await supabaseAdmin

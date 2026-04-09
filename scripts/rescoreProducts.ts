@@ -1,10 +1,11 @@
 import { supabaseAdmin } from './utils/supabaseAdmin'
 import { scoreProduct } from '../lib/scoring'
 
-// Rescores all products imported by the bulk OFF importer using the canonical
-// lib/scoring logic. Needed because earlier imports used a broken local
-// scorer that ignored nova_group and matched additive tags incorrectly,
-// resulting in NOVA-4 ultra-processed products getting 10/10 quality scores.
+// Rescores bulk-imported OFF products using the canonical lib/scoring logic.
+// Reads nova_source and off_nova_group (migration 011) so that it passes the
+// ORIGINAL nova_group to lib/scoring — without this, NOVA-4-inferred rows get
+// a different quality_score at rescore time than at import time (0.25 swing,
+// see memory/rescore_script_artifact.md for the gory details).
 
 const PAGE_SIZE = 1000
 const DRY_RUN = process.argv.includes('--dry-run')
@@ -15,6 +16,8 @@ type Row = {
   barcode: string
   name: string
   nova_score: number | null
+  off_nova_group: number | null
+  nova_source: string | null
   quality_score: number | null
   nutriscore_grade: string | null
   ingredients: string | null
@@ -50,8 +53,21 @@ function rescore(row: Row): { nova: number; quality: number } {
     (a) => `en:${a.code.toLowerCase()}`
   )
 
+  // Feed lib/scoring the ORIGINAL OFF nova (or undefined when OFF had none),
+  // not row.nova_score which may have been inferred. Prefer off_nova_group
+  // (migration 011) but fall back to nova_source='off_direct' + nova_score
+  // for rows written before 011.
+  let originalNova: number | undefined
+  if (row.off_nova_group && row.off_nova_group >= 1 && row.off_nova_group <= 4) {
+    originalNova = row.off_nova_group
+  } else if (row.nova_source === 'off_direct' && row.nova_score) {
+    originalNova = row.nova_score
+  } else {
+    originalNova = undefined
+  }
+
   const result = scoreProduct({
-    nova_group: row.nova_score && row.nova_score >= 1 && row.nova_score <= 4 ? row.nova_score : undefined,
+    nova_group: originalNova,
     nutriscore_grade: row.nutriscore_grade ?? undefined,
     additives_tags,
     categories_tags: row.categories_tags || [],
@@ -66,7 +82,7 @@ function rescore(row: Row): { nova: number; quality: number } {
 async function rescoreOne(barcode: string) {
   const { data, error } = await supabaseAdmin
     .from('products')
-    .select('barcode, name, nova_score, quality_score, nutriscore_grade, ingredients, additives, categories_tags, labels_tags, nutrition')
+    .select('barcode, name, nova_score, off_nova_group, nova_source, quality_score, nutriscore_grade, ingredients, additives, categories_tags, labels_tags, nutrition')
     .eq('barcode', barcode)
     .single()
   if (error || !data) {
@@ -97,7 +113,7 @@ async function rescoreAll() {
   while (true) {
     const { data, error } = await supabaseAdmin
       .from('products')
-      .select('barcode, name, nova_score, quality_score, nutriscore_grade, ingredients, additives, categories_tags, labels_tags, nutrition')
+      .select('barcode, name, nova_score, off_nova_group, nova_source, quality_score, nutriscore_grade, ingredients, additives, categories_tags, labels_tags, nutrition')
       .eq('import_source', 'openfoodfacts')
       .order('barcode', { ascending: true })
       .range(offset, offset + PAGE_SIZE - 1)

@@ -26,14 +26,14 @@ function csvRowToRawProduct(row: any): RawProduct | null {
     .split(',')
     .map((s: string) => s.trim().toLowerCase())
     .filter(Boolean)
-  // Accept products explicitly tagged as sold in the UK or US.
+  // Global import — accept every product regardless of country. Per-row
+  // country is still tagged below for analytics/filtering.
   const isUK = countriesTags.some(
     (c: string) => c === 'en:united-kingdom' || c === 'united-kingdom'
   )
   const isUS = countriesTags.some(
     (c: string) => c === 'en:united-states' || c === 'united-states'
   )
-  if (!isUK && !isUS) return null
 
   const labelsTags = (row.labels_tags || '').split(',').map((s: string) => s.trim())
   const isOrganic = labelsTags.some((l: string) => l.includes('organic') || l.includes('bio'))
@@ -64,10 +64,21 @@ function csvRowToRawProduct(row: any): RawProduct | null {
     import_source: 'openfoodfacts',
     retailer_availability: [],
     avg_price: null,
-    // If a product is sold in both, prefer UK tag (matches our existing rows
-    // so the upsert priority logic doesn't churn).
-    country: isUK ? 'UK' : 'US',
+    // Mark as UK/US if explicitly tagged; otherwise derive a short country
+    // code from the first countries_tags entry, else 'Other'.
+    country: isUK ? 'UK' : isUS ? 'US' : deriveCountry(countriesTags),
   }
+}
+
+function deriveCountry(tags: string[]): string {
+  if (!tags.length) return 'Other'
+  const first = tags[0].replace(/^en:/, '')
+  if (!first) return 'Other'
+  // Title-case the first tag so e.g. 'en:france' → 'France'.
+  return first
+    .split('-')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ')
 }
 
 export async function importOpenFoodFacts(options: ImportOptions): Promise<void> {

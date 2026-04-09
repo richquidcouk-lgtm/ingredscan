@@ -21,8 +21,13 @@ export function processProduct(raw: RawProduct): ProcessedProduct {
   if (n.proteins_100g != null) nutriments['proteins_100g'] = n.proteins_100g
   if (n.salt_100g != null) nutriments['salt_100g'] = n.salt_100g
 
+  // Capture the raw OFF NOVA before lib/scoring potentially replaces it via
+  // inference — we need to preserve the original for traceability.
+  const offNovaGroup: number | null =
+    raw.nova_group && raw.nova_group >= 1 && raw.nova_group <= 4 ? raw.nova_group : null
+
   const result = scoreProduct({
-    nova_group: raw.nova_group ?? undefined,
+    nova_group: offNovaGroup ?? undefined,
     nutriscore_grade: raw.nutriscore_grade ?? undefined,
     additives_tags: raw.additives_tags || [],
     categories_tags: raw.categories_tags || [],
@@ -42,5 +47,9 @@ export function processProduct(raw: RawProduct): ProcessedProduct {
     data_source: isUK ? 'Open Food Facts + UK FSA' : 'Open Food Facts + USDA',
     confidence: result.confidence,
     last_imported_at: new Date().toISOString(),
+    off_nova_group: offNovaGroup,
+    nova_source: offNovaGroup != null ? 'off_direct' : 'inferred',
+    quality_score_version: result.quality_breakdown.version,
+    quality_score_breakdown: result.quality_breakdown as unknown as Record<string, unknown>,
   }
 }

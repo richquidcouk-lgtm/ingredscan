@@ -32,6 +32,15 @@ export interface ProcessedProduct extends RawProduct {
   data_source: string
   confidence: number
   last_imported_at: string
+  // Traceability: preserved OFF originals + provenance of our computed scores.
+  // `off_nova_group` is the raw NOVA from OFF (null if OFF had none), kept
+  // verbatim for audit. `nova_source` says whether `nova_group` (the
+  // IngredScan-displayed NOVA, stored as `nova_score` in the DB) came from
+  // OFF directly or was inferred by lib/scoring.
+  off_nova_group: number | null
+  nova_source: 'off_direct' | 'inferred'
+  quality_score_version: number
+  quality_score_breakdown: Record<string, unknown>
 }
 
 export interface ImportOptions {
