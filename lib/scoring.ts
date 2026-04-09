@@ -332,19 +332,29 @@ export function scoreProduct(product: OpenFoodFactsProduct): ScoringResult {
 }
 
 export function getScoreColor(score: number): string {
-  if (score < 4) return '#ff5a5a'     // red - Poor
-  if (score < 5.5) return '#ff8c42'   // orange - Moderate
-  if (score < 7) return '#f5a623'     // amber - Fair
-  if (score < 8.5) return '#22c77e'   // green - Good
-  return '#00e5a0'                     // bright green - Excellent
+  // Cream-theme palette. Score input is the 0-10 internal scale.
+  if (score < 5) return '#c0392b'    // red — Poor
+  if (score < 7) return '#c8763a'    // amber — Fair
+  return '#3d8c5e'                    // green — Good
 }
 
 export function getScoreLabel(score: number): string {
-  if (score < 4) return 'Poor'
-  if (score < 5.5) return 'Moderate'
+  if (score < 5) return 'Poor'
   if (score < 7) return 'Fair'
-  if (score < 9) return 'Good'
-  return 'Excellent'
+  return 'Good'
+}
+
+// Convert the internal 0-10 quality score to the 0-100 number we display in
+// the UI. The DB column stays 0-10 — only the rendering layer scales up.
+export function getDisplayScore(score: number | null | undefined): number {
+  if (score == null) return 0
+  return Math.round(score * 10)
+}
+
+export function getScoreClass(score: number | null | undefined): 'score-good' | 'score-fair' | 'score-poor' {
+  if (score == null || score < 5) return 'score-poor'
+  if (score < 7) return 'score-fair'
+  return 'score-good'
 }
 
 export function getNovaColor(nova: number): string {

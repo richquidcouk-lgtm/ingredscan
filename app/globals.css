@@ -2,30 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   IngredScan v2 — warm cream design system
+   Typography: Fraunces (display serif) + DM Sans (body)
+   Palette: warm cream, near-black ink, forest green, amber, brick red
+   Replaces the previous dark glass-morphism theme.
+   ============================================================ */
+
 :root {
-  /* Warmed up from the original near-black (#0b0b0f) toward a deep plum — keeps
-     the sophisticated dark-mode feel but reads less clinical and pairs better
-     with the mesh gradients. Fully backward compatible with every existing
-     component that references var(--bg). */
-  --bg: #0c0a14;
-  --surface: #17131f;
-  --surface2: #201b2c;
-  --border: rgba(255, 255, 255, 0.08);
-  --text: #f4f1f8;
-  --muted: rgba(244, 241, 248, 0.48);
-  --green: #00e5a0;
-  --green-glow: rgba(0, 229, 160, 0.25);
-  --amber: #f5a623;
-  --red: #ff5a5a;
-  --accent: #7c6fff;
-  /* Beauty-mode accent — warm coral-pink pairs with the purple and reads
-     distinctly feminine without being cliché. */
-  --pink: #ff7ab8;
-  --pink-glow: rgba(255, 122, 184, 0.22);
+  --cream: #f5f1ea;
+  --dark: #1c1b18;
+  --green: #3d8c5e;
+  --green-deep: #1d6b43;
+  --amber: #c8763a;
+  --amber-deep: #9a5620;
+  --red: #c0392b;
+  --red-deep: #922b21;
+  --soft: #fdfcf9;
+  --muted: #8a8780;
+  --border: rgba(28, 27, 24, 0.1);
+  --card: #ffffff;
+  --green-bg: #eef6f1;
+  --amber-bg: #fdf3ea;
+  --red-bg: #fdf0ef;
+
+  /* Legacy tokens still referenced by older pages — point them at the new palette */
+  --bg: var(--cream);
+  --surface: var(--card);
+  --surface2: var(--soft);
+  --text: var(--dark);
+  --accent: var(--green);
 }
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
@@ -34,463 +45,244 @@ html, body {
 }
 
 html {
-  color-scheme: dark;
+  scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body), system-ui, sans-serif;
+  font-family: var(--font-body), 'DM Sans', system-ui, sans-serif;
+  background: var(--cream);
+  color: var(--dark);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.01em;
 }
 
-/* ═══════════════════════════════════════════
-   Premium Background — animated mesh gradient
-   ═══════════════════════════════════════════ */
+/* ── Display heading typography (Fraunces) ── */
+.heading-display,
+h1.heading-display,
+h2.heading-display,
+h3.heading-display {
+  font-family: var(--font-display), 'Fraunces', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+.heading-display em {
+  font-style: italic;
+}
 
-.bg-mesh {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
+/* ============================================================
+   Reusable component primitives — match the mockup naming
+   ============================================================ */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.btn-primary {
   width: 100%;
-  max-width: 100vw;
+  padding: 15px;
+  background: var(--dark);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-family: var(--font-body), 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+.btn-primary:hover { opacity: 0.88; }
+.btn-primary:active { opacity: 0.78; }
+
+.btn-outline {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  color: var(--dark);
+  border: 1.5px solid var(--dark);
+  border-radius: 14px;
+  font-family: var(--font-body), 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
-.bg-mesh::before {
-  content: '';
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  top: -200px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(124, 111, 255, 0.08) 0%, transparent 70%);
-  animation: meshFloat 20s ease-in-out infinite;
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--dark);
+  transition: background 0.15s ease;
 }
+.icon-btn:hover { background: rgba(0, 0, 0, 0.04); }
 
-.bg-mesh::after {
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  bottom: -100px;
-  right: -100px;
-  background: radial-gradient(circle, rgba(0, 229, 160, 0.06) 0%, transparent 70%);
-  animation: meshFloat 25s ease-in-out infinite reverse;
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 400;
 }
+.chip-green { background: var(--green-bg); color: var(--green-deep); }
+.chip-amber { background: var(--amber-bg); color: var(--amber-deep); }
+.chip-red   { background: var(--red-bg);   color: var(--red-deep); }
+.chip-gray  { background: #f0ede6; color: var(--muted); }
 
-@keyframes meshFloat {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(30px); }
+.score-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
 }
+.score-good { background: var(--green-bg); color: var(--green-deep); }
+.score-fair { background: var(--amber-bg); color: var(--amber-deep); }
+.score-poor { background: var(--red-bg);   color: var(--red-deep); }
 
-/* Dot pattern overlay */
-.bg-dots {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 24px 24px;
+/* ── Animations ── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-/* Noise texture overlay */
-.bg-noise {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.015;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
-
-/* ═══════════════════════════════════════════
-   Glassmorphism utilities
-   ═══════════════════════════════════════════ */
-
-.glass {
-  background: rgba(19, 19, 26, 0.6);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+@keyframes scanLine {
+  0%   { top: 10%; }
+  50%  { top: 85%; }
+  100% { top: 10%; }
 }
+.animate-fadeUp { animation: fadeUp 500ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-fadeIn { animation: fadeIn 400ms ease-out both; }
 
-.glass-subtle {
-  background: rgba(19, 19, 26, 0.4);
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(28, 27, 24, 0.12); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(28, 27, 24, 0.22); }
+* { scrollbar-width: thin; scrollbar-color: rgba(28, 27, 24, 0.12) transparent; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-.glass-card {
-  background: rgba(19, 19, 26, 0.7);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+/* ── Selection ── */
+::selection { background: rgba(61, 140, 94, 0.18); color: var(--dark); }
 
-.glass-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  transform: translateY(-1px);
-}
-
-.glass-input {
-  background: rgba(28, 28, 38, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.2s ease;
-}
-
-.glass-input:focus {
-  border-color: rgba(124, 111, 255, 0.4);
-  box-shadow: 0 0 0 3px rgba(124, 111, 255, 0.1);
-}
-
-/* ═══════════════════════════════════════════
-   Card hover glow effects
-   ═══════════════════════════════════════════ */
-
-.card-hover-glow {
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-hover-glow::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent 50%, rgba(124,111,255,0.1));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.card-hover-glow:hover::before {
-  opacity: 1;
-}
-
-.card-hover-glow:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-}
-
-/* Gradient border card */
-.gradient-border {
-  position: relative;
-  border: 1px solid transparent;
-  background-clip: padding-box;
-}
-
-.gradient-border::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(124, 111, 255, 0.3), rgba(0, 229, 160, 0.3));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-/* ═══════════════════════════════════════════
-   CTA glow button
-   ═══════════════════════════════════════════ */
-
-.btn-glow {
-  position: relative;
-  background: linear-gradient(135deg, #00e5a0, #1ab06e);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btn-glow::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, #00e5a0, #1ab06e);
-  filter: blur(16px);
-  opacity: 0.4;
-  z-index: -1;
-  transition: opacity 0.3s ease, filter 0.3s ease;
-}
-
-.btn-glow:hover {
-  transform: translateY(-1px) scale(1.02);
-}
-
-.btn-glow:hover::before {
-  opacity: 0.6;
-  filter: blur(20px);
-}
-
-.btn-glow:active {
-  transform: scale(0.97);
-}
-
-/* ═══════════════════════════════════════════
-   Gradient divider
-   ═══════════════════════════════════════════ */
-
-.gradient-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(124, 111, 255, 0.2), rgba(0, 229, 160, 0.2), transparent);
-}
-
-/* ═══════════════════════════════════════════
-   Display heading typography
-   ═══════════════════════════════════════════ */
-
-.heading-display {
-  font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.05em;
-  line-height: 1.05;
-}
-
-/* ═══════════════════════════════════════════
-   Hide html5-qrcode default UI
-   ═══════════════════════════════════════════ */
-
+/* ============================================================
+   html5-qrcode scanner overrides — keep the camera view clean
+   ============================================================ */
 #scanner-region video {
   border-radius: 16px !important;
   object-fit: cover !important;
 }
+#scanner-region > div > div { border: none !important; box-shadow: none !important; }
+#scanner-region > div:last-child { display: none !important; }
+#scanner-region__scan_region > img { display: none !important; }
+#scanner-region__dashboard { display: none !important; }
+#scanner-region img[alt="Info icon"] { display: none !important; }
+#scanner-region span { display: none !important; }
 
-#scanner-region > div > div {
-  border: none !important;
-  box-shadow: none !important;
+/* ============================================================
+   Legacy utility classes — kept so non-mockup pages don't break.
+   They now render against the cream theme instead of pure black.
+   These will be cleaned up as each remaining page is restyled.
+   ============================================================ */
+
+.bg-mesh, .bg-dots, .bg-noise { display: none; }
+
+.glass,
+.glass-subtle,
+.glass-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.glass-input {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--dark);
+}
+.glass-input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(61, 140, 94, 0.12);
+  outline: none;
 }
 
-#scanner-region > div:last-child {
-  display: none !important;
+.btn-glow {
+  background: var(--dark);
+  color: #fff;
+  border-radius: 14px;
+}
+.btn-glow:hover { opacity: 0.88; }
+
+.gradient-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
 }
 
-#scanner-region__scan_region > img {
-  display: none !important;
-}
+.card-hover-glow { transition: background 0.15s ease; }
+.card-hover-glow:hover { background: #fafaf6; }
 
-#scanner-region__dashboard {
-  display: none !important;
-}
+.gradient-border { border: 1px solid var(--border); }
 
-#scanner-region img[alt="Info icon"] {
-  display: none !important;
-}
+/* ── Footer links (cream theme) ── */
+.footer-link        { color: var(--dark); }
+.footer-link:hover  { color: var(--green); }
+.footer-link-muted  { color: var(--muted); }
+.footer-link-muted:hover { color: var(--dark); }
 
-#scanner-region span {
-  display: none !important;
-}
-
-/* ═══════════════════════════════════════════
-   Animations
-   ═══════════════════════════════════════════ */
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scanLine {
-  from {
-    top: 20%;
-  }
-  to {
-    top: 75%;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.7; }
-}
-
-@keyframes floatSlow {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(2deg); }
-}
-
-.animate-fadeUp {
-  animation: fadeUp 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.animate-slideUp {
-  animation: slideUp 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.animate-shimmer {
-  background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite;
-}
-
-/* ═══════════════════════════════════════════
-   Scrollbar
-   ═══════════════════════════════════════════ */
-
-::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 99px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* ═══════════════════════════════════════════
-   Footer links
-   ═══════════════════════════════════════════ */
-
-.footer-link {
-  color: rgba(240, 240, 244, 0.55);
-}
-
-.footer-link:hover {
-  color: #f0f0f4;
-}
-
-.footer-link-muted {
-  color: rgba(240, 240, 244, 0.45);
-}
-
-.footer-link-muted:hover {
-  color: rgba(240, 240, 244, 0.7);
-}
-
-/* ═══════════════════════════════════════════
-   Blog prose styling
-   ═══════════════════════════════════════════ */
-
+/* ── Blog prose (light theme) ── */
 .blog-prose {
-  color: rgba(240, 240, 244, 0.7);
+  color: #44423d;
   font-size: 0.9375rem;
   line-height: 1.85;
   letter-spacing: -0.005em;
 }
-
 .blog-prose h2 {
-  color: #f0f0f4;
-  font-family: var(--font-display);
+  color: var(--dark);
+  font-family: var(--font-display), 'Fraunces', serif;
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   letter-spacing: -0.03em;
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
 }
-
 .blog-prose h3 {
-  color: #f0f0f4;
-  font-family: var(--font-display);
+  color: var(--dark);
+  font-family: var(--font-display), 'Fraunces', serif;
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   letter-spacing: -0.02em;
   margin-top: 2rem;
   margin-bottom: 0.5rem;
 }
+.blog-prose p { margin-bottom: 1rem; }
+.blog-prose ul, .blog-prose ol { margin-bottom: 1rem; padding-left: 1.5rem; }
+.blog-prose ul { list-style-type: disc; }
+.blog-prose ol { list-style-type: decimal; }
+.blog-prose li { margin-bottom: 0.4rem; }
+.blog-prose strong { color: var(--dark); font-weight: 600; }
+.blog-prose a { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
+.blog-prose a:hover { color: var(--amber); }
+.blog-prose em { font-style: italic; }
 
-.blog-prose p {
-  margin-bottom: 1rem;
-}
-
-.blog-prose ul, .blog-prose ol {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
-}
-
-.blog-prose ul {
-  list-style-type: disc;
-}
-
-.blog-prose ol {
-  list-style-type: decimal;
-}
-
-.blog-prose li {
-  margin-bottom: 0.4rem;
-}
-
-.blog-prose strong {
-  color: #f0f0f4;
-  font-weight: 600;
-}
-
-.blog-prose a {
-  color: #00e5a0;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.blog-prose a:hover {
-  color: #7c6fff;
-}
-
-.blog-prose em {
-  font-style: italic;
-}
-
-/* line-clamp utility */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -498,22 +290,10 @@ body {
   overflow: hidden;
 }
 
-/* ═══════════════════════════════════════════
-   PWA standalone
-   ═══════════════════════════════════════════ */
-
+/* ── PWA standalone ── */
 @media all and (display-mode: standalone) {
   body {
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
   }
-}
-
-/* ═══════════════════════════════════════════
-   Selection
-   ═══════════════════════════════════════════ */
-
-::selection {
-  background: rgba(124, 111, 255, 0.3);
-  color: #f0f0f4;
 }

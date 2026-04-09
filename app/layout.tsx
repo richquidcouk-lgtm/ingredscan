@@ -1,22 +1,24 @@
 import type { Metadata, Viewport } from 'next'
-import { Space_Grotesk, Plus_Jakarta_Sans } from 'next/font/google'
+import { Fraunces, DM_Sans } from 'next/font/google'
 import PWARegister from '@/components/PWARegister'
 import AuthListener from '@/components/AuthListener'
 import FeedbackButton from '@/components/FeedbackButton'
 import CookieConsent from '@/components/CookieConsent'
 import { MarketProvider } from '@/components/MarketProvider'
 import BottomNav from '@/components/BottomNav'
+import TopNav from '@/components/TopNav'
 import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
+  weight: ['400', '500', '700'],
+  style: ['normal', 'italic'],
   variable: '--font-display',
 })
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['300', '400', '500'],
   variable: '--font-body',
 })
 
@@ -24,7 +26,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#0b0b0f',
+  themeColor: '#f5f1ea',
 }
 
 export const metadata: Metadata = {
@@ -126,7 +128,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${plusJakartaSans.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${dmSans.variable}`}>
       <head>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-15E8R2CQPT" />
         <script
@@ -142,11 +144,11 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="IngredScan" />
         <meta name="application-name" content="IngredScan" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content="#0b0b0f" />
+        <meta name="msapplication-TileColor" content="#f5f1ea" />
         <meta name="msapplication-tap-highlight" content="no" />
         <link rel="alternate" hrefLang="en-gb" href="https://www.ingredscan.com" />
         <link rel="alternate" hrefLang="en-us" href="https://www.ingredscan.com" />
@@ -157,56 +159,48 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="es" href="https://www.ingredscan.com" />
         <link rel="alternate" hrefLang="x-default" href="https://www.ingredscan.com" />
       </head>
-      <body className="antialiased min-h-screen" style={{ backgroundColor: '#0b0b0f' }}>
-        {/* Background layers */}
-        <div className="bg-mesh" />
-        <div className="bg-dots" />
-        <div className="bg-noise" />
-
-        <div className="relative z-10">
-          <PWARegister />
-          <AuthListener />
-          <MarketProvider>
-            {children}
-            <BottomNav />
-          </MarketProvider>
-          <FeedbackButton />
-          <CookieConsent />
-          <footer className="pb-24 py-8 px-4 text-center">
-            <div className="gradient-divider max-w-xs mx-auto mb-6" />
-            <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mb-4">
-              {[
-                { label: 'Home', href: '/' },
-                { label: 'Scan', href: '/scan' },
-                { label: 'History', href: '/history' },
-                { label: 'Blog', href: '/blog' },
-              ].map((link) => (
-                <a key={link.href} href={link.href} className="footer-link text-xs font-medium transition-colors">
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-            <nav className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 mb-4">
-              {[
-                { label: 'Privacy Policy', href: '/privacy' },
-                { label: 'Cookie Policy', href: '/cookies' },
-                { label: 'Terms', href: '/terms' },
-                { label: 'Disclaimer', href: '/disclaimer' },
-                { label: 'Methodology', href: '/methodology' },
-              ].map((link) => (
-                <a key={link.href} href={link.href} className="footer-link-muted text-[11px] transition-colors">
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-            <p className="text-xs mb-3" style={{ color: 'rgba(240,240,244,0.5)' }}>
-              &copy; 2026 IngredScan &middot; Made in London
-            </p>
-            <p className="text-xs tracking-wide max-w-md mx-auto leading-relaxed mb-2" style={{ color: 'rgba(240,240,244,0.4)' }}>
-              Product data sourced from <a href="https://world.openfoodfacts.org" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(124,111,255,0.6)' }}>Open Food Facts</a> and <a href="https://world.openbeautyfacts.org" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(124,111,255,0.6)' }}>Open Beauty Facts</a> (CC-BY-SA 4.0). Scores are estimates only. Not medical advice. IngredScan is not affiliated with any brand or retailer.
-            </p>
-          </footer>
-        </div>
+      <body className="antialiased min-h-screen">
+        <PWARegister />
+        <AuthListener />
+        <MarketProvider>
+          <TopNav />
+          {children}
+          <BottomNav />
+        </MarketProvider>
+        <FeedbackButton />
+        <CookieConsent />
+        <footer className="pb-24 pt-8 px-4 text-center max-w-lg mx-auto" style={{ color: 'var(--muted)' }}>
+          <div className="gradient-divider max-w-xs mx-auto mb-6" />
+          <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mb-4">
+            {[
+              { label: 'Home', href: '/' },
+              { label: 'Scan', href: '/scan' },
+              { label: 'History', href: '/history' },
+              { label: 'Blog', href: '/blog' },
+            ].map((link) => (
+              <a key={link.href} href={link.href} className="footer-link text-xs font-medium transition-colors">
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <nav className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 mb-4">
+            {[
+              { label: 'Privacy Policy', href: '/privacy' },
+              { label: 'Cookie Policy', href: '/cookies' },
+              { label: 'Terms', href: '/terms' },
+              { label: 'Disclaimer', href: '/disclaimer' },
+              { label: 'Methodology', href: '/methodology' },
+            ].map((link) => (
+              <a key={link.href} href={link.href} className="footer-link-muted text-[11px] transition-colors">
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <p className="text-xs mb-3">&copy; 2026 IngredScan &middot; Made in London</p>
+          <p className="text-[11px] tracking-wide max-w-md mx-auto leading-relaxed mb-2">
+            Product data sourced from <a href="https://world.openfoodfacts.org" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--green)' }}>Open Food Facts</a> and <a href="https://world.openbeautyfacts.org" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--green)' }}>Open Beauty Facts</a> (CC-BY-SA 4.0). Scores are estimates only. Not medical advice. IngredScan is not affiliated with any brand or retailer.
+          </p>
+        </footer>
       </body>
     </html>
   )
