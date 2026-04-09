@@ -98,26 +98,26 @@ export default function BlogPostPage({ params }: Props) {
       </div>
 
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs mb-8 flex-wrap" style={{ color: 'rgba(240,240,244,0.5)' }}>
-        <Link href="/" className="hover:underline" style={{ color: 'rgba(240,240,244,0.5)' }}>Home</Link>
+      <nav className="flex items-center gap-2 text-xs mb-8 flex-wrap" style={{ color: 'var(--muted)' }}>
+        <Link href="/" className="hover:underline" style={{ color: 'var(--muted)' }}>Home</Link>
         <span>/</span>
-        <Link href="/blog" className="hover:underline" style={{ color: 'rgba(240,240,244,0.5)' }}>Blog</Link>
+        <Link href="/blog" className="hover:underline" style={{ color: 'var(--muted)' }}>Blog</Link>
         <span>/</span>
-        <span style={{ color: 'rgba(240,240,244,0.6)' }} className="truncate max-w-[200px] sm:max-w-none">{post.title}</span>
+        <span style={{ color: 'var(--dark)' }} className="truncate max-w-[200px] sm:max-w-none">{post.title}</span>
       </nav>
 
       {/* Header */}
       <div className="mb-10 animate-fadeUp">
         <span
           className="inline-block px-2.5 py-1 rounded-full text-xs font-medium mb-4"
-          style={{ backgroundColor: 'rgba(0,229,160,0.12)', color: '#00e5a0' }}
+          style={{ backgroundColor: 'var(--green-bg)', color: 'var(--green)' }}
         >
           {post.category}
         </span>
-        <h1 className="text-2xl sm:text-3xl heading-display mb-4" style={{ color: '#f0f0f4' }}>
+        <h1 className="text-2xl sm:text-3xl heading-display mb-4" style={{ color: 'var(--dark)' }}>
           {post.title}
         </h1>
-        <div className="flex items-center gap-3 text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>
+        <div className="flex items-center gap-3 text-xs" style={{ color: 'var(--muted)' }}>
           <span>{new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
           <span>·</span>
           <span>{post.readTime}</span>
@@ -140,21 +140,21 @@ export default function BlogPostPage({ params }: Props) {
       <div
         className="rounded-2xl p-6 text-center mb-12 animate-fadeUp"
         style={{
-          background: 'linear-gradient(135deg, rgba(0,229,160,0.08), rgba(124,111,255,0.08))',
-          border: '1px solid rgba(255,255,255,0.08)',
+          background: 'var(--green-bg)',
+          border: '1px solid var(--border)',
           animationDelay: '150ms',
         }}
       >
-        <h3 className="text-lg font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>
+        <h3 className="text-lg font-bold heading-display mb-2" style={{ color: 'var(--dark)' }}>
           Scan this product instantly
         </h3>
-        <p className="text-sm mb-4" style={{ color: 'rgba(240,240,244,0.5)' }}>
+        <p className="text-sm mb-4" style={{ color: 'var(--muted)' }}>
           Curious about a product mentioned in this article? Scan it now and get a full breakdown.
         </p>
         <Link
           href="/scan"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold btn-glow"
-          style={{ color: '#0b0b0f' }}
+          style={{ color: '#fff' }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
             <path d="M3 7V5a2 2 0 0 1 2-2h2" />
@@ -177,7 +177,7 @@ export default function BlogPostPage({ params }: Props) {
             <span
               key={tag}
               className="px-3 py-1.5 rounded-full text-xs"
-              style={{ backgroundColor: 'rgba(19,19,26,0.8)', color: 'rgba(240,240,244,0.4)', border: '1px solid rgba(255,255,255,0.06)' }}
+              style={{ backgroundColor: 'var(--cream)', color: 'var(--muted)', border: '1px solid var(--border)' }}
             >
               {tag}
             </span>
@@ -189,7 +189,7 @@ export default function BlogPostPage({ params }: Props) {
       {related.length > 0 && (
         <div>
           <div className="gradient-divider mb-8" />
-          <h3 className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'rgba(240,240,244,0.5)' }}>
+          <h3 className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--muted)' }}>
             Related Articles
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -201,14 +201,14 @@ export default function BlogPostPage({ params }: Props) {
               >
                 <span
                   className="inline-block px-2 py-0.5 rounded-full text-xs font-medium mb-2"
-                  style={{ backgroundColor: 'rgba(124,111,255,0.12)', color: '#7c6fff', fontSize: '0.65rem' }}
+                  style={{ backgroundColor: 'var(--green-bg)', color: 'var(--green)', fontSize: '0.65rem' }}
                 >
                   {rp.category}
                 </span>
-                <h4 className="text-sm font-semibold mb-1.5 line-clamp-2" style={{ color: '#f0f0f4', letterSpacing: '-0.01em' }}>
+                <h4 className="text-sm font-semibold mb-1.5 line-clamp-2" style={{ color: 'var(--dark)', letterSpacing: '-0.01em' }}>
                   {rp.title}
                 </h4>
-                <span className="text-xs" style={{ color: 'rgba(240,240,244,0.4)' }}>{rp.readTime}</span>
+                <span className="text-xs" style={{ color: 'var(--muted)' }}>{rp.readTime}</span>
               </Link>
             ))}
           </div>

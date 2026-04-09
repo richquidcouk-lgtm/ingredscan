@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function AppPrivacyPage() {
   return (
-    <div className="min-h-screen px-5 py-10 max-w-2xl mx-auto relative z-10">
+    <div className="legacy-page min-h-screen px-5 py-10 max-w-2xl mx-auto relative z-10">
       <Link
         href="/"
         className="inline-flex items-center gap-2 text-sm mb-8 transition-colors"

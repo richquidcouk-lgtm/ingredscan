@@ -13,7 +13,7 @@ export default function DisclaimerPage() {
       <Link
         href="/"
         className="inline-flex items-center gap-2 text-sm mb-8 transition-colors"
-        style={{ color: 'rgba(240,240,244,0.4)' }}
+        style={{ color: 'var(--muted)' }}
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M19 12H5" /><polyline points="12 19 5 12 12 5" />
@@ -21,16 +21,16 @@ export default function DisclaimerPage() {
         Back to Home
       </Link>
 
-      <h1 className="text-3xl sm:text-4xl heading-display mb-3" style={{ color: '#f0f0f4' }}>
+      <h1 className="text-3xl sm:text-4xl heading-display mb-3" style={{ color: 'var(--dark)' }}>
         Data &amp; Scoring Disclaimer
       </h1>
-      <p className="text-sm mb-10" style={{ color: 'rgba(240,240,244,0.5)' }}>
+      <p className="text-sm mb-10" style={{ color: 'var(--muted)' }}>
         Last updated: 5 April 2026
       </p>
 
       <div className="space-y-8" style={{ color: 'rgba(240,240,244,0.7)', lineHeight: '1.8' }}>
         <section>
-          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>Data Sources</h2>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--dark)' }}>Data Sources</h2>
           <p className="text-sm mb-3">IngredScan aggregates product data from multiple sources:</p>
           <ul className="list-disc list-inside text-sm space-y-1.5 ml-2">
             <li><strong>Open Food Facts</strong> — a free, open, collaborative database of food products</li>
@@ -46,7 +46,7 @@ export default function DisclaimerPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>How the NOVA Score Is Calculated</h2>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--dark)' }}>How the NOVA Score Is Calculated</h2>
           <p className="text-sm mb-3">
             The NOVA classification system was developed by researchers at the University of Sao Paulo, Brazil. It groups foods into four categories based on their level of processing:
           </p>
@@ -71,7 +71,7 @@ export default function DisclaimerPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>How the Quality Score Is Calculated</h2>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--dark)' }}>How the Quality Score Is Calculated</h2>
           <p className="text-sm mb-3">
             The IngredScan Quality Score is a proprietary rating from 0 to 10, calculated using the following formula:
           </p>
@@ -91,13 +91,13 @@ export default function DisclaimerPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>Regulatory Framework</h2>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--dark)' }}>Regulatory Framework</h2>
           <p className="text-sm mb-3"><strong>United Kingdom (England, Scotland, Wales):</strong> Food additive safety in Great Britain is governed by UK assimilated law — retained EU regulations that became part of UK domestic law following Brexit and are now published on <a href="https://www.legislation.gov.uk/eur/2008/1333/contents" style={{ color: '#7c6fff' }}>legislation.gov.uk</a>. The <a href="https://www.food.gov.uk" style={{ color: '#7c6fff' }}>Food Standards Agency (FSA)</a> is the primary authority, maintaining a public register of approved additives at <a href="https://www.food.gov.uk/business-guidance/approved-additives-and-e-numbers" style={{ color: '#7c6fff' }}>food.gov.uk</a>.</p>
           <p className="text-sm mb-3"><strong>Northern Ireland:</strong> Follows EU food regulations under the Windsor Framework. EU Regulation (EC) No. 1333/2008 directly applies.</p>
           <p className="text-sm mb-3"><strong>Post-Brexit Divergence:</strong> Since Brexit, the UK and EU food safety regulators operate independently. In most cases their decisions align, but differences exist. A notable example is Titanium Dioxide (E171), which was banned in EU food in 2022 but remains permitted in Great Britain following an independent FSA review. Where we are aware of UK/EU differences, we flag these clearly.</p>
           <p className="text-sm mb-3"><strong>United States:</strong> Food additive safety is governed by the FDA under Title 21 of the Code of Federal Regulations (21 CFR). Additives may be classified as GRAS (Generally Recognized as Safe).</p>
 
-          <h2 className="text-lg font-semibold mb-3 mt-8" style={{ color: '#f0f0f4' }}>Additive Risk Ratings</h2>
+          <h2 className="text-lg font-semibold mb-3 mt-8" style={{ color: 'var(--dark)' }}>Additive Risk Ratings</h2>
           <p className="text-sm mb-3">
             Each additive in our database is classified as low, medium, or high risk. These classifications are based on:
           </p>
@@ -113,7 +113,7 @@ export default function DisclaimerPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>Cosmetic Product Scoring</h2>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--dark)' }}>Cosmetic Product Scoring</h2>
           <p className="text-sm mb-3">
             IngredScan also analyses cosmetic products using data from Open Beauty Facts and the EWG Skin Deep database. Cosmetic safety scores are calculated by analysing the INCI (International Nomenclature of Cosmetic Ingredients) ingredient list against published scientific literature and EU/UK regulatory status.
           </p>
@@ -128,7 +128,7 @@ export default function DisclaimerPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>Products IngredScan Does Not Cover</h2>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--dark)' }}>Products IngredScan Does Not Cover</h2>
           <p className="text-sm mb-3"><strong>Infant Formula and Baby Milk</strong></p>
           <p className="text-sm mb-3">
             IngredScan does not score infant formula or baby milk products. When these products are detected, we show official NHS guidance instead. Infant formula is governed by strict UK and EU nutritional regulations and should not be compared using standard food processing scores.
@@ -148,14 +148,14 @@ export default function DisclaimerPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>Fresh Produce</h2>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--dark)' }}>Fresh Produce</h2>
           <p className="text-sm">
             Fresh, whole produce (fruits, vegetables, raw meat, eggs, etc.) is always classified as NOVA 1 — unprocessed or minimally processed. If you scan a fresh product and it shows a different NOVA classification, this is an error. Please use the Report feature to let us know.
           </p>
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>Reporting Errors</h2>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--dark)' }}>Reporting Errors</h2>
           <p className="text-sm">
             If you find incorrect product data, inaccurate scores, or missing information:
           </p>
@@ -168,7 +168,7 @@ export default function DisclaimerPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3" style={{ color: '#f0f0f4' }}>Contact</h2>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--dark)' }}>Contact</h2>
           <p className="text-sm">
             For questions about our data or scoring methodology, contact us at{' '}
             <a href="mailto:support@ingredscan.com" style={{ color: '#00e5a0' }}>support@ingredscan.com</a>.

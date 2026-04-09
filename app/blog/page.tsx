@@ -18,7 +18,7 @@ export default function BlogPage() {
       <Link
         href="/"
         className="inline-flex items-center gap-2 text-sm mb-8 transition-colors"
-        style={{ color: 'rgba(240,240,244,0.4)' }}
+        style={{ color: 'var(--muted)' }}
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M19 12H5" /><polyline points="12 19 5 12 12 5" />
@@ -42,7 +42,7 @@ export default function BlogPage() {
         >
           The IngredScan Blog
         </h1>
-        <p className="text-sm max-w-md mx-auto" style={{ color: 'rgba(240,240,244,0.4)' }}>
+        <p className="text-sm max-w-md mx-auto" style={{ color: 'var(--muted)' }}>
           Evidence-based articles about food processing, additives, and making informed choices at the supermarket.
         </p>
       </div>
@@ -60,10 +60,10 @@ export default function BlogPage() {
           >
             {featured.category}
           </span>
-          <h2 className="text-xl sm:text-2xl font-bold heading-display mb-3" style={{ color: '#f0f0f4' }}>
+          <h2 className="text-xl sm:text-2xl font-bold heading-display mb-3" style={{ color: 'var(--dark)' }}>
             {featured.title}
           </h2>
-          <p className="text-sm mb-4 line-clamp-2" style={{ color: 'rgba(240,240,244,0.5)' }}>
+          <p className="text-sm mb-4 line-clamp-2" style={{ color: 'var(--muted)' }}>
             {featured.description}
           </p>
           <div className="flex items-center gap-3 text-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>
@@ -85,17 +85,17 @@ export default function BlogPage() {
           >
             <span
               className="inline-block px-2.5 py-1 rounded-full text-xs font-medium mb-3"
-              style={{ backgroundColor: 'rgba(124,111,255,0.12)', color: '#7c6fff' }}
+              style={{ backgroundColor: 'rgba(124,111,255,0.12)', color: 'var(--green)' }}
             >
               {post.category}
             </span>
-            <h3 className="text-base font-bold mb-2 line-clamp-2" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
+            <h3 className="text-base font-bold mb-2 line-clamp-2" style={{ color: 'var(--dark)', letterSpacing: '-0.02em' }}>
               {post.title}
             </h3>
-            <p className="text-xs mb-3 line-clamp-2" style={{ color: 'rgba(240,240,244,0.4)' }}>
+            <p className="text-xs mb-3 line-clamp-2" style={{ color: 'var(--muted)' }}>
               {post.description}
             </p>
-            <div className="flex items-center gap-3 text-xs" style={{ color: 'rgba(240,240,244,0.4)' }}>
+            <div className="flex items-center gap-3 text-xs" style={{ color: 'var(--muted)' }}>
               <span>{post.readTime}</span>
               <span>·</span>
               <span>{new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</span>

@@ -124,7 +124,7 @@ export default function ComparePage() {
   }
 
   return (
-    <div className="min-h-screen pb-20 relative">
+    <div className="legacy-page min-h-screen pb-20 relative">
       <header className="flex items-center justify-between px-5 pt-6 pb-2 max-w-lg mx-auto relative z-10">
         <button onClick={() => router.back()} className="p-2.5 rounded-xl glass-card">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0f0f4" strokeWidth="2" strokeLinecap="round"><path d="M19 12H5" /><polyline points="12,19 5,12 12,5" /></svg>

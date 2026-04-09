@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
+// Cream-theme cookie consent banner. Sits above the bottom nav and is
+// dismissed once the user accepts.
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const consent = localStorage.getItem('ingredscan_cookie_consent')
-    if (!consent) {
-      setVisible(true)
-    }
+    if (!consent) setVisible(true)
   }, [])
 
   function handleAccept() {
@@ -22,31 +22,45 @@ export default function CookieConsent() {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-50 p-4 animate-slideUp"
-      style={{ pointerEvents: 'none' }}
+      className="fixed left-0 right-0 z-40 px-4"
+      style={{
+        bottom: 'calc(72px + env(safe-area-inset-bottom, 0px))',
+        pointerEvents: 'none',
+      }}
     >
       <div
-        className="max-w-lg mx-auto rounded-2xl px-5 py-4 flex items-center justify-between gap-4 glass-card"
+        className="max-w-[480px] mx-auto rounded-2xl px-5 py-4 flex items-center justify-between gap-4"
         style={{
           pointerEvents: 'auto',
-          backgroundColor: 'rgba(19, 19, 26, 0.85)',
-          backdropFilter: 'blur(20px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-          border: '1px solid rgba(255,255,255,0.08)',
+          background: 'var(--card)',
+          border: '1px solid var(--border)',
+          boxShadow: '0 6px 24px rgba(28, 27, 24, 0.12)',
         }}
       >
-        <p className="text-xs" style={{ color: 'rgba(240,240,244,0.6)' }}>
+        <p style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.4 }}>
           We use essential cookies only. No ad tracking. Ever.{' '}
-          <Link href="/cookies" style={{ color: '#7c6fff' }} className="underline underline-offset-2">
+          <Link
+            href="/cookies"
+            className="underline underline-offset-2"
+            style={{ color: 'var(--green)' }}
+          >
             Learn more
           </Link>
         </p>
         <button
           onClick={handleAccept}
-          className="shrink-0 px-4 py-2 rounded-xl text-xs font-semibold transition-all"
+          type="button"
+          className="shrink-0"
           style={{
-            backgroundColor: '#00e5a0',
-            color: '#0b0b0f',
+            padding: '8px 16px',
+            borderRadius: 12,
+            background: 'var(--dark)',
+            color: '#fff',
+            border: 'none',
+            fontFamily: 'var(--font-body), DM Sans, sans-serif',
+            fontSize: 12,
+            fontWeight: 500,
+            cursor: 'pointer',
           }}
         >
           Got it
