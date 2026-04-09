@@ -1,10 +1,9 @@
 'use client'
 
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { getScoreColor, getScoreLabel } from '@/lib/scoring'
-import Logo from '@/components/Logo'
+import { useSearchParams } from 'next/navigation'
+import { getDisplayScore, getScoreClass } from '@/lib/scoring'
 
 type SearchResult = {
   code: string
@@ -16,11 +15,6 @@ type SearchResult = {
   image_front_small_url: string
 }
 
-// Curated high-level categories shown on the search landing page. The `term`
-// is a search keyword that the API ILIKEs against name + category columns —
-// not a structured OFF tag. The OFF dump's categories_tags array is too
-// sparsely populated to use directly (many products have only free-text
-// category info), so a keyword match is more reliable.
 const FOOD_CATEGORIES: Array<{ emoji: string; label: string; term: string }> = [
   { emoji: '🍞', label: 'Bread & Bakery', term: 'bread' },
   { emoji: '🥣', label: 'Breakfast Cereals', term: 'cereal' },
@@ -31,8 +25,6 @@ const FOOD_CATEGORIES: Array<{ emoji: string; label: string; term: string }> = [
   { emoji: '🥤', label: 'Soft Drinks', term: 'drink' },
   { emoji: '☕', label: 'Coffee & Tea', term: 'coffee' },
   { emoji: '💧', label: 'Waters', term: 'water' },
-  { emoji: '🍺', label: 'Beer & Cider', term: 'beer' },
-  { emoji: '🍷', label: 'Wine', term: 'wine' },
   { emoji: '🍝', label: 'Pasta', term: 'pasta' },
   { emoji: '🍚', label: 'Rice', term: 'rice' },
   { emoji: '🥫', label: 'Canned Foods', term: 'canned' },
@@ -43,7 +35,6 @@ const FOOD_CATEGORIES: Array<{ emoji: string; label: string; term: string }> = [
   { emoji: '🍎', label: 'Fruits', term: 'fruit' },
   { emoji: '🧊', label: 'Frozen', term: 'frozen' },
   { emoji: '🍿', label: 'Snacks', term: 'snack' },
-  { emoji: '🍬', label: 'Sweets & Candy', term: 'candy' },
   { emoji: '🧂', label: 'Sauces', term: 'sauce' },
   { emoji: '🍯', label: 'Spreads & Jams', term: 'jam' },
   { emoji: '🌰', label: 'Nuts & Seeds', term: 'nuts' },
@@ -69,9 +60,10 @@ const BEAUTY_CATEGORIES: Array<{ emoji: string; label: string; term: string }> =
 ]
 
 export default function SearchPage() {
-  const router = useRouter()
+  const params = useSearchParams()
+  const initialTerm = params.get('term') || ''
   const [mode, setMode] = useState<'food' | 'cosmetic'>('food')
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState(initialTerm)
   const [selectedCategory, setSelectedCategory] = useState<{ label: string; term: string } | null>(null)
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
@@ -88,11 +80,11 @@ export default function SearchPage() {
       }
       setLoading(true)
       setHasSearched(true)
-      const params = new URLSearchParams({ type: mode, limit: '50' })
-      if (q.length >= 2) params.set('q', q)
-      if (category) params.set('category', category)
+      const sp = new URLSearchParams({ type: mode, limit: '50' })
+      if (q.length >= 2) sp.set('q', q)
+      if (category) sp.set('category', category)
       try {
-        const res = await fetch(`/api/search?${params.toString()}`)
+        const res = await fetch(`/api/search?${sp.toString()}`)
         const json = await res.json()
         setResults(json.products || [])
       } catch {
@@ -104,13 +96,12 @@ export default function SearchPage() {
     [mode]
   )
 
-  // Debounced free-text search
   useEffect(() => {
     const t = setTimeout(() => runSearch(query, selectedCategory?.term ?? null), 400)
     return () => clearTimeout(t)
   }, [query, selectedCategory, runSearch])
 
-  // Reset category when mode switches (food categories don't apply to cosmetics)
+  // Reset state when switching mode
   useEffect(() => {
     setSelectedCategory(null)
     setResults([])
@@ -132,223 +123,262 @@ export default function SearchPage() {
   const showCategoryList = !hasSearched && !loading
   const showResults = hasSearched
 
-  const headerTitle = useMemo(() => {
-    if (selectedCategory) return selectedCategory.label
-    if (query.length >= 2) return `“${query}”`
-    return mode === 'food' ? 'Browse Food' : 'Browse Beauty'
-  }, [selectedCategory, query, mode])
-
   return (
-    <div className="min-h-screen pb-24 relative">
-      {/* Header */}
-      <header className="sticky top-0 z-20 backdrop-blur-xl" style={{ background: 'rgba(11,11,15,0.85)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-        <div className="flex items-center justify-between px-5 py-4 max-w-lg mx-auto">
-          <button
-            onClick={() => router.back()}
-            className="p-2.5 rounded-xl glass-card"
-            aria-label="Back"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0f0f4" strokeWidth="2" strokeLinecap="round">
-              <path d="M19 12H5" />
-              <polyline points="12,19 5,12 12,5" />
-            </svg>
-          </button>
-          <Logo size="small" />
-          <div className="w-10" />
-        </div>
+    <div className="max-w-[480px] mx-auto pt-16 pb-24 animate-fadeIn">
+      <div className="px-5 pt-5 pb-3">
+        <h1 className="heading-display" style={{ fontSize: 22, marginBottom: 16 }}>
+          {selectedCategory ? selectedCategory.label : `Browse ${mode === 'food' ? 'food' : 'beauty'}`}
+        </h1>
+      </div>
 
-        {/* Search bar */}
-        <div className="px-5 pb-3 max-w-lg mx-auto">
-          <div className="relative">
-            <svg className="absolute left-4 top-1/2 -translate-y-1/2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.45)" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <input
-              type="text"
-              placeholder={mode === 'food' ? 'Search food products…' : 'Search beauty products…'}
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value)
-                if (e.target.value.length >= 2) setSelectedCategory(null)
-              }}
-              className="w-full pl-11 pr-10 py-3.5 rounded-xl text-sm outline-none glass-input"
-              style={{ color: '#f0f0f4' }}
-            />
-            {(query || selectedCategory) && (
+      {/* Search bar */}
+      <div className="px-5 pb-3 relative">
+        <span
+          style={{
+            position: 'absolute',
+            left: 34,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            color: 'var(--muted)',
+            fontSize: 16,
+            pointerEvents: 'none',
+          }}
+        >
+          🔍
+        </span>
+        <input
+          type="text"
+          placeholder={mode === 'food' ? 'Search food products…' : 'Search beauty products…'}
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value)
+            if (e.target.value.length >= 2) setSelectedCategory(null)
+          }}
+          className="w-full outline-none"
+          style={{
+            padding: '12px 40px 12px 42px',
+            borderRadius: 12,
+            border: '1px solid var(--border)',
+            background: 'var(--card)',
+            fontFamily: 'var(--font-body), DM Sans, sans-serif',
+            fontSize: 14,
+            color: 'var(--dark)',
+          }}
+        />
+        {(query || selectedCategory) && (
+          <button
+            onClick={clearFilters}
+            type="button"
+            aria-label="Clear"
+            style={{
+              position: 'absolute',
+              right: 30,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              background: 'transparent',
+              border: 'none',
+              color: 'var(--muted)',
+              cursor: 'pointer',
+              fontSize: 16,
+            }}
+          >
+            ×
+          </button>
+        )}
+      </div>
+
+      {/* Mode toggle */}
+      <div className="flex gap-2 px-5 pb-4">
+        <button
+          onClick={() => setMode('food')}
+          type="button"
+          className="flex-1"
+          style={{
+            padding: '10px 12px',
+            borderRadius: 12,
+            background: mode === 'food' ? 'var(--dark)' : 'var(--card)',
+            color: mode === 'food' ? '#fff' : 'var(--muted)',
+            border: `1px solid ${mode === 'food' ? 'var(--dark)' : 'var(--border)'}`,
+            fontSize: 13,
+            fontWeight: 500,
+            cursor: 'pointer',
+          }}
+        >
+          🥫 Food
+        </button>
+        <button
+          onClick={() => setMode('cosmetic')}
+          type="button"
+          className="flex-1"
+          style={{
+            padding: '10px 12px',
+            borderRadius: 12,
+            background: mode === 'cosmetic' ? 'var(--dark)' : 'var(--card)',
+            color: mode === 'cosmetic' ? '#fff' : 'var(--muted)',
+            border: `1px solid ${mode === 'cosmetic' ? 'var(--dark)' : 'var(--border)'}`,
+            fontSize: 13,
+            fontWeight: 500,
+            cursor: 'pointer',
+          }}
+        >
+          💄 Beauty
+        </button>
+      </div>
+
+      {/* Category list */}
+      {showCategoryList && (
+        <div className="px-5">
+          <div
+            className="pb-2 pl-1"
+            style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.07em', color: 'var(--muted)' }}
+          >
+            {mode === 'food' ? 'Food categories' : 'Beauty categories'}
+          </div>
+          <div className="card overflow-hidden">
+            {categories.map((cat, i) => (
+              <button
+                key={cat.term + i}
+                onClick={() => handleCategoryTap(cat)}
+                type="button"
+                className="w-full flex items-center gap-3 px-4 py-3.5"
+                style={{
+                  borderBottom: i < categories.length - 1 ? '1px solid var(--border)' : 'none',
+                  background: 'transparent',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                }}
+              >
+                <span style={{ fontSize: 22 }}>{cat.emoji}</span>
+                <span style={{ flex: 1, fontSize: 14, fontWeight: 500, color: 'var(--dark)' }}>
+                  {cat.label}
+                </span>
+                <span style={{ fontSize: 14, color: '#ccc' }}>›</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Results */}
+      {showResults && (
+        <div>
+          <div className="flex items-center justify-between px-5 pb-2 pt-1">
+            <div style={{ fontSize: 12, color: 'var(--muted)' }}>
+              {loading
+                ? 'Searching…'
+                : `${results.length} result${results.length === 1 ? '' : 's'}`}
+            </div>
+          </div>
+
+          {loading && (
+            <div className="px-10 py-10 text-center" style={{ color: 'var(--muted)' }}>
+              <div
+                className="mx-auto"
+                style={{
+                  width: 28,
+                  height: 28,
+                  border: '2px solid var(--border)',
+                  borderTopColor: 'var(--green)',
+                  borderRadius: '50%',
+                  animation: 'spin 0.8s linear infinite',
+                }}
+              />
+            </div>
+          )}
+
+          {!loading && results.length === 0 && (
+            <div className="px-10 py-12 text-center" style={{ color: 'var(--muted)' }}>
+              <div style={{ fontSize: 40, marginBottom: 12, opacity: 0.4 }}>🔎</div>
+              <div style={{ fontSize: 14, marginBottom: 16 }}>No products found</div>
               <button
                 onClick={clearFilters}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full"
-                aria-label="Clear"
+                type="button"
+                style={{
+                  fontSize: 13,
+                  fontWeight: 500,
+                  color: 'var(--green)',
+                  background: 'transparent',
+                  border: 'none',
+                  textDecoration: 'underline',
+                  cursor: 'pointer',
+                }}
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.5)" strokeWidth="2" strokeLinecap="round">
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
+                Clear and browse categories
               </button>
-            )}
-          </div>
-
-          {/* Food / Beauty toggle */}
-          <div className="flex gap-2 mt-3">
-            <button
-              onClick={() => setMode('food')}
-              className="flex-1 py-2.5 rounded-xl text-xs font-semibold transition-all"
-              style={{
-                background:
-                  mode === 'food'
-                    ? 'linear-gradient(135deg, rgba(0,229,160,0.18), rgba(26,176,110,0.12))'
-                    : 'rgba(255,255,255,0.03)',
-                color: mode === 'food' ? '#00e5a0' : 'rgba(240,240,244,0.5)',
-                border: `1px solid ${mode === 'food' ? 'rgba(0,229,160,0.35)' : 'rgba(255,255,255,0.06)'}`,
-              }}
-            >
-              🥫 Food
-            </button>
-            <button
-              onClick={() => setMode('cosmetic')}
-              className="flex-1 py-2.5 rounded-xl text-xs font-semibold transition-all"
-              style={{
-                background:
-                  mode === 'cosmetic'
-                    ? 'linear-gradient(135deg, rgba(168,85,247,0.18), rgba(124,111,255,0.12))'
-                    : 'rgba(255,255,255,0.03)',
-                color: mode === 'cosmetic' ? '#a855f7' : 'rgba(240,240,244,0.5)',
-                border: `1px solid ${mode === 'cosmetic' ? 'rgba(168,85,247,0.35)' : 'rgba(255,255,255,0.06)'}`,
-              }}
-            >
-              💄 Beauty
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <main className="px-5 pt-4 max-w-lg mx-auto relative z-10">
-        {/* Landing: vertical category list */}
-        {showCategoryList && (
-          <section>
-            <h2 className="text-sm font-semibold mb-3" style={{ color: 'rgba(240,240,244,0.55)' }}>
-              {mode === 'food' ? 'Food categories' : 'Beauty categories'}
-            </h2>
-            <div className="space-y-1.5">
-              {categories.map((cat) => (
-                <button
-                  key={cat.term}
-                  onClick={() => handleCategoryTap(cat)}
-                  className="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl glass-card text-left transition-all active:scale-[0.99] hover:bg-white/5"
-                >
-                  <span className="text-2xl shrink-0">{cat.emoji}</span>
-                  <span className="flex-1 text-sm font-medium" style={{ color: '#f0f0f4' }}>
-                    {cat.label}
-                  </span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(240,240,244,0.35)" strokeWidth="2" strokeLinecap="round">
-                    <polyline points="9,18 15,12 9,6" />
-                  </svg>
-                </button>
-              ))}
             </div>
-          </section>
-        )}
+          )}
 
-        {/* Results section */}
-        {showResults && (
-          <section>
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-semibold truncate" style={{ color: '#f0f0f4' }}>
-                {headerTitle}
-              </h2>
-              {!loading && (
-                <span className="text-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>
-                  {results.length} result{results.length !== 1 ? 's' : ''}
-                </span>
-              )}
-            </div>
-
-            {loading && (
-              <div className="py-10 text-center">
-                <div
-                  className="w-6 h-6 border-2 border-t-transparent rounded-full animate-spin mx-auto"
-                  style={{ borderColor: '#00e5a0', borderTopColor: 'transparent' }}
-                />
-              </div>
-            )}
-
-            {!loading && results.length === 0 && (
-              <div className="py-10 text-center">
-                <p className="text-sm" style={{ color: 'rgba(240,240,244,0.5)' }}>
-                  No products found
-                </p>
-                <button
-                  onClick={clearFilters}
-                  className="mt-3 text-xs font-medium underline"
-                  style={{ color: '#00e5a0' }}
+          {!loading &&
+            results.map((p) => {
+              const cls = getScoreClass(p.quality_score ?? null)
+              const color =
+                cls === 'score-good'
+                  ? 'var(--green)'
+                  : cls === 'score-fair'
+                  ? 'var(--amber)'
+                  : 'var(--red)'
+              return (
+                <Link
+                  key={p.code}
+                  href={`/result/${p.code}?source=search`}
+                  className="flex items-center gap-3 px-5 py-3.5"
+                  style={{ borderBottom: '1px solid var(--border)' }}
                 >
-                  Clear and browse categories
-                </button>
-              </div>
-            )}
-
-            {!loading && results.length > 0 && (
-              <div className="space-y-1.5">
-                {results.map((p) => (
-                  <Link
-                    key={p.code}
-                    href={`/result/${p.code}?source=search`}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl glass-card transition-all hover:bg-white/5"
+                  <div
+                    className="flex items-center justify-center flex-shrink-0"
+                    style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: 10,
+                      background: 'var(--cream)',
+                      border: '1px solid var(--border)',
+                      fontSize: 20,
+                    }}
                   >
                     {p.image_front_small_url ? (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={p.image_front_small_url}
                         alt=""
-                        className="w-12 h-12 rounded-lg object-cover shrink-0"
+                        style={{ width: '100%', height: '100%', borderRadius: 10, objectFit: 'cover' }}
                       />
                     ) : (
-                      <div
-                        className="w-12 h-12 rounded-lg flex items-center justify-center text-xl shrink-0"
-                        style={{ backgroundColor: 'rgba(28,28,38,0.8)' }}
-                      >
-                        {mode === 'cosmetic' ? '💄' : '🛒'}
-                      </div>
+                      <span>{mode === 'cosmetic' ? '💄' : '🛒'}</span>
                     )}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate" style={{ color: '#f0f0f4' }}>
-                        {p.product_name || 'Unknown Product'}
-                      </p>
-                      <p className="text-xs truncate" style={{ color: 'rgba(240,240,244,0.45)' }}>
-                        {p.brands || 'Unknown Brand'}
-                      </p>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div
+                      style={{
+                        fontSize: 14,
+                        fontWeight: 500,
+                        color: 'var(--dark)',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    >
+                      {p.product_name || 'Unknown product'}
                     </div>
-                    {typeof p.quality_score === 'number' ? (
-                      <div className="flex flex-col items-end shrink-0">
-                        <span
-                          className="text-xs font-bold px-2.5 py-1 rounded-md whitespace-nowrap"
-                          style={{
-                            backgroundColor: `${getScoreColor(p.quality_score)}22`,
-                            color: getScoreColor(p.quality_score),
-                            border: `1px solid ${getScoreColor(p.quality_score)}55`,
-                          }}
-                        >
-                          {p.quality_score.toFixed(1)}
-                        </span>
-                        <span className="text-[10px] mt-0.5" style={{ color: 'rgba(240,240,244,0.4)' }}>
-                          {getScoreLabel(p.quality_score)}
-                        </span>
-                      </div>
-                    ) : (
-                      <span
-                        className="text-[11px] px-2 py-0.5 rounded-full shrink-0"
-                        style={{ backgroundColor: 'rgba(255,255,255,0.04)', color: 'rgba(240,240,244,0.4)' }}
-                      >
-                        no score
-                      </span>
-                    )}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </section>
-        )}
-      </main>
+                    <div style={{ fontSize: 12, color: 'var(--muted)' }}>{p.brands || 'Unknown brand'}</div>
+                  </div>
+                  {typeof p.quality_score === 'number' ? (
+                    <div className="heading-display" style={{ fontSize: 22, color }}>
+                      {getDisplayScore(p.quality_score)}
+                    </div>
+                  ) : (
+                    <span className="chip chip-gray">no score</span>
+                  )}
+                </Link>
+              )
+            })}
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   )
 }

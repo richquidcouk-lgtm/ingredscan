@@ -119,7 +119,7 @@ export default function HomePage() {
           {greeting()}{user ? `, ${userName}` : ''}
         </div>
         <h1 className="heading-display" style={{ fontSize: 28, letterSpacing: '-0.025em' }}>
-          What are you <em style={{ color: 'var(--green)' }}>eating</em> today?
+          Know <em style={{ color: 'var(--green)' }}>what&apos;s</em> in your products
         </h1>
       </div>
 

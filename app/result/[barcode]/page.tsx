@@ -3,36 +3,19 @@
 import { useEffect, useState, useRef } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
-import { QualityScoreCard } from '@/components/ScoreCard'
-import ProcessingLevelCard from '@/components/ProcessingLevelCard'
-import NutriScoreBar from '@/components/NutriScoreBar'
-import RAGIndicator from '@/components/RAGIndicator'
-import AdditiveDetail from '@/components/AdditiveDetail'
-import NutritionBreakdown from '@/components/NutritionBreakdown'
-import SwapCard from '@/components/SwapCard'
-import ShareButton from '@/components/ShareCard'
-import ProductReport from '@/components/ProductReport'
-import SkeletonResult from '@/components/SkeletonResult'
+import { supabase, type Product, type NutritionData, type AdditiveEntry } from '@/lib/supabase'
+import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
+import { resolveAdditives, calculateQualityBreakdown, getDisplayScore, getScoreClass } from '@/lib/scoring'
+import { detectSpecialCategory } from '@/lib/specialCategories'
+import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
+import { cacheProductOffline, getOfflineProduct } from '@/lib/offlineCache'
 import CosmeticResult from '@/components/CosmeticResult'
-import FavouriteButton from '@/components/FavouriteButton'
 import InfantFormulaResult from '@/components/InfantFormulaResult'
 import MedicineResult from '@/components/MedicineResult'
 import SupplementResult from '@/components/SupplementResult'
-import { calculateCosmeticScore } from '@/lib/cosmeticScoring'
-import { getNovaEmoji, getNovaLabel, resolveAdditives } from '@/lib/scoring'
-import ScoreBreakdown from '@/components/ScoreBreakdown'
-import AllergenAlert from '@/components/AllergenAlert'
-import RetailerInfo from '@/components/RetailerInfo'
-import { getRegulatoryRef } from '@/lib/regulatoryRefs'
-import { detectSpecialCategory } from '@/lib/specialCategories'
-import { supabase, type Product, type NutritionData } from '@/lib/supabase'
-import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
-import { cacheProductOffline, getOfflineProduct } from '@/lib/offlineCache'
-import { useMarket } from '@/components/MarketProvider'
-import ComingSoonSwaps from '@/components/ComingSoonSwaps'
-import Logo from '@/components/Logo'
-import swapsData from '@/data/swaps.json'
+import FavouriteButton from '@/components/FavouriteButton'
+
+type ResolvedAdditive = ReturnType<typeof resolveAdditives>[number]
 
 export default function ResultPage() {
   const params = useParams()
@@ -41,78 +24,58 @@ export default function ResultPage() {
   const barcode = params.barcode as string
   const isNewScan = searchParams.get('source') === 'scan'
   const hasRecorded = useRef(false)
+
   const [product, setProduct] = useState<Product | null>(null)
-  const [cosmeticScore, setCosmeticScore] = useState<any>(null)
+  const [cosmeticScore, setCosmeticScore] = useState<ReturnType<typeof calculateCosmeticScore> | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [matchedSwaps, setMatchedSwaps] = useState<any[]>([])
-  const { config } = useMarket()
+  const [openAdditive, setOpenAdditive] = useState<string | null>(null)
 
   useEffect(() => {
     if (!barcode) return
     fetchProduct()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [barcode])
 
   async function fetchProduct() {
     setLoading(true)
     setError(null)
 
+    // Try Supabase cache first
     try {
-      const { data: cached } = await supabase
-        .from('products')
-        .select('*')
-        .eq('barcode', barcode)
-        .single()
-
+      const { data: cached } = await supabase.from('products').select('*').eq('barcode', barcode).single()
       if (cached) {
         setProduct(cached as Product)
         cacheProductOffline(cached)
         if (cached.product_type === 'cosmetic' && cached.inci_ingredients) {
-          const score = calculateCosmeticScore(cached, cached.inci_ingredients)
-          setCosmeticScore(score)
+          setCosmeticScore(calculateCosmeticScore(cached, cached.inci_ingredients))
         }
-        findSwaps()
         setLoading(false)
         recordScan()
         return
       }
     } catch {
-      // Not cached in Supabase, proceed to API
+      // not cached
     }
 
     try {
       const res = await fetch(`/api/scan?barcode=${barcode}`)
       if (!res.ok) {
-        if (res.status === 404) {
-          // Try offline cache before showing error
-          const offline = getOfflineProduct(barcode)
-          if (offline) {
-            setProduct(offline as Product)
-            setLoading(false)
-            return
-          }
-          setError('not_found')
-        } else {
-          const offline = getOfflineProduct(barcode)
-          if (offline) {
-            setProduct(offline as Product)
-            setLoading(false)
-            return
-          }
-          setError('api_error')
+        const offline = getOfflineProduct(barcode)
+        if (offline) {
+          setProduct(offline as Product)
+          setLoading(false)
+          return
         }
+        setError(res.status === 404 ? 'not_found' : 'api_error')
         setLoading(false)
         return
       }
-
       const data = await res.json()
       setProduct(data as Product)
       cacheProductOffline(data)
-      if (data.cosmetic_score) setCosmeticScore(data.cosmetic_score)
-      findSwaps()
       recordScan()
     } catch {
-      // Network error — try offline cache
       const offline = getOfflineProduct(barcode)
       if (offline) {
         setProduct(offline as Product)
@@ -121,15 +84,12 @@ export default function ResultPage() {
       }
       setError('api_error')
     }
-
     setLoading(false)
   }
 
   async function recordScan() {
-    // Only record if this is a fresh scan (not from history/recents) and hasn't been recorded yet
     if (!isNewScan || hasRecorded.current) return
     hasRecorded.current = true
-
     incrementAnonScanCount()
     try {
       const { data: { user } } = await supabase.auth.getUser()
@@ -141,73 +101,24 @@ export default function ResultPage() {
         })
       }
     } catch {
-      // Don't block the result page if recording fails
+      // non-blocking
     }
   }
 
-  function findSwaps() {
-    const marketCode = config.code
-    const productName = (product?.name || '').toLowerCase()
-
-    // Only match swaps if the product name directly contains a keyword
-    // Category tags are too broad and cause cross-category matches
-    let bestMatch: any[] | null = null
-    let bestScore = 0
-
-    for (const group of swapsData) {
-      let nameMatches = 0
-
-      for (const kw of group.keywords as string[]) {
-        if (productName.includes(kw.toLowerCase())) {
-          nameMatches++
-        }
-      }
-
-      // Require at least one keyword match in the product name
-      if (nameMatches > 0 && nameMatches > bestScore) {
-        bestScore = nameMatches
-        bestMatch = group.swaps.filter((s: any) => !s.market || s.market === marketCode)
-      }
-    }
-
-    if (bestMatch && bestScore > 0) {
-      setMatchedSwaps(bestMatch)
-    } else {
-      setMatchedSwaps([])
-    }
-  }
-
-  function scrollToSection(id: string) {
-    const el = document.getElementById(id)
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
-  if (loading) {
-    return (
-      <div className="min-h-screen relative pb-20">
-        <header className="flex items-center justify-between px-5 py-4 max-w-lg mx-auto relative z-10">
-          <button onClick={() => router.back()} className="p-2.5 rounded-xl glass-card">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0f0f4" strokeWidth="2" strokeLinecap="round">
-              <path d="M19 12H5" /><polyline points="12,19 5,12 12,5" />
-            </svg>
-          </button>
-          <div className="w-10" />
-        </header>
-        <SkeletonResult />
-      </div>
-    )
-  }
+  if (loading) return <ResultSkeleton onBack={() => router.back()} />
 
   if (error === 'not_found') {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative pb-20">
-        <div className="text-5xl mb-4">🔍</div>
-        <h2 className="text-xl font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>Product not found</h2>
-        <p className="text-sm mb-6" style={{ color: 'rgba(240,240,244,0.4)' }}>
+      <div className="max-w-[480px] mx-auto pt-20 pb-24 px-6 text-center animate-fadeIn">
+        <div style={{ fontSize: 48, marginBottom: 16, opacity: 0.5 }}>🔍</div>
+        <h2 className="heading-display" style={{ fontSize: 22, marginBottom: 8 }}>
+          Product not found
+        </h2>
+        <p style={{ fontSize: 14, color: 'var(--muted)', marginBottom: 24, lineHeight: 1.5 }}>
           We couldn&apos;t find this product in our database. It may not be listed yet.
         </p>
-        <Link href="/scan" className="btn-glow px-6 py-3 rounded-xl text-sm font-medium" style={{ color: '#0b0b0f' }}>
-          Scan Another Product
+        <Link href="/scan" className="btn-primary inline-block" style={{ maxWidth: 240 }}>
+          Scan another product
         </Link>
       </div>
     )
@@ -215,369 +126,671 @@ export default function ResultPage() {
 
   if (error === 'api_error' || !product) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative pb-20">
-        <div className="text-5xl mb-4">⚠</div>
-        <h2 className="text-xl font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>Something went wrong</h2>
-        <p className="text-sm mb-6" style={{ color: 'rgba(240,240,244,0.4)' }}>
-          We couldn&apos;t fetch the product data. Please try again.
+      <div className="max-w-[480px] mx-auto pt-20 pb-24 px-6 text-center animate-fadeIn">
+        <div style={{ fontSize: 48, marginBottom: 16, opacity: 0.5 }}>⚠</div>
+        <h2 className="heading-display" style={{ fontSize: 22, marginBottom: 8 }}>
+          Something went wrong
+        </h2>
+        <p style={{ fontSize: 14, color: 'var(--muted)', marginBottom: 24 }}>
+          We couldn&apos;t fetch the product. Please try again.
         </p>
-        <button onClick={fetchProduct} className="px-6 py-3 rounded-xl text-sm font-medium" style={{ backgroundColor: '#7c6fff', color: '#fff' }}>
+        <button onClick={fetchProduct} type="button" className="btn-primary" style={{ maxWidth: 240 }}>
           Retry
         </button>
       </div>
     )
   }
 
-  // Render cosmetic result if product is a cosmetic
+  // Special-category routes keep their existing dedicated views
   if (product.product_type === 'cosmetic') {
-    return (
-      <CosmeticResult
-        product={product}
-        cosmeticScore={cosmeticScore}
-        onBack={() => router.back()}
-      />
-    )
+    return <CosmeticResult product={product} cosmeticScore={cosmeticScore ?? undefined} onBack={() => router.back()} />
   }
-
-  // Special category detection
   const specialCategory = detectSpecialCategory(product)
+  if (specialCategory === 'infant_formula') return <InfantFormulaResult product={product} onBack={() => router.back()} />
+  if (specialCategory === 'medicine')      return <MedicineResult     product={product} onBack={() => router.back()} />
+  if (specialCategory === 'supplement')    return <SupplementResult   product={product} onBack={() => router.back()} />
 
-  if (specialCategory === 'infant_formula') {
-    return <InfantFormulaResult product={product} onBack={() => router.back()} />
-  }
-  if (specialCategory === 'medicine') {
-    return <MedicineResult product={product} onBack={() => router.back()} />
-  }
-  if (specialCategory === 'supplement') {
-    return <SupplementResult product={product} onBack={() => router.back()} />
-  }
-
+  // Standard food product
   const nutrition = (product.nutrition || {}) as NutritionData
-  // Re-resolve additives from our local database to get full detail
-  // (cached products may have older additive data without descriptions)
   const rawAdditives = product.additives || []
-  const additives = rawAdditives.length > 0
-    ? resolveAdditives(rawAdditives.map((a: any) => `en:${a.code || a}`))
+  const additives: ResolvedAdditive[] = rawAdditives.length > 0
+    ? resolveAdditives(rawAdditives.map((a: AdditiveEntry) => `en:${a.code || ''}`))
     : []
-  const flags = detectFlagsFromProduct(product)
+
+  // Recompute the breakdown so we can show pillar bars. lib/scoring is the
+  // single source of truth — feed it the same shape we feed at import time.
+  const nutriments: Record<string, number> = {}
+  if (nutrition.energy != null) nutriments['energy_100g'] = nutrition.energy
+  if (nutrition.fat != null) nutriments['fat_100g'] = nutrition.fat
+  if (nutrition.saturated_fat != null) nutriments['saturated-fat_100g'] = nutrition.saturated_fat
+  if (nutrition.carbs != null) nutriments['carbohydrates_100g'] = nutrition.carbs
+  if (nutrition.sugars != null) nutriments['sugars_100g'] = nutrition.sugars
+  if (nutrition.fibre != null) nutriments['fiber_100g'] = nutrition.fibre
+  if (nutrition.protein != null) nutriments['proteins_100g'] = nutrition.protein
+  if (nutrition.salt != null) nutriments['salt_100g'] = nutrition.salt
+
+  const breakdown = calculateQualityBreakdown({
+    nova_group: product.nova_score,
+    nutriscore_grade: product.nutriscore_grade,
+    additives_tags: rawAdditives.map((a) => `en:${(a.code || '').toLowerCase()}`),
+    nutriments,
+    ingredients_text: product.ingredients,
+  })
+
+  const displayScore = getDisplayScore(product.quality_score)
+  const scoreClass = getScoreClass(product.quality_score)
+  const scoreColor =
+    scoreClass === 'score-good' ? '#3d8c5e' : scoreClass === 'score-fair' ? '#fb923c' : '#f87171'
+  const verdict =
+    scoreClass === 'score-good' ? 'Good — recommended' : scoreClass === 'score-fair' ? 'Fair — eat in moderation' : 'Poor — not recommended'
+
+  // Pillar bars 0-100
+  const pillarNutrition = Math.round((breakdown.nutritional / 5) * 100)
+  const pillarAdditives = Math.round((breakdown.additives / 2) * 100)
+  const pillarIngredients = Math.round((breakdown.processing / 2.5) * 100)
+
+  // Parse ingredients into a list
+  const ingredientList = (product.ingredients || '')
+    .split(/[,;]+/)
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0)
+    .slice(0, 25)
+
+  // Mark ingredient flagged status by checking against additive E-codes
+  const flaggedCodes = new Set(additives.filter((a) => a.risk === 'high' || a.risk === 'medium').map((a) => a.code.toUpperCase()))
+  const flaggedCodesArr = Array.from(flaggedCodes)
+  function ingredientFlag(ing: string): 'clean' | 'flagged' | 'unknown' {
+    const u = ing.toUpperCase()
+    for (const code of flaggedCodesArr) {
+      if (u.includes(code)) return 'flagged'
+    }
+    if (/MODIFIED|HYDROGENATED|GLUCOSE-FRUCTOSE|HIGH-FRUCTOSE|MALTODEXTRIN/i.test(ing)) return 'flagged'
+    if (/[Ee]\d{3}/.test(ing) && !flaggedCodesArr.length) return 'unknown'
+    return 'clean'
+  }
+
+  // Nutriscore active letter
+  const nsLetter = (product.nutriscore_grade || '').toLowerCase()
 
   return (
-    <div className="min-h-screen pb-28 relative">
-      {/* Sticky header bar */}
-      <header
-        className="sticky top-0 z-30 flex items-center justify-between px-5 py-3 max-w-lg mx-auto"
+    <div className="max-w-[480px] mx-auto pb-32 animate-fadeIn" style={{ paddingTop: 0 }}>
+      {/* Top bar */}
+      <div
+        className="sticky top-0 z-30 flex items-center justify-between px-5 py-3.5"
         style={{
-          background: 'rgba(11,11,15,0.85)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
+          background: 'rgba(245, 241, 234, 0.95)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          borderBottom: '1px solid var(--border)',
         }}
       >
-        <button onClick={() => router.back()} className="p-2 rounded-xl glass-card">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0f0f4" strokeWidth="2" strokeLinecap="round">
-            <path d="M19 12H5" /><polyline points="12,19 5,12 12,5" />
+        <button
+          onClick={() => router.back()}
+          type="button"
+          className="rounded-full flex items-center justify-center"
+          style={{
+            width: 34,
+            height: 34,
+            border: '1px solid var(--border)',
+            background: 'transparent',
+            color: 'var(--dark)',
+            cursor: 'pointer',
+          }}
+          aria-label="Back"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
           </svg>
         </button>
-        <Logo size="small" />
-        <div className="flex items-center gap-1.5">
+        <span style={{ fontSize: 13, color: 'var(--muted)' }}>Scan result</span>
+        <div className="flex items-center gap-2">
           <FavouriteButton barcode={barcode} />
-          <ShareButton product={product} />
         </div>
-      </header>
-
-      <div className="px-5 max-w-lg mx-auto space-y-4 relative z-10">
-        {/* 1. Product card */}
-        <div className="rounded-2xl p-5 animate-fadeUp glass-card">
-          <div className="flex items-start gap-4">
-            {product.image_url ? (
-              <div className="relative w-20 h-20 rounded-2xl overflow-hidden shrink-0" style={{ backgroundColor: '#1c1c26' }}>
-                <Image src={product.image_url} alt={product.name} fill className="object-cover" unoptimized />
-              </div>
-            ) : (
-              <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-3xl shrink-0" style={{ backgroundColor: 'rgba(28,28,38,0.8)' }}>
-                {getCategoryEmoji(product.category || '')}
-              </div>
-            )}
-            <div className="flex-1 min-w-0">
-              <h2 className="text-lg font-bold leading-tight heading-display" style={{ color: '#f0f0f4', letterSpacing: '-0.03em' }}>
-                {product.name}
-              </h2>
-              {product.name && /[éèêëàâäùûüôöîïçñæœß]/.test(product.name) && (
-                <p className="text-xs mt-1" style={{ color: 'rgba(240,240,244,0.45)' }}>
-                  Name shown in original language — English not available for this product.
-                </p>
-              )}
-              <p className="text-sm mt-1" style={{ color: 'rgba(240,240,244,0.4)' }}>{product.brand}</p>
-              {flags.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 mt-2.5">
-                  {flags.map((flag) => (
-                    <span key={flag} className="px-2 py-0.5 rounded-full text-[11px] font-medium" style={{ backgroundColor: '#ff5a5a15', color: '#ff5a5a', border: '1px solid rgba(255,90,90,0.1)' }}>
-                      {flag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* 1b. Allergen alert */}
-        <AllergenAlert ingredientsText={product.ingredients || ''} />
-
-        {/* 2. Score section */}
-        <div className="flex gap-3 animate-fadeUp" style={{ animationDelay: '50ms' }}>
-          <QualityScoreCard score={product.quality_score} />
-          <ProcessingLevelCard
-            novaScore={product.nova_score}
-            novaSource={(product as any).nova_source}
-          />
-        </div>
-
-        {/* 2b. Score breakdown */}
-        {(product as any).quality_breakdown ? (
-          <ScoreBreakdown breakdown={(product as any).quality_breakdown} />
-        ) : null}
-
-        {/* 3. Quick flags — anchor links and NOVA chips */}
-        <div className="flex flex-wrap gap-2 animate-fadeUp" style={{ animationDelay: '80ms' }}>
-          {/* NOVA chip — green for 1-2, amber for 3-4 */}
-          {product.nova_score <= 2 && (
-            <span className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium"
-              style={{ backgroundColor: 'rgba(34,199,126,0.08)', color: '#22c77e', border: '1px solid rgba(34,199,126,0.12)' }}>
-              {getNovaEmoji(product.nova_score)} {getNovaLabel(product.nova_score)}
-            </span>
-          )}
-          {product.nova_score >= 3 && (
-            <span className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium"
-              style={{ backgroundColor: 'rgba(245,166,35,0.08)', color: '#f5a623', border: '1px solid rgba(245,166,35,0.12)' }}>
-              {getNovaEmoji(product.nova_score)} {getNovaLabel(product.nova_score)}
-            </span>
-          )}
-          {additives.length > 0 && (
-            <button
-              onClick={() => scrollToSection('section-additives')}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium transition-all active:scale-95"
-              style={{ backgroundColor: 'rgba(255,90,90,0.08)', color: '#ff5a5a', border: '1px solid rgba(255,90,90,0.12)' }}
-            >
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <polyline points="6,9 12,15 18,9" />
-              </svg>
-              Additives ({additives.length})
-            </button>
-          )}
-        </div>
-
-        {/* 4. Alternative Products — hidden for high-scoring products */}
-        {product.quality_score < 9 && (
-          <div className="animate-fadeUp" style={{ animationDelay: '100ms' }}>
-            <h3 className="text-sm font-semibold mb-1" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
-              Higher-Scoring Alternatives
-            </h3>
-            <p className="text-[11px] mb-3" style={{ color: 'rgba(240,240,244,0.35)' }}>
-              Products that score higher on IngredScan&apos;s criteria. Not affiliated with any retailer. Availability may vary.
-            </p>
-            {!config.supported ? (
-              <ComingSoonSwaps />
-            ) : matchedSwaps.length > 0 ? (
-              <div className="space-y-2">
-                {matchedSwaps.map((swap, i) => (
-                  <SwapCard key={i} swap={swap} currentScore={product.quality_score} index={i} />
-                ))}
-              </div>
-            ) : (
-              <div className="rounded-2xl p-5 glass-card">
-                <p className="text-sm mb-1" style={{ color: 'rgba(240,240,244,0.45)' }}>
-                  No alternatives available for this specific product category yet.
-                </p>
-                <p className="text-xs" style={{ color: 'rgba(240,240,244,0.35)' }}>
-                  We only show alternatives from the same product type — never from a different category. We&apos;re expanding our database regularly.
-                </p>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* 5. Nutrition Breakdown — Negatives & Positives */}
-        <div className="animate-fadeUp" style={{ animationDelay: '150ms' }}>
-          <NutritionBreakdown nutrition={nutrition} additiveCount={additives.length} />
-        </div>
-
-        {/* 6. Additives section */}
-        <div id="section-additives" className="animate-fadeUp" style={{ animationDelay: '180ms' }}>
-          <h3 className="text-sm font-semibold mb-3" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
-            Additives
-          </h3>
-          {additives.length === 0 ? (
-            <div className="rounded-2xl p-5 text-center glass-card" style={{ borderColor: 'rgba(0,229,160,0.15)' }}>
-              <p className="text-sm font-medium" style={{ color: '#22c77e' }}>
-                No additives detected
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-1.5">
-              {additives.map((additive, i) => (
-                <AdditiveDetail key={additive.code} additive={additive} index={i} />
-              ))}
-              {(() => {
-                const reg = getRegulatoryRef(config.code, 'food')
-                return (
-                  <a
-                    href={reg.primaryUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-xs text-center pt-3 transition-colors"
-                    style={{ color: 'rgba(124,111,255,0.6)' }}
-                  >
-                    Risk levels based on {reg.primaryRef} →
-                  </a>
-                )
-              })()}
-            </div>
-          )}
-        </div>
-
-        {/* 7. RAG Indicator */}
-        <div className="animate-fadeUp" style={{ animationDelay: '210ms' }}>
-          <RAGIndicator score={product.quality_score} />
-        </div>
-
-        {/* 8. Nutri-Score bar */}
-        <div className="animate-fadeUp" style={{ animationDelay: '230ms' }}>
-          <h3 className="text-sm font-semibold mb-3" style={{ color: '#f0f0f4', letterSpacing: '-0.02em' }}>
-            Nutri-Score
-          </h3>
-          <NutriScoreBar grade={product.nutriscore_grade || ''} />
-        </div>
-
-        {/* 8. Ingredients */}
-        {product.ingredients && (
-          <div className="rounded-2xl p-5 glass-card animate-fadeUp" style={{ animationDelay: '300ms' }}>
-            <h3 className="text-xs uppercase tracking-wider mb-3 font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
-              Ingredients
-            </h3>
-            <p className="text-sm leading-relaxed" style={{ color: 'rgba(240,240,244,0.65)' }}>
-              {product.ingredients}
-            </p>
-            {product.ingredients && /[éèêëàâäùûüôöîïçñæœß]/.test(product.ingredients) && (
-              <p className="text-xs mt-2" style={{ color: 'rgba(240,240,244,0.45)' }}>
-                Ingredients shown in original language — English not available for this product.
-              </p>
-            )}
-          </div>
-        )}
-
-        {/* 9. Retailer info + where did you buy */}
-        <div className="animate-fadeUp" style={{ animationDelay: '340ms' }}>
-          <RetailerInfo
-            barcode={barcode}
-            offRetailers={(product as any).retailer_info?.retailers || []}
-          />
-        </div>
-
-        {/* 10. Data source + confidence */}
-        <div
-          className="rounded-xl px-4 py-3 text-center animate-fadeUp glass-subtle"
-          style={{ borderColor: 'rgba(124,111,255,0.15)', animationDelay: '350ms' }}
-        >
-          <p className="text-xs font-medium" style={{ color: '#7c6fff' }}>
-            {product.data_source} · {product.confidence}% match
-          </p>
-          <p className="text-[11px] mt-1" style={{ color: 'rgba(240,240,244,0.35)' }}>
-            Sourced from community databases. Always check the physical label.
-          </p>
-        </div>
-
-        {/* Informational disclaimer */}
-        <p className="text-[11px] text-center leading-relaxed animate-fadeUp" style={{ color: 'rgba(240,240,244,0.35)', animationDelay: '360ms' }}>
-          Scores are for informational purposes only and do not constitute medical, dietary, or clinical advice. Consult a qualified professional for health decisions.
-        </p>
-
-        {/* Low confidence warning */}
-        {(product as any)?.warning && (
-          <div
-            className="rounded-xl px-4 py-3 animate-fadeUp flex items-center gap-2.5"
-            style={{
-              backgroundColor: 'rgba(245,166,35,0.08)',
-              border: '1px solid rgba(245,166,35,0.15)',
-              animationDelay: '360ms',
-            }}
-          >
-            <span className="text-base">⚠</span>
-            <p className="text-xs" style={{ color: '#f5a623' }}>
-              {(product as any)?.warning}
-            </p>
-          </div>
-        )}
-
-        {/* 10. Share banner — every 10th scan */}
-        {typeof window !== 'undefined' && (() => {
-          try {
-            const count = JSON.parse(localStorage.getItem('ingredscan_anon_scans') || '{}').count || 0
-            if (count > 0 && count % 10 === 0) {
-              return (
-                <div className="rounded-2xl p-5 text-center glass-card animate-fadeUp" style={{ animationDelay: '380ms' }}>
-                  <p className="text-sm font-semibold mb-1" style={{ color: '#f0f0f4' }}>Enjoying IngredScan?</p>
-                  <p className="text-xs mb-3" style={{ color: 'rgba(240,240,244,0.4)' }}>Tell a friend — it helps us grow</p>
-                  <button
-                    onClick={() => {
-                      if (navigator.share) {
-                        navigator.share({ title: 'IngredScan', text: 'Scan any food or cosmetic product to see what\u2019s really in it', url: 'https://www.ingredscan.com' })
-                      } else {
-                        navigator.clipboard.writeText('https://www.ingredscan.com')
-                        alert('Link copied!')
-                      }
-                    }}
-                    className="px-5 py-2.5 rounded-xl text-xs font-medium transition-all active:scale-95"
-                    style={{ backgroundColor: 'rgba(0,229,160,0.1)', color: '#00e5a0', border: '1px solid rgba(0,229,160,0.15)' }}
-                  >
-                    Share the app
-                  </button>
-                </div>
-              )
-            }
-          } catch {}
-          return null
-        })()}
-
-        {/* 11. Report an issue */}
-        <ProductReport barcode={barcode} />
       </div>
 
-      {/* Sticky bottom: Scan Another Product */}
+      {/* Product hero */}
+      <div className="px-5 pt-5 pb-4 flex gap-3.5 items-start">
+        <div
+          className="flex items-center justify-center flex-shrink-0"
+          style={{
+            width: 68,
+            height: 68,
+            borderRadius: 12,
+            background: 'var(--cream)',
+            border: '1px solid var(--border)',
+            fontSize: 26,
+          }}
+        >
+          {product.image_url ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={product.image_url} alt="" style={{ width: '100%', height: '100%', borderRadius: 12, objectFit: 'cover' }} />
+          ) : (
+            <span>{getCategoryEmoji(product.category || '')}</span>
+          )}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="heading-display" style={{ fontSize: 19, lineHeight: 1.2, marginBottom: 3 }}>
+            {product.name || 'Unknown product'}
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 8 }}>
+            {[product.brand, `Barcode ${product.barcode}`].filter(Boolean).join(' · ')}
+          </div>
+          <div className="flex gap-1.5 flex-wrap">
+            {product.category?.split(',')[0] && (
+              <span className="chip chip-gray">{product.category.split(',')[0].trim()}</span>
+            )}
+            {breakdown.organic > 0 && <span className="chip chip-green">Organic</span>}
+          </div>
+        </div>
+      </div>
+
+      {/* Score card (dark) */}
       <div
-        className="fixed bottom-0 left-0 right-0 z-50"
+        className="mx-5 mb-5 relative overflow-hidden"
         style={{
-          background: 'rgba(11,11,15,0.9)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          borderTop: '1px solid rgba(255,255,255,0.08)',
+          background: 'var(--dark)',
+          borderRadius: 20,
+          padding: 22,
+          color: '#fff',
         }}
       >
-        <div className="max-w-lg mx-auto px-5 py-3">
-          <Link
-            href="/scan"
-            className="block w-full text-center py-3.5 rounded-xl text-sm font-semibold btn-glow transition-all"
-            style={{ color: '#0b0b0f' }}
-          >
-            Scan Another Product
-          </Link>
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: -30,
+            right: -30,
+            width: 130,
+            height: 130,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.03)',
+          }}
+        />
+        <div className="flex items-start justify-between mb-5">
+          <div>
+            <div
+              style={{
+                fontSize: 10,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.4)',
+                marginBottom: 5,
+              }}
+            >
+              Quality Score
+            </div>
+            <div className="heading-display" style={{ fontSize: 54, lineHeight: 1, color: scoreColor, letterSpacing: '-0.05em' }}>
+              {displayScore}
+            </div>
+            <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 3 }}>
+              {verdict}
+            </div>
+          </div>
+          {/* Score ring */}
+          <svg width="76" height="76" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="6" />
+            <circle
+              cx="40"
+              cy="40"
+              r="32"
+              fill="none"
+              stroke={scoreColor}
+              strokeWidth="6"
+              strokeDasharray="201"
+              strokeDashoffset={201 - (201 * displayScore) / 100}
+              strokeLinecap="round"
+              transform="rotate(-90 40 40)"
+            />
+          </svg>
         </div>
+
+        {/* Pillars */}
+        <div className="flex flex-col gap-2.5">
+          <Pillar name="Ingredients" value={pillarIngredients} />
+          <Pillar name="Nutrition" value={pillarNutrition} />
+          <Pillar name="Additives" value={pillarAdditives} />
+        </div>
+
+        {/* NOVA */}
+        <div
+          className="flex gap-1.5 items-center"
+          style={{
+            marginTop: 16,
+            paddingTop: 14,
+            borderTop: '1px solid rgba(255,255,255,0.07)',
+          }}
+        >
+          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', marginRight: 3 }}>Processing</div>
+          {[1, 2, 3, 4].map((n) => {
+            const colors: Record<number, string> = { 1: '#4ade80', 2: '#a3e635', 3: '#fb923c', 4: '#f87171' }
+            const isActive = n === product.nova_score
+            return (
+              <div
+                key={n}
+                style={{
+                  flex: 1,
+                  height: 5,
+                  borderRadius: 3,
+                  background: isActive ? colors[n] : 'rgba(255,255,255,0.1)',
+                }}
+              />
+            )
+          })}
+          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', marginLeft: 6, whiteSpace: 'nowrap' }}>
+            NOVA {product.nova_score} — {novaWord(product.nova_score)}
+          </div>
+        </div>
+      </div>
+
+      {/* Additives */}
+      <div className="px-5 mb-5">
+        <div className="heading-display flex items-center gap-2 mb-3" style={{ fontSize: 18 }}>
+          Additives
+          <span
+            style={{
+              fontFamily: 'var(--font-body), DM Sans, sans-serif',
+              fontSize: 12,
+              fontWeight: 400,
+              color: 'var(--muted)',
+              background: 'var(--cream)',
+              padding: '2px 8px',
+              borderRadius: 10,
+            }}
+          >
+            {additives.length} found
+          </span>
+        </div>
+        {additives.length === 0 ? (
+          <div className="card" style={{ padding: 16, fontSize: 13, color: 'var(--muted)', textAlign: 'center' }}>
+            No additives detected ✨
+          </div>
+        ) : (
+          additives.map((add) => {
+            const isOpen = openAdditive === add.code
+            const dot =
+              add.risk === 'high' ? '#f87171' : add.risk === 'medium' ? '#fb923c' : '#4ade80'
+            const badge =
+              add.risk === 'high'
+                ? { bg: '#fef2f2', color: '#991b1b', label: '● High concern' }
+                : add.risk === 'medium'
+                ? { bg: '#fff7ed', color: '#9a3412', label: '● Moderate concern' }
+                : { bg: '#f0fdf4', color: '#166534', label: '● No concern' }
+            return (
+              <div key={add.code} className="card mb-2 overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setOpenAdditive(isOpen ? null : add.code)}
+                  className="w-full flex items-center gap-2.5 px-3.5 py-3.5 text-left"
+                  style={{ background: 'transparent', cursor: 'pointer' }}
+                >
+                  <div style={{ width: 9, height: 9, borderRadius: '50%', background: dot, flexShrink: 0 }} />
+                  <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--muted)', minWidth: 38 }}>
+                    {add.code}
+                  </div>
+                  <div style={{ flex: 1, fontSize: 13, color: 'var(--dark)' }}>{add.name}</div>
+                  {add.function && (
+                    <div
+                      style={{
+                        fontSize: 10,
+                        color: '#a8a59c',
+                        background: '#f5f3ee',
+                        padding: '2px 6px',
+                        borderRadius: 7,
+                      }}
+                    >
+                      {add.function}
+                    </div>
+                  )}
+                  <div
+                    style={{
+                      fontSize: 11,
+                      color: '#ccc',
+                      marginLeft: 2,
+                      transform: isOpen ? 'rotate(180deg)' : 'none',
+                      transition: 'transform 0.2s',
+                    }}
+                  >
+                    ▾
+                  </div>
+                </button>
+                {isOpen && (
+                  <div className="px-3.5 pb-3.5" style={{ borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+                    <span
+                      className="inline-flex items-center mt-2.5 mb-2"
+                      style={{
+                        fontSize: 10,
+                        padding: '3px 9px',
+                        borderRadius: 20,
+                        background: badge.bg,
+                        color: badge.color,
+                        fontWeight: 500,
+                      }}
+                    >
+                      {badge.label}
+                    </span>
+                    <div style={{ fontSize: 12, color: '#666', lineHeight: 1.6, marginBottom: 10 }}>
+                      {add.description}
+                    </div>
+                    {add.sources && add.sources.length > 0 && (
+                      <>
+                        <div
+                          style={{
+                            fontSize: 10,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.06em',
+                            color: '#bbb',
+                            marginBottom: 6,
+                          }}
+                        >
+                          Official sources
+                        </div>
+                        {add.sources.map((src, i) => (
+                          <a
+                            key={i}
+                            href={src.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 mb-1.5"
+                            style={{
+                              padding: '7px 9px',
+                              background: 'var(--cream)',
+                              borderRadius: 8,
+                              border: '1px solid var(--border)',
+                              textDecoration: 'none',
+                              color: 'var(--dark)',
+                            }}
+                          >
+                            <span style={{ fontSize: 11, flex: 1 }}>{src.title}</span>
+                            <span style={{ fontSize: 10, color: '#bbb' }}>↗</span>
+                          </a>
+                        ))}
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+            )
+          })
+        )}
+      </div>
+
+      {/* Ingredients */}
+      <div className="px-5 mb-5">
+        <div className="heading-display flex items-center gap-2 mb-3" style={{ fontSize: 18 }}>
+          Ingredients
+          <span
+            style={{
+              fontFamily: 'var(--font-body), DM Sans, sans-serif',
+              fontSize: 12,
+              fontWeight: 400,
+              color: 'var(--muted)',
+              background: 'var(--cream)',
+              padding: '2px 8px',
+              borderRadius: 10,
+            }}
+          >
+            {ingredientList.length} total
+          </span>
+        </div>
+        {ingredientList.length === 0 ? (
+          <div className="card" style={{ padding: 16, fontSize: 13, color: 'var(--muted)', textAlign: 'center' }}>
+            No ingredients listed
+          </div>
+        ) : (
+          <>
+            <div className="card" style={{ padding: 14 }}>
+              {ingredientList.map((ing, i) => {
+                const flag = ingredientFlag(ing)
+                const dotColor = flag === 'clean' ? '#4ade80' : flag === 'flagged' ? '#fb923c' : '#d1d5db'
+                return (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 py-1"
+                    style={{
+                      borderBottom: i < ingredientList.length - 1 ? '1px solid rgba(0,0,0,0.04)' : 'none',
+                      fontSize: 12,
+                      color: '#555',
+                    }}
+                  >
+                    <div style={{ width: 5, height: 5, borderRadius: '50%', background: dotColor, flexShrink: 0 }} />
+                    {ing}
+                  </div>
+                )
+              })}
+            </div>
+            <div className="flex gap-3 mt-2" style={{ fontSize: 11, color: 'var(--muted)' }}>
+              <LegendDot color="#4ade80" label="Clean" />
+              <LegendDot color="#fb923c" label="Flagged" />
+              <LegendDot color="#d1d5db" label="Unclassified" />
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Nutrition */}
+      <div className="px-5 mb-5">
+        <div className="heading-display flex items-center gap-2 mb-3" style={{ fontSize: 18 }}>
+          Nutrition
+          <span
+            style={{
+              fontFamily: 'var(--font-body), DM Sans, sans-serif',
+              fontSize: 12,
+              fontWeight: 400,
+              color: 'var(--muted)',
+              background: 'var(--cream)',
+              padding: '2px 8px',
+              borderRadius: 10,
+            }}
+          >
+            per 100g
+          </span>
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          <NutCard label="Calories" value={nutrition.energy} unit="kcal" pct={nutrition.energy ? Math.min(100, Math.round((nutrition.energy / 200) * 100)) : 0} />
+          <NutCard label="Sugars" value={nutrition.sugars} unit="g" pct={nutrition.sugars ? Math.min(100, Math.round((nutrition.sugars / 18) * 100)) : 0} variant={nutrition.sugars && nutrition.sugars > 10 ? 'red' : nutrition.sugars && nutrition.sugars > 5 ? 'amber' : 'green'} />
+          <NutCard label="Protein" value={nutrition.protein} unit="g" pct={nutrition.protein ? Math.min(100, Math.round((nutrition.protein / 10) * 100)) : 0} />
+          <NutCard label="Saturated fat" value={nutrition.saturated_fat} unit="g" pct={nutrition.saturated_fat ? Math.min(100, Math.round((nutrition.saturated_fat / 5) * 100)) : 0} variant={nutrition.saturated_fat && nutrition.saturated_fat > 5 ? 'red' : 'green'} />
+          <NutCard label="Fibre" value={nutrition.fibre} unit="g" pct={nutrition.fibre ? Math.min(100, Math.round((nutrition.fibre / 6) * 100)) : 0} variant={nutrition.fibre && nutrition.fibre < 1 ? 'amber' : 'green'} />
+          <NutCard label="Salt" value={nutrition.salt} unit="g" pct={nutrition.salt ? Math.min(100, Math.round((nutrition.salt / 1.5) * 100)) : 0} variant={nutrition.salt && nutrition.salt > 1.5 ? 'red' : 'green'} />
+        </div>
+
+        {/* Nutriscore strip */}
+        {nsLetter && ['a', 'b', 'c', 'd', 'e'].includes(nsLetter) && (
+          <div className="mt-3">
+            <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 7 }}>Nutriscore</div>
+            <div className="flex gap-1.5">
+              {(['a', 'b', 'c', 'd', 'e'] as const).map((g) => {
+                const colors: Record<string, string> = {
+                  a: '#1a9e3f',
+                  b: '#7abf35',
+                  c: '#f5c400',
+                  d: '#e27802',
+                  e: '#d63626',
+                }
+                const active = g === nsLetter
+                return (
+                  <div
+                    key={g}
+                    className="flex items-center justify-center"
+                    style={{
+                      flex: 1,
+                      height: 30,
+                      borderRadius: 6,
+                      background: colors[g],
+                      opacity: active ? 1 : 0.2,
+                      color: '#fff',
+                      fontSize: 12,
+                      fontWeight: 500,
+                    }}
+                  >
+                    {g.toUpperCase()}
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Disclaimer */}
+      <div className="px-5 mb-6">
+        <div
+          style={{
+            background: '#f0ede6',
+            borderRadius: 12,
+            padding: '12px 14px',
+            fontSize: 11,
+            color: 'var(--muted)',
+            lineHeight: 1.5,
+          }}
+        >
+          IngredScan scores reflect our independent methodology based on Open Food Facts data, EFSA evaluations, and published research. Not regulatory safety ratings. Data: Open Food Facts (CC BY-SA).
+        </div>
+      </div>
+
+      {/* Sticky bottom CTA */}
+      <div
+        className="fixed bottom-0 left-0 right-0 z-30 flex gap-2.5 px-5"
+        style={{
+          background: 'var(--soft)',
+          borderTop: '1px solid var(--border)',
+          padding: '14px 20px calc(14px + env(safe-area-inset-bottom, 0px))',
+          maxWidth: 480,
+          margin: '0 auto',
+        }}
+      >
+        <button
+          type="button"
+          style={{
+            padding: '14px 18px',
+            border: '1.5px solid var(--border)',
+            borderRadius: 12,
+            background: 'transparent',
+            fontFamily: 'var(--font-body), DM Sans, sans-serif',
+            fontSize: 14,
+            color: 'var(--muted)',
+            cursor: 'pointer',
+          }}
+        >
+          Save
+        </button>
+        <Link
+          href={`/swaps?for=${barcode}`}
+          className="flex-1 text-center"
+          style={{
+            background: 'var(--dark)',
+            color: '#fff',
+            borderRadius: 12,
+            padding: '14px',
+            fontFamily: 'var(--font-body), DM Sans, sans-serif',
+            fontSize: 14,
+            fontWeight: 500,
+          }}
+        >
+          Find better alternatives →
+        </Link>
       </div>
     </div>
   )
 }
 
-function detectFlagsFromProduct(product: Product): string[] {
-  const flags: string[] = []
-  const n = product.nutrition as NutritionData
-  if (n) {
-    if ((n.sugars || 0) > 10) flags.push('High Sugar')
-    if ((n.salt || 0) > 1.5) flags.push('High Salt')
-    if ((n.saturated_fat || 0) > 5) flags.push('High Saturated Fat')
+function novaWord(n: number): string {
+  switch (n) {
+    case 1: return 'unprocessed'
+    case 2: return 'culinary'
+    case 3: return 'processed'
+    case 4: return 'ultra-processed'
+    default: return 'unknown'
   }
-  const additives = product.additives || []
-  const colorCodes = ['e102', 'e104', 'e110', 'e122', 'e124', 'e129']
-  if (additives.some(a => colorCodes.some(c => a.code.toLowerCase().includes(c)))) {
-    flags.push('Artificial Colours')
-  }
-  return flags
+}
+
+function Pillar({ name, value }: { name: string; value: number }) {
+  const color = value >= 70 ? '#4ade80' : value >= 50 ? '#fb923c' : '#f87171'
+  return (
+    <div className="flex items-center gap-2.5">
+      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', width: 86, flexShrink: 0 }}>{name}</div>
+      <div style={{ flex: 1, height: 3, background: 'rgba(255,255,255,0.1)', borderRadius: 2, overflow: 'hidden' }}>
+        <div style={{ width: `${value}%`, height: '100%', background: color, borderRadius: 2 }} />
+      </div>
+      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.7)', minWidth: 24, textAlign: 'right' }}>{value}</div>
+    </div>
+  )
+}
+
+function LegendDot({ color, label }: { color: string; label: string }) {
+  return (
+    <span className="flex items-center gap-1">
+      <span style={{ width: 5, height: 5, borderRadius: '50%', background: color, display: 'inline-block' }} />
+      {label}
+    </span>
+  )
+}
+
+function NutCard({
+  label,
+  value,
+  unit,
+  pct,
+  variant = 'green',
+}: {
+  label: string
+  value: number | null | undefined
+  unit: string
+  pct: number
+  variant?: 'green' | 'amber' | 'red'
+}) {
+  const barColor = variant === 'red' ? '#f87171' : variant === 'amber' ? '#fb923c' : '#4ade80'
+  return (
+    <div className="card" style={{ padding: '11px 13px' }}>
+      <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 3 }}>{label}</div>
+      <div className="heading-display" style={{ fontSize: 17 }}>
+        {value != null ? value : '—'}
+        {value != null && (
+          <span style={{ fontSize: 10, color: 'var(--muted)', marginLeft: 1, fontFamily: 'var(--font-body), DM Sans, sans-serif' }}>
+            {unit}
+          </span>
+        )}
+      </div>
+      <div style={{ height: 3, background: 'var(--cream)', borderRadius: 2, marginTop: 7, overflow: 'hidden' }}>
+        <div style={{ width: `${pct}%`, height: 3, borderRadius: 2, background: barColor }} />
+      </div>
+    </div>
+  )
+}
+
+function ResultSkeleton({ onBack }: { onBack: () => void }) {
+  return (
+    <div className="max-w-[480px] mx-auto pb-32 animate-fadeIn">
+      <div
+        className="flex items-center justify-between px-5 py-3.5"
+        style={{ borderBottom: '1px solid var(--border)' }}
+      >
+        <button
+          onClick={onBack}
+          type="button"
+          className="rounded-full flex items-center justify-center"
+          style={{
+            width: 34,
+            height: 34,
+            border: '1px solid var(--border)',
+            background: 'transparent',
+          }}
+          aria-label="Back"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--dark)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+          </svg>
+        </button>
+        <span style={{ fontSize: 13, color: 'var(--muted)' }}>Loading…</span>
+        <div style={{ width: 34 }} />
+      </div>
+      <div className="px-5 pt-5 space-y-4">
+        <div style={{ height: 80, borderRadius: 14, background: 'var(--card)', border: '1px solid var(--border)' }} className="animate-pulse" />
+        <div style={{ height: 220, borderRadius: 20, background: 'var(--dark)', opacity: 0.4 }} className="animate-pulse" />
+        <div style={{ height: 100, borderRadius: 14, background: 'var(--card)', border: '1px solid var(--border)' }} className="animate-pulse" />
+      </div>
+    </div>
+  )
 }
