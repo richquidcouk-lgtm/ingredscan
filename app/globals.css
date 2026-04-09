@@ -3,17 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0b0b0f;
-  --surface: #13131a;
-  --surface2: #1c1c26;
+  /* Warmed up from the original near-black (#0b0b0f) toward a deep plum — keeps
+     the sophisticated dark-mode feel but reads less clinical and pairs better
+     with the mesh gradients. Fully backward compatible with every existing
+     component that references var(--bg). */
+  --bg: #0c0a14;
+  --surface: #17131f;
+  --surface2: #201b2c;
   --border: rgba(255, 255, 255, 0.08);
-  --text: #f0f0f4;
-  --muted: rgba(240, 240, 244, 0.45);
+  --text: #f4f1f8;
+  --muted: rgba(244, 241, 248, 0.48);
   --green: #00e5a0;
   --green-glow: rgba(0, 229, 160, 0.25);
   --amber: #f5a623;
   --red: #ff5a5a;
   --accent: #7c6fff;
+  /* Beauty-mode accent — warm coral-pink pairs with the purple and reads
+     distinctly feminine without being cliché. */
+  --pink: #ff7ab8;
+  --pink-glow: rgba(255, 122, 184, 0.22);
 }
 
 * {

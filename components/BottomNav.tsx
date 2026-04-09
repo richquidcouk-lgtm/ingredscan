@@ -16,7 +16,7 @@ const tabs = [
   },
   {
     label: 'Search',
-    href: '/scan',
+    href: '/search',
     icon: (active: boolean) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? '#00e5a0' : 'rgba(240,240,244,0.4)'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="11" cy="11" r="8" />

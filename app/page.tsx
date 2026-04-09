@@ -177,20 +177,37 @@ export default function HomePage() {
           Scan any food or cosmetic product for an instant, honest ingredient breakdown — powered by open data and independent research.
         </p>
 
-        <Link
-          href="/scan"
-          className="btn-glow inline-flex items-center gap-2.5 px-10 py-4 rounded-2xl text-base font-semibold"
-          style={{ color: '#0b0b0f' }}
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-            <path d="M3 7V5a2 2 0 0 1 2-2h2" />
-            <path d="M17 3h2a2 2 0 0 1 2 2v2" />
-            <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
-            <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
-            <line x1="7" y1="12" x2="17" y2="12" />
-          </svg>
-          Scan a Product
-        </Link>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Link
+            href="/scan"
+            className="btn-glow inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-base font-semibold"
+            style={{ color: '#0b0b0f' }}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+              <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+              <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+              <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+              <line x1="7" y1="12" x2="17" y2="12" />
+            </svg>
+            Scan a Product
+          </Link>
+          <Link
+            href="/search"
+            className="inline-flex items-center gap-2.5 px-7 py-4 rounded-2xl text-base font-semibold glass-card"
+            style={{
+              color: '#f4f1f8',
+              border: '1px solid rgba(124,111,255,0.25)',
+              background: 'linear-gradient(135deg, rgba(124,111,255,0.12), rgba(0,229,160,0.06))',
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            Search Products
+          </Link>
+        </div>
 
         {/* Free badge */}
         <div className="flex items-center justify-center gap-2 mt-4">
