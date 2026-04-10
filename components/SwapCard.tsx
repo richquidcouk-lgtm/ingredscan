@@ -36,7 +36,7 @@ export default function SwapCard({
   currentScore: number
   index: number
 }) {
-  const improvement = Math.round((swap.quality_score - currentScore) * 10) / 10
+  const improvement = Math.round(swap.quality_score - currentScore)
   const scoreColor = getScoreColor(swap.quality_score)
   const novaColor = getNovaColor(swap.nova_score)
   const retailerColor = retailerColors[swap.retailer] || '#555'
@@ -69,14 +69,14 @@ export default function SwapCard({
           </p>
           {improvement > 0 && (
             <p className="text-[11px] mt-1 font-medium" style={{ color: '#00e5a0' }}>
-              +{improvement.toFixed(1)} on our criteria
+              +{improvement} on our criteria
             </p>
           )}
         </div>
 
         <div className="shrink-0 flex flex-col items-center">
           <span className="text-2xl font-extrabold heading-display" style={{ color: scoreColor }}>
-            {swap.quality_score.toFixed(1)}
+            {Math.round(swap.quality_score)}
           </span>
           <span className="text-[11px] font-medium uppercase tracking-wider" style={{ color: 'rgba(240,240,244,0.5)' }}>
             Score

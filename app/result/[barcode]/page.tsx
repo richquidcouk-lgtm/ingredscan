@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { supabase, type Product, type NutritionData, type AdditiveEntry } from '@/lib/supabase'
-import { resolveAdditives, calculateQualityBreakdown, getDisplayScore, getScoreClass } from '@/lib/scoring'
+import { resolveAdditives, calculateQualityBreakdown, getDisplayScore, getScoreColor, getScoreLabel } from '@/lib/scoring'
 import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
 import { cacheProductOffline, getOfflineProduct } from '@/lib/offlineCache'
 import FavouriteButton from '@/components/FavouriteButton'
@@ -160,22 +160,20 @@ export default function ResultPage() {
     nova_group: product.nova_score,
     nutriscore_grade: product.nutriscore_grade,
     additives_tags: rawAdditives.map((a) => `en:${(a.code || '').toLowerCase()}`),
+    labels_tags: [], // labels not stored on product; recalc from what we have
     nutriments,
     ingredients_text: product.ingredients,
   })
 
+  // Score is now natively 0-100
   const displayScore = getDisplayScore(product.quality_score)
-  const scoreClass = getScoreClass(product.quality_score)
-  const scoreColor =
-    scoreClass === 'score-good' ? '#3d8c5e' : scoreClass === 'score-fair' ? '#fb923c' : '#f87171'
-  // No recommendation language — we show the score and let the user decide.
-  const verdict =
-    scoreClass === 'score-good' ? 'Good' : scoreClass === 'score-fair' ? 'Fair' : 'Poor'
+  const scoreColor = getScoreColor(product.quality_score ?? 0)
+  const verdict = getScoreLabel(product.quality_score ?? 0)
 
-  // Pillar bars 0-100
-  const pillarNutrition = Math.round((breakdown.nutritional / 5) * 100)
-  const pillarAdditives = Math.round((breakdown.additives / 2) * 100)
-  const pillarIngredients = Math.round((breakdown.processing / 2.5) * 100)
+  // Pillar values are already 0-100
+  const pillarNutrition = breakdown.nutritionScore
+  const pillarAdditives = breakdown.additiveScore
+  const pillarOrganic = breakdown.organicBonus
 
   // Parse ingredients into a list
   const ingredientList = (product.ingredients || '')
@@ -268,7 +266,7 @@ export default function ResultPage() {
             {product.category?.split(',')[0] && (
               <span className="chip chip-gray">{product.category.split(',')[0].trim()}</span>
             )}
-            {breakdown.organic > 0 && <span className="chip chip-green">Organic</span>}
+            {breakdown.organicBonus > 0 && <span className="chip chip-green">Organic</span>}
           </div>
         </div>
       </div>
@@ -335,9 +333,9 @@ export default function ResultPage() {
 
         {/* Pillars */}
         <div className="flex flex-col gap-2.5">
-          <Pillar name="Ingredients" value={pillarIngredients} />
-          <Pillar name="Nutrition" value={pillarNutrition} />
-          <Pillar name="Additives" value={pillarAdditives} />
+          <Pillar name="Nutrition" value={pillarNutrition} weight="60%" />
+          <Pillar name="Additives" value={pillarAdditives} weight="30%" />
+          <Pillar name="Organic" value={pillarOrganic} weight="10%" />
         </div>
 
         {/* NOVA */}
@@ -693,11 +691,14 @@ function novaWord(n: number): string {
   }
 }
 
-function Pillar({ name, value }: { name: string; value: number }) {
-  const color = value >= 70 ? '#4ade80' : value >= 50 ? '#fb923c' : '#f87171'
+function Pillar({ name, value, weight }: { name: string; value: number; weight?: string }) {
+  const color = value >= 70 ? '#4ade80' : value >= 45 ? '#fb923c' : '#f87171'
   return (
     <div className="flex items-center gap-2.5">
-      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', width: 86, flexShrink: 0 }}>{name}</div>
+      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', width: 86, flexShrink: 0 }}>
+        {name}
+        {weight && <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.3)', marginLeft: 4 }}>{weight}</span>}
+      </div>
       <div style={{ flex: 1, height: 3, background: 'rgba(255,255,255,0.1)', borderRadius: 2, overflow: 'hidden' }}>
         <div style={{ width: `${value}%`, height: '100%', background: color, borderRadius: 2 }} />
       </div>

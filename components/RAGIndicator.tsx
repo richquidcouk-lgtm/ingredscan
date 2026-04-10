@@ -3,17 +3,17 @@
 import { getScoreColor, getScoreLabel } from '@/lib/scoring'
 
 const RAG_CONFIG = [
-  { key: 'red', color: '#ff5a5a', label: 'Low ingredient quality', min: 0, max: 3.9 },
-  { key: 'amber', color: '#f5a623', label: 'Mixed ingredient quality', min: 4, max: 6.9 },
-  { key: 'green', color: '#00e5a0', label: 'High ingredient quality', min: 7, max: 10 },
+  { key: 'red', color: '#ff5a5a', label: 'Low ingredient quality', min: 0, max: 44 },
+  { key: 'amber', color: '#f5a623', label: 'Mixed ingredient quality', min: 45, max: 69 },
+  { key: 'green', color: '#00e5a0', label: 'High ingredient quality', min: 70, max: 100 },
 ]
 
 export default function RAGIndicator({ score }: { score: number }) {
   const activeColor = getScoreColor(score)
   const activeLabel = getScoreLabel(score)
-  const activeDescription = score < 4
+  const activeDescription = score < 45
     ? 'Low ingredient quality'
-    : score < 7
+    : score < 70
     ? 'Mixed ingredient quality'
     : 'High ingredient quality'
 

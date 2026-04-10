@@ -7,10 +7,9 @@ interface Props {
   breakdown: QualityScoreBreakdown
 }
 
-function barColor(score: number, max: number): string {
-  const pct = score / max
-  if (pct >= 0.8) return '#22c77e'
-  if (pct >= 0.5) return '#f5a623'
+function barColor(score: number): string {
+  if (score >= 70) return '#22c77e'
+  if (score >= 45) return '#f5a623'
   return '#ff5a5a'
 }
 
@@ -25,41 +24,33 @@ function nutriLabel(grade: string): string {
   }
 }
 
-function novaLabel(nova: number): string {
-  switch (nova) {
-    case 1: return 'Whole food'
-    case 2: return 'Culinary ingredient'
-    case 3: return 'Processed'
-    case 4: return 'Industrially processed'
-    default: return 'Unknown'
-  }
-}
-
 function additiveLabel(score: number): string {
-  if (score >= 1.8) return 'No concerning additives'
-  if (score >= 1.2) return 'Some additives'
-  if (score >= 0.5) return 'Several additives'
+  if (score >= 90) return 'No concerning additives'
+  if (score >= 60) return 'Some additives'
+  if (score >= 30) return 'Several additives'
   return 'Many concerning additives'
 }
 
 function organicLabel(score: number): string {
-  if (score >= 0.5) return 'Organic certified'
-  if (score >= 0.25) return 'Some certifications'
+  if (score >= 100) return 'Organic certified'
   return 'Not certified organic'
 }
 
-function BreakdownRow({ label, score, max, detail }: {
-  label: string; score: number; max: number; detail: string
+function BreakdownRow({ label, score, weight, detail }: {
+  label: string; score: number; weight: string; detail: string
 }) {
-  const color = barColor(score, max)
-  const pct = Math.min(100, (score / max) * 100)
+  const color = barColor(score)
+  const pct = Math.min(100, score)
 
   return (
     <div className="py-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
       <div className="flex items-center justify-between mb-1.5">
-        <span className="text-xs font-medium" style={{ color: '#f0f0f4' }}>{label}</span>
+        <span className="text-xs font-medium" style={{ color: '#f0f0f4' }}>
+          {label}
+          <span className="ml-1.5 text-[10px]" style={{ color: 'rgba(240,240,244,0.3)' }}>{weight}</span>
+        </span>
         <span className="text-xs font-medium" style={{ color }}>
-          {score.toFixed(1)}/{max.toFixed(1)}
+          {score}/100
         </span>
       </div>
       <div className="relative h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.06)' }}>
@@ -95,34 +86,28 @@ export default function ScoreBreakdown({ breakdown }: Props) {
       {expanded && (
         <div className="rounded-2xl p-4 mt-3 glass-card animate-fadeUp">
           <BreakdownRow
-            label="Nutritional Quality"
-            score={breakdown.nutritional}
-            max={5.0}
+            label="Nutrition"
+            score={breakdown.nutritionScore}
+            weight="60%"
             detail={nutriLabel(breakdown.nutriscore)}
           />
           <BreakdownRow
-            label="Processing Level"
-            score={breakdown.processing}
-            max={2.5}
-            detail={novaLabel(breakdown.nova)}
-          />
-          <BreakdownRow
             label="Additives"
-            score={breakdown.additives}
-            max={2.0}
-            detail={additiveLabel(breakdown.additives)}
+            score={breakdown.additiveScore}
+            weight="30%"
+            detail={additiveLabel(breakdown.additiveScore)}
           />
           <BreakdownRow
             label="Organic"
-            score={breakdown.organic}
-            max={0.5}
-            detail={organicLabel(breakdown.organic)}
+            score={breakdown.organicBonus}
+            weight="10%"
+            detail={organicLabel(breakdown.organicBonus)}
           />
 
           <div className="flex items-center justify-between pt-3 mt-1">
             <span className="text-xs font-semibold" style={{ color: '#f0f0f4' }}>Total</span>
-            <span className="text-xs font-bold" style={{ color: barColor(breakdown.total, 10) }}>
-              {breakdown.total.toFixed(1)}/10
+            <span className="text-xs font-bold" style={{ color: barColor(breakdown.qualityScore) }}>
+              {breakdown.qualityScore}/100
             </span>
           </div>
 

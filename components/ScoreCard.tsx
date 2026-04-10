@@ -20,7 +20,7 @@ export function QualityScoreCard({ score }: { score: number }) {
         setDisplayScore(score)
         clearInterval(timer)
       } else {
-        setDisplayScore(Math.round(current * 10) / 10)
+        setDisplayScore(Math.round(current))
       }
     }, duration / steps)
     return () => clearInterval(timer)
@@ -59,9 +59,9 @@ export function QualityScoreCard({ score }: { score: number }) {
       </div>
       <div className="flex items-baseline gap-1">
         <span className="text-4xl font-extrabold heading-display" style={{ color }}>
-          {displayScore.toFixed(1)}
+          {displayScore}
         </span>
-        <span className="text-lg font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>/10</span>
+        <span className="text-lg font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>/100</span>
       </div>
       <span
         className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-medium"
@@ -75,7 +75,7 @@ export function QualityScoreCard({ score }: { score: number }) {
           style={{ borderColor: 'rgba(124,111,255,0.15)' }}
         >
           <p className="text-[11px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.55)' }}>
-            Rates overall ingredient quality from 0-10. Factors include additives, nutri-score grade, saturated fat, sugar, and salt levels. Higher is better.
+            Rates overall ingredient quality from 0-100. Based on nutrition (60%), additives (30%), and organic certification (10%). Higher is better.
           </p>
         </div>
       )}

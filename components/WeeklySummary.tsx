@@ -37,11 +37,11 @@ export default function WeeklySummary({ scans }: Props) {
           <p className="text-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>Products scanned</p>
         </div>
         <div className="text-center">
-          <p className="text-2xl font-bold heading-display" style={{ color: getScoreColor(avgScore) }}>{avgScore.toFixed(1)}</p>
+          <p className="text-2xl font-bold heading-display" style={{ color: getScoreColor(avgScore) }}>{Math.round(avgScore)}</p>
           <p className="text-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>Average score</p>
         </div>
         <div className="text-center">
-          <p className="text-2xl font-bold heading-display" style={{ color: '#22c77e' }}>{bestPick.quality_score.toFixed(1)}</p>
+          <p className="text-2xl font-bold heading-display" style={{ color: '#22c77e' }}>{Math.round(bestPick.quality_score)}</p>
           <p className="text-xs" style={{ color: 'rgba(240,240,244,0.45)' }}>Best pick</p>
         </div>
       </div>
@@ -52,7 +52,7 @@ export default function WeeklySummary({ scans }: Props) {
             <span className="text-xs">🏆</span>
             <p className="text-xs font-medium truncate" style={{ color: '#f0f0f4', maxWidth: '180px' }}>{bestPick.name}</p>
           </div>
-          <span className="text-xs font-bold" style={{ color: '#22c77e' }}>{bestPick.quality_score.toFixed(1)}</span>
+          <span className="text-xs font-bold" style={{ color: '#22c77e' }}>{Math.round(bestPick.quality_score)}</span>
         </div>
         {worstPick.barcode !== bestPick.barcode && (
           <div className="flex items-center justify-between px-3 py-2 rounded-lg" style={{ backgroundColor: 'rgba(255,90,90,0.04)' }}>
@@ -60,7 +60,7 @@ export default function WeeklySummary({ scans }: Props) {
               <span className="text-xs">📉</span>
               <p className="text-xs font-medium truncate" style={{ color: '#f0f0f4', maxWidth: '180px' }}>{worstPick.name}</p>
             </div>
-            <span className="text-xs font-bold" style={{ color: getScoreColor(worstPick.quality_score) }}>{worstPick.quality_score.toFixed(1)}</span>
+            <span className="text-xs font-bold" style={{ color: getScoreColor(worstPick.quality_score) }}>{Math.round(worstPick.quality_score)}</span>
           </div>
         )}
       </div>

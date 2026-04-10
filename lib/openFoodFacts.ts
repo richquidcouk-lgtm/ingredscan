@@ -122,7 +122,7 @@ export function validateProduct(product: OFFProduct): ValidatedProduct {
     // Recalculate from categories
     if (isFreshProduceByCategory(categories)) {
       nova_score = 1
-      quality_score = Math.max(quality_score, 8.0)
+      quality_score = Math.max(quality_score, 80)
       overrides.push(`NOVA override applied: "${name}" ${originalNova} → ${nova_score} (fresh produce by name+category)`)
     } else {
       // Name matches but category doesn't — flag for review, set to null-equivalent
@@ -134,9 +134,9 @@ export function validateProduct(product: OFFProduct): ValidatedProduct {
   }
 
   // Override 2: Quality score too low for fresh produce
-  if (isFreshProduceByCategory(categories) && quality_score < 7.5) {
+  if (isFreshProduceByCategory(categories) && quality_score < 75) {
     const originalScore = quality_score
-    quality_score = 7.5
+    quality_score = 75
     overrides.push(`Quality override applied: "${name}" ${originalScore} → ${quality_score} (fresh produce minimum)`)
   }
 

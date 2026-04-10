@@ -1,9 +1,6 @@
 import type { RawProduct, ProcessedProduct } from '../types/product'
 // Single source of truth: delegate to the same scoring used by the live scan
-// path. The previous standalone implementation here was broken — it ignored
-// nova_group entirely and matched additive tags by category prefixes
-// (`en:flavouring`) when OFF actually uses E-number tags (`en:e621`), so
-// every product scored 9-10/10 regardless of how processed it was.
+// path. Version 3 — Yuka-aligned 3-pillar formula (0-100 scale).
 import { scoreProduct } from '../../lib/scoring'
 
 export function processProduct(raw: RawProduct): ProcessedProduct {
@@ -43,7 +40,7 @@ export function processProduct(raw: RawProduct): ProcessedProduct {
   return {
     ...raw,
     nova_group: result.nova_score,
-    quality_score: result.quality_score,
+    quality_score: result.quality_score, // now 0-100
     data_source: isUK ? 'Open Food Facts + UK FSA' : 'Open Food Facts + USDA',
     confidence: result.confidence,
     last_imported_at: new Date().toISOString(),

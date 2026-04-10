@@ -91,7 +91,7 @@ export default function ComparePage() {
           )}
           <p className="text-xs font-semibold truncate" style={{ color: '#f0f0f4' }}>{product.name}</p>
           <p className="text-xs truncate" style={{ color: 'rgba(240,240,244,0.4)' }}>{product.brand}</p>
-          <p className="text-xl font-bold mt-2" style={{ color: getScoreColor(product.quality_score) }}>{product.quality_score.toFixed(1)}</p>
+          <p className="text-xl font-bold mt-2" style={{ color: getScoreColor(product.quality_score) }}>{Math.round(product.quality_score)}</p>
           <p className="text-xs" style={{ color: getNovaColor(product.nova_score) }}>{getNovaEmoji(product.nova_score)} {getNovaLabel(product.nova_score)}</p>
           <button onClick={() => side === 'Product A' ? setProductA(null) : setProductB(null)} className="text-xs mt-2" style={{ color: 'rgba(240,240,244,0.35)' }}>Change</button>
         </div>

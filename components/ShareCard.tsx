@@ -40,10 +40,10 @@ export default function ShareButton({ product }: { product: Product }) {
     ctx.fillStyle = scoreColor
     ctx.font = 'bold 32px -apple-system, sans-serif'
     ctx.textAlign = 'center'
-    ctx.fillText(product.quality_score.toFixed(1), 100, 130)
+    ctx.fillText(String(Math.round(product.quality_score)), 100, 130)
     ctx.font = '12px -apple-system, sans-serif'
     ctx.fillStyle = 'rgba(240,240,244,0.5)'
-    ctx.fillText('/10', 100, 148)
+    ctx.fillText('/100', 100, 148)
 
     // Product name
     ctx.textAlign = 'left'
@@ -76,7 +76,7 @@ export default function ShareButton({ product }: { product: Product }) {
 
     // Stats row
     const stats = [
-      { label: 'Quality', value: `${product.quality_score.toFixed(1)}/10` },
+      { label: 'Quality', value: `${Math.round(product.quality_score)}/100` },
       { label: 'Processing', value: `NOVA ${product.nova_score}` },
       { label: 'Additives', value: `${(product.additives || []).length}` },
     ]
@@ -111,7 +111,7 @@ export default function ShareButton({ product }: { product: Product }) {
     setGenerating(true)
 
     const shareUrl = `${window.location.origin}/result/${product.barcode}`
-    const shareText = `${product.name}: ${product.quality_score.toFixed(1)}/10 (${getScoreLabel(product.quality_score)}) — Scanned with IngredScan`
+    const shareText = `${product.name}: ${Math.round(product.quality_score)}/100 (${getScoreLabel(product.quality_score)}) — Scanned with IngredScan`
 
     // Try to generate and share image
     const blob = await generateShareImage()
