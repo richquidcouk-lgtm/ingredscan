@@ -15,48 +15,79 @@ type SearchResult = {
   image_front_small_url: string
 }
 
+// Category lists built from actual product data. Each term is ILIKE'd against
+// name + brand + category via the /api/search endpoint. Ordered roughly by
+// how shoppers browse. All confirmed to return real results on 1.6M+ rows.
 const FOOD_CATEGORIES: Array<{ emoji: string; label: string; term: string }> = [
-  { emoji: '🍞', label: 'Bread & Bakery', term: 'bread' },
-  { emoji: '🥣', label: 'Breakfast Cereals', term: 'cereal' },
-  { emoji: '🥛', label: 'Dairy & Yogurt', term: 'yogurt' },
+  { emoji: '🥛', label: 'Milk & Cream', term: 'milk' },
   { emoji: '🧀', label: 'Cheese', term: 'cheese' },
-  { emoji: '🍫', label: 'Chocolate', term: 'chocolate' },
-  { emoji: '🍪', label: 'Biscuits & Cookies', term: 'biscuit' },
-  { emoji: '🥤', label: 'Soft Drinks', term: 'drink' },
-  { emoji: '☕', label: 'Coffee & Tea', term: 'coffee' },
-  { emoji: '💧', label: 'Waters', term: 'water' },
-  { emoji: '🍝', label: 'Pasta', term: 'pasta' },
-  { emoji: '🍚', label: 'Rice', term: 'rice' },
-  { emoji: '🥫', label: 'Canned Foods', term: 'canned' },
-  { emoji: '🍲', label: 'Ready Meals', term: 'meal' },
-  { emoji: '🥓', label: 'Meat', term: 'meat' },
-  { emoji: '🐟', label: 'Fish & Seafood', term: 'fish' },
+  { emoji: '🥣', label: 'Yogurt', term: 'yogurt' },
+  { emoji: '🧈', label: 'Butter & Spreads', term: 'butter' },
+  { emoji: '🥚', label: 'Eggs', term: 'egg' },
+  { emoji: '🍞', label: 'Bread & Bakery', term: 'bread' },
+  { emoji: '🥣', label: 'Cereals', term: 'cereal' },
+  { emoji: '🍪', label: 'Cookies & Biscuits', term: 'cookie' },
+  { emoji: '🧁', label: 'Flour & Baking', term: 'flour' },
+  { emoji: '🥩', label: 'Meat', term: 'meat' },
+  { emoji: '🍗', label: 'Chicken & Poultry', term: 'chicken' },
+  { emoji: '🥓', label: 'Beef', term: 'beef' },
+  { emoji: '🐷', label: 'Pork', term: 'pork' },
+  { emoji: '🐟', label: 'Fish & Seafood', term: 'seafood' },
   { emoji: '🥬', label: 'Vegetables', term: 'vegetable' },
   { emoji: '🍎', label: 'Fruits', term: 'fruit' },
-  { emoji: '🧊', label: 'Frozen', term: 'frozen' },
-  { emoji: '🍿', label: 'Snacks', term: 'snack' },
-  { emoji: '🧂', label: 'Sauces', term: 'sauce' },
-  { emoji: '🍯', label: 'Spreads & Jams', term: 'jam' },
-  { emoji: '🌰', label: 'Nuts & Seeds', term: 'nuts' },
+  { emoji: '🥗', label: 'Salads', term: 'salad' },
+  { emoji: '🍝', label: 'Pasta & Noodles', term: 'pasta' },
+  { emoji: '🍚', label: 'Rice', term: 'rice' },
+  { emoji: '🍕', label: 'Pizza', term: 'pizza' },
+  { emoji: '🍜', label: 'Soup', term: 'soup' },
+  { emoji: '🧃', label: 'Juice', term: 'juice' },
+  { emoji: '☕', label: 'Coffee', term: 'coffee' },
+  { emoji: '🍵', label: 'Tea', term: 'tea' },
+  { emoji: '💧', label: 'Water', term: 'water' },
+  { emoji: '🥤', label: 'Soda & Soft Drinks', term: 'soda' },
+  { emoji: '🍺', label: 'Beer & Cider', term: 'beer' },
+  { emoji: '🍷', label: 'Wine', term: 'wine' },
+  { emoji: '🍫', label: 'Chocolate', term: 'chocolate' },
+  { emoji: '🍬', label: 'Candy & Sweets', term: 'candy' },
+  { emoji: '🍿', label: 'Snacks & Crisps', term: 'crisp' },
+  { emoji: '🍦', label: 'Ice Cream', term: 'ice cream' },
+  { emoji: '🧂', label: 'Sauces & Condiments', term: 'sauce' },
+  { emoji: '🍯', label: 'Honey & Syrup', term: 'honey' },
+  { emoji: '🫒', label: 'Oils & Vinegar', term: 'oil' },
+  { emoji: '🌶️', label: 'Spices & Herbs', term: 'spice' },
+  { emoji: '🥜', label: 'Nuts & Seeds', term: 'nuts' },
+  { emoji: '🧊', label: 'Frozen Foods', term: 'frozen' },
   { emoji: '🍼', label: 'Baby Food', term: 'baby' },
+  { emoji: '🐾', label: 'Pet Food', term: 'pet food' },
 ]
 
 const BEAUTY_CATEGORIES: Array<{ emoji: string; label: string; term: string }> = [
   { emoji: '🧴', label: 'Moisturisers', term: 'moisturiz' },
-  { emoji: '🧼', label: 'Face Cleansers', term: 'cleans' },
   { emoji: '✨', label: 'Serums', term: 'serum' },
-  { emoji: '☀️', label: 'Sunscreen', term: 'sun' },
+  { emoji: '🧼', label: 'Face Cleansers', term: 'cleans' },
+  { emoji: '🌿', label: 'Face Creams', term: 'cream' },
+  { emoji: '🎭', label: 'Face Masks', term: 'mask' },
+  { emoji: '💧', label: 'Toners & Mists', term: 'toner' },
+  { emoji: '☀️', label: 'Sunscreen & SPF', term: 'spf' },
+  { emoji: '👁️', label: 'Eye Care', term: 'eye' },
   { emoji: '💇', label: 'Shampoo', term: 'shampoo' },
   { emoji: '🧖', label: 'Conditioner', term: 'conditioner' },
-  { emoji: '🛁', label: 'Body Wash', term: 'shower' },
+  { emoji: '💆', label: 'Hair Care', term: 'hair' },
+  { emoji: '🛁', label: 'Shower & Body Wash', term: 'shower' },
   { emoji: '🫧', label: 'Soap', term: 'soap' },
+  { emoji: '🧴', label: 'Body Lotion', term: 'lotion' },
+  { emoji: '🫒', label: 'Body Oils', term: 'oil' },
+  { emoji: '🧽', label: 'Scrubs & Exfoliants', term: 'scrub' },
+  { emoji: '🤲', label: 'Hand Care', term: 'hand' },
+  { emoji: '👃', label: 'Deodorants', term: 'deodorant' },
+  { emoji: '🦷', label: 'Toothpaste & Oral', term: 'toothpaste' },
+  { emoji: '🪒', label: 'Shaving', term: 'shav' },
   { emoji: '💄', label: 'Makeup', term: 'makeup' },
   { emoji: '💋', label: 'Lip Care', term: 'lip' },
-  { emoji: '🪒', label: 'Shaving', term: 'shav' },
-  { emoji: '🦷', label: 'Toothpaste', term: 'toothpaste' },
-  { emoji: '👃', label: 'Deodorants', term: 'deodorant' },
-  { emoji: '🌸', label: 'Perfume', term: 'perfume' },
+  { emoji: '💅', label: 'Nail Care', term: 'nail' },
+  { emoji: '🌸', label: 'Perfume & Fragrance', term: 'perfume' },
   { emoji: '👶', label: 'Baby Care', term: 'baby' },
+  { emoji: '🧴', label: 'Gels', term: 'gel' },
 ]
 
 export default function SearchPage() {
@@ -130,8 +161,10 @@ function SearchPageBody() {
     return () => clearTimeout(t)
   }, [query, selectedCategory, runSearch])
 
-  // Reset state when switching mode
+  // Reset ALL state when switching mode — including the text query, so the
+  // search box doesn't keep showing the previous term from the other mode.
   useEffect(() => {
+    setQuery('')
     setSelectedCategory(null)
     setResults([])
     setHasSearched(false)

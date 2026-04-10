@@ -168,8 +168,9 @@ export default function ResultPage() {
   const scoreClass = getScoreClass(product.quality_score)
   const scoreColor =
     scoreClass === 'score-good' ? '#3d8c5e' : scoreClass === 'score-fair' ? '#fb923c' : '#f87171'
+  // No recommendation language — we show the score and let the user decide.
   const verdict =
-    scoreClass === 'score-good' ? 'Good — recommended' : scoreClass === 'score-fair' ? 'Fair — eat in moderation' : 'Poor — not recommended'
+    scoreClass === 'score-good' ? 'Good' : scoreClass === 'score-fair' ? 'Fair' : 'Poor'
 
   // Pillar bars 0-100
   const pillarNutrition = Math.round((breakdown.nutritional / 5) * 100)
