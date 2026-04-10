@@ -237,6 +237,26 @@ export function getDisplayScore(score: number | null | undefined): number {
   return Math.round(score)
 }
 
+/**
+ * Get the effective 0-100 display score from a product row.
+ * Prefers quality_score_v3 (new column) when populated;
+ * falls back to quality_score × 10 (v2 original on 0-10 scale).
+ * This lets the UI show correct scores during the transition while
+ * the re-import populates v3 columns row by row.
+ */
+export function getEffectiveScore(product: {
+  quality_score_v3?: number | null
+  quality_score?: number | null
+}): number {
+  if (typeof product.quality_score_v3 === 'number') {
+    return Math.round(product.quality_score_v3)
+  }
+  if (typeof product.quality_score === 'number') {
+    return Math.round(product.quality_score * 10)
+  }
+  return 0
+}
+
 /** CSS class based on score thresholds: <45 poor, <70 fair, >=70 good */
 export function getScoreClass(
   score: number | null | undefined,

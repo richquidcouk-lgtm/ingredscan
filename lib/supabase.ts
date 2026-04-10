@@ -26,7 +26,11 @@ export type Product = {
   name: string
   brand: string
   nova_score: number
-  quality_score: number
+  quality_score: number           // v2 original (0-10), preserved
+  quality_score_v3?: number | null // v3 Yuka-aligned (0-100), new
+  nutrition_score_v3?: number | null
+  additive_score_v3?: number | null
+  organic_bonus_v3?: number | null
   nutriscore_grade: string
   ingredients: string
   additives: AdditiveEntry[]

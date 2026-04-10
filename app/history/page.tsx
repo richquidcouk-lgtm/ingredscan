@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-import { getDisplayScore, getScoreClass } from '@/lib/scoring'
+import { getScoreClass, getEffectiveScore } from '@/lib/scoring'
 import { getCategoryEmoji } from '@/lib/utils'
 import AuthModal from '@/components/AuthModal'
 
@@ -140,8 +140,8 @@ export default function HistoryPage() {
     }
     if (filter === 'food' && scan.product_type === 'cosmetic') return false
     if (filter === 'cosmetics' && scan.product_type !== 'cosmetic') return false
-    if (filter === 'poor' && getDisplayScore(scan.quality_score) >= 50) return false
-    if (filter === 'good' && getDisplayScore(scan.quality_score) <= 70) return false
+    if (filter === 'poor' && getEffectiveScore(scan) >= 50) return false
+    if (filter === 'good' && getEffectiveScore(scan) <= 70) return false
     if (filter === 'additives' && (scan.additives_count || 0) === 0) return false
     return true
   })
@@ -374,7 +374,7 @@ export default function HistoryPage() {
                             : 'var(--red)',
                       }}
                     >
-                      {getDisplayScore(scan.quality_score)}
+                      {getEffectiveScore(scan)}
                     </div>
                     <div style={{ fontSize: 10, color: 'var(--muted)' }}>
                       {timeLabel(scan.scanned_at)}

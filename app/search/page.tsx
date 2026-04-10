@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { getDisplayScore, getScoreClass } from '@/lib/scoring'
+import { getScoreClass, getEffectiveScore } from '@/lib/scoring'
 
 type SearchResult = {
   code: string
@@ -12,6 +12,7 @@ type SearchResult = {
   nova_group: number
   nutriscore_grade: string
   quality_score: number | null
+  quality_score_v3?: number | null
   image_front_small_url: string
 }
 
@@ -372,7 +373,8 @@ function SearchPageBody() {
 
           {!loading &&
             results.map((p) => {
-              const cls = getScoreClass(p.quality_score ?? null)
+              const effectiveScore = getEffectiveScore(p)
+              const cls = getScoreClass(effectiveScore)
               const color =
                 cls === 'score-good'
                   ? 'var(--green)'
@@ -431,9 +433,9 @@ function SearchPageBody() {
                     className="flex items-center justify-end flex-shrink-0"
                     style={{ width: 56 }}
                   >
-                    {typeof p.quality_score === 'number' && p.quality_score > 0 ? (
+                    {effectiveScore > 0 ? (
                       <div className="heading-display" style={{ fontSize: 22, color }}>
-                        {getDisplayScore(p.quality_score)}
+                        {effectiveScore}
                       </div>
                     ) : (
                       <span style={{ fontSize: 22, color: 'var(--muted)', fontFamily: 'var(--font-display), Fraunces, serif', fontWeight: 700 }}>

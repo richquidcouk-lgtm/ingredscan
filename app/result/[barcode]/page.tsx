@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { supabase, type Product, type NutritionData, type AdditiveEntry } from '@/lib/supabase'
-import { resolveAdditives, calculateQualityBreakdown, getDisplayScore, getScoreColor, getScoreLabel } from '@/lib/scoring'
+import { resolveAdditives, calculateQualityBreakdown, getEffectiveScore, getScoreColor, getScoreLabel } from '@/lib/scoring'
 import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
 import { cacheProductOffline, getOfflineProduct } from '@/lib/offlineCache'
 import FavouriteButton from '@/components/FavouriteButton'
@@ -165,10 +165,10 @@ export default function ResultPage() {
     ingredients_text: product.ingredients,
   })
 
-  // Score is now natively 0-100
-  const displayScore = getDisplayScore(product.quality_score)
-  const scoreColor = getScoreColor(product.quality_score ?? 0)
-  const verdict = getScoreLabel(product.quality_score ?? 0)
+  // Use v3 score when available, fall back to v2 × 10
+  const displayScore = getEffectiveScore(product)
+  const scoreColor = getScoreColor(displayScore)
+  const verdict = getScoreLabel(displayScore)
 
   // Pillar values are already 0-100
   const pillarNutrition = breakdown.nutritionScore

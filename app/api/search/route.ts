@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
 
   let query = supabase
     .from('products')
-    .select('barcode, name, brand, image_url, nutriscore_grade, nova_score, quality_score')
+    .select('barcode, name, brand, image_url, nutriscore_grade, nova_score, quality_score, quality_score_v3')
     .or(`name.ilike.${pattern},brand.ilike.${pattern},category.ilike.${pattern}`)
     .order('quality_score', { ascending: false, nullsFirst: false })
     .limit(limit)
@@ -64,6 +64,7 @@ export async function GET(request: NextRequest) {
     nova_group: p.nova_score,
     nutriscore_grade: p.nutriscore_grade,
     quality_score: p.quality_score,
+    quality_score_v3: p.quality_score_v3,
     image_front_small_url: p.image_url,
   }))
 

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
-import { getDisplayScore, getScoreClass } from '@/lib/scoring'
+import { getScoreClass, getEffectiveScore } from '@/lib/scoring'
 import { getCategoryEmoji } from '@/lib/utils'
 import AuthModal from '@/components/AuthModal'
 
@@ -104,7 +104,7 @@ export default function HomePage() {
     const total = mapped.length
     const flagged = data.filter((s: any) => Array.isArray(s.products?.additives) && s.products.additives.length > 0).length
     const avg = total > 0
-      ? Math.round(mapped.reduce((sum, s) => sum + getDisplayScore(s.quality_score), 0) / total)
+      ? Math.round(mapped.reduce((sum, s) => sum + getEffectiveScore(s), 0) / total)
       : 0
     setStats({ total, flagged, avgScore: avg })
   }
@@ -262,7 +262,7 @@ export default function HomePage() {
               </div>
               <div className="flex flex-col items-end gap-1">
                 <span className={`score-pill ${getScoreClass(scan.quality_score)}`}>
-                  {getDisplayScore(scan.quality_score)}
+                  {getEffectiveScore(scan)}
                 </span>
                 <span style={{ fontSize: 11, color: 'var(--muted)' }}>
                   {relativeTime(scan.scanned_at)}

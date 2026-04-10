@@ -56,8 +56,12 @@ export async function batchUpsert(
       nova_score: p.nova_group,
       nova_source: p.nova_source,
       off_nova_group: p.off_nova_group,
-      // IngredScan-computed quality score + breakdown + version, for audit.
-      quality_score: p.quality_score,
+      // v3 scores go into dedicated columns — the original quality_score is
+      // NEVER overwritten so the v2 data is preserved for traceability.
+      quality_score_v3: p.quality_score,           // 0-100 composite
+      nutrition_score_v3: (p.quality_score_breakdown as any)?.nutritionScore ?? null,
+      additive_score_v3: (p.quality_score_breakdown as any)?.additiveScore ?? null,
+      organic_bonus_v3: (p.quality_score_breakdown as any)?.organicBonus ?? null,
       quality_score_version: p.quality_score_version,
       quality_score_breakdown: p.quality_score_breakdown,
       quality_score_updated_at: now,
