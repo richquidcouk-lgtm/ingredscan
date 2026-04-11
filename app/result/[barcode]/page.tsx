@@ -175,6 +175,14 @@ export default function ResultPage() {
   const pillarAdditives = breakdown.additiveScore
   const pillarOrganic = breakdown.organicBonus
 
+  // Did OFF ship any nutrition data at all? If every nutriment is null and
+  // there's no nutriscore grade, the nutrition pillar is running on the
+  // neutral fallback (50) rather than a real measurement. Show a badge so
+  // users understand the score isn't punishing the product — it's coping
+  // with missing data.
+  const hasNutritionData =
+    !!breakdown.nutriscore && breakdown.nutriscore !== 'unknown'
+
   // Parse ingredients into a list
   const ingredientList = (product.ingredients || '')
     .split(/[,;]+/)
@@ -370,6 +378,29 @@ export default function ResultPage() {
           </div>
         </div>
       </div>
+
+      {!hasNutritionData && (
+        <div
+          className="mx-5 mb-5"
+          style={{
+            background: 'var(--amber-bg)',
+            border: '1px solid rgba(200,118,58,0.25)',
+            borderRadius: 14,
+            padding: '12px 14px',
+            display: 'flex',
+            gap: 10,
+            alignItems: 'flex-start',
+          }}
+        >
+          <span style={{ fontSize: 16, lineHeight: 1 }}>⚠️</span>
+          <div style={{ flex: 1, fontSize: 12, color: 'var(--amber-deep)', lineHeight: 1.5 }}>
+            <strong style={{ fontWeight: 600 }}>Nutrition data unavailable.</strong>{' '}
+            Open Food Facts hasn&apos;t published per-100g values for this product, so the
+            Nutrition pillar is running on a neutral 50/100 fallback. The score isn&apos;t
+            penalising the product — it&apos;s coping with missing data.
+          </div>
+        </div>
+      )}
 
       {/* Additives */}
       <div className="px-5 mb-5">
