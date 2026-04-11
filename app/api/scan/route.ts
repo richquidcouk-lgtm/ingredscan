@@ -95,7 +95,7 @@ export async function GET(request: NextRequest) {
     nova_source: novaSource,
     special_category: specialCategory,
     quality_score_breakdown: validated.quality_breakdown,
-    quality_score_version: 3,
+    quality_score_version: validated.quality_breakdown.version,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   }
@@ -136,7 +136,7 @@ export async function GET(request: NextRequest) {
       nova_source: novaSource,
       special_category: specialCategory,
       quality_score_breakdown: validated.quality_breakdown,
-      quality_score_version: 3,
+      quality_score_version: validated.quality_breakdown.version,
     }, { onConflict: 'barcode' })
 
   if (upsertError) {

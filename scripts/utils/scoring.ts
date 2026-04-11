@@ -1,9 +1,123 @@
 import type { RawProduct, ProcessedProduct } from '../types/product'
 // Single source of truth: delegate to the same scoring used by the live scan
-// path. Version 3 — Yuka-aligned 3-pillar formula (0-100 scale).
+// path. Food products use lib/scoring (Yuka-aligned 3-pillar formula v4);
+// cosmetic products use lib/cosmeticScoring (INCI-based safety score).
 import { scoreProduct } from '../../lib/scoring'
+import { calculateCosmeticScore } from '../../lib/cosmeticScoring'
+import {
+  parseInciIngredients,
+  matchCosmeticIngredients,
+} from '../../lib/openBeautyFacts'
+
+const COSMETIC_CATEGORY_HINTS = [
+  'en:cosmetics', 'en:beauty', 'en:skin-care', 'en:hair-care',
+  'en:makeup', 'en:perfumes', 'en:shampoos', 'en:shower-gels',
+  'en:face-creams', 'en:body-lotions', 'en:sunscreens',
+  'en:deodorants', 'en:toothpastes', 'en:lip-care', 'en:nail-polish',
+]
+
+function isCosmetic(raw: RawProduct): boolean {
+  if (raw.import_source === 'openbeautyfacts') return true
+  const cats = (raw.categories_tags || []).map((c) => c.toLowerCase())
+  return cats.some((c) => COSMETIC_CATEGORY_HINTS.includes(c))
+}
+
+/**
+ * Label-based cosmetic flag detection. Lives here (rather than using
+ * detectCosmeticFlags from lib/openBeautyFacts) because that helper expects an
+ * OBFProduct and we work with RawProduct at import time.
+ */
+function detectCosmeticFlagsFromRaw(raw: RawProduct) {
+  const labels = (raw.labels_tags || []).map((l) => l.toLowerCase())
+  const ingText = (raw.ingredients || '').toUpperCase()
+
+  return {
+    is_vegan: labels.some((l) => l.includes('vegan')),
+    is_cruelty_free: labels.some(
+      (l) => l.includes('cruelty-free') || l.includes('not tested on animals'),
+    ),
+    is_natural: labels.some(
+      (l) => l.includes('natural') || l.includes('organic') || l.includes('bio'),
+    ),
+    fragrance_free:
+      !ingText.includes('PARFUM') && !ingText.includes('FRAGRANCE'),
+    alcohol_free:
+      !ingText.includes('ALCOHOL DENAT') &&
+      !ingText.includes('ETHANOL') &&
+      !ingText.includes('ISOPROPYL ALCOHOL'),
+    paraben_free: !ingText.includes('PARABEN'),
+    sulphate_free:
+      !ingText.includes('SODIUM LAURYL SULFATE') &&
+      !ingText.includes('SODIUM LAURETH SULFATE'),
+    silicone_free:
+      !ingText.includes('DIMETHICONE') && !ingText.includes('SILOXANE'),
+  }
+}
+
+function processCosmetic(raw: RawProduct): ProcessedProduct {
+  const flags = detectCosmeticFlagsFromRaw(raw)
+  const inciNames = parseInciIngredients(raw.ingredients || '')
+  const matched = matchCosmeticIngredients(inciNames)
+  const cosmeticScore = calculateCosmeticScore(flags, matched)
+
+  // Cosmetic scorer returns 0-10; scale to 0-100 so the shared
+  // quality_score_v3 / quality_score columns stay consistent across product
+  // types. Pillar fields are cosmetic-specific rather than nutrition/additive.
+  const score100 = Math.round(cosmeticScore.overallScore * 10)
+  const breakdown: Record<string, unknown> = {
+    type: 'cosmetic',
+    overallScore: cosmeticScore.overallScore,
+    safetyScore: cosmeticScore.safetyScore,
+    transparencyScore: cosmeticScore.transparencyScore,
+    label: cosmeticScore.label,
+    concerns: cosmeticScore.concerns,
+    highlights: cosmeticScore.highlights,
+    flags: cosmeticScore.flags,
+    ingredientCount: matched.length,
+    version: 5,
+  }
+
+  const isUK = raw.countries_tags?.some(
+    (c) => c.includes('united-kingdom') || c.includes('en:united-kingdom'),
+  )
+
+  return {
+    ...raw,
+    nova_group: 0, // NOVA is meaningless for cosmetics — stored as 0
+    quality_score: score100,
+    data_source: isUK ? 'Open Beauty Facts + UK' : 'Open Beauty Facts',
+    confidence: matched.length > 0 ? 90 : 60,
+    last_imported_at: new Date().toISOString(),
+    off_nova_group: null,
+    nova_source: 'inferred',
+    quality_score_version: 5,
+    quality_score_breakdown: breakdown,
+    product_type: 'cosmetic',
+    inci_ingredients: matched,
+    cosmetic_concerns: cosmeticScore.concerns,
+    is_vegan: flags.is_vegan,
+    is_cruelty_free: flags.is_cruelty_free,
+    is_natural: flags.is_natural,
+    fragrance_free: flags.fragrance_free,
+    alcohol_free: flags.alcohol_free,
+    paraben_free: flags.paraben_free,
+    sulphate_free: flags.sulphate_free,
+    silicone_free: flags.silicone_free,
+    ewg_score:
+      matched
+        .map((m) => m.ewg_score || 0)
+        .reduce((a, b) => Math.max(a, b), 0) || null,
+  }
+}
 
 export function processProduct(raw: RawProduct): ProcessedProduct {
+  // Cosmetic products get scored via lib/cosmeticScoring — nutrient-based
+  // scoring would give every beauty product a meaningless ~60 because they
+  // have no nutriscore, no nutrients, and no E-number additives.
+  if (isCosmetic(raw)) {
+    return processCosmetic(raw)
+  }
+
   // Adapt RawProduct → the OpenFoodFactsProduct shape lib/scoring expects.
   // lib/scoring reads nutriments via OFF-style flat keys (e.g.
   // `saturated-fat_100g`) so we map our nested nutrition object to that.
@@ -48,5 +162,6 @@ export function processProduct(raw: RawProduct): ProcessedProduct {
     nova_source: offNovaGroup != null ? 'off_direct' : 'inferred',
     quality_score_version: result.quality_breakdown.version,
     quality_score_breakdown: result.quality_breakdown as unknown as Record<string, unknown>,
+    product_type: 'food',
   }
 }

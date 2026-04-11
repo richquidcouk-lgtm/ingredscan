@@ -30,27 +30,27 @@ export function QualityScoreCard({ score }: { score: number }) {
     <div
       className="flex-1 rounded-2xl p-5 transition-all duration-300 glass-card card-hover-glow"
       style={{
-        background: `linear-gradient(135deg, rgba(19,19,26,0.8) 0%, ${color}08 100%)`,
-        borderColor: `${color}20`,
-        boxShadow: `0 0 24px ${color}10, inset 0 1px 0 rgba(255,255,255,0.03)`,
+        background: `linear-gradient(135deg, var(--card) 0%, ${color}0d 100%)`,
+        borderColor: `${color}33`,
+        boxShadow: `0 2px 12px ${color}1a`,
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 40px ${color}20, inset 0 1px 0 rgba(255,255,255,0.05)`
+        e.currentTarget.style.boxShadow = `0 4px 20px ${color}2e`
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 24px ${color}10, inset 0 1px 0 rgba(255,255,255,0.03)`
+        e.currentTarget.style.boxShadow = `0 2px 12px ${color}1a`
       }}
     >
       <div className="flex items-center gap-1.5 mb-3">
-        <p className="text-[11px] uppercase tracking-wider font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
+        <p className="text-[11px] uppercase tracking-wider font-medium" style={{ color: 'var(--muted)' }}>
           Quality Score
         </p>
         <button
           onClick={() => setShowInfo(!showInfo)}
           className="w-4 h-4 flex items-center justify-center rounded-full text-[11px] leading-none transition-colors"
           style={{
-            color: showInfo ? '#7c6fff' : 'rgba(240,240,244,0.5)',
-            border: `1px solid ${showInfo ? 'rgba(124,111,255,0.4)' : 'rgba(255,255,255,0.1)'}`,
+            color: showInfo ? 'var(--green)' : 'var(--muted)',
+            border: `1px solid ${showInfo ? 'rgba(61,140,94,0.4)' : 'var(--border)'}`,
           }}
           aria-label="What is Quality Score?"
         >
@@ -61,20 +61,20 @@ export function QualityScoreCard({ score }: { score: number }) {
         <span className="text-4xl font-extrabold heading-display" style={{ color }}>
           {displayScore}
         </span>
-        <span className="text-lg font-medium" style={{ color: 'rgba(240,240,244,0.5)' }}>/100</span>
+        <span className="text-lg font-medium" style={{ color: 'var(--muted)' }}>/100</span>
       </div>
       <span
         className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-medium"
-        style={{ backgroundColor: `${color}15`, color, border: `1px solid ${color}20` }}
+        style={{ backgroundColor: `${color}1a`, color, border: `1px solid ${color}33` }}
       >
         {label}
       </span>
       {showInfo && (
         <div
-          className="mt-3 rounded-xl p-3 animate-fadeUp glass-card"
-          style={{ borderColor: 'rgba(124,111,255,0.15)' }}
+          className="mt-3 rounded-xl p-3 animate-fadeUp"
+          style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}
         >
-          <p className="text-[11px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.55)' }}>
+          <p className="text-[11px] leading-relaxed" style={{ color: 'var(--muted)' }}>
             Rates overall ingredient quality from 0-100. Based on nutrition (60%), additives (30%), and organic certification (10%). Higher is better.
           </p>
         </div>
@@ -100,27 +100,27 @@ export function NovaScoreCard({ score }: { score: number }) {
     <div
       className="flex-1 rounded-2xl p-5 transition-all duration-300 glass-card card-hover-glow"
       style={{
-        background: `linear-gradient(135deg, rgba(19,19,26,0.8) 0%, ${color}08 100%)`,
-        borderColor: `${color}20`,
-        boxShadow: `0 0 24px ${color}10, inset 0 1px 0 rgba(255,255,255,0.03)`,
+        background: `linear-gradient(135deg, var(--card) 0%, ${color}0d 100%)`,
+        borderColor: `${color}33`,
+        boxShadow: `0 2px 12px ${color}1a`,
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 40px ${color}20, inset 0 1px 0 rgba(255,255,255,0.05)`
+        e.currentTarget.style.boxShadow = `0 4px 20px ${color}2e`
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 24px ${color}10, inset 0 1px 0 rgba(255,255,255,0.03)`
+        e.currentTarget.style.boxShadow = `0 2px 12px ${color}1a`
       }}
     >
       <div className="flex items-center gap-1.5 mb-3">
-        <p className="text-[11px] uppercase tracking-wider font-medium" style={{ color: 'rgba(240,240,244,0.4)' }}>
+        <p className="text-[11px] uppercase tracking-wider font-medium" style={{ color: 'var(--muted)' }}>
           Processing Level
         </p>
         <button
           onClick={() => setShowInfo(!showInfo)}
           className="w-4 h-4 flex items-center justify-center rounded-full text-[11px] leading-none transition-colors"
           style={{
-            color: showInfo ? '#7c6fff' : 'rgba(240,240,244,0.5)',
-            border: `1px solid ${showInfo ? 'rgba(124,111,255,0.4)' : 'rgba(255,255,255,0.1)'}`,
+            color: showInfo ? 'var(--green)' : 'var(--muted)',
+            border: `1px solid ${showInfo ? 'rgba(61,140,94,0.4)' : 'var(--border)'}`,
           }}
           aria-label="What is Processing Level?"
         >
@@ -140,16 +140,16 @@ export function NovaScoreCard({ score }: { score: number }) {
       </div>
       <span
         className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-medium"
-        style={{ backgroundColor: `${color}15`, color, border: `1px solid ${color}20` }}
+        style={{ backgroundColor: `${color}1a`, color, border: `1px solid ${color}33` }}
       >
         {label}
       </span>
       {showInfo && (
         <div
-          className="mt-3 rounded-xl p-3 animate-fadeUp glass-card"
-          style={{ borderColor: 'rgba(124,111,255,0.15)' }}
+          className="mt-3 rounded-xl p-3 animate-fadeUp"
+          style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}
         >
-          <p className="text-[11px] leading-relaxed" style={{ color: 'rgba(240,240,244,0.55)' }}>
+          <p className="text-[11px] leading-relaxed" style={{ color: 'var(--muted)' }}>
             NOVA classifies foods by processing level. 🌿 Whole Food (fruits, veg). 🧂 Culinary Ingredient (oils, flour). ⚙️ Processed (canned, cured). 🏭 Industrially Processed (contains industrial ingredients like emulsifiers, flavourings).
           </p>
         </div>

@@ -41,6 +41,21 @@ export interface ProcessedProduct extends RawProduct {
   nova_source: 'off_direct' | 'inferred'
   quality_score_version: number
   quality_score_breakdown: Record<string, unknown>
+  // Product type — 'food' (default) or 'cosmetic'. Cosmetics are scored via
+  // lib/cosmeticScoring rather than the food Yuka formula.
+  product_type?: 'food' | 'cosmetic'
+  // Cosmetic-only fields, populated when product_type === 'cosmetic'.
+  inci_ingredients?: unknown[] | null
+  cosmetic_concerns?: string[] | null
+  is_vegan?: boolean | null
+  is_cruelty_free?: boolean | null
+  is_natural?: boolean | null
+  fragrance_free?: boolean | null
+  alcohol_free?: boolean | null
+  paraben_free?: boolean | null
+  sulphate_free?: boolean | null
+  silicone_free?: boolean | null
+  ewg_score?: number | null
 }
 
 export interface ImportOptions {

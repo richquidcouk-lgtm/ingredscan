@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Fraunces, DM_Sans } from 'next/font/google'
 import PWARegister from '@/components/PWARegister'
+import InstallPopup from '@/components/InstallPopup'
 import AuthListener from '@/components/AuthListener'
 import FeedbackButton from '@/components/FeedbackButton'
 import CookieConsent from '@/components/CookieConsent'
@@ -168,6 +169,7 @@ export default function RootLayout({
           <BottomNav />
         </MarketProvider>
         <FeedbackButton />
+        <InstallPopup />
         <CookieConsent />
         <footer className="pb-24 pt-8 px-4 text-center max-w-lg mx-auto" style={{ color: 'var(--muted)' }}>
           <div className="gradient-divider max-w-xs mx-auto mb-6" />

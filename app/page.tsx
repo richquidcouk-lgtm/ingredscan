@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase'
 import { getScoreClass, getEffectiveScore } from '@/lib/scoring'
 import { getCategoryEmoji } from '@/lib/utils'
 import AuthModal from '@/components/AuthModal'
+import InstallBanner from '@/components/InstallBanner'
 
 type RecentScan = {
   barcode: string
@@ -321,6 +322,11 @@ export default function HomePage() {
         <div style={{ fontSize: 14, color: 'var(--green-deep)', lineHeight: 1.5 }}>
           <strong style={{ fontWeight: 500 }}>E407 (Carrageenan)</strong> appears in 1 in 3 UK yogurts. It&apos;s linked to gut inflammation and is banned in EU organic products. Check your fridge today.
         </div>
+      </div>
+
+      {/* Install app banner */}
+      <div className="px-5 pb-6">
+        <InstallBanner variant="default" />
       </div>
 
       {/* Browse by category */}

@@ -13,9 +13,26 @@ type OpenFoodFactsProduct = {
 }
 
 // ---------------------------------------------------------------------------
-// Quality Score Breakdown — version 3 (Yuka-aligned 3-pillar formula)
+// Quality Score Breakdown — version 5 (Yuka-aligned 3-pillar formula)
+//
+// v5 changes (2026-04-11):
+//   - Nutrition pillar now maps Nutri-Score grade → base directly (no more
+//     halving + hand-tuned bonus/penalty layering).
+//   - When OFF doesn't ship a grade, we compute one ourselves from
+//     nutriments using the 2017 Nutri-Score thresholds for solid foods.
+//   - Additive pillar scans ingredients_text for E-numbers in addition to
+//     OFF's additives_tags, so Yuka-visible additives we were missing now
+//     count toward the pillar.
+//
 // Score is natively 0-100. NOVA has zero influence on the quality score.
 // ---------------------------------------------------------------------------
+
+export type AdditiveFlag = {
+  code: string            // e.g. "E250"
+  tag: string             // original OFF tag, e.g. "en:e250"
+  tier: 0 | 1 | 2 | 3
+  risk: 'none' | 'low' | 'medium' | 'high'
+}
 
 export type QualityScoreBreakdown = {
   nutritionScore: number   // 0-100
@@ -24,7 +41,8 @@ export type QualityScoreBreakdown = {
   qualityScore: number     // 0-100 (weighted composite)
   nutriscore: string       // a-e or 'unknown'
   nova: number             // 1-4 (display only)
-  version: number          // 3
+  additiveFlags: AdditiveFlag[]  // per-additive tier breakdown (sorted worst-first)
+  version: number          // 5
 }
 
 export type ScoringResult = {
@@ -45,59 +63,179 @@ const NUTRISCORE_BASE: Record<string, number> = {
 }
 
 // ---------------------------------------------------------------------------
+// Nutri-Score computation (2017 thresholds, general solid foods)
+//
+// Used when OFF doesn't supply a `nutriscore_grade`. Yuka does this too —
+// they never show "unknown nutrition"; they derive it from the nutrient
+// table. Thresholds match the published Santé publique France algorithm.
+// ---------------------------------------------------------------------------
+
+function stepPoints(value: number, thresholds: number[]): number {
+  // Returns the number of thresholds the value strictly exceeds (0 to N).
+  let pts = 0
+  for (const t of thresholds) if (value > t) pts++
+  return pts
+}
+
+// kJ/100g boundaries — score rises 0..10
+const ENERGY_KJ = [335, 670, 1005, 1340, 1675, 2010, 2345, 2680, 3015, 3350]
+// g/100g boundaries — score rises 0..10
+const SUGARS_G = [4.5, 9, 13.5, 18, 22.5, 27, 31, 36, 40, 45]
+const SAT_FAT_G = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+// mg/100g sodium boundaries — score rises 0..10
+const SODIUM_MG = [90, 180, 270, 360, 450, 540, 630, 720, 810, 900]
+// g/100g boundaries — positives rise 0..5
+const PROTEIN_G = [1.6, 3.2, 4.8, 6.4, 8.0]
+const FIBRE_G = [0.9, 1.9, 2.8, 3.7, 4.7]
+
+export function computeNutriScoreGrade(
+  nutriments: Record<string, number>,
+): 'a' | 'b' | 'c' | 'd' | 'e' | null {
+  const energyKj = nutriments['energy_100g']
+  const sugars = nutriments['sugars_100g']
+  const satFat = nutriments['saturated-fat_100g']
+  const salt = nutriments['salt_100g']
+  const protein = nutriments['proteins_100g']
+  const fibre = nutriments['fiber_100g']
+
+  // Need at least energy, sugars, satfat, salt, protein to compute anything
+  // sensible. Fibre and fruits/veg can default to zero.
+  if (
+    energyKj == null ||
+    sugars == null ||
+    satFat == null ||
+    salt == null ||
+    protein == null
+  ) {
+    return null
+  }
+
+  const nEnergy = stepPoints(energyKj, ENERGY_KJ)
+  const nSugars = stepPoints(sugars, SUGARS_G)
+  const nSatFat = stepPoints(satFat, SAT_FAT_G)
+  const sodiumMg = salt * 400 // salt to sodium conversion
+  const nSodium = stepPoints(sodiumMg, SODIUM_MG)
+  const N = nEnergy + nSugars + nSatFat + nSodium
+
+  const pProtein = stepPoints(protein, PROTEIN_G)
+  const pFibre = stepPoints(fibre ?? 0, FIBRE_G)
+  const pFruitVeg = 0 // we don't have this field at import time
+
+  // Official rule: if N >= 11 and fruits/veg points < 5, protein doesn't count
+  const P =
+    N >= 11 && pFruitVeg < 5 ? pFibre + pFruitVeg : pProtein + pFibre + pFruitVeg
+
+  const score = N - P
+
+  if (score <= -1) return 'a'
+  if (score <= 2) return 'b'
+  if (score <= 10) return 'c'
+  if (score <= 18) return 'd'
+  return 'e'
+}
+
+// ---------------------------------------------------------------------------
 // Pillar 1 — Nutrition Score (60% weight)
+//
+// Maps Nutri-Score grade directly to a 0-100 base. No hand-tuned bonuses or
+// penalties layered on top — Yuka uses Nutri-Score's own point system.
+// If OFF didn't ship a grade, we compute one ourselves from nutriments.
 // ---------------------------------------------------------------------------
 
 function calcNutritionScore(
   nutriments: Record<string, number>,
   nutriscoreGrade: string,
-): number {
-  const grade = nutriscoreGrade.toLowerCase()
-  const base = NUTRISCORE_BASE[grade] ?? 50 // missing → neutral 50
+): { score: number; grade: string } {
+  let grade = nutriscoreGrade.toLowerCase()
 
-  const proteinBonus  = Math.min(20, (nutriments['proteins_100g']       ?? 0) * 0.5)
-  const fibreBonus    = Math.min(15, (nutriments['fiber_100g']          ?? 0) * 1.5)
-  const sugarPenalty  = Math.min(30, (nutriments['sugars_100g']         ?? 0) * 0.6)
-  const satFatPenalty = Math.min(10, (nutriments['saturated-fat_100g']  ?? 0) * 1.2)
-  const saltPenalty   = Math.min(10, (nutriments['salt_100g']           ?? 0) * 8.0)
-
-  let score = Math.round(
-    (base * 0.5) + proteinBonus + fibreBonus
-    - sugarPenalty - satFatPenalty - saltPenalty
-  )
-  score = Math.max(0, Math.min(100, score))
-
-  // Yuka hard cap: Nutriscore D or E → max 49
-  if (grade === 'd' || grade === 'e') {
-    score = Math.min(score, 49)
+  if (!['a', 'b', 'c', 'd', 'e'].includes(grade)) {
+    const computed = computeNutriScoreGrade(nutriments)
+    if (computed) grade = computed
   }
 
-  return score
+  if (!['a', 'b', 'c', 'd', 'e'].includes(grade)) {
+    // Genuinely no data — stay neutral rather than punishing.
+    return { score: 50, grade: 'unknown' }
+  }
+
+  return { score: NUTRISCORE_BASE[grade], grade }
 }
 
 // ---------------------------------------------------------------------------
 // Pillar 2 — Additive Score (30% weight)
+//
+// Yuka method: score is determined by the RISKIEST additive present, not by
+// cumulative stacking. Limited-risk and risk-free additives don't pile on top
+// of a hazardous one — the worst tier sets the pillar.
 // ---------------------------------------------------------------------------
 
-function calcAdditiveScore(additiveTags: string[]): number {
-  let penalty = 0
-  let maxTier = 0
+const TIER_TO_RISK: Record<0 | 1 | 2 | 3, AdditiveFlag['risk']> = {
+  0: 'none',
+  1: 'low',
+  2: 'medium',
+  3: 'high',
+}
 
-  for (const tag of additiveTags) {
-    const tier = getTier(tag)
-    maxTier = Math.max(maxTier, tier)
-    if (tier === 3) penalty += 30
-    else if (tier === 2) penalty += 15
-    else if (tier === 1) penalty += 5
+/**
+ * Extract E-number tags from raw ingredients text. OFF's `additives_tags` is
+ * often incomplete (Yuka is better at parsing ingredient labels), so we do our
+ * own pass over the text and merge with whatever OFF supplied.
+ *
+ * Matches patterns like "E621", "E 621", "E-621", "(E 102)", "e102a".
+ */
+export function extractAdditiveTagsFromText(text: string): string[] {
+  if (!text) return []
+  const found = new Set<string>()
+  const regex = /\bE\s*-?\s*(\d{3,4})([a-z])?\b/gi
+  let m: RegExpExecArray | null
+  while ((m = regex.exec(text)) !== null) {
+    const num = m[1]
+    const suffix = (m[2] || '').toLowerCase()
+    found.add(`en:e${num}${suffix}`)
   }
+  return Array.from(found)
+}
 
-  let score = Math.max(0, Math.min(100, 100 - penalty))
+function mergeAdditiveTags(existing: string[], extracted: string[]): string[] {
+  const seen = new Set<string>()
+  const merged: string[] = []
+  for (const t of [...existing, ...extracted]) {
+    const n = (t || '').toLowerCase().trim()
+    if (!n || seen.has(n)) continue
+    seen.add(n)
+    merged.push(n)
+  }
+  return merged
+}
 
-  // Yuka hard caps
-  if (maxTier >= 3) score = Math.min(score, 49)
-  else if (maxTier >= 2) score = Math.min(score, 75)
+function buildAdditiveFlags(additiveTags: string[]): AdditiveFlag[] {
+  const seen = new Set<string>()
+  const flags: AdditiveFlag[] = []
+  for (const tag of additiveTags) {
+    const norm = tag.toLowerCase().trim()
+    if (!norm || seen.has(norm)) continue
+    seen.add(norm)
+    const tier = getTier(norm)
+    const code = norm.replace(/^en:/, '').toUpperCase()
+    flags.push({ code, tag: norm, tier, risk: TIER_TO_RISK[tier] })
+  }
+  // Worst-first ordering so the UI can render the most important flags at the top
+  flags.sort((a, b) => b.tier - a.tier)
+  return flags
+}
 
-  return score
+function calcAdditiveScore(flags: AdditiveFlag[]): number {
+  let maxTier = 0
+  for (const f of flags) {
+    if (f.tier > maxTier) maxTier = f.tier
+    if (maxTier === 3) break
+  }
+  switch (maxTier) {
+    case 3: return 49   // hazardous — Yuka cap
+    case 2: return 75   // moderate — Yuka cap
+    case 1: return 90   // limited
+    default: return 100 // risk-free / none
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -161,8 +299,17 @@ export function calculateQualityBreakdown(
   const nutriments = product.nutriments || {}
   const grade = (product.nutriscore_grade || '').toLowerCase()
 
-  const nutritionScore = calcNutritionScore(nutriments, grade)
-  const additiveScore = calcAdditiveScore(product.additives_tags || [])
+  // Merge OFF's additives_tags with E-numbers extracted from the ingredients
+  // text — OFF's tag list is often missing entries that are clearly visible
+  // in the ingredients label.
+  const extractedTags = extractAdditiveTagsFromText(product.ingredients_text || '')
+  const mergedTags = mergeAdditiveTags(product.additives_tags || [], extractedTags)
+  const additiveFlags = buildAdditiveFlags(mergedTags)
+
+  const nutrition = calcNutritionScore(nutriments, grade)
+  const nutritionScore = nutrition.score
+  const effectiveGrade = nutrition.grade
+  const additiveScore = calcAdditiveScore(additiveFlags)
   const organicBonus = calcOrganicBonus(product.labels_tags || [])
 
   const qualityScore = Math.round(
@@ -178,9 +325,10 @@ export function calculateQualityBreakdown(
     additiveScore,
     organicBonus,
     qualityScore: Math.max(0, Math.min(100, qualityScore)),
-    nutriscore: ['a', 'b', 'c', 'd', 'e'].includes(grade) ? grade : 'unknown',
+    nutriscore: ['a', 'b', 'c', 'd', 'e'].includes(effectiveGrade) ? effectiveGrade : 'unknown',
     nova,
-    version: 3,
+    additiveFlags,
+    version: 5,
   }
 }
 
@@ -372,6 +520,7 @@ export function resolveAdditives(additiveTags: string[]): Array<{
   code: string
   name: string
   risk: 'low' | 'medium' | 'high'
+  tier: 0 | 1 | 2 | 3
   description: string
   regulation?: string
   function?: string
@@ -386,18 +535,26 @@ export function resolveAdditives(additiveTags: string[]): Array<{
     .filter(code => !isAddedNutrient(code))
   const unique = normalised.filter((v, i, a) => a.indexOf(v) === i)
 
+  // Risk label comes from the tier registry — single source of truth shared
+  // with the scorer, so UI badges always match the additive pillar.
+  const tierToRisk = (tier: 0 | 1 | 2 | 3): 'low' | 'medium' | 'high' =>
+    tier === 3 ? 'high' : tier === 2 ? 'medium' : 'low'
+
   return unique
     .map(code => {
+      const tier = getTier(`en:${code.toLowerCase()}`)
+      const risk = tierToRisk(tier)
       const match = additiveDatabase.find(
         a => a.code.toLowerCase() === code.toLowerCase(),
       )
       if (match) {
-        return { ...match, risk: match.risk as 'low' | 'medium' | 'high' }
+        return { ...match, risk, tier }
       }
       return {
         code,
         name: code,
-        risk: 'low' as const,
+        risk,
+        tier,
         function: 'Additive',
         description: `${code} is a permitted food additive under EU Regulation 1333/2008.`,
         detailed_description: `${code} is a permitted food additive authorised for use in the EU under Regulation 1333/2008 and in the UK under retained EU law. All permitted additives have undergone safety assessments by EFSA. Detailed information for this specific additive is being added to our database.`,
@@ -405,6 +562,8 @@ export function resolveAdditives(additiveTags: string[]): Array<{
         sources: [{ title: 'EU Regulation 1333/2008 on food additives', url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333', year: 2008 }],
       }
     })
+    // Worst-first so the UI naturally shows the riskiest additives at the top
+    .sort((a, b) => b.tier - a.tier)
 }
 
 export function resolveAddedNutrients(additiveTags: string[]): string[] {
