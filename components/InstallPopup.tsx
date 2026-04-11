@@ -102,23 +102,23 @@ export default function InstallPopup() {
       aria-modal="true"
       aria-labelledby="install-popup-title"
       className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)' }}
+      style={{ background: 'rgba(28,27,24,0.45)', backdropFilter: 'blur(4px)' }}
       onClick={dismiss}
     >
       <div
         onClick={(e) => e.stopPropagation()}
         className="w-full max-w-sm rounded-2xl p-6 relative"
         style={{
-          background: 'var(--card, #14141a)',
-          border: '1px solid var(--border, rgba(255,255,255,0.08))',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+          background: 'var(--card)',
+          border: '1px solid var(--border)',
+          boxShadow: '0 20px 60px rgba(28,27,24,0.18)',
         }}
       >
         <button
           onClick={dismiss}
           aria-label="Dismiss install prompt"
           className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-base"
-          style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--muted, #9a9aa8)' }}
+          style={{ background: 'var(--soft)', color: 'var(--muted)', border: '1px solid var(--border)' }}
         >
           ×
         </button>
@@ -127,11 +127,11 @@ export default function InstallPopup() {
         <h3
           id="install-popup-title"
           className="heading-display text-lg font-bold mb-2"
-          style={{ color: 'var(--text, #f0f0f4)' }}
+          style={{ color: 'var(--dark)' }}
         >
           Install IngredScan
         </h3>
-        <p className="text-sm mb-5 leading-relaxed" style={{ color: 'var(--muted, rgba(240,240,244,0.6))' }}>
+        <p className="text-sm mb-5 leading-relaxed" style={{ color: 'var(--muted)' }}>
           Add IngredScan to your home screen for instant product scans. No app
           store, no download — works like any native app.
         </p>
@@ -139,7 +139,7 @@ export default function InstallPopup() {
         {isIOS ? (
           <div
             className="rounded-xl p-3 mb-4 text-xs leading-relaxed"
-            style={{ background: 'rgba(0,229,160,0.08)', color: 'var(--muted, rgba(240,240,244,0.7))' }}
+            style={{ background: 'var(--green-bg)', color: 'var(--green-deep)', border: '1px solid rgba(61,140,94,0.2)' }}
           >
             {getIosInstructions()}
           </div>
@@ -149,7 +149,7 @@ export default function InstallPopup() {
           <button
             onClick={dismiss}
             className="flex-1 py-3 rounded-xl text-sm font-semibold"
-            style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--muted, #9a9aa8)' }}
+            style={{ background: 'var(--soft)', color: 'var(--dark)', border: '1px solid var(--border)' }}
           >
             Not now
           </button>
@@ -158,9 +158,9 @@ export default function InstallPopup() {
               onClick={handleInstall}
               className="flex-1 py-3 rounded-xl text-sm font-semibold transition-all active:scale-95"
               style={{
-                background: 'linear-gradient(135deg, #00e5a0, #1ab06e)',
-                color: '#0b0b0f',
-                boxShadow: '0 2px 15px rgba(0,229,160,0.3)',
+                background: 'var(--dark)',
+                color: 'var(--cream)',
+                boxShadow: '0 2px 12px rgba(28,27,24,0.25)',
               }}
             >
               Install
