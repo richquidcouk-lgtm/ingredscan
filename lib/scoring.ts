@@ -566,9 +566,10 @@ export function resolveAdditives(additiveTags: string[]): Array<{
         potential_risks: [],
         sources: [
           { title: 'EU Regulation 1333/2008 on food additives', url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333', year: 2008 },
-          { title: 'EFSA — Food Additives', url: 'https://www.efsa.europa.eu/en/topics/topic/food-additives', year: 2024 },
-          { title: 'UK FSA — Approved Additives and E Numbers', url: 'https://www.food.gov.uk/safety-hygiene/food-additives', year: 2024 },
+          { title: 'EFSA — Food Additives topic', url: 'https://www.efsa.europa.eu/en/topics/topic/food-additives', year: 2024 },
+          { title: 'UK Food Standards Agency — Food additives', url: 'https://www.food.gov.uk/safety-hygiene/food-additives', year: 2024 },
           { title: 'US FDA — Food Additive Status List', url: 'https://www.fda.gov/food/food-additives-petitions/food-additive-status-list', year: 2024 },
+          { title: 'WHO / FAO JECFA — Evaluations of food additives', url: 'https://apps.who.int/food-additives-contaminants-jecfa-database/search.aspx', year: 2024 },
         ],
         uk_status: 'permitted',
         eu_status: 'permitted',
