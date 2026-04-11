@@ -37,3 +37,13 @@ next-env.d.ts
 
 # import logs
 scripts/logs/
+
+# rescore failure log
+rescoreToV4.failed.log
+
+# local design reference assets (mockups, screenshots, prompt notes)
+/Ingredscan UI/
+/YUKA features/
+
+# claude code local workspace
+/.claude/
