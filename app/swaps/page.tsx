@@ -4,7 +4,7 @@ import { useEffect, useState, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
-import { getDisplayScore, getScoreClass } from '@/lib/scoring'
+import { getEffectiveScore, getScoreClass } from '@/lib/scoring'
 import { getCategoryEmoji } from '@/lib/utils'
 
 // Better-alternatives browser. If a `?for=<barcode>` query is supplied we
@@ -15,8 +15,12 @@ type AltProduct = {
   barcode: string
   name: string
   brand: string
-  quality_score: number
+  quality_score: number | null
+  quality_score_v3: number | null
+  effective_score: number
   category: string
+  country: string | null
+  categories_tags: string[]
   image_url?: string
   additives_count: number
   is_organic?: boolean
@@ -66,62 +70,74 @@ function SwapsPageBody() {
   async function loadAlternatives() {
     setLoading(true)
 
-    let categoryFilter: string | null = null
-    let sourceProduct: AltProduct | null = null
+    // v4 score threshold on the 0-100 scale. 55 ≈ Fair or above.
+    const MIN_V3 = 55
+    const baseSelect =
+      'barcode, name, brand, quality_score, quality_score_v3, category, categories_tags, country, image_url, additives, is_organic'
+
+    let sourceTags: string[] = []
+    let sourceCountry: string | null = null
 
     if (sourceBarcode) {
       const { data } = await supabase
         .from('products')
-        .select('barcode, name, brand, quality_score, category, image_url, additives, is_organic')
+        .select(baseSelect)
         .eq('barcode', sourceBarcode)
         .single()
       if (data) {
-        sourceProduct = mapRow(data)
-        setSource(sourceProduct)
-        // Use a meaningful category fragment from the source product if it
-        // has one — long category strings get split by " - " or "," and we
-        // pick the most specific (last) word group as the search hint.
-        const cat = data.category || ''
-        const tokens = cat
-          .split(/[,\-/]+/)
-          .map((s: string) => s.trim())
-          .filter((s: string) => s.length > 3)
-        categoryFilter = tokens[tokens.length - 1] || null
+        setSource(mapRow(data))
+        sourceTags = (data.categories_tags as string[]) || []
+        sourceCountry = (data.country as string | null) || null
       }
     }
 
-    // Lowered threshold from 7.0 to 5.5 — there were too few NOVA-3/4 rows
-    // hitting 7.0 to populate the swaps list, so users were getting an
-    // empty page. 5.5 is "Fair" or above on the 0-10 scale.
-    const baseSelect = 'barcode, name, brand, quality_score, category, image_url, additives, is_organic'
-    const minScore = 5.5
+    // OFF category tags are hierarchical (en:cereals → en:noodles →
+    // en:instant-noodles). The tail is the most specific — try it first,
+    // then broaden if we don't have enough matches.
+    const tryTags = [...sourceTags].reverse().slice(0, 3)
 
-    // First try: filtered by category (if we have a source).
-    if (categoryFilter) {
-      const { data: scoped } = await supabase
+    const runQuery = async (tag: string | null) => {
+      let q = supabase
         .from('products')
         .select(baseSelect)
         .eq('import_source', 'openfoodfacts')
-        .gte('quality_score', minScore)
-        .ilike('category', `%${categoryFilter}%`)
-        .order('quality_score', { ascending: false })
-        .limit(40)
+        .not('quality_score_v3', 'is', null)
+        .gte('quality_score_v3', MIN_V3)
 
-      if (scoped && scoped.length > 0) {
-        setAlts((scoped as Array<Record<string, unknown>>).map(mapRow))
+      if (tag) q = q.contains('categories_tags', [tag])
+      if (sourceCountry) q = q.eq('country', sourceCountry)
+
+      return q.order('quality_score_v3', { ascending: false }).limit(40)
+    }
+
+    // 1. Most specific tag + country.
+    for (const tag of tryTags) {
+      const { data } = await runQuery(tag)
+      if (data && data.length >= 5) {
+        setAlts((data as Array<Record<string, unknown>>).map(mapRow))
         setLoading(false)
         return
       }
-      // Fall through to the unscoped query if the category filter empties out.
     }
 
-    // Fallback: highest-quality products globally (no category filter).
+    // 2. Country-scoped, no tag (better than global if country is known).
+    if (sourceCountry) {
+      const { data } = await runQuery(null)
+      if (data && data.length > 0) {
+        setAlts((data as Array<Record<string, unknown>>).map(mapRow))
+        setLoading(false)
+        return
+      }
+    }
+
+    // 3. Global fallback — highest v3 anywhere.
     const { data: global } = await supabase
       .from('products')
       .select(baseSelect)
       .eq('import_source', 'openfoodfacts')
-      .gte('quality_score', minScore)
-      .order('quality_score', { ascending: false })
+      .not('quality_score_v3', 'is', null)
+      .gte('quality_score_v3', MIN_V3)
+      .order('quality_score_v3', { ascending: false })
       .limit(40)
 
     setAlts(((global || []) as Array<Record<string, unknown>>).map(mapRow))
@@ -182,7 +198,7 @@ function SwapsPageBody() {
             Replacing
           </div>
           <div style={{ fontSize: 13, color: '#7a4210', lineHeight: 1.4 }}>
-            {source.name} — Score {getDisplayScore(source.quality_score)} ·{' '}
+            {source.name} — Score {source.effective_score}/100 ·{' '}
             {source.additives_count} additive{source.additives_count === 1 ? '' : 's'}
           </div>
         </div>
@@ -242,9 +258,9 @@ function SwapsPageBody() {
 
       {!loading &&
         filtered.map((alt) => {
-          const altScore = getDisplayScore(alt.quality_score)
-          const improvement = source ? altScore - getDisplayScore(source.quality_score) : null
-          const cls = getScoreClass(alt.quality_score)
+          const altScore = alt.effective_score
+          const improvement = source ? altScore - source.effective_score : null
+          const cls = getScoreClass(altScore)
           const color =
             cls === 'score-good' ? 'var(--green)' : cls === 'score-fair' ? 'var(--amber)' : 'var(--red)'
           return (
@@ -315,12 +331,18 @@ function SwapsPageBody() {
 
 function mapRow(row: Record<string, unknown>): AltProduct {
   const additives = Array.isArray(row.additives) ? row.additives : []
+  const v3 = row.quality_score_v3 as number | null | undefined
+  const v2 = row.quality_score as number | null | undefined
   return {
     barcode: row.barcode as string,
     name: (row.name as string) || 'Unknown',
     brand: (row.brand as string) || '',
-    quality_score: (row.quality_score as number) || 0,
+    quality_score: v2 ?? null,
+    quality_score_v3: v3 ?? null,
+    effective_score: getEffectiveScore({ quality_score_v3: v3, quality_score: v2 }),
     category: (row.category as string) || '',
+    country: (row.country as string | null) || null,
+    categories_tags: (row.categories_tags as string[]) || [],
     image_url: (row.image_url as string) || '',
     additives_count: additives.length,
     is_organic: Boolean(row.is_organic),

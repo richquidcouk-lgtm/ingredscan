@@ -28,6 +28,56 @@ const QUICK_CATEGORIES = [
   { emoji: '👶', label: 'Baby', term: 'baby' },
 ]
 
+// Rotating "Did you know" tips. Every tip MUST cite an official regulatory
+// body or peer-reviewed source — no marketing claims. We pick one at random
+// on each page load.
+type Tip = {
+  html: string
+  source: { label: string; url: string }
+}
+const DID_YOU_KNOW_TIPS: Tip[] = [
+  {
+    html:
+      '<strong style="font-weight:500">E102 (Tartrazine)</strong> must carry a warning label in the UK: "may have an adverse effect on activity and attention in children". Check sweets, soft drinks and sauces.',
+    source: {
+      label: 'UK Food Standards Agency — Food colours and hyperactivity',
+      url: 'https://www.food.gov.uk/safety-hygiene/food-additives',
+    },
+  },
+  {
+    html:
+      '<strong style="font-weight:500">E407 (Carrageenan)</strong> is not permitted in infant formula under 4 months in the EU, following EFSA\'s re-evaluation of its safety in that age group.',
+    source: {
+      label: 'EFSA — Re-evaluation of carrageenan (E 407)',
+      url: 'https://www.efsa.europa.eu/en/efsajournal/pub/5238',
+    },
+  },
+  {
+    html:
+      '<strong style="font-weight:500">E171 (Titanium dioxide)</strong> was banned as a food additive across the EU in 2022 after EFSA concluded it "can no longer be considered as safe" due to genotoxicity concerns. Still permitted in the US.',
+    source: {
+      label: 'EFSA — Safety of titanium dioxide (E 171)',
+      url: 'https://www.efsa.europa.eu/en/efsajournal/pub/6585',
+    },
+  },
+  {
+    html:
+      '<strong style="font-weight:500">Ultra-processed foods (NOVA 4)</strong> now make up over 50% of the average UK diet — higher than any other European country. Every 10% increase is associated with a 14% higher risk of all-cause mortality.',
+    source: {
+      label: 'BMJ — Ultra-processed food consumption and risk of mortality',
+      url: 'https://www.bmj.com/content/365/bmj.l1451',
+    },
+  },
+  {
+    html:
+      '<strong style="font-weight:500">E621 (MSG)</strong> is considered safe by the FDA but EFSA set a group ADI of 30 mg/kg body weight in 2017 — the first time a safety limit was assigned. Check crisps, stock cubes and instant noodles.',
+    source: {
+      label: 'EFSA — Re-evaluation of glutamic acid and glutamates (E 620–E 625)',
+      url: 'https://www.efsa.europa.eu/en/efsajournal/pub/4910',
+    },
+  },
+]
+
 function relativeTime(iso: string): string {
   const then = new Date(iso).getTime()
   if (isNaN(then)) return ''
@@ -55,6 +105,12 @@ export default function HomePage() {
   const [recentScans, setRecentScans] = useState<RecentScan[]>([])
   const [stats, setStats] = useState({ total: 0, flagged: 0, avgScore: 0 })
   const [showAuth, setShowAuth] = useState(false)
+  const [tip, setTip] = useState<Tip>(DID_YOU_KNOW_TIPS[0])
+
+  useEffect(() => {
+    // Pick a random tip on mount (client-side only — avoids hydration mismatch)
+    setTip(DID_YOU_KNOW_TIPS[Math.floor(Math.random() * DID_YOU_KNOW_TIPS.length)])
+  }, [])
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -319,9 +375,29 @@ export default function HomePage() {
         >
           Did you know
         </div>
-        <div style={{ fontSize: 14, color: 'var(--green-deep)', lineHeight: 1.5 }}>
-          <strong style={{ fontWeight: 500 }}>E407 (Carrageenan)</strong> appears in 1 in 3 UK yogurts. It&apos;s linked to gut inflammation and is banned in EU organic products. Check your fridge today.
-        </div>
+        <div
+          style={{ fontSize: 14, color: 'var(--green-deep)', lineHeight: 1.5 }}
+          dangerouslySetInnerHTML={{ __html: tip.html }}
+        />
+        <a
+          href={tip.source.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 mt-3"
+          style={{
+            fontSize: 11,
+            color: 'var(--green-deep)',
+            textDecoration: 'none',
+            padding: '5px 10px',
+            borderRadius: 8,
+            background: 'rgba(61,140,94,0.1)',
+            border: '1px solid rgba(61,140,94,0.2)',
+            fontWeight: 500,
+          }}
+        >
+          <span>📖 {tip.source.label}</span>
+          <span style={{ opacity: 0.7 }}>↗</span>
+        </a>
       </div>
 
       {/* Install app banner */}
