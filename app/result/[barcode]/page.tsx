@@ -271,14 +271,16 @@ export default function ResultPage() {
         </div>
       </div>
 
-      {/* Score card (dark) */}
+      {/* Score card */}
       <div
         className="mx-5 mb-5 relative overflow-hidden"
         style={{
-          background: 'var(--dark)',
+          background: 'var(--card)',
+          border: '1px solid var(--border)',
           borderRadius: 20,
           padding: 22,
-          color: '#fff',
+          color: 'var(--dark)',
+          boxShadow: `0 2px 14px ${scoreColor}1f`,
         }}
       >
         <div
@@ -290,7 +292,7 @@ export default function ResultPage() {
             width: 130,
             height: 130,
             borderRadius: '50%',
-            background: 'rgba(255,255,255,0.03)',
+            background: `${scoreColor}0f`,
           }}
         />
         <div className="flex items-start justify-between mb-5">
@@ -300,7 +302,7 @@ export default function ResultPage() {
                 fontSize: 10,
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.4)',
+                color: 'var(--muted)',
                 marginBottom: 5,
               }}
             >
@@ -309,13 +311,13 @@ export default function ResultPage() {
             <div className="heading-display" style={{ fontSize: 54, lineHeight: 1, color: scoreColor, letterSpacing: '-0.05em' }}>
               {displayScore}
             </div>
-            <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 3 }}>
+            <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 3 }}>
               {verdict}
             </div>
           </div>
           {/* Score ring */}
           <svg width="76" height="76" viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="6" />
+            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(28,27,24,0.08)" strokeWidth="6" />
             <circle
               cx="40"
               cy="40"
@@ -344,12 +346,12 @@ export default function ResultPage() {
           style={{
             marginTop: 16,
             paddingTop: 14,
-            borderTop: '1px solid rgba(255,255,255,0.07)',
+            borderTop: '1px solid var(--border)',
           }}
         >
-          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', marginRight: 3 }}>Processing</div>
+          <div style={{ fontSize: 11, color: 'var(--muted)', marginRight: 3 }}>Processing</div>
           {[1, 2, 3, 4].map((n) => {
-            const colors: Record<number, string> = { 1: '#4ade80', 2: '#a3e635', 3: '#fb923c', 4: '#f87171' }
+            const colors: Record<number, string> = { 1: '#3d8c5e', 2: '#7ab55c', 3: '#c8763a', 4: '#c0392b' }
             const isActive = n === product.nova_score
             return (
               <div
@@ -358,12 +360,12 @@ export default function ResultPage() {
                   flex: 1,
                   height: 5,
                   borderRadius: 3,
-                  background: isActive ? colors[n] : 'rgba(255,255,255,0.1)',
+                  background: isActive ? colors[n] : 'rgba(28,27,24,0.1)',
                 }}
               />
             )
           })}
-          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.45)', marginLeft: 6, whiteSpace: 'nowrap' }}>
+          <div style={{ fontSize: 11, color: 'var(--dark)', marginLeft: 6, whiteSpace: 'nowrap', fontWeight: 500 }}>
             NOVA {product.nova_score} — {novaWord(product.nova_score)}
           </div>
         </div>
@@ -402,37 +404,72 @@ export default function ResultPage() {
                 : add.risk === 'medium'
                 ? { bg: '#fff7ed', color: '#9a3412', label: '● Moderate concern' }
                 : { bg: '#f0fdf4', color: '#166534', label: '● No concern' }
+            const regStatuses: Array<{ body: string; status?: string | null }> = [
+              { body: 'UK FSA', status: add.uk_status },
+              { body: 'EU EFSA', status: add.eu_status },
+              { body: 'US FDA', status: add.us_status },
+            ].filter((r) => r.status)
+            const statusColor = (s?: string | null) => {
+              if (!s) return { bg: '#f5f3ee', color: 'var(--muted)' }
+              if (s.includes('banned') || s.includes('prohibited'))
+                return { bg: '#fdf0ef', color: '#922b21' }
+              if (s.includes('warning') || s.includes('restricted'))
+                return { bg: '#fdf3ea', color: '#9a5620' }
+              return { bg: '#eef6f1', color: '#1d6b43' }
+            }
             return (
               <div key={add.code} className="card mb-2 overflow-hidden">
                 <button
                   type="button"
                   onClick={() => setOpenAdditive(isOpen ? null : add.code)}
-                  className="w-full flex items-center gap-2.5 px-3.5 py-3.5 text-left"
+                  className="w-full flex items-start gap-2.5 px-3.5 py-3.5 text-left"
                   style={{ background: 'transparent', cursor: 'pointer' }}
                 >
-                  <div style={{ width: 9, height: 9, borderRadius: '50%', background: dot, flexShrink: 0 }} />
-                  <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--muted)', minWidth: 38 }}>
+                  <div style={{ width: 9, height: 9, borderRadius: '50%', background: dot, flexShrink: 0, marginTop: 5 }} />
+                  <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--muted)', minWidth: 38, marginTop: 2 }}>
                     {add.code}
                   </div>
-                  <div style={{ flex: 1, fontSize: 13, color: 'var(--dark)' }}>{add.name}</div>
-                  {add.function && (
-                    <div
-                      style={{
-                        fontSize: 10,
-                        color: '#a8a59c',
-                        background: '#f5f3ee',
-                        padding: '2px 6px',
-                        borderRadius: 7,
-                      }}
-                    >
-                      {add.function}
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div className="flex items-center gap-2">
+                      <div style={{ fontSize: 13, color: 'var(--dark)', fontWeight: 500 }}>{add.name}</div>
+                      {add.function && (
+                        <div
+                          style={{
+                            fontSize: 10,
+                            color: 'var(--muted)',
+                            background: '#f5f3ee',
+                            padding: '2px 6px',
+                            borderRadius: 7,
+                            whiteSpace: 'nowrap',
+                          }}
+                        >
+                          {add.function}
+                        </div>
+                      )}
                     </div>
-                  )}
+                    {add.description && (
+                      <div
+                        style={{
+                          fontSize: 11,
+                          color: 'var(--muted)',
+                          lineHeight: 1.45,
+                          marginTop: 4,
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {add.description}
+                      </div>
+                    )}
+                  </div>
                   <div
                     style={{
                       fontSize: 11,
-                      color: '#ccc',
+                      color: 'var(--muted)',
                       marginLeft: 2,
+                      marginTop: 3,
                       transform: isOpen ? 'rotate(180deg)' : 'none',
                       transition: 'transform 0.2s',
                     }}
@@ -441,7 +478,7 @@ export default function ResultPage() {
                   </div>
                 </button>
                 {isOpen && (
-                  <div className="px-3.5 pb-3.5" style={{ borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+                  <div className="px-3.5 pb-3.5" style={{ borderTop: '1px solid var(--border)' }}>
                     <span
                       className="inline-flex items-center mt-2.5 mb-2"
                       style={{
@@ -455,9 +492,72 @@ export default function ResultPage() {
                     >
                       {badge.label}
                     </span>
-                    <div style={{ fontSize: 12, color: '#666', lineHeight: 1.6, marginBottom: 10 }}>
-                      {add.description}
+                    <div style={{ fontSize: 12, color: 'var(--dark)', lineHeight: 1.6, marginBottom: 10 }}>
+                      {add.detailed_description || add.description}
                     </div>
+
+                    {add.potential_risks && add.potential_risks.length > 0 && (
+                      <div style={{ marginBottom: 12 }}>
+                        <div
+                          style={{
+                            fontSize: 10,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.06em',
+                            color: 'var(--muted)',
+                            marginBottom: 6,
+                          }}
+                        >
+                          Potential concerns
+                        </div>
+                        <ul style={{ margin: 0, paddingLeft: 16, fontSize: 12, color: 'var(--dark)', lineHeight: 1.55 }}>
+                          {add.potential_risks.map((risk, i) => (
+                            <li key={i} style={{ marginBottom: 3 }}>{risk}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {regStatuses.length > 0 && (
+                      <div style={{ marginBottom: 12 }}>
+                        <div
+                          style={{
+                            fontSize: 10,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.06em',
+                            color: 'var(--muted)',
+                            marginBottom: 6,
+                          }}
+                        >
+                          Regulatory status
+                        </div>
+                        <div className="flex flex-wrap gap-1.5">
+                          {regStatuses.map((r) => {
+                            const c = statusColor(r.status)
+                            return (
+                              <span
+                                key={r.body}
+                                style={{
+                                  fontSize: 10,
+                                  padding: '3px 9px',
+                                  borderRadius: 20,
+                                  background: c.bg,
+                                  color: c.color,
+                                  fontWeight: 500,
+                                }}
+                              >
+                                {r.body}: {r.status?.replace(/_/g, ' ')}
+                              </span>
+                            )
+                          })}
+                        </div>
+                        {add.uk_notes && (
+                          <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 6, lineHeight: 1.5 }}>
+                            {add.uk_notes}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
                     {add.sources && add.sources.length > 0 && (
                       <>
                         <div
@@ -465,11 +565,11 @@ export default function ResultPage() {
                             fontSize: 10,
                             textTransform: 'uppercase',
                             letterSpacing: '0.06em',
-                            color: '#bbb',
+                            color: 'var(--muted)',
                             marginBottom: 6,
                           }}
                         >
-                          Official sources
+                          Approved body references
                         </div>
                         {add.sources.map((src, i) => (
                           <a
@@ -487,8 +587,11 @@ export default function ResultPage() {
                               color: 'var(--dark)',
                             }}
                           >
-                            <span style={{ fontSize: 11, flex: 1 }}>{src.title}</span>
-                            <span style={{ fontSize: 10, color: '#bbb' }}>↗</span>
+                            <span style={{ fontSize: 11, flex: 1 }}>
+                              {src.title}
+                              {src.year ? <span style={{ color: 'var(--muted)', marginLeft: 6 }}>({src.year})</span> : null}
+                            </span>
+                            <span style={{ fontSize: 10, color: 'var(--muted)' }}>↗</span>
                           </a>
                         ))}
                       </>
@@ -692,17 +795,17 @@ function novaWord(n: number): string {
 }
 
 function Pillar({ name, value, weight }: { name: string; value: number; weight?: string }) {
-  const color = value >= 70 ? '#4ade80' : value >= 45 ? '#fb923c' : '#f87171'
+  const color = value >= 70 ? '#3d8c5e' : value >= 45 ? '#c8763a' : '#c0392b'
   return (
     <div className="flex items-center gap-2.5">
-      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', width: 86, flexShrink: 0 }}>
+      <div style={{ fontSize: 11, color: 'var(--muted)', width: 86, flexShrink: 0 }}>
         {name}
-        {weight && <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.3)', marginLeft: 4 }}>{weight}</span>}
+        {weight && <span style={{ fontSize: 9, color: 'var(--muted)', marginLeft: 4, opacity: 0.7 }}>{weight}</span>}
       </div>
-      <div style={{ flex: 1, height: 3, background: 'rgba(255,255,255,0.1)', borderRadius: 2, overflow: 'hidden' }}>
+      <div style={{ flex: 1, height: 3, background: 'rgba(28,27,24,0.08)', borderRadius: 2, overflow: 'hidden' }}>
         <div style={{ width: `${value}%`, height: '100%', background: color, borderRadius: 2 }} />
       </div>
-      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.7)', minWidth: 24, textAlign: 'right' }}>{value}</div>
+      <div style={{ fontSize: 11, color: 'var(--dark)', minWidth: 24, textAlign: 'right', fontWeight: 500 }}>{value}</div>
     </div>
   )
 }

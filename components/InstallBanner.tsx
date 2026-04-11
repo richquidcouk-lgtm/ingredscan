@@ -109,10 +109,10 @@ export default function InstallBanner({ variant = 'default' }: Props) {
             </svg>
           </div>
           <div className="flex-1 min-w-0">
-            <h4 className="text-sm font-bold mb-0.5" style={{ color: '#f0f0f4' }}>
+            <h4 className="text-sm font-bold mb-0.5" style={{ color: 'var(--dark)' }}>
               Scan products instantly with IngredScan
             </h4>
-            <p className="text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>
+            <p className="text-xs" style={{ color: 'var(--muted)' }}>
               Free app — works like any native app. No app store needed.
             </p>
           </div>
@@ -137,7 +137,7 @@ export default function InstallBanner({ variant = 'default' }: Props) {
           )}
         </div>
         {!canInstall && getInstallInstructions(browserInfo.browser, browserInfo.isIOS) && (
-          <p className="text-[11px] mt-3 text-center leading-relaxed" style={{ color: 'rgba(240,240,244,0.5)' }}>
+          <p className="text-[11px] mt-3 text-center leading-relaxed" style={{ color: 'var(--muted)' }}>
             {getInstallInstructions(browserInfo.browser, browserInfo.isIOS)}
           </p>
         )}
@@ -161,8 +161,8 @@ export default function InstallBanner({ variant = 'default' }: Props) {
             <line x1="7" y1="12" x2="17" y2="12" />
           </svg>
         </div>
-        <p className="flex-1 text-xs" style={{ color: 'rgba(240,240,244,0.5)' }}>
-          <strong style={{ color: '#f0f0f4' }}>Get IngredScan</strong> — install the free app
+        <p className="flex-1 text-xs" style={{ color: 'var(--muted)' }}>
+          <strong style={{ color: 'var(--dark)' }}>Get IngredScan</strong> — install the free app
         </p>
         {canInstall ? (
           <button onClick={handleInstall} className="px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0" style={{ backgroundColor: 'rgba(0,229,160,0.15)', color: '#00e5a0' }}>
@@ -187,10 +187,10 @@ export default function InstallBanner({ variant = 'default' }: Props) {
       }}
     >
       <div className="text-4xl mb-3">📱</div>
-      <h3 className="text-lg font-bold heading-display mb-2" style={{ color: '#f0f0f4' }}>
+      <h3 className="text-lg font-bold heading-display mb-2" style={{ color: 'var(--dark)' }}>
         Get the app
       </h3>
-      <p className="text-sm mb-4 max-w-xs mx-auto leading-relaxed" style={{ color: 'rgba(240,240,244,0.5)' }}>
+      <p className="text-sm mb-4 max-w-xs mx-auto leading-relaxed" style={{ color: 'var(--muted)' }}>
         Install IngredScan on your phone. Works just like any other app — instant access from your home screen, no app store download needed.
       </p>
       <div className="flex flex-col items-center gap-3">
@@ -212,12 +212,12 @@ export default function InstallBanner({ variant = 'default' }: Props) {
           </Link>
         )}
         <div className="flex items-center gap-4">
-          <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ No download</span>
-          <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ No sign-up required</span>
-          <span className="text-[11px]" style={{ color: 'rgba(240,240,244,0.45)' }}>✓ 100% free</span>
+          <span className="text-[11px]" style={{ color: 'var(--muted)' }}>✓ No download</span>
+          <span className="text-[11px]" style={{ color: 'var(--muted)' }}>✓ No sign-up required</span>
+          <span className="text-[11px]" style={{ color: 'var(--muted)' }}>✓ 100% free</span>
         </div>
         {!canInstall && getInstallInstructions(browserInfo.browser, browserInfo.isIOS) && (
-          <p className="text-xs mt-3 leading-relaxed" style={{ color: 'rgba(240,240,244,0.5)' }}>
+          <p className="text-xs mt-3 leading-relaxed" style={{ color: 'var(--muted)' }}>
             {getInstallInstructions(browserInfo.browser, browserInfo.isIOS)}
           </p>
         )}

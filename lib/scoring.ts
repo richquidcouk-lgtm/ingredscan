@@ -527,6 +527,11 @@ export function resolveAdditives(additiveTags: string[]): Array<{
   detailed_description?: string
   potential_risks?: string[]
   sources?: Array<{ title: string; url: string; year: number }>
+  uk_status?: string | null
+  eu_status?: string | null
+  us_status?: string | null
+  uk_notes?: string | null
+  divergence_alert?: boolean
 }> {
   // Normalise, deduplicate, and filter out nutrients
   const normalised = additiveTags
@@ -556,10 +561,18 @@ export function resolveAdditives(additiveTags: string[]): Array<{
         risk,
         tier,
         function: 'Additive',
-        description: `${code} is a permitted food additive under EU Regulation 1333/2008.`,
+        description: `${code} is a permitted food additive under EU/UK Regulation 1333/2008.`,
         detailed_description: `${code} is a permitted food additive authorised for use in the EU under Regulation 1333/2008 and in the UK under retained EU law. All permitted additives have undergone safety assessments by EFSA. Detailed information for this specific additive is being added to our database.`,
         potential_risks: [],
-        sources: [{ title: 'EU Regulation 1333/2008 on food additives', url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333', year: 2008 }],
+        sources: [
+          { title: 'EU Regulation 1333/2008 on food additives', url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1333', year: 2008 },
+          { title: 'EFSA — Food Additives', url: 'https://www.efsa.europa.eu/en/topics/topic/food-additives', year: 2024 },
+          { title: 'UK FSA — Approved Additives and E Numbers', url: 'https://www.food.gov.uk/safety-hygiene/food-additives', year: 2024 },
+          { title: 'US FDA — Food Additive Status List', url: 'https://www.fda.gov/food/food-additives-petitions/food-additive-status-list', year: 2024 },
+        ],
+        uk_status: 'permitted',
+        eu_status: 'permitted',
+        us_status: 'permitted',
       }
     })
     // Worst-first so the UI naturally shows the riskiest additives at the top
