@@ -36,10 +36,14 @@ export async function GET(request: NextRequest) {
   }
   const pattern = `%${escape(term)}%`
 
+  // Default to UK products. Caller can override with ?country= param.
+  const country = request.nextUrl.searchParams.get('country')?.trim() || 'UK'
+
   let query = supabase
     .from('products')
     .select('barcode, name, brand, image_url, nutriscore_grade, nova_score, quality_score, quality_score_v3')
     .neq('data_source', 'not_found')
+    .eq('country', country)
     .or(`name.ilike.${pattern},brand.ilike.${pattern},category.ilike.${pattern}`)
     .order('quality_score', { ascending: false, nullsFirst: false })
     .limit(limit)
