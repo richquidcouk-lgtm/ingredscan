@@ -9,6 +9,7 @@ import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
 import { cacheProductOffline, getOfflineProduct } from '@/lib/offlineCache'
 import FavouriteButton from '@/components/FavouriteButton'
 import PhotoSubmission from '@/components/PhotoSubmission'
+import AllergenAlert from '@/components/AllergenAlert'
 
 type ResolvedAdditive = ReturnType<typeof resolveAdditives>[number]
 
@@ -239,6 +240,9 @@ export default function ResultPage() {
         </div>
       </div>
 
+      {/* Allergen alert — shown when user's flagged allergens match ingredients */}
+      <AllergenAlert ingredientsText={product.ingredients || ''} />
+
       {/* Product hero */}
       <div className="px-5 pt-5 pb-4 flex gap-3.5 items-start">
         <div
@@ -397,6 +401,47 @@ export default function ResultPage() {
           </div>
         </div>
       )}
+
+      {/* UK safety badge + Eco-score */}
+      <div className="flex gap-2.5 mx-5 mb-5">
+        <div
+          className="flex-1 rounded-xl"
+          style={{
+            padding: '12px 14px',
+            background: 'var(--green-bg)',
+            border: '1px solid rgba(61,140,94,0.2)',
+          }}
+        >
+          <div style={{ fontSize: 14, marginBottom: 4 }}>🇬🇧</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--green-deep)', marginBottom: 2 }}>
+            UK Safety Verified
+          </div>
+          <div style={{ fontSize: 10, color: 'var(--muted)', lineHeight: 1.4 }}>
+            Scored against UK FSA, EFSA &amp; WHO standards
+          </div>
+        </div>
+        {!!(product as Record<string, unknown>).ecoscore_grade &&
+          ['a', 'b', 'c', 'd', 'e'].includes(
+            String((product as Record<string, unknown>).ecoscore_grade).toLowerCase(),
+          ) && (
+          <div
+            className="flex-1 rounded-xl"
+            style={{
+              padding: '12px 14px',
+              background: 'var(--card)',
+              border: '1px solid var(--border)',
+            }}
+          >
+            <div style={{ fontSize: 14, marginBottom: 4 }}>🌍</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--dark)', marginBottom: 2 }}>
+              Eco-Score {String((product as Record<string, unknown>).ecoscore_grade).toUpperCase()}
+            </div>
+            <div style={{ fontSize: 10, color: 'var(--muted)', lineHeight: 1.4 }}>
+              Environmental impact from Open Food Facts
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* Additives */}
       <div className="px-5 mb-5">

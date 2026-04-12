@@ -1,5 +1,5 @@
 const CACHE_KEY = 'ingredscan_offline_products'
-const MAX_CACHED = 20
+const MAX_CACHED = 200
 
 export function cacheProductOffline(product: any) {
   if (typeof window === 'undefined') return

@@ -51,8 +51,9 @@ export default function ScanPage() {
             if (!isValidBarcode(decodedText)) return
             setScanned((prev) => {
               if (prev) return prev
+              try { navigator.vibrate?.(50) } catch {}
               try { scanner.stop() } catch {}
-              setTimeout(() => router.push(`/result/${decodedText}?source=scan`), 400)
+              setTimeout(() => router.push(`/result/${decodedText}?source=scan`), 300)
               return true
             })
           },

@@ -27,6 +27,8 @@ export type OFFProduct = {
   origins_tags: string[]
   manufacturing_places: string
   manufacturing_places_tags: string[]
+  ecoscore_grade?: string
+  ecoscore_score?: number
 }
 
 export type OFFResponse = {

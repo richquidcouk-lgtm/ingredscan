@@ -130,6 +130,8 @@ export async function GET(request: NextRequest) {
     data_source: isUK ? 'Open Food Facts + UK FSA' : 'Open Food Facts + USDA',
     confidence: validated.confidence,
     category: (offProduct.categories_tags || []).join(', '),
+    ecoscore_grade: offProduct.ecoscore_grade || null,
+    ecoscore_score: offProduct.ecoscore_score || null,
     product_type: 'food' as const,
     nova_source: novaSource,
     special_category: specialCategory,
