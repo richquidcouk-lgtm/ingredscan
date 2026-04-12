@@ -414,10 +414,10 @@ export default function ResultPage() {
         >
           <div style={{ fontSize: 14, marginBottom: 4 }}>🇬🇧</div>
           <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--green-deep)', marginBottom: 2 }}>
-            UK Safety Verified
+            Independently Scored
           </div>
           <div style={{ fontSize: 10, color: 'var(--muted)', lineHeight: 1.4 }}>
-            Scored against UK FSA, EFSA &amp; WHO standards
+            Using published UK FSA, EFSA &amp; WHO data
           </div>
         </div>
         {!!(product as Record<string, unknown>).ecoscore_grade &&
