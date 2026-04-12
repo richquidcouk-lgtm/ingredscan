@@ -43,10 +43,10 @@ export async function GET(request: NextRequest) {
       }
       // Stale negative cache — fall through and re-fetch
     } else {
-      // Check if cache is fresh (30 days)
+      // Check if cache is fresh (90 days — products rarely change)
       const updatedAt = new Date(cached.updated_at)
       const daysSince = (Date.now() - updatedAt.getTime()) / (1000 * 60 * 60 * 24)
-      if (daysSince < 30) {
+      if (daysSince < 90) {
         // For cached cosmetic products, compute the score on the fly
         if (cached.product_type === 'cosmetic' && cached.inci_ingredients) {
           const score = calculateCosmeticScore(cached, cached.inci_ingredients)

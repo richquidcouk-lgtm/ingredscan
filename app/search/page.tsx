@@ -158,9 +158,10 @@ function SearchPageBody() {
   )
 
   useEffect(() => {
-    const t = setTimeout(() => runSearch(query, selectedCategory?.term ?? null), 400)
+    const t = setTimeout(() => runSearch(query, selectedCategory?.term ?? null), 350)
     return () => clearTimeout(t)
-  }, [query, selectedCategory, runSearch])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, selectedCategory, mode])
 
   // Reset ALL state when switching mode — including the text query, so the
   // search box doesn't keep showing the previous term from the other mode.

@@ -1,88 +1,91 @@
-const CACHE_NAME = 'ingredscan-v5'
+const CACHE_NAME = 'ingredscan-v6'
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
 ]
 
-// Listen for skip waiting message from the app
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting()
   }
 })
 
-// Install: pre-cache static assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS)
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS))
   )
 })
 
-// Activate: clean up old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames
-          .filter((name) => name !== CACHE_NAME)
-          .map((name) => caches.delete(name))
-      )
-    })
+    caches.keys().then((names) =>
+      Promise.all(names.filter((n) => n !== CACHE_NAME).map((n) => caches.delete(n)))
+    )
   )
   self.clients.claim()
 })
 
-// Fetch: network-first for API, cache-first for static
 self.addEventListener('fetch', (event) => {
   const { request } = event
   const url = new URL(request.url)
 
-  // Cache scan results for offline viewing
+  // Never cache POST requests (photo submissions etc.)
+  if (request.method !== 'GET') return
+
+  // API responses: network-only. Supabase + localStorage handle caching.
+  // Caching API JSON in the SW just causes stale-data bugs.
+  if (url.pathname.startsWith('/api/')) {
+    event.respondWith(
+      fetch(request).catch(() =>
+        new Response(JSON.stringify({ error: 'offline' }), {
+          status: 503,
+          headers: { 'Content-Type': 'application/json' },
+        })
+      )
+    )
+    return
+  }
+
+  // Result pages: network-first, cache fallback for offline viewing.
   if (url.pathname.startsWith('/result/')) {
     event.respondWith(
       fetch(request)
-        .then((response) => {
-          const responseClone = response.clone()
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, responseClone)
-          })
+        .then(async (response) => {
+          if (response.ok) {
+            const cache = await caches.open(CACHE_NAME)
+            await cache.put(request, response.clone())
+          }
           return response
         })
-        .catch(() => {
-          return caches.match(request).then((cachedResponse) => {
-            return cachedResponse || new Response('Offline', { status: 503 })
-          })
+        .catch(async () => {
+          const cached = await caches.match(request)
+          return cached || new Response('Offline', { status: 503 })
         })
     )
     return
   }
 
-  // Cache API responses for offline
-  if (url.pathname.startsWith('/api/scan')) {
+  // Static assets (_next/static, images, fonts): cache-first for speed.
+  if (
+    url.pathname.startsWith('/_next/static/') ||
+    url.pathname.startsWith('/icons/') ||
+    url.pathname.endsWith('.woff2') ||
+    url.pathname.endsWith('.woff')
+  ) {
     event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const responseClone = response.clone()
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, responseClone)
-          })
+      caches.match(request).then((cached) =>
+        cached ||
+        fetch(request).then(async (response) => {
+          const cache = await caches.open(CACHE_NAME)
+          await cache.put(request, response.clone())
           return response
         })
-        .catch(() => {
-          return caches.match(request).then((cachedResponse) => {
-            return cachedResponse || new Response(
-              JSON.stringify({ error: 'offline' }),
-              { status: 503, headers: { 'Content-Type': 'application/json' } }
-            )
-          })
-        })
+      )
     )
     return
   }
 
-  // Default: network first, fallback to cache
+  // Everything else: network-first, cache fallback.
   event.respondWith(
     fetch(request).catch(() => caches.match(request))
   )

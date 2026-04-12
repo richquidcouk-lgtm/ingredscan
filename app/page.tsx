@@ -294,7 +294,7 @@ export default function HomePage() {
               >
                 {scan.image_url ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={scan.image_url} alt="" style={{ width: '100%', height: '100%', borderRadius: 10, objectFit: 'cover' }} />
+                  <img src={scan.image_url} alt="" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', borderRadius: 10, objectFit: 'cover', background: 'var(--cream)' }} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
                 ) : (
                   <span>{getCategoryEmoji(scan.category)}</span>
                 )}

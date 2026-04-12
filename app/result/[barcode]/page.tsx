@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useMemo, useState, useRef } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { supabase, type Product, type NutritionData, type AdditiveEntry } from '@/lib/supabase'
@@ -36,29 +36,19 @@ export default function ResultPage() {
     setLoading(true)
     setError(null)
 
-    // Try Supabase cache first
-    try {
-      const { data: cached } = await supabase.from('products').select('*').eq('barcode', barcode).single()
-      if (cached) {
-        setProduct(cached as Product)
-        cacheProductOffline(cached)
-        setLoading(false)
-        recordScan()
-        return
-      }
-    } catch {
-      // not cached
+    // Check offline cache first for instant display
+    const offline = getOfflineProduct(barcode)
+    if (offline) {
+      setProduct(offline as Product)
+      setLoading(false)
+      recordScan()
+      return
     }
 
+    // Single API call handles DB cache check + external fetch + save
     try {
       const res = await fetch(`/api/scan?barcode=${barcode}`)
       if (!res.ok) {
-        const offline = getOfflineProduct(barcode)
-        if (offline) {
-          setProduct(offline as Product)
-          setLoading(false)
-          return
-        }
         setError(res.status === 404 ? 'not_found' : 'api_error')
         setLoading(false)
         return
@@ -68,12 +58,6 @@ export default function ResultPage() {
       cacheProductOffline(data)
       recordScan()
     } catch {
-      const offline = getOfflineProduct(barcode)
-      if (offline) {
-        setProduct(offline as Product)
-        setLoading(false)
-        return
-      }
       setError('api_error')
     }
     setLoading(false)
@@ -134,62 +118,66 @@ export default function ResultPage() {
   // components still exist as standalone files but are no longer routed to;
   // they will be reintroduced once each has been individually restyled.
 
-  // Standard food product
-  const nutrition = (product.nutrition || {}) as NutritionData
-  const rawAdditives = product.additives || []
-  const additives: ResolvedAdditive[] = rawAdditives.length > 0
-    ? resolveAdditives(rawAdditives.map((a: AdditiveEntry) => `en:${a.code || ''}`))
-    : []
+  // Memoize all expensive scoring + additive resolution so it doesn't
+  // re-run when openAdditive toggles or other state changes.
+  const {
+    nutrition, additives, breakdown, displayScore, scoreColor, verdict,
+    pillarNutrition, pillarAdditives, pillarOrganic,
+    hasNutritionData, ingredientList, flaggedCodesArr,
+  } = useMemo(() => {
+    const nutrition = (product.nutrition || {}) as NutritionData
+    const rawAdditives = product.additives || []
+    const _additives: ResolvedAdditive[] = rawAdditives.length > 0
+      ? resolveAdditives(rawAdditives.map((a: AdditiveEntry) => `en:${a.code || ''}`))
+      : []
 
-  // Recompute the breakdown so we can show pillar bars. lib/scoring is the
-  // single source of truth — feed it the same shape we feed at import time.
-  const nutriments: Record<string, number> = {}
-  if (nutrition.energy != null) nutriments['energy_100g'] = nutrition.energy
-  if (nutrition.fat != null) nutriments['fat_100g'] = nutrition.fat
-  if (nutrition.saturated_fat != null) nutriments['saturated-fat_100g'] = nutrition.saturated_fat
-  if (nutrition.carbs != null) nutriments['carbohydrates_100g'] = nutrition.carbs
-  if (nutrition.sugars != null) nutriments['sugars_100g'] = nutrition.sugars
-  if (nutrition.fibre != null) nutriments['fiber_100g'] = nutrition.fibre
-  if (nutrition.protein != null) nutriments['proteins_100g'] = nutrition.protein
-  if (nutrition.salt != null) nutriments['salt_100g'] = nutrition.salt
+    const nutriments: Record<string, number> = {}
+    if (nutrition.energy != null) nutriments['energy_100g'] = nutrition.energy
+    if (nutrition.fat != null) nutriments['fat_100g'] = nutrition.fat
+    if (nutrition.saturated_fat != null) nutriments['saturated-fat_100g'] = nutrition.saturated_fat
+    if (nutrition.carbs != null) nutriments['carbohydrates_100g'] = nutrition.carbs
+    if (nutrition.sugars != null) nutriments['sugars_100g'] = nutrition.sugars
+    if (nutrition.fibre != null) nutriments['fiber_100g'] = nutrition.fibre
+    if (nutrition.protein != null) nutriments['proteins_100g'] = nutrition.protein
+    if (nutrition.salt != null) nutriments['salt_100g'] = nutrition.salt
 
-  const breakdown = calculateQualityBreakdown({
-    nova_group: product.nova_score,
-    nutriscore_grade: product.nutriscore_grade,
-    additives_tags: rawAdditives.map((a) => `en:${(a.code || '').toLowerCase()}`),
-    labels_tags: [], // labels not stored on product; recalc from what we have
-    nutriments,
-    ingredients_text: product.ingredients,
-  })
+    const _breakdown = calculateQualityBreakdown({
+      nova_group: product.nova_score,
+      nutriscore_grade: product.nutriscore_grade,
+      additives_tags: rawAdditives.map((a) => `en:${(a.code || '').toLowerCase()}`),
+      labels_tags: [],
+      nutriments,
+      ingredients_text: product.ingredients,
+    })
 
-  // Use v3 score when available, fall back to v2 × 10
-  const displayScore = getEffectiveScore(product)
-  const scoreColor = getScoreColor(displayScore)
-  const verdict = getScoreLabel(displayScore)
+    const _displayScore = getEffectiveScore(product)
 
-  // Pillar values are already 0-100
-  const pillarNutrition = breakdown.nutritionScore
-  const pillarAdditives = breakdown.additiveScore
-  const pillarOrganic = breakdown.organicBonus
+    const _ingredientList = (product.ingredients || '')
+      .split(/[,;]+/)
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0)
+      .slice(0, 25)
 
-  // Did OFF ship any nutrition data at all? If every nutriment is null and
-  // there's no nutriscore grade, the nutrition pillar is running on the
-  // neutral fallback (50) rather than a real measurement. Show a badge so
-  // users understand the score isn't punishing the product — it's coping
-  // with missing data.
-  const hasNutritionData =
-    !!breakdown.nutriscore && breakdown.nutriscore !== 'unknown'
+    const _flaggedCodes = new Set(
+      _additives.filter((a) => a.risk === 'high' || a.risk === 'medium').map((a) => a.code.toUpperCase()),
+    )
 
-  // Parse ingredients into a list
-  const ingredientList = (product.ingredients || '')
-    .split(/[,;]+/)
-    .map((s) => s.trim())
-    .filter((s) => s.length > 0)
-    .slice(0, 25)
+    return {
+      nutrition,
+      additives: _additives,
+      breakdown: _breakdown,
+      displayScore: _displayScore,
+      scoreColor: getScoreColor(_displayScore),
+      verdict: getScoreLabel(_displayScore),
+      pillarNutrition: _breakdown.nutritionScore,
+      pillarAdditives: _breakdown.additiveScore,
+      pillarOrganic: _breakdown.organicBonus,
+      hasNutritionData: !!_breakdown.nutriscore && _breakdown.nutriscore !== 'unknown',
+      ingredientList: _ingredientList,
+      flaggedCodesArr: Array.from(_flaggedCodes),
+    }
+  }, [product])
 
-  // Mark ingredient flagged status by checking against additive E-codes
-  const flaggedCodes = new Set(additives.filter((a) => a.risk === 'high' || a.risk === 'medium').map((a) => a.code.toUpperCase()))
-  const flaggedCodesArr = Array.from(flaggedCodes)
   function ingredientFlag(ing: string): 'clean' | 'flagged' | 'unknown' {
     const u = ing.toUpperCase()
     for (const code of flaggedCodesArr) {
@@ -258,7 +246,7 @@ export default function ResultPage() {
         >
           {product.image_url ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={product.image_url} alt="" style={{ width: '100%', height: '100%', borderRadius: 12, objectFit: 'cover' }} />
+            <img src={product.image_url} alt="" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', borderRadius: 12, objectFit: 'cover', background: 'var(--cream)' }} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
           ) : (
             <span>{getCategoryEmoji(product.category || '')}</span>
           )}

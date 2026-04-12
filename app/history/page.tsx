@@ -331,7 +331,7 @@ export default function HistoryPage() {
                   >
                     {scan.image_url ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={scan.image_url} alt="" style={{ width: '100%', height: '100%', borderRadius: 9, objectFit: 'cover' }} />
+                      <img src={scan.image_url} alt="" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', borderRadius: 9, objectFit: 'cover', background: 'var(--cream)' }} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
                     ) : (
                       <span>{scan.product_type === 'cosmetic' ? '💄' : getCategoryEmoji(scan.category)}</span>
                     )}

@@ -110,17 +110,19 @@ function SwapsPageBody() {
       return q.order('quality_score_v3', { ascending: false }).limit(40)
     }
 
-    // 1. Most specific tag + country.
-    for (const tag of tryTags) {
-      const { data } = await runQuery(tag)
-      if (data && data.length >= 5) {
-        setAlts((data as Array<Record<string, unknown>>).map(mapRow))
-        setLoading(false)
-        return
+    // 1. Fire all tag queries in parallel — pick the first with >= 5 results.
+    if (tryTags.length > 0) {
+      const tagResults = await Promise.all(tryTags.map((tag) => runQuery(tag)))
+      for (const { data } of tagResults) {
+        if (data && data.length >= 5) {
+          setAlts((data as Array<Record<string, unknown>>).map(mapRow))
+          setLoading(false)
+          return
+        }
       }
     }
 
-    // 2. Country-scoped, no tag (better than global if country is known).
+    // 2. Country-scoped, no tag.
     if (sourceCountry) {
       const { data } = await runQuery(null)
       if (data && data.length > 0) {
@@ -130,7 +132,7 @@ function SwapsPageBody() {
       }
     }
 
-    // 3. Global fallback — highest v3 anywhere.
+    // 3. Global fallback.
     const { data: global } = await supabase
       .from('products')
       .select(baseSelect)
@@ -283,7 +285,7 @@ function SwapsPageBody() {
               >
                 {alt.image_url ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={alt.image_url} alt="" style={{ width: '100%', height: '100%', borderRadius: 11, objectFit: 'cover' }} />
+                  <img src={alt.image_url} alt="" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', borderRadius: 11, objectFit: 'cover', background: 'var(--cream)' }} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
                 ) : (
                   <span>{getCategoryEmoji(alt.category)}</span>
                 )}
