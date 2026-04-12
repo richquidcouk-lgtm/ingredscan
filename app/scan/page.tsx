@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { isValidBarcode } from '@/lib/barcode'
 
 // Direct html5-qrcode integration. The previous implementation wrapped the
 // reusable Scanner component AND drew its own viewfinder frame, resulting in
@@ -47,6 +48,7 @@ export default function ScanPage() {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
           } as any,
           (decodedText: string) => {
+            if (!isValidBarcode(decodedText)) return
             setScanned((prev) => {
               if (prev) return prev
               try { scanner.stop() } catch {}
@@ -123,7 +125,7 @@ export default function ScanPage() {
   function submitManual(e: React.FormEvent) {
     e.preventDefault()
     const code = manualBarcode.trim()
-    if (code.length >= 6) {
+    if (code.length >= 6 && isValidBarcode(code)) {
       router.push(`/result/${code}?source=scan`)
     }
   }

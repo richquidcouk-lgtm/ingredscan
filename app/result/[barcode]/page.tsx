@@ -8,6 +8,7 @@ import { resolveAdditives, calculateQualityBreakdown, getEffectiveScore, getScor
 import { getCategoryEmoji, incrementAnonScanCount } from '@/lib/utils'
 import { cacheProductOffline, getOfflineProduct } from '@/lib/offlineCache'
 import FavouriteButton from '@/components/FavouriteButton'
+import PhotoSubmission from '@/components/PhotoSubmission'
 
 type ResolvedAdditive = ReturnType<typeof resolveAdditives>[number]
 
@@ -99,18 +100,13 @@ export default function ResultPage() {
 
   if (error === 'not_found') {
     return (
-      <div className="max-w-[480px] mx-auto pt-20 pb-24 px-6 text-center animate-fadeIn">
-        <div style={{ fontSize: 48, marginBottom: 16, opacity: 0.5 }}>🔍</div>
-        <h2 className="heading-display" style={{ fontSize: 22, marginBottom: 8 }}>
-          Product not found
-        </h2>
-        <p style={{ fontSize: 14, color: 'var(--muted)', marginBottom: 24, lineHeight: 1.5 }}>
-          We couldn&apos;t find this product in our database. It may not be listed yet.
-        </p>
-        <Link href="/scan" className="btn-primary inline-block" style={{ maxWidth: 240 }}>
-          Scan another product
-        </Link>
-      </div>
+      <PhotoSubmission
+        barcode={barcode}
+        onProductFound={(p) => {
+          setProduct(p as unknown as Product)
+          setError(null)
+        }}
+      />
     )
   }
 

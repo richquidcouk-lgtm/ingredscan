@@ -22,6 +22,7 @@
     "import:dry-run": "tsx scripts/importProducts.ts --source=openfoodfacts --dry-run --limit=100"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.88.0",
     "@stripe/stripe-js": "^9.0.1",
     "@supabase/supabase-js": "^2.101.1",
     "html2canvas": "^1.4.1",

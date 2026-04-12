@@ -39,6 +39,7 @@ export async function GET(request: NextRequest) {
   let query = supabase
     .from('products')
     .select('barcode, name, brand, image_url, nutriscore_grade, nova_score, quality_score, quality_score_v3')
+    .neq('data_source', 'not_found')
     .or(`name.ilike.${pattern},brand.ilike.${pattern},category.ilike.${pattern}`)
     .order('quality_score', { ascending: false, nullsFirst: false })
     .limit(limit)

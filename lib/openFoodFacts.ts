@@ -158,15 +158,14 @@ export function validateProduct(product: OFFProduct): ValidatedProduct {
 
 export async function fetchProduct(barcode: string): Promise<OFFProduct | null> {
   try {
-    const response = await fetch(
+    const { fetchWithRetry } = await import('@/lib/fetchUtils')
+    const response = await fetchWithRetry(
       `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`,
-      {
-        headers: { 'User-Agent': 'IngredScan/1.0 (https://ingredscan.com)' },
-        next: { revalidate: 86400 },
-      }
+      { headers: { 'User-Agent': 'IngredScan/1.0 (https://ingredscan.com)' } },
+      { timeoutMs: 8000, maxRetries: 2, baseDelay: 500 },
     )
 
-    if (!response.ok) return null
+    if (!response || !response.ok) return null
 
     const data: OFFResponse = await response.json()
 

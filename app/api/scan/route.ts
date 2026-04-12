@@ -8,12 +8,17 @@ import { detectSpecialCategory } from '@/lib/specialCategories'
 import { validateProductData } from '@/lib/dataQuality'
 import { extractRetailerInfo } from '@/lib/retailers'
 import { getServiceSupabase } from '@/lib/supabase'
+import { isValidBarcode } from '@/lib/barcode'
 
 export async function GET(request: NextRequest) {
   const barcode = request.nextUrl.searchParams.get('barcode')
 
   if (!barcode) {
     return NextResponse.json({ error: 'Barcode required' }, { status: 400 })
+  }
+
+  if (!isValidBarcode(barcode)) {
+    return NextResponse.json({ error: 'Invalid barcode format' }, { status: 400 })
   }
 
   const supabase = getServiceSupabase()
@@ -26,16 +31,29 @@ export async function GET(request: NextRequest) {
     .single()
 
   if (cached) {
-    // Check if cache is fresh (30 days)
-    const updatedAt = new Date(cached.updated_at)
-    const daysSince = (Date.now() - updatedAt.getTime()) / (1000 * 60 * 60 * 24)
-    if (daysSince < 30) {
-      // For cached cosmetic products, compute the score on the fly
-      if (cached.product_type === 'cosmetic' && cached.inci_ingredients) {
-        const score = calculateCosmeticScore(cached, cached.inci_ingredients)
-        return NextResponse.json({ ...cached, cosmetic_score: score })
+    // Negative cache: product was recently looked up and not found anywhere.
+    // Expires after 1 hour so OFF additions are picked up on re-scan.
+    if (cached.data_source === 'not_found') {
+      const hoursSince = (Date.now() - new Date(cached.updated_at).getTime()) / (1000 * 60 * 60)
+      if (hoursSince < 1) {
+        return NextResponse.json(
+          { error: 'Product not found', allow_photo_submit: true },
+          { status: 404 },
+        )
       }
-      return NextResponse.json(cached)
+      // Stale negative cache — fall through and re-fetch
+    } else {
+      // Check if cache is fresh (30 days)
+      const updatedAt = new Date(cached.updated_at)
+      const daysSince = (Date.now() - updatedAt.getTime()) / (1000 * 60 * 60 * 24)
+      if (daysSince < 30) {
+        // For cached cosmetic products, compute the score on the fly
+        if (cached.product_type === 'cosmetic' && cached.inci_ingredients) {
+          const score = calculateCosmeticScore(cached, cached.inci_ingredients)
+          return NextResponse.json({ ...cached, cosmetic_score: score })
+        }
+        return NextResponse.json(cached)
+      }
     }
   }
 
@@ -57,7 +75,28 @@ export async function GET(request: NextRequest) {
 
   // --- FOOD FLOW (existing) ---
   if (!offProduct) {
-    return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+    // Negative cache so re-scans within 1 hour are instant
+    await supabase.from('products').upsert({
+      barcode,
+      name: 'Unknown',
+      brand: '',
+      nova_score: 0,
+      quality_score: 0,
+      nutriscore_grade: '',
+      ingredients: '',
+      additives: [],
+      nutrition: {},
+      image_url: '',
+      data_source: 'not_found',
+      confidence: 0,
+      category: '',
+      created_at: cached?.created_at || new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }, { onConflict: 'barcode' })
+    return NextResponse.json(
+      { error: 'Product not found', allow_photo_submit: true },
+      { status: 404 },
+    )
   }
 
   const validated = validateProduct(offProduct)
@@ -170,7 +209,27 @@ async function handleCosmeticProduct(
   // Use whichever source has data, preferring OBF
   const source = obfProduct || offProduct
   if (!source) {
-    return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+    await supabase.from('products').upsert({
+      barcode,
+      name: 'Unknown',
+      brand: '',
+      nova_score: 0,
+      quality_score: 0,
+      nutriscore_grade: '',
+      ingredients: '',
+      additives: [],
+      nutrition: {},
+      image_url: '',
+      data_source: 'not_found',
+      confidence: 0,
+      category: '',
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }, { onConflict: 'barcode' })
+    return NextResponse.json(
+      { error: 'Product not found', allow_photo_submit: true },
+      { status: 404 },
+    )
   }
 
   const name = source.product_name_en || source.product_name || 'Unknown Product'
